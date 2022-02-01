@@ -33,8 +33,6 @@ int takeInput(char* str)
 
 int main(void)
 {
-
     init_shell();
     return (0);
-
 }
