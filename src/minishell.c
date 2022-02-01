@@ -16,7 +16,7 @@ void init_shell()
     clear();
 }
   
-// Function to take input
+// Function to take input bla bla bla
 int takeInput(char* str)
 {
     char* buf;
