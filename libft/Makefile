@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/08 16:59:17 by azamario          #+#    #+#              #
-#    Updated: 2021/10/13 18:20:42 by azamario         ###   ########.fr        #
+#    Updated: 2022/03/09 21:30:52 by joeduard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ OBJ = $(subst .c,.o,$(SRC))
 
 OBJ_BONUS = $(subst .c,.o,$(SRC_BONUS))
 
-all: $(NAME)
+all: $(NAME) bonus
 
 $(NAME):
 	@gcc -Wall -Wextra -Werror -c $(SRC)

@@ -17,4 +17,20 @@
 // Clearing the shell using escape sequences
 #define clear() printf("\033[H\033[J")
 
+#define NO_BUILTINS 4
+
+//init minishell
+void init_shell();
+int takeInput(char* str);
+void printDir();
+void execArgs(char** parsed);
+void execArgsPiped(char** parsed, char** parsedpipe);
+void openHelp();
+int ownCmdHandler(char** parsed);
+int parsePipe(char* str, char** strpiped);
+void parseSpace(char* str, char** parsed);
+int processString(char* str, char** parsed, char** parsedpipe);
+
+
+
 #endif
