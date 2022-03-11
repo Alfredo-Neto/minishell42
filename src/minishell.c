@@ -6,7 +6,7 @@
 /*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 23:19:00 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/11 12:31:48 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/03/11 13:31:02 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,38 +118,43 @@ int	own_cmd_handler(char **parsed)
 	char	*list_of_own_cmds[4];
 	char	*username;
 
+	i = 0;
 	switch_own_arg = 0;
 	list_of_own_cmds[0] = "exit";
 	list_of_own_cmds[1] = "cd";
 	list_of_own_cmds[2] = "help";
 	list_of_own_cmds[3] = "hello";
 	printf("PARSED: %s\n", *parsed);
-	for (i = 0; i < 4; i++)
+	while (i < 4)
 	{
 		if (strcmp(parsed[0], list_of_own_cmds[i]) == 0)
 		{
 			switch_own_arg = i + 1;
 			break ;
 		}
+		i++;
 	}
-	switch (switch_own_arg)
+	if (switch_own_arg == 1)
 	{
-		case 1:
-			printf("\nGoodbye\n");
-			exit(0);
-		case 2:
-			chdir(parsed[1]);
-			return (1);
-		case 3:
-			open_help();
-			return (1);
-		case 4:
-			username = getenv("USER");
-			printf("\nHello %s.\nMind that this is not a place to play around."
-				"\nUse help to know more..\n", username);
-			return (1);
-		default :
-			break ;
+		printf("\nGoodbye\n");
+		exit(0);
+	}
+	else if (switch_own_arg == 2)
+	{
+		chdir(parsed[1]);
+		return (1);
+	}
+	else if (switch_own_arg == 3)
+	{
+		open_help();
+		return (1);
+	}
+	else if (switch_own_arg == 4)
+	{
+		username = getenv("USER");
+		printf("\nHello %s.\nMind that this is not a place to play around."
+			"\nUse help to know more..\n", username);
+		return (1);
 	}
 	return (0);
 }

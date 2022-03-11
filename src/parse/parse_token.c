@@ -6,7 +6,7 @@
 /*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:03:07 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/10 22:24:19 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/03/11 13:38:28 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,8 @@ int	process_string(char *str, char **parsed, char **parsedpipe)
 		parse_space(strpiped[0], parsed);
 		parse_space(strpiped[1], parsedpipe);
 	}
-//	else
-//	{
-//		parse_space(str, parsed);
-//	}
+	else
+		parse_space(str, parsed);
 	if (own_cmd_handler(&str))
 	{
 		printf("IF\n");
