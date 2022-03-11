@@ -1,25 +1,29 @@
 NAME = minishell
 
-SRC_DIR = src
-INCLUDES = includes
-HEADERS := $(INCLUDES)/minishell.h
-INCLUDES := $(addprefix -I, $(INCLUDES))
-
-SRC_FILES = main.c minishell.c  \
-
-SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
-
-OBJ_DIR	= obj
-OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
-
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 LIBFLAGS = -L$(LIBFT_DIR) -lft
 
-RM = rm -f
+SRC_FILES = main.c minishell.c parse_token.c prompt_take_input.c  \
 
+SRC_DIR = src
+OBJ_DIR	= obj
+HEADERS := minishell.h
+#OBJ = $(SRC_FILES:%.c=$(OBJ_DIR)/%.o) $(SRC_DIR) # main.o minishell.o parse_token.o prompt_take_input.o
+OBJ = main.o minishell.o parse_token.o prompt_take_input.o
+#INCLUDES = includes
+#HEADERS := $(INCLUDES)/minishell.h
+
+#INCLUDES := $(addprefix -I, $(INCLUDES))
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -lreadline
+
+VPATH = src src/parse src/prompt
+
+RM = rm -f
+
+$(OBJ_DIR)/%.o: /%.c $(HEADERS) #$(SRC_DIR)
+		$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES) 
 
 all: $(NAME)
 
@@ -28,9 +32,6 @@ $(NAME): $(OBJ_DIR) $(LIBFT) $(OBJ)
 	@echo ""
 	@echo "|		minishell created		|"
 	@echo ""
-
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS)
-		$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(LIBFT):
 		make -C $(LIBFT_DIR)
