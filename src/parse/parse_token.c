@@ -11,27 +11,38 @@
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-// function for parsing command words
-void	parse_space(char *str, char **parsed)
+
+// function for finding pipe
+int parse_pipe(char *str, char **strpiped)
 {
-	int	i;
+	strpiped = ft_split(str, '|');
+	if (strpiped[1] == NULL)
+		return (0);
+	else
+		return (1);
+}
+
+// function for parsing command words
+void parse_space(char *str, char **parsed)
+{
+	int i;
 
 	i = 0;
-	while (i < MAXLIST)
+
+	parsed = ft_split(str, ' ');
+
+	// print variable
+	while (parsed[i])
 	{
-		parsed[i] = strsep(&str, " ");
-		if (parsed[i] == NULL)
-			break ;
-		if (strlen(parsed[i]) == 0)
-			i--;
+		printf("PARSED: %s\n", parsed[i]);
 		i++;
 	}
 }
 
-int	process_string(char *str, char **parsed, char **parsedpipe)
+int process_string(char *str, char **parsed, char **parsedpipe)
 {
-	char	*strpiped[2];
-	int		piped;
+	char *strpiped[2];
+	int piped;
 
 	piped = 0;
 	piped = parse_pipe(str, strpiped);

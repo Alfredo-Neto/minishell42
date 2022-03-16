@@ -124,7 +124,6 @@ int	own_cmd_handler(char **parsed)
 	list_of_own_cmds[1] = "cd";
 	list_of_own_cmds[2] = "help";
 	list_of_own_cmds[3] = "hello";
-	printf("PARSED: %s\n", *parsed);
 	while (i < 4)
 	{
 		if (strcmp(parsed[0], list_of_own_cmds[i]) == 0)
@@ -157,22 +156,4 @@ int	own_cmd_handler(char **parsed)
 		return (1);
 	}
 	return (0);
-}
-
-// function for finding pipe
-int	parse_pipe(char *str, char **strpiped)
-{
-	int	i;
-
-	i = 0;
-	while (i++ < 2)
-	{
-		strpiped[i] = strsep(&str, "|");
-		if (strpiped[i] == NULL)
-			break ;
-	}
-	if (strpiped[1] == NULL)
-		return (0);
-	else
-		return (1);
 }
