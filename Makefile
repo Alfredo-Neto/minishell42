@@ -14,6 +14,7 @@ SRC_FILES = main.c \
 SRC_DIR = src
 OBJ_DIR	= obj
 HEADERS := minishell.h
+
 #OBJ = $(SRC_FILES:%.c=$(OBJ_DIR)/%.o) $(SRC_DIR) # main.o minishell.o parse_token.o prompt_take_input.o
 OBJ =	main.o \
 		executor.o \
