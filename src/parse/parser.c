@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_token.c                                      :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:03:07 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/11 13:38:28 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/03/16 23:56:42 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void parse_space(char *str, char **parsed)
 	// print variable
 	while (parsed[i])
 	{
-		printf("PARSED: %s\n", parsed[i]);
+		printf("......................PARSED: %s\n", parsed[i]);
 		i++;
 	}
 }
@@ -55,12 +55,12 @@ int process_string(char *str, char **parsed, char **parsedpipe)
 		parse_space(str, parsed);
 	if (own_cmd_handler(&str))
 	{
-		printf("IF\n");
-		return (0);
+		printf("                                      BUILTIN (yes)\n");
+		return (SUCESS);
 	}
 	else
 	{
-		printf("ELSE");
+		printf("                                      BUILTIN (no)");
 		return (1 + piped);
 	}
 }
