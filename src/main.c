@@ -17,8 +17,6 @@
 */
 #include "../minishell.h"
 
-
-
 void	wellcome(void)
 {
 	char	*username;
