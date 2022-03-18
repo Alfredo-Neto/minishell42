@@ -80,7 +80,6 @@ void echo(char **str);
 //main.c
 void wellcome(void);
 void init_data(t_data *data);
-void echo(char **str);
 
 //minishell.c
 void minishell(t_data *data);
