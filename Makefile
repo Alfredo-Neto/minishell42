@@ -9,7 +9,8 @@ SRC_FILES = main.c \
 			parser.c \
 			prompt_take_input.c \
 			history.c \
-			str_tools.c
+			str_tools.c \
+			echo.c
 
 SRC_DIR = src
 OBJ_DIR	= obj
@@ -21,7 +22,8 @@ OBJ =	main.o \
 		parser.o \
 		prompt_take_input.o \
 		history.o \
-		str_tools.o
+		str_tools.o \
+		echo.o
 #INCLUDES = includes
 #HEADERS := $(INCLUDES)/minishell.h
 
@@ -29,7 +31,7 @@ OBJ =	main.o \
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -lreadline
 
-VPATH = src src/parse src/prompt src/tools src/exec
+VPATH = src src/parse src/prompt src/tools src/exec src/builtins
 
 RM = rm -f
 

@@ -23,7 +23,7 @@ int parse_pipe(char *str, char **strpiped)
 }
 
 // function for parsing command words
-void parse_space(char *str, char **parsed)
+char **parse_space(char *str, char **parsed)
 {
 	int i;
 
@@ -37,6 +37,8 @@ void parse_space(char *str, char **parsed)
 		printf("......................PARSED: %s\n", parsed[i]);
 		i++;
 	}
+
+	return (parsed);
 }
 
 int process_string(char *str, char **parsed, char **parsedpipe)
@@ -48,12 +50,12 @@ int process_string(char *str, char **parsed, char **parsedpipe)
 	piped = parse_pipe(str, strpiped);
 	if (piped)
 	{
-		parse_space(strpiped[0], parsed);
-		parse_space(strpiped[1], parsedpipe);
+		parsed = parse_space(strpiped[0], parsed);
+		parsed = parse_space(strpiped[1], parsedpipe);
 	}
 	else
-		parse_space(str, parsed);
-	if (own_cmd_handler(&str))
+		parsed = parse_space(str, parsed);
+	if (own_cmd_handler(parsed))
 	{
 		printf("                                      BUILTIN (yes)\n");
 		return (SUCESS);
