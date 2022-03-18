@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/17 00:04:05 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/03/17 20:53:21 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct	s_data
 	char	*parsed_args[MAXLIST];
 	char	*parsed_args_piped[MAXLIST];
 	int		exec_flag;
+	char	**env_variable;
 }				t_data;
 
 //..................................................EXEC
@@ -69,7 +70,7 @@ int		take_input(char* input);
 
 //main.c
 void wellcome(void);
-void init_shell(t_data *data);
+void init_data(t_data *data);
 
 
 

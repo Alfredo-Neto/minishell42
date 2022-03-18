@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 19:08:49 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/17 00:01:20 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/03/17 20:56:23 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 */
 #include "../minishell.h"
 
+
+
 void	wellcome(void)
 {
 	char	*username;
@@ -24,10 +26,11 @@ void	wellcome(void)
 	clear();
 	username = getenv("USER");
 	printf("\n\n\nHi, @%s!\n", username);
+	sleep(1);
 	clear();
 }
 
-void	init_shell(t_data *data)
+void	init_data(t_data *data)
 {
 	data->input_string[0] = '\0';
 	data->parsed_args[0] = NULL;
@@ -35,14 +38,18 @@ void	init_shell(t_data *data)
 	data->exec_flag = 0;
 }
 
-int	main(void)
+int	main(int argc, char **argv, char **envp)
 {
 	t_data data;
-
-	init_shell(&data);
+	
+	(void)argc;
+	(void)argv;
+	init_data(&data);
+	wellcome();
+	data.env_variable = envp;
 	while (1)
 	{
-		if (take_input(data.input_string))
+		if (take_input(data.input_string)) 
 			continue ;
 		printf(".......................INPUT: %s\n", data.input_string);
 		data.exec_flag = process_string(data.input_string, data.parsed_args,
