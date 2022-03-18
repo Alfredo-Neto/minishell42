@@ -39,5 +39,5 @@ int	take_input(char *input)
 		return (SUCCESS);
 	}
 	else
-		return (FAIL);
+		return (FAILURE);
 }

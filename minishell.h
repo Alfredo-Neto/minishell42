@@ -28,7 +28,7 @@
 #define MAXPROMPT	100 // max lenght of prompt
 
 
-#define FAIL		1
+#define FAILURE		1
 #define SUCCESS		0
 #define true		1
 #define false		0
