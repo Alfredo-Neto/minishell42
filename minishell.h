@@ -56,7 +56,7 @@ typedef struct	s_data
 void	exec_args(char** parsed);
 void	exec_args_piped(char** parsed, char** parsedpipe);
 void	open_help();
-int		own_cmd_handler(char** parsed);
+int		handle_builtins(char** parsed);
 
 //..................................................PARSE
 //parser.c

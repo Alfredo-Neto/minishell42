@@ -55,7 +55,7 @@ int process_string(char *str, char **parsed, char **parsedpipe)
 	}
 	else
 		parsed = parse_space(str, parsed);
-	if (own_cmd_handler(parsed))
+	if (handle_builtins(parsed))
 	{
 		printf("                                      BUILTIN (yes)\n");
 		return (SUCESS);

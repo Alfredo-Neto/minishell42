@@ -111,7 +111,7 @@ void open_help(void)
 }
 
 // Function to execute builtin commands
-int own_cmd_handler(char **parsed)
+int handle_builtins(char **parsed)
 {
 	int i;
 	int switch_own_arg;
