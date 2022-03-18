@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 19:08:49 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/17 20:56:23 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/03/18 17:23:50 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	init_data(t_data *data)
 	data->parsed_args[0] = NULL;
 	data->parsed_args_piped[0] = NULL;
 	data->exec_flag = 0;
+	// adicionar init_data...
 }
 
 int	main(int argc, char **argv, char **envp)
