@@ -70,17 +70,14 @@ int		take_input(char* input);
 //..................................................TOOLS
 // Vamos usar funcoes proprias
 
+//..................................................BUILTINS
+void echo(char **str);
 
 //main.c
 void wellcome(void);
 void init_shell(t_data *data);
-void echo(char **str);
 
-
-
-
-
-
-
+//minishell.c
+void minishell(t_data *data);
 
 #endif

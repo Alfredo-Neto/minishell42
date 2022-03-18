@@ -10,7 +10,8 @@ SRC_FILES = main.c \
 			prompt_take_input.c \
 			history.c \
 			str_tools.c \
-			echo.c
+			echo.c \
+			minishell.c
 
 SRC_DIR = src
 OBJ_DIR	= obj
@@ -23,7 +24,8 @@ OBJ =	main.o \
 		prompt_take_input.o \
 		history.o \
 		str_tools.o \
-		echo.o
+		echo.o \
+		minishell.o
 #INCLUDES = includes
 #HEADERS := $(INCLUDES)/minishell.h
 
