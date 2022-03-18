@@ -27,8 +27,12 @@
 #define MAXLIST		100 // max number of commands to be supported
 #define MAXPROMPT	100 // max lenght of prompt
 
+
 #define FAIL		1
 #define SUCESS		0
+#define true		1
+#define false		0
+
   
 #define NO_BUILTINS 4
 
@@ -53,7 +57,7 @@ int		own_cmd_handler(char** parsed);
 //..................................................PARSE
 //parser.c
 int		parse_pipe(char* str, char** strpiped);
-void	parse_space(char* str, char** parsed);
+char **parse_space(char *str, char **parsed);
 int		process_string(char* str, char** parsed, char** parsedpipe);
 
 //..................................................PROMPT
@@ -70,6 +74,7 @@ int		take_input(char* input);
 //main.c
 void wellcome(void);
 void init_shell(t_data *data);
+void echo(char **str);
 
 
 
