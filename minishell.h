@@ -33,6 +33,9 @@
 #define true		1
 #define false		0
 
+#define NO_PIPE				1
+#define PIPE_PRESENT		2
+
   
 #define NO_BUILTINS 4
 
