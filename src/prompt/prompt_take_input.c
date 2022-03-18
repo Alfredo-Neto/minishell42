@@ -29,7 +29,7 @@ int	take_input(char *input)
 	char	*old_input;
 	char	*prompt;
 	
-	prompt = "\nConcatenar User:Dir$ ";//criar func
+	prompt = "Concatenar User:Dir$ ";//criar func
 	old_input = input;
 	buf = readline(prompt);
 	if (strlen(buf) != 0)
