@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_take_input.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 20:56:26 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/16 23:39:14 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/03/17 18:33:46 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
