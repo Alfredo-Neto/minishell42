@@ -29,7 +29,7 @@
 
 
 #define FAIL		1
-#define SUCESS		0
+#define SUCCESS		0
 #define true		1
 #define false		0
 

@@ -36,7 +36,7 @@ int	take_input(char *input)
 	{
 		put_on_history(buf, old_input);
 		strcpy(input, buf);
-		return (SUCESS);
+		return (SUCCESS);
 	}
 	else
 		return (FAIL);

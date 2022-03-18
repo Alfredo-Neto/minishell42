@@ -58,7 +58,7 @@ int process_string(char *str, char **parsed, char **parsedpipe)
 	if (handle_builtins(parsed))
 	{
 		printf("                                      BUILTIN (yes)\n");
-		return (SUCESS);
+		return (SUCCESS);
 	}
 	else
 	{
