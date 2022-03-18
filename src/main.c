@@ -17,7 +17,7 @@
 */
 #include "../minishell.h"
 
-void	wellcome(void)
+void	welcome(void)
 {
 	char	*username;
 
@@ -43,7 +43,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	init_data(&data);
-	wellcome();
+	welcome();
 	data.env_variable = envp;
 	while (1)
 		minishell(&data);

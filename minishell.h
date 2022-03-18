@@ -78,7 +78,7 @@ int		take_input(char* input);
 void echo(char **str);
 
 //main.c
-void wellcome(void);
+void welcome(void);
 void init_data(t_data *data);
 
 //minishell.c
