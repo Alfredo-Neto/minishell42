@@ -19,7 +19,7 @@ static char *trim_backwards_until_slash(char **absolute_path)
 static char **trim_off_current_dir(char **directory)
 {
     printf("DIR %s\n", *directory);
-    static char *absolute_path;
+    char *absolute_path;
     if (absolute_path == NULL)
     {
         printf("DENTRO DO ELSE %s\n", absolute_path);
