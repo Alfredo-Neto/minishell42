@@ -11,7 +11,9 @@ SRC_FILES = main.c \
 			history.c \
 			str_tools.c \
 			echo.c \
-			minishell.c
+			minishell.c \
+			cd.c \
+			pwd.c
 
 SRC_DIR = src
 OBJ_DIR	= obj
@@ -25,13 +27,15 @@ OBJ =	main.o \
 		history.o \
 		str_tools.o \
 		echo.o \
-		minishell.o
+		minishell.o \
+		cd.o \
+		pwd.o \
 #INCLUDES = includes
 #HEADERS := $(INCLUDES)/minishell.h
 
 #INCLUDES := $(addprefix -I, $(INCLUDES))
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -lreadline
+CFLAGS = -Wall -Wextra -Werror -lreadline -g3
 
 VPATH = src src/parse src/prompt src/tools src/exec src/builtins
 

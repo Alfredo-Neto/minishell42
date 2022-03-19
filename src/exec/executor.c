@@ -116,14 +116,13 @@ int handle_builtins(char **parsed)
 	int i;
 	int switch_own_arg;
 	char *list_of_own_cmds[4];
-	char *username;
 
 	i = 0;
 	switch_own_arg = 0;
 	list_of_own_cmds[0] = "exit";
 	list_of_own_cmds[1] = "cd";
 	list_of_own_cmds[2] = "echo";
-	list_of_own_cmds[3] = "hello";
+	list_of_own_cmds[3] = "pwd";
 	while (i < 4)
 	{
 		if (strcmp(parsed[0], list_of_own_cmds[i]) == 0)
@@ -135,14 +134,11 @@ int handle_builtins(char **parsed)
 	}
 
 	if (switch_own_arg == 1)
-	{
-		printf("\nGoodbye\n");
 		exit(0);
-	}
 	else if (switch_own_arg == 2)
 	{
-		chdir(parsed[1]);
-		return (1);
+		if (!cd(&parsed[1]))
+			return (1);
 	}
 	else if (switch_own_arg == 3)
 	{
@@ -151,10 +147,7 @@ int handle_builtins(char **parsed)
 	}
 	else if (switch_own_arg == 4)
 	{
-		username = getenv("USER");
-		printf("\nHello %s.\nMind that this is not a place to play around."
-			   "\nUse help to know more..\n",
-			   username);
+		pwd();
 		return (1);
 	}
 	return (0);

@@ -26,6 +26,7 @@
 #define MAXCOM		1000 // max number of letters to be supported
 #define MAXLIST		100 // max number of commands to be supported
 #define MAXPROMPT	100 // max lenght of prompt
+#define CHAR_MAX_NUM 1024
 
 
 #define FAILURE		1
@@ -76,6 +77,8 @@ int		take_input(char* input);
 
 //..................................................BUILTINS
 void echo(char **str);
+int cd(char **directory);
+void pwd();
 
 //main.c
 void welcome(void);
