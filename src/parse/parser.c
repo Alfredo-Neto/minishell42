@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:03:07 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/18 17:23:33 by coder            ###   ########.fr       */
+/*   Updated: 2022/03/19 23:09:01 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ int process_string(char *str, char **parsed, char **parsedpipe)
 	char *strpiped[2];
 	int piped;
 
+	if(ft_strncmp(str, "\n", 2))
+		return(EXIT_SUCCESS);
+	str = handle_quotes(str);
+
 	piped = 0;
 	piped = parse_pipe(str, strpiped);
 	if (piped)
@@ -55,6 +59,7 @@ int process_string(char *str, char **parsed, char **parsedpipe)
 	}
 	else
 		parsed = parse_space(str, parsed);
+	
 	if (handle_builtins(parsed))
 	{
 		printf("                                      BUILTIN (yes)\n");

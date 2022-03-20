@@ -6,7 +6,7 @@
 /*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/17 23:19:07 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/03/19 20:00:43 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@
 #define NO_PIPE				1
 #define PIPE_PRESENT		2
 
+#define SQUOTES 39
+#define DQUOTES 34
+
   
 #define NO_BUILTINS 4
 
@@ -63,6 +66,7 @@ int		handle_builtins(char** parsed);
 int		parse_pipe(char* str, char** strpiped);
 char **parse_space(char *str, char **parsed);
 int		process_string(char* str, char** parsed, char** parsedpipe);
+char *handle_quotes(char *str);
 
 //..................................................PROMPT
 //history.c
