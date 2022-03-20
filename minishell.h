@@ -38,6 +38,7 @@
 
 #define SQUOTES 39
 #define DQUOTES 34
+#define NO_QUOTES_FOUND -1
 
   
 #define NO_BUILTINS 4
@@ -80,6 +81,9 @@ int		take_input(char* input);
 
 //..................................................BUILTINS
 void echo(char **str);
+
+//..................................................UTILS
+int find_quote(char *str);
 
 //main.c
 void welcome(void);

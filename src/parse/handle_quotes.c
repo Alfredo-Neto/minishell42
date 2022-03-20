@@ -12,20 +12,20 @@
 
 #include "../../minishell.h"
 
-static int find_quote(char *str)
+int find_quote(char *str)
 {
     int i;
 
     i = 0;
     if (str == 0)
-        return (-1);
+        return (EXIT_FAILURE);
     while (str[i] != '\0')
     {
         if (str[i] == '\"' || str[i] == '\'')
             return (i);
         i++;
     }
-    return (-1);
+    return (NO_QUOTES_FOUND);
 }
 
 char *handle_quotes(char *str)
@@ -39,6 +39,7 @@ char *handle_quotes(char *str)
 
     i = 0;
     j = 0;
+
     if (str)
     {
         from_single_quotes = ft_strchr(str, '\'');
@@ -47,7 +48,6 @@ char *handle_quotes(char *str)
             no_quotes = ft_strtrim(from_single_quotes, "\'");
         else if (from_double_quotes)
             no_quotes = ft_strtrim(from_double_quotes, "\"");
-
         quote_pos = find_quote(str);
         printf("NO Quotes: %s\n", no_quotes);
         while (str[i])

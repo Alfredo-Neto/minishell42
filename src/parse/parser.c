@@ -46,10 +46,8 @@ int process_string(char *str, char **parsed, char **parsedpipe)
 	char *strpiped[2];
 	int piped;
 
-	if(ft_strncmp(str, "\n", 2))
-		return(EXIT_SUCCESS);
-	str = handle_quotes(str);
-
+	if (find_quote(str) != NO_QUOTES_FOUND)
+		str = handle_quotes(str);
 	piped = 0;
 	piped = parse_pipe(str, strpiped);
 	if (piped)
