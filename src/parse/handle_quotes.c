@@ -6,7 +6,7 @@
 /*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 01:34:34 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/19 23:10:51 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/03/20 18:04:14 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int find_quote(char *str)
         return (EXIT_FAILURE);
     while (str[i] != '\0')
     {
-        if (str[i] == '\"' || str[i] == '\'')
+        if (str[i] == SQUOTES || str[i] == DQUOTES)
             return (i);
         i++;
     }
@@ -42,17 +42,16 @@ char *handle_quotes(char *str)
 
     if (str)
     {
-        from_single_quotes = ft_strchr(str, '\'');
-        from_double_quotes = ft_strchr(str, '\"');
+        from_single_quotes = ft_strchr(str, SQUOTES);
+        from_double_quotes = ft_strchr(str, DQUOTES);
         if (from_single_quotes)
             no_quotes = ft_strtrim(from_single_quotes, "\'");
         else if (from_double_quotes)
             no_quotes = ft_strtrim(from_double_quotes, "\"");
         quote_pos = find_quote(str);
-        printf("NO Quotes: %s\n", no_quotes);
         while (str[i])
         {
-            if (str[i] == '\'' || str[i] == '\"')
+            if (str[i] == SQUOTES || str[i] == DQUOTES)
             {
                 while (no_quotes[j])
                     str[quote_pos++] = no_quotes[j++];
