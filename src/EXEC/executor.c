@@ -6,12 +6,19 @@
 /*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 23:19:00 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/16 23:50:57 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/03/21 19:43:48 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
+
+//void 
+
+//multiple_exec(data);
+//single_exec(data);
+
+/*
 // Function where the system command is executed
 void exec_args(char **parsed)
 {
@@ -94,68 +101,35 @@ void exec_args_piped(char **parsed, char **parsedpipe)
 	}
 }
 
-// Help command builtin
-void open_help(void)
-{
-	puts("\n***WELCOME TO MY SHELL HELP***"
-		 "\nCopyright @ Suprotik Dey"
-		 "\n-Use the shell at your own risk..."
-		 "\nList of Commands supported:"
-		 "\n>cd"
-		 "\n>ls"
-		 "\n>exit"
-		 "\n>all other general commands available in UNIX shell"
-		 "\n>pipe handling"
-		 "\n>improper space handling");
-	return;
-}
+*/
 
 // Function to execute builtin commands
-int handle_builtins(char **parsed)
+
+
+void switch_builtin(t_data *data, int code)
 {
-	int i;
-	int switch_own_arg;
-	char *list_of_own_cmds[4];
-	char *username;
-
-	i = 0;
-	switch_own_arg = 0;
-	list_of_own_cmds[0] = "exit";
-	list_of_own_cmds[1] = "cd";
-	list_of_own_cmds[2] = "echo";
-	list_of_own_cmds[3] = "hello";
-	while (i < 4)
+	if (code == EXIT)
 	{
-		if (strcmp(parsed[0], list_of_own_cmds[i]) == 0)
-		{
-			switch_own_arg = i + 1;
-			break;
-		}
-		i++;
+		printf("\nGoodbye!\n");
+		exit_minishell(data, SUCCESS);
 	}
-
-	if (switch_own_arg == 1)
+	else if (code == CD)
+		chdir(data->argve[0][1]);
+	else if (code == ECHO)
+		echo(data);
+	else if (HELLO == 4) //retirar!
 	{
-		printf("\nGoodbye\n");
-		exit(0);
-	}
-	else if (switch_own_arg == 2)
-	{
-		chdir(parsed[1]);
-		return (1);
-	}
-	else if (switch_own_arg == 3)
-	{
-		echo(&parsed[1]);
-		return (1);
-	}
-	else if (switch_own_arg == 4)
-	{
+		int username;
 		username = getenv("USER");
 		printf("\nHello %s.\nMind that this is not a place to play around."
 			   "\nUse help to know more..\n",
-			   username);
-		return (1);
+			   username);		
 	}
-	return (0);
 }
+
+void executor(t_data *data)
+{
+	//
+	
+}
+
