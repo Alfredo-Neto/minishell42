@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 01:34:34 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/19 23:10:51 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/03/21 17:52:12 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,39 +28,72 @@ int find_quote(char *str)
     return (NO_QUOTES_FOUND);
 }
 
-char *handle_quotes(char *str)
+void	single_quotes(char *from_single_quotes, char *str)
 {
     char *no_quotes;
+   	int quote_pos;
+   	int i;
+	int j;
+	
+	i = 0;
+	j = 0;
+	no_quotes = ft_strtrim(from_single_quotes, "\'");
+	
+    quote_pos = find_quote(str);
+    while (str[i])
+    {
+    	if (str[i] == SQUOTES)
+        {
+    	    while (no_quotes[j])
+			{
+                str[quote_pos++] = no_quotes[j++];
+			}
+        	str[quote_pos] = '\0';
+            break;
+        }
+        i++;
+    }
+}
+
+void	double_quotes(char *from_double_quotes, char *str)
+{
+    char *no_quotes;
+   	int quote_pos;
+	int i;
+	int j;
+	
+	i = 0;
+	j = 0;
+	no_quotes = ft_strtrim(from_double_quotes, "\"");
+	
+    quote_pos = find_quote(str);
+    while (str[i])
+    {
+    	if (str[i] == DQUOTES)
+        {
+    	    while (no_quotes[j])
+			{
+                str[quote_pos++] = no_quotes[j++];
+			}
+        	str[quote_pos] = '\0';
+            break;
+        }
+        i++;
+    }	
+}
+
+char *handle_quotes(char *str)
+{
     char *from_single_quotes;
     char *from_double_quotes;
-    int quote_pos;
-    int i;
-    int j;
-
-    i = 0;
-    j = 0;
-
     if (str)
     {
-        from_single_quotes = ft_strchr(str, '\'');
-        from_double_quotes = ft_strchr(str, '\"');
+        from_single_quotes = ft_strchr(str, SQUOTES);
+        from_double_quotes = ft_strchr(str, DQUOTES);
         if (from_single_quotes)
-            no_quotes = ft_strtrim(from_single_quotes, "\'");
+			single_quotes(from_single_quotes, str);
         else if (from_double_quotes)
-            no_quotes = ft_strtrim(from_double_quotes, "\"");
-        quote_pos = find_quote(str);
-        printf("NO Quotes: %s\n", no_quotes);
-        while (str[i])
-        {
-            if (str[i] == '\'' || str[i] == '\"')
-            {
-                while (no_quotes[j])
-                    str[quote_pos++] = no_quotes[j++];
-                str[quote_pos] = '\0';
-                break;
-            }
-            i++;
-        }
+			double_quotes(from_double_quotes, str);
         printf("str: %s\n", str);
     }
     return (str);
