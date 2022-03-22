@@ -121,9 +121,9 @@ void	hello(void);
 // Vamos usar funcoes proprias
 int		ft_strcpy_handled(char **new, char const *src);
 int		ft_str_count(char **str);
-void	free_str(char **str);
-void	free_double_str(char ***str);
-void	free_triple_str(char ****str);
+void	free_str(char *str);
+void	free_double_str(char **str);
+void	free_triple_str(char ***str);
 
 //////////////////////////////////////////////////////////
 

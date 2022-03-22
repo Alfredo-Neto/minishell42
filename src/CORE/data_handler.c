@@ -23,8 +23,8 @@ void	init_data(t_data *data)
 
 void	data_clean(t_data *data)
 {
-	free_str(&data->input);
-	free_triple_str(&data->argve);
+	free_str(data->input);
+	free_triple_str(data->argve);
 	data->no_pipes = -1;
 	data->exec_flag = -1;
 }

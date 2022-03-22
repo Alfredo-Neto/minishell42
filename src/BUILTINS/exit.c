@@ -17,7 +17,7 @@ int	exit_minishell(t_data *data, int status)
 	if (status == 0)
 		printf("\nGoodbye!\n");
 	data_clean(data);
-	free_double_str(&data->envp);
+	free_double_str(data->envp);
 	rl_clear_history();
 	exit (status);
 }

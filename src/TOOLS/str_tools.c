@@ -54,33 +54,33 @@ int	ft_str_count(char **str)
 	return (count);
 }
 
-void free_str(char **str) //Uso: passar endereço da str
+void free_str(char *str) //Uso: passar endereço da str
 {
 	if (str)
 	{
 		if (*str)
 		{
-			free(*str);
-			*str = NULL;
+			free(str);
+			str = NULL;
 		}
 		str = NULL;
 	}
 }
 
-void free_double_str(char ***str) //Uso: passar endereço da **str
+void free_double_str(char **str) //Uso: passar endereço da **str
 {
 	if (str)
 	{
 		free_str(*str);
-		*str = NULL;
+		str = NULL;
 	}	
 }
 
-void free_triple_str(char ****str) //Uso: passar endereço da ***str
+void free_triple_str(char ***str) //Uso: passar endereço da ***str
 {
 	if (str)
 	{
 		free_double_str(*str);
-		*str = NULL;
+		str = NULL;
 	}	
 }
