@@ -6,7 +6,7 @@
 /*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/21 19:35:56 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/03/22 13:44:19 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct	s_data
 	char	**envp; //colocar global?
 	int		no_pipes;
 	int		exec_flag;
+	int		tirar;
 }				t_data;
 
 //..................................................CORE
@@ -87,17 +88,19 @@ void	parser(t_data *data);
 
 //..................................................EXPANDER
 //expand_variables.c
-//expand_vars();
+void expand_vars(t_data *data);
 
 //..................................................EXEC
 //sorting.c
 int		is_builtins(t_data *data);
-int		sorting_executor(t_data *data);
+void	exec_selector(t_data *data);
+void	system_exec(t_data *data);
 
 //executor.c
-void	switch_builtin(t_data *data, int code);
-//multiple_exec(data);
-//single_exec(data);
+void	executor(t_data *data);
+void	multiple_exec(t_data *data);
+void 	single_exec(t_data *data);
+void	builtin_exec(t_data *data, int code);
 
 //..................................................BUILTINS
 //exit.c
@@ -107,19 +110,22 @@ int		exit_minishell(t_data *data, int status);
 void	open_help(void);
 
 //echo.c
-void echo(t_data *data);
+void	echo(t_data *data);
+
+//hello.c
+void	hello(void);
 
 
 //..................................................TOOLS
 // Vamos usar funcoes proprias
-int ft_strcpy_handled(char **new, char const *src);
-int	ft_str_count(char **str);
-void free_str(char **str);
-void free_double_str(char ***str);
-void free_triple_str(char ****str);
+int		ft_strcpy_handled(char **new, char const *src);
+int		ft_str_count(char **str);
+void	free_str(char **str);
+void	free_double_str(char ***str);
+void	free_triple_str(char ****str);
 
 //////////////////////////////////////////////////////////
 
-void welcome(void);
+void	welcome(void);
 
 #endif

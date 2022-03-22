@@ -6,7 +6,7 @@
 /*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 13:55:53 by ebresser          #+#    #+#             */
-/*   Updated: 2022/03/21 19:01:27 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/03/22 13:51:45 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void pull_space(t_data *data, char **cmds_piped)
 	while (data->argve[i])
 	{
 		j = 0;
-		printf("-------------PIPE----------------\n");
 		while(data->argve[i][j])
 		{
 			printf("......................LEXED %d: %s\n", i, data->argve[i][j]);

@@ -6,21 +6,19 @@
 /*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 23:19:00 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/21 19:43:48 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/03/22 13:48:57 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
+void executor(t_data *data)
+{
+	exec_selector(data);
+}
 
-//void 
-
-//multiple_exec(data);
-//single_exec(data);
-
-/*
-// Function where the system command is executed
-void exec_args(char **parsed)
+// Function to call one sys cmds
+void single_exec(t_data *data) //char **parsed)
 {
 	pid_t pid;
 
@@ -32,7 +30,7 @@ void exec_args(char **parsed)
 	}
 	else if (pid == 0)
 	{
-		if (execvp(parsed[0], parsed) < 0)
+		if (execvp(data->argve[0][0], data->argve[0]) < 0)//mudar p execve - n vai rodar
 		{
 			printf("\nCould not execute command..");
 		}
@@ -45,8 +43,8 @@ void exec_args(char **parsed)
 	}
 }
 
-// Function where the piped system commands is executed
-void exec_args_piped(char **parsed, char **parsedpipe)
+// Function to call multiple sys cmds
+void multiple_exec(t_data *data) //char **parsed, char **parsedpipe)
 {
 	int pipefd[2];
 	pid_t p1;
@@ -68,7 +66,7 @@ void exec_args_piped(char **parsed, char **parsedpipe)
 		close(pipefd[0]);
 		dup2(pipefd[1], STDOUT_FILENO);
 		close(pipefd[1]);
-		if (execvp(parsed[0], parsed) < 0)
+		if (execvp(data->argve[0][0], data->argve[0]) < 0) //n vai rodar
 		{
 			printf("\nCould not execute command 1..");
 			exit(0);
@@ -87,7 +85,7 @@ void exec_args_piped(char **parsed, char **parsedpipe)
 			close(pipefd[1]);
 			dup2(pipefd[0], STDIN_FILENO);
 			close(pipefd[0]);
-			if (execvp(parsedpipe[0], parsedpipe) < 0)
+			if (execvp(data->argve[1][0], data->argve[1]) < 0) //n vai rodar
 			{
 				printf("\nCould not execute command 2..");
 				exit(0);
@@ -101,35 +99,20 @@ void exec_args_piped(char **parsed, char **parsedpipe)
 	}
 }
 
-*/
 
-// Function to execute builtin commands
-
-
-void switch_builtin(t_data *data, int code)
+// Function to call builtin commands
+void builtin_exec(t_data *data, int code)
 {
-	if (code == EXIT)
-	{
-		printf("\nGoodbye!\n");
-		exit_minishell(data, SUCCESS);
-	}
+	if (code == EXIT)		
+		exit_minishell(data, code);
 	else if (code == CD)
 		chdir(data->argve[0][1]);
 	else if (code == ECHO)
 		echo(data);
-	else if (HELLO == 4) //retirar!
-	{
-		int username;
-		username = getenv("USER");
-		printf("\nHello %s.\nMind that this is not a place to play around."
-			   "\nUse help to know more..\n",
-			   username);		
-	}
+	else if (code == HELLO)
+		hello();		
 }
 
-void executor(t_data *data)
-{
-	//
-	
-}
+
+
 
