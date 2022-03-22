@@ -31,12 +31,13 @@
 
 #define NO_PIPE		0
 
-#define NO_BUILTINS 4
+#define NO_BUILTINS 5
 
 #define EXIT		1
 #define CD			2
 #define ECHO		3
 #define HELLO		4
+#define HELP		5
 #define	NONE		0
 
 

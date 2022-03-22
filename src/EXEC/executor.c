@@ -110,7 +110,9 @@ void builtin_exec(t_data *data, int code)
 	else if (code == ECHO)
 		echo(data);
 	else if (code == HELLO)
-		hello();		
+		hello();	
+	else if (code == HELP)
+		open_help();	
 }
 
 

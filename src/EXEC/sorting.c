@@ -16,7 +16,7 @@ int is_builtins(t_data *data)
 {
 	int i;
 	int switcher;
-	char *builtin_cmd[4];
+	char *builtin_cmd[NO_BUILTINS];
 	
 	i = 0;
 	switcher = 0;
@@ -24,7 +24,8 @@ int is_builtins(t_data *data)
 	builtin_cmd[1] = "cd";
 	builtin_cmd[2] = "echo";
 	builtin_cmd[3] = "hello";
-	while (i < 4)
+	builtin_cmd[4] = "help";
+	while (i < NO_BUILTINS)
 	{
 		if (strcmp(data->argve[0][0], builtin_cmd[i]) == 0)
 		{
@@ -54,7 +55,7 @@ void exec_selector(t_data *data)
 	if (builtin)
 		printf("                                      BUILTIN (yes)\n");
 	else
-		printf("                                      BUILTIN (no)");
+		printf("                                      BUILTIN (no)\n");
 	//----------------------------------------------------------------
 	
 }
