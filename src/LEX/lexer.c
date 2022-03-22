@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 13:55:53 by ebresser          #+#    #+#             */
-/*   Updated: 2022/03/22 13:51:45 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/03/22 23:20:46 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void pull_space(t_data *data, char **cmds_piped)
 	if (data->argve == NULL)
 	{
 		perror("Malloc failure");
-		free_double_str(cmds_piped);
+		free_double_str(&cmds_piped);
 		exit_minishell(data, FAILURE);
 	}	
 	while(cmds_piped[i])
@@ -53,7 +53,7 @@ void pull_space(t_data *data, char **cmds_piped)
 		if (data->argve[i] == NULL)
 		{
 			perror("Malloc failure");
-			free_double_str(cmds_piped);
+			free_double_str(&cmds_piped);
 			exit_minishell(data, FAILURE);
 		} 
 		i++;
@@ -86,5 +86,5 @@ void lexer (t_data *data)
 	
 	cmds_piped = pull_pipe(data); //tenho estrutura de str** - cada string com linha de cmd
 	pull_space(data, cmds_piped); //tenho estrutura de str*** - cada str é um arg(ou cmd)
-	free_double_str(cmds_piped);
+	free_double_str(&cmds_piped);
 }

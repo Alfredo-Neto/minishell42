@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_tools.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 22:54:50 by ebresser          #+#    #+#             */
-/*   Updated: 2022/03/22 13:52:14 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/03/22 23:19:56 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,33 +54,33 @@ int	ft_str_count(char **str)
 	return (count);
 }
 
-void free_str(char *str) //Uso: passar endereço da str
+void free_str(char **str) //Uso: passar endereço da str
 {
-	if (str)
-	{
-		if (*str)
-		{
-			free(str);
-			str = NULL;
-		}
-		str = NULL;
-	}
+    if (str)
+    {
+        if (*str)
+        {
+            free(*str);
+            *str = NULL;
+        }
+        str = NULL;
+    }
 }
 
-void free_double_str(char **str) //Uso: passar endereço da **str
+void free_double_str(char ***str) //Uso: passar endereço da **str
 {
-	if (str)
-	{
-		free_str(*str);
-		str = NULL;
-	}	
+    if (str)
+    {
+        free_str(*str);
+        *str = NULL;
+    }    
 }
 
-void free_triple_str(char ***str) //Uso: passar endereço da ***str
+void free_triple_str(char ****str) //Uso: passar endereço da ***str
 {
-	if (str)
-	{
-		free_double_str(*str);
-		str = NULL;
-	}	
-}
+    if (str)
+    {
+        free_double_str(*str);
+        *str = NULL;
+    }    
+} 

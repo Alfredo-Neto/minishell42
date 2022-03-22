@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/22 13:44:19 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/03/22 23:20:07 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,9 +121,9 @@ void	hello(void);
 // Vamos usar funcoes proprias
 int		ft_strcpy_handled(char **new, char const *src);
 int		ft_str_count(char **str);
-void	free_str(char *str);
-void	free_double_str(char **str);
-void	free_triple_str(char ***str);
+void	free_str(char **str);
+void	free_double_str(char ***str);
+void	free_triple_str(char ****str);
 
 //////////////////////////////////////////////////////////
 
