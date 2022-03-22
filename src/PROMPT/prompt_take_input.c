@@ -6,12 +6,16 @@
 /*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 20:56:26 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/16 23:39:14 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/03/22 13:52:07 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
+//void prompt() FAZER
+//{
+//
+//}
 
 // Function to print Current Directory.
 void	print_dir(void)
@@ -22,22 +26,26 @@ void	print_dir(void)
 	printf("\nDir: %s", cwd);
 }
 
-/** Function to take input */
-int	take_input(char *input)
+/** Function to take input - MALLOC input*/
+int	take_input(t_data *data)
 {
 	char	*buf;
 	char	*old_input;
 	char	*prompt;
+	int		status;
 	
 	prompt = "Concatenar User:Dir$ ";//criar func
-	old_input = input;
 	buf = readline(prompt);
 	if (strlen(buf) != 0)
 	{
-		put_on_history(buf, old_input);
-		strcpy(input, buf);
-		return (SUCESS);
+		old_input = data->input; 
+		put_on_history(buf, old_input);	
+		status = ft_strcpy_handled(&data->input, buf);
+		if (status == FAILURE)
+			exit_minishell(data, FAILURE);
+		//free(buf); ---> acho q readline já faz isso
+		return (SUCCESS);
 	}
 	else
-		return (FAIL);
+		return (FAILURE);
 }
