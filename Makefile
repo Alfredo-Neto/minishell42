@@ -1,6 +1,6 @@
 NAME		=	minishell
 CC			=	gcc
-CFLAGS		=	-Wall -Wextra -Werror -lreadline
+CFLAGS		=	-Wall -Wextra -Werror -lreadline -g -fsanitize=address
 LIBFT_DIR	=	libft
 LIBFT		=	$(LIBFT_DIR)/libft.a
 LIBFLAGS	=	-L $(LIBFT_DIR) -lft
@@ -24,7 +24,8 @@ SRC_FILES	=	main.c \
 				exit.c \
 				help.c \
 				echo.c \
-				str_tools.c
+				str_tools.c \
+				list_tools.c
 
 OBJ			=	$(SRC_FILES:%.c=%.o)
 OBJ_DIR		=	obj

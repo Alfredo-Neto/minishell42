@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 23:19:00 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/22 21:57:49 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/03/23 21:59:06 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,23 @@
 
 void executor(t_data *data)
 {
-	exec_selector(data);
+	if (data->exec_flag != -1)  //só executa se tiver algo pra executar, pode ser só def de variável
+		exec_selector(data);
 }
 
 // Function to call one sys cmds
 void single_exec(t_data *data) //char **parsed)
 {
-	pid_t pid;
-	int	  builtin_flag;
-	int index;
+	pid_t	pid;
+	int		builtin_flag;
+	int		index;
 
 	index = 0;
 
 	builtin_flag = is_builtins(data->argve[index][0]);
 
-	pid = fork();
+	//pid = fork();
+	pid = 0;
 	if (pid == -1)
 	{
 		printf("\nFailed forking child..");
