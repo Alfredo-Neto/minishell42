@@ -6,7 +6,7 @@
 /*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/22 22:00:34 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/03/22 22:34:42 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 #include <sys/wait.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include <signal.h>
   
 #define SUCCESS		0
 #define FAILURE		1
@@ -47,6 +48,7 @@
 
 // Clearing the shell using escape sequences
 #define clear() printf("\033[H\033[J")
+
 
 typedef struct	s_data
 {    
