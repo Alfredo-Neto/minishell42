@@ -6,7 +6,7 @@
 /*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 19:08:49 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/22 12:34:12 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/03/22 22:51:13 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,10 @@ void	welcome(void)
 
 	clear();
 	username = getenv("USER");
-	printf("\n\n\nHi, @%s!\n", username);
-	sleep(1);
-	clear();
-}
-
-void	init_data(t_data *data)
-{
-	data->input_string[0] = '\0';
-	data->parsed_args[0] = NULL;
-	data->parsed_args_piped[0] = NULL;
-	data->exec_flag = 0;
-	// adicionar init_data...
+	printf("|			        			|\n");
+	printf("|			MINISHELL			|\n");
+	printf("|			        			|\n");
+	printf("\n\n\nHi, @%s!\n\n", username);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -45,8 +37,8 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	init_data(&data);
 	welcome();
-	data.env_variable = envp;
-	while (1)
+	data.envp = envp;
+	while (TRUE)
 		minishell(&data);
-	return (0);
+	exit_minishell(&data, SUCCESS);
 }
