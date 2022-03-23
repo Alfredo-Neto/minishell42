@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/19 20:00:43 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/03/21 17:41:18 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@
 #define MAXCOM		1000 // max number of letters to be supported
 #define MAXLIST		100 // max number of commands to be supported
 #define MAXPROMPT	100 // max lenght of prompt
-
 
 #define FAILURE		1
 #define SUCCESS		0
@@ -68,6 +67,10 @@ int		parse_pipe(char* str, char** strpiped);
 char **parse_space(char *str, char **parsed);
 int		process_string(char* str, char** parsed, char** parsedpipe);
 char *handle_quotes(char *str);
+
+void	single_quotes(char *from_single_quotes, char *str);
+void	double_quotes(char *from_double_quotes, char *str);
+
 
 //..................................................PROMPT
 //history.c

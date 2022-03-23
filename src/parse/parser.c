@@ -6,7 +6,7 @@
 /*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:03:07 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/19 23:09:01 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/03/22 12:27:17 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int process_string(char *str, char **parsed, char **parsedpipe)
 	}
 	else
 	{
-		printf("                                      BUILTIN (no)");
+		printf("                                      BUILTIN (no)\n");
 		return (1 + piped);
 	}
 }

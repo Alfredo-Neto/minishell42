@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 19:08:49 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/18 17:23:50 by coder            ###   ########.fr       */
+/*   Updated: 2022/03/22 12:34:12 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 void	welcome(void)
 {
-	char	*username;
+	static char	*username;
 
 	clear();
 	username = getenv("USER");
