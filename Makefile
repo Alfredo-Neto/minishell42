@@ -1,49 +1,33 @@
-NAME = minishell
+NAME		=	minishell
+CC			=	gcc
+CFLAGS		=	-Wall -Wextra -Werror -lreadline
+LIBFT_DIR	=	libft
+LIBFT		=	$(LIBFT_DIR)/libft.a
+LIBFLAGS	=	-L $(LIBFT_DIR) -lft
+VPATH 		=	src src/parse src/prompt src/tools src/exec src/builtins
+RM			=	rm -fr
+HEADERS		=	minishell.h
 
-LIBFT_DIR = libft
-LIBFT = $(LIBFT_DIR)/libft.a
-LIBFLAGS = -L$(LIBFT_DIR) -lft
+SRC_FILES	=	main.c \
+				executor.c \
+				parser.c \
+				prompt_take_input.c \
+				history.c \
+				str_tools.c \
+				echo.c \
+				minishell.c
 
-SRC_FILES = main.c \
-			executor.c \
-			parser.c \
-			prompt_take_input.c \
-			history.c \
-			str_tools.c \
-			echo.c \
-			minishell.c
+OBJ			=	$(SRC_FILES:%.c=%.o)
+OBJ_DIR		=	obj
 
-SRC_DIR = src
-OBJ_DIR	= obj
-HEADERS := minishell.h
-
-#OBJ = $(SRC_FILES:%.c=$(OBJ_DIR)/%.o) $(SRC_DIR) # main.o minishell.o parse_token.o prompt_take_input.o
-OBJ =	main.o \
-		executor.o \
-		parser.o \
-		prompt_take_input.o \
-		history.o \
-		str_tools.o \
-		echo.o \
-		minishell.o
-#INCLUDES = includes
-#HEADERS := $(INCLUDES)/minishell.h
-
-#INCLUDES := $(addprefix -I, $(INCLUDES))
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror -lreadline
-
-VPATH = src src/parse src/prompt src/tools src/exec src/builtins
-
-RM = rm -f
-
-$(OBJ_DIR)/%.o: /%.c $(HEADERS) #$(SRC_DIR)
+$(OBJ_DIR)/%.o: %.c $(HEADERS)
 		$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES) 
 
 all: $(NAME)
 
 $(NAME): $(OBJ_DIR) $(LIBFT) $(OBJ)
-	$(CC) $(OBJ) $(CFLAGS) $(LIBFLAGS) -o $@
+	mv $(OBJ) $(OBJ_DIR)
+	$(CC) $(addprefix obj/, $(OBJ)) $(CFLAGS) $(LIBFLAGS) -o $@
 	@echo ""
 	@echo "|		minishell created		|"
 	@echo ""
@@ -61,7 +45,7 @@ clean:
 	@echo ""
 
 fclean: clean
-	$(RM) $(OBJ)
+	$(RM) $(OBJ_DIR)
 	$(RM) $(NAME)
 
 install:
