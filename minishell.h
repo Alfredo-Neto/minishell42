@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/22 21:33:39 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/03/22 22:34:42 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,65 +24,111 @@
 #include <readline/history.h>
 #include <signal.h>
   
-#define MAXCOM		1000 // max number of letters to be supported
-#define MAXLIST		100 // max number of commands to be supported
-#define MAXPROMPT	100 // max lenght of prompt
-
-
-#define FAILURE		1
 #define SUCCESS		0
-#define true		1
-#define false		0
+#define FAILURE		1
 
-#define NO_PIPE				1
-#define PIPE_PRESENT		2
+#define FALSE		0
+#define TRUE		1
 
-  
-#define NO_BUILTINS 4
+#define NO_PIPE		0
+
+#define NUMBER_OF_BUILTINS 5
+
+#define EXIT		1
+#define CD			2
+#define ECHO		3
+#define HELLO		4
+#define HELP		5
+#define	NONE		0
+
+
+
+
+
 
 // Clearing the shell using escape sequences
 #define clear() printf("\033[H\033[J")
 
+
 typedef struct	s_data
-{
-    char	input_string[MAXCOM];
-	char	*parsed_args[MAXLIST];
-	char	*parsed_args_piped[MAXLIST];
+{    
+	char	*input;
+	char	***argve; //(cmd + args: argumento de execve)
+	char	**envp; //colocar global?
+	int		number_of_pipes;
 	int		exec_flag;
-	char	**env_variable;
+	int		tirar;
 }				t_data;
 
-//..................................................EXEC
-//executor.c
-void	exec_args(char** parsed);
-void	exec_args_piped(char** parsed, char** parsedpipe);
-void	open_help();
-int		handle_builtins(char** parsed);
+//..................................................CORE
+//data_handler.c
+void	init_data(t_data *data);
+void	data_clean(t_data *data);
 
-//..................................................PARSE
-//parser.c
-int		parse_pipe(char* str, char** strpiped);
-char **parse_space(char *str, char **parsed);
-int		process_string(char* str, char** parsed, char** parsedpipe);
+//minishell.c
+void	minishell(t_data *data);
 
 //..................................................PROMPT
+//prompt_take_input.c
+int		take_input(t_data *data);
+void	print_dir(void); //Faremos pwd?
+//void prompt() FAZER
+
 //history.c
 void	put_on_history(char *buf, char *old_input);
-//prompt_take_input.c
-void	print_dir(void);
-int		take_input(char* input);
+
+//..................................................LEX
+//lexer.c - tokens
+void	lexer (t_data *data);
+char	**pull_pipe(t_data *data);
+void	pull_space(t_data *data, char **cmds_piped);
+
+//..................................................PARSE
+//parser.c  -  quotes ok: analisa!
+void	parser(t_data *data);
+//parse_quotes();
+//parse_redirects();
+
+//..................................................EXPANDER
+//expand_variables.c
+void expand_vars(t_data *data);
+
+//..................................................EXEC
+//sorting.c
+int		is_builtins(char *cmd);
+void	exec_selector(t_data *data);
+
+
+//executor.c
+void	executor(t_data *data);
+void	multiple_exec(t_data *data);
+void 	single_exec(t_data *data);
+void	builtin_exec(t_data *data, int code);
+
+//..................................................BUILTINS
+//exit.c
+int		exit_minishell(t_data *data, int status);
+
+//help.c
+void	open_help(void);
+
+//echo.c
+void	echo(t_data *data);
+
+//hello.c
+void	hello(void);
+
 
 //..................................................TOOLS
 // Vamos usar funcoes proprias
+int		ft_strcpy_handled(char **new, char const *src);
+int		ft_str_count(char **str);
+void	free_str(char **str);
+void	free_double_str(char ***str);
+void	free_triple_str(char ****str);
 
-//..................................................BUILTINS
-void echo(char **str);
+//////////////////////////////////////////////////////////
 
-//main.c
-void welcome(void);
-void init_data(t_data *data);
-
-//minishell.c
-void minishell(t_data *data);
+void	welcome(void);
 
 #endif

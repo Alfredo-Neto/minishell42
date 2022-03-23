@@ -4,18 +4,27 @@ CFLAGS		=	-Wall -Wextra -Werror -lreadline
 LIBFT_DIR	=	libft
 LIBFT		=	$(LIBFT_DIR)/libft.a
 LIBFLAGS	=	-L $(LIBFT_DIR) -lft
-VPATH 		=	src src/parse src/prompt src/tools src/exec src/builtins
+VPATH 		= 	src src/CORE src/PROMPT src/LEX \
+				src/PARSE src/EXPAND src/EXEC \
+				src/BUILTINS src/TOOLS
 RM			=	rm -fr
 HEADERS		=	minishell.h
 
 SRC_FILES	=	main.c \
-				executor.c \
-				parser.c \
+				hello.c \
+				data_handler.c \
+				minishell.c \
 				prompt_take_input.c \
 				history.c \
-				str_tools.c \
+				lexer.c \
+				parser.c \
+				expand_variables.c \
+				sorting.c \
+				executor.c \
+				exit.c \
+				help.c \
 				echo.c \
-				minishell.c
+				str_tools.c
 
 OBJ			=	$(SRC_FILES:%.c=%.o)
 OBJ_DIR		=	obj
@@ -52,6 +61,9 @@ install:
 	@sudo apt-get -y install libreadline-dev
 
 re: fclean all
+
+install:
+	sudo apt-get install libreadline-dev
 
 git:
 	git add .
