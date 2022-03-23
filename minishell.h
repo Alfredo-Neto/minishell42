@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/22 23:20:07 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/03/22 22:00:34 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 
 #define NO_PIPE		0
 
-#define NO_BUILTINS 5
+#define NUMBER_OF_BUILTINS 5
 
 #define EXIT		1
 #define CD			2
@@ -53,7 +53,7 @@ typedef struct	s_data
 	char	*input;
 	char	***argve; //(cmd + args: argumento de execve)
 	char	**envp; //colocar global?
-	int		no_pipes;
+	int		number_of_pipes;
 	int		exec_flag;
 	int		tirar;
 }				t_data;
@@ -93,9 +93,9 @@ void expand_vars(t_data *data);
 
 //..................................................EXEC
 //sorting.c
-int		is_builtins(t_data *data);
+int		is_builtins(char *cmd);
 void	exec_selector(t_data *data);
-void	system_exec(t_data *data);
+
 
 //executor.c
 void	executor(t_data *data);

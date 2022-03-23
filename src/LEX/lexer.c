@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 13:55:53 by ebresser          #+#    #+#             */
-/*   Updated: 2022/03/22 23:20:46 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/03/22 22:01:34 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ char **pull_pipe(t_data *data)
 		exit_minishell(data, FAILURE);
 	} 
 	if (input_piped[0] && input_piped[1] == NULL) 
-		data->no_pipes = 0;
+		data->number_of_pipes = 0;
 	else
-		data->no_pipes = ft_str_count(input_piped) - 1;	
+		data->number_of_pipes = ft_str_count(input_piped) - 1;	
 	return (input_piped);
 }
 
@@ -39,7 +39,7 @@ void pull_space(t_data *data, char **cmds_piped)
 	int no_cmds;
 	
 	i = 0;
-	no_cmds = data->no_pipes + 1;
+	no_cmds = data->number_of_pipes + 1;
 	data->argve = (char ***)malloc((no_cmds + 1)* sizeof(char **));
 	if (data->argve == NULL)
 	{

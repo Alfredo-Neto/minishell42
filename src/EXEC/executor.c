@@ -6,7 +6,7 @@
 /*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 23:19:00 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/22 13:48:57 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/03/22 21:57:49 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@ void executor(t_data *data)
 void single_exec(t_data *data) //char **parsed)
 {
 	pid_t pid;
+	int	  builtin_flag;
+	int index;
+
+	index = 0;
+
+	builtin_flag = is_builtins(data->argve[index][0]);
 
 	pid = fork();
 	if (pid == -1)
@@ -30,10 +36,10 @@ void single_exec(t_data *data) //char **parsed)
 	}
 	else if (pid == 0)
 	{
-		if (execvp(data->argve[0][0], data->argve[0]) < 0)//mudar p execve - n vai rodar
-		{
+		if (builtin_flag)
+			builtin_exec(data, builtin_flag);
+		else if (execvp(data->argve[index][0], data->argve[0]) < 0)//mudar p execve - n vai rodar
 			printf("\nCould not execute command..");
-		}
 		exit(0);
 	}
 	else
@@ -47,15 +53,19 @@ void single_exec(t_data *data) //char **parsed)
 void multiple_exec(t_data *data) //char **parsed, char **parsedpipe)
 {
 	int pipefd[2];
+	int index;
+	int	  builtin_flag;
 	pid_t p1;
 	pid_t p2;
 
+	index = 0;
 	if (pipe(pipefd) < 0)
 	{
 		printf("\nPipe could not be initialized");
 		return;
 	}
 	p1 = fork();
+	builtin_flag = is_builtins(data->argve[index][0]);
 	if (p1 < 0)
 	{
 		printf("\nCould not fork");
@@ -66,7 +76,10 @@ void multiple_exec(t_data *data) //char **parsed, char **parsedpipe)
 		close(pipefd[0]);
 		dup2(pipefd[1], STDOUT_FILENO);
 		close(pipefd[1]);
-		if (execvp(data->argve[0][0], data->argve[0]) < 0) //n vai rodar
+
+		if (builtin_flag)
+			builtin_exec(data, builtin_flag);
+		else if (execvp(data->argve[index][0], data->argve[0]) < 0) //n vai rodar
 		{
 			printf("\nCould not execute command 1..");
 			exit(0);
@@ -74,7 +87,9 @@ void multiple_exec(t_data *data) //char **parsed, char **parsedpipe)
 	}
 	else
 	{
+		index++;
 		p2 = fork();
+		builtin_flag = is_builtins(data->argve[index][0]);
 		if (p2 < 0)
 		{
 			printf("\nCould not fork");
@@ -85,7 +100,9 @@ void multiple_exec(t_data *data) //char **parsed, char **parsedpipe)
 			close(pipefd[1]);
 			dup2(pipefd[0], STDIN_FILENO);
 			close(pipefd[0]);
-			if (execvp(data->argve[1][0], data->argve[1]) < 0) //n vai rodar
+			if (builtin_flag)
+				builtin_exec(data, builtin_flag);
+			else if (execvp(data->argve[index][0], data->argve[1]) < 0) //n vai rodar
 			{
 				printf("\nCould not execute command 2..");
 				exit(0);
