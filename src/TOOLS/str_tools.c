@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 22:54:50 by ebresser          #+#    #+#             */
-/*   Updated: 2022/03/22 23:19:56 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/03/24 12:33:41 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,4 @@ void free_triple_str(char ****str) //Uso: passar endereço da ***str
         free_double_str(*str);
         *str = NULL;
     }    
-} 
+}

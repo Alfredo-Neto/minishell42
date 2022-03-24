@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/22 22:34:42 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/03/24 13:05:56 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,19 @@
 // Clearing the shell using escape sequences
 #define clear() printf("\033[H\033[J")
 
+typedef	struct s_vars
+{
+	char			*var_name;
+	char			*var_value;
+	struct s_vars	*next;
+}				t_vars;
 
 typedef struct	s_data
 {    
 	char	*input;
 	char	***argve; //(cmd + args: argumento de execve)
 	char	**envp; //colocar global?
+	t_vars	*vars;
 	int		number_of_pipes;
 	int		exec_flag;
 	int		tirar;
@@ -89,9 +96,14 @@ void	parser(t_data *data);
 //parse_quotes();
 //parse_redirects();
 
+//parse_vars.c
+void	grab_vars(t_data *data);
+char	*get_var_value(char *input);
+char	*get_var_name(char *input);
+
 //..................................................EXPANDER
 //expand_variables.c
-void expand_vars(t_data *data);
+void expander(t_data *data);
 
 //..................................................EXEC
 //sorting.c
@@ -121,11 +133,19 @@ void	hello(void);
 
 //..................................................TOOLS
 // Vamos usar funcoes proprias
+//str_tools.c
 int		ft_strcpy_handled(char **new, char const *src);
 int		ft_str_count(char **str);
 void	free_str(char **str);
 void	free_double_str(char ***str);
 void	free_triple_str(char ****str);
+
+//list_tools.c
+t_vars	*new_node(char *name, char *value);
+t_vars	*last_in_list(t_vars *lst);
+void	add_to_list(t_vars **lst, char *name, char *value);
+void	clear_list(t_vars *lst);
+char	*find_in_list(char *var_name, t_vars *lst);
 
 //////////////////////////////////////////////////////////
 
