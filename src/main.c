@@ -6,7 +6,7 @@
 /*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 19:08:49 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/22 22:51:13 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/03/23 20:23:42 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,15 @@
 */
 #include "../minishell.h"
 
-void	welcome(void)
+void	welcome(t_data *data)
 {
-	static char	*username;
-
-	clear();
-	username = getenv("USER");
+	
+	data->username = getenv("USER");
 	printf("|			        			|\n");
 	printf("|			MINISHELL			|\n");
 	printf("|			        			|\n");
-	printf("\n\n\nHi, @%s!\n\n", username);
+	printf("\n\n\nHi, @%s!\n\n", data->username);
+	clear();
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -36,7 +35,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	init_data(&data);
-	welcome();
+	welcome(&data);
 	data.envp = envp;
 	while (TRUE)
 		minishell(&data);

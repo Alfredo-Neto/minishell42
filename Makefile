@@ -63,9 +63,6 @@ install:
 
 re: fclean all
 
-install:
-	sudo apt-get install libreadline-dev
-
 git:
 	git add .
 	git status

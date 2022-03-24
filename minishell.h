@@ -6,7 +6,7 @@
 /*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/22 22:55:51 by joeduard         ###   ########.fr       */
+/*   Updated: 2022/03/23 22:36:59 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@
 #define HELP		5
 #define	NONE		0
 
+#define KBLU  "\x1B[34m"
+#define KGRN  "\x1B[32m"
+
 #define SQUOTES 39
 #define DQUOTES 34
 #define NO_QUOTES_FOUND -1
@@ -50,7 +53,8 @@
 
 
 typedef struct	s_data
-{    
+{   
+	char	*username; 
 	char	*input;
 	char	***argve; //(cmd + args: argumento de execve)
 	char	**envp; //colocar global?
@@ -74,8 +78,9 @@ void	double_quotes(char *from_double_quotes, char *str);
 //..................................................PROMPT
 //prompt_take_input.c
 int		take_input(t_data *data);
-void	print_dir(void); //Faremos pwd?
-//void prompt() FAZER
+//void	print_dir(void); //Faremos pwd?
+void prompt(t_data *data);
+
 
 //history.c
 void	put_on_history(char *buf, char *old_input);
@@ -113,7 +118,7 @@ void	builtin_exec(t_data *data, int code);
 int		exit_minishell(t_data *data, int status);
 
 //main.c
-void welcome(void);
+void	welcome(t_data *data);
 void init_data(t_data *data);
 //help.c
 void	open_help(void);
@@ -134,7 +139,5 @@ void	free_double_str(char ***str);
 void	free_triple_str(char ****str);
 
 //////////////////////////////////////////////////////////
-
-void	welcome(void);
 
 #endif
