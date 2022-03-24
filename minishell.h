@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/23 22:02:28 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/03/24 13:05:56 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,14 @@ void	parser(t_data *data);
 //parse_quotes();
 //parse_redirects();
 
+//parse_vars.c
+void	grab_vars(t_data *data);
+char	*get_var_value(char *input);
+char	*get_var_name(char *input);
+
 //..................................................EXPANDER
 //expand_variables.c
-void expand_vars(t_data *data);
+void expander(t_data *data);
 
 //..................................................EXEC
 //sorting.c
@@ -140,6 +145,7 @@ t_vars	*new_node(char *name, char *value);
 t_vars	*last_in_list(t_vars *lst);
 void	add_to_list(t_vars **lst, char *name, char *value);
 void	clear_list(t_vars *lst);
+char	*find_in_list(char *var_name, t_vars *lst);
 
 //////////////////////////////////////////////////////////
 

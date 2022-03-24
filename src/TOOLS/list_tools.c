@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 17:30:51 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/03/23 22:03:38 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/03/24 13:38:31 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,17 @@ void	clear_list(t_vars *lst)
 			free(lst);
 			lst = aux;
 		}
+}
+
+char	*find_in_list(char *var_name, t_vars *lst)
+{
+	var_name++;
+	if (lst != 0x0)
+		while (lst)
+		{
+			if (ft_strcmp(var_name, lst->var_name) == 0)
+				return (lst->var_value);
+			lst = lst->next;
+		}
+	return "$";
 }
