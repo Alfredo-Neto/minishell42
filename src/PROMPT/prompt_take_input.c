@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_take_input.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 20:56:26 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/22 13:52:07 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/03/24 12:26:45 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	print_dir(void)
 	char	cwd[1024];
 
 	getcwd(cwd, sizeof(cwd));
-	printf("\nDir: %s", cwd);
+	printf("Dir: %s\n", cwd);
 }
 
 /** Function to take input - MALLOC input*/

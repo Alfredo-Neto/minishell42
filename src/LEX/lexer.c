@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 13:55:53 by ebresser          #+#    #+#             */
-/*   Updated: 2022/03/22 22:01:34 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/03/23 21:55:13 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void pull_space(t_data *data, char **cmds_piped)
 		i++;
 	}
 	data->argve[i] = NULL;
+	data->exec_flag = 1;
 
 	//FIM
 	// print variable ------RETIRAR--------------------------------------------------------
