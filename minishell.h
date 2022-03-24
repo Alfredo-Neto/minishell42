@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/24 13:05:56 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/03/24 22:40:51 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,6 @@
 #define HELLO		4
 #define HELP		5
 #define	NONE		0
-
-
-
-
 
 
 // Clearing the shell using escape sequences

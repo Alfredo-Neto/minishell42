@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 23:19:00 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/24 18:54:41 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/03/24 22:39:45 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,6 @@ void multiple_exec(t_data *data) //char **parsed, char **parsedpipe)
 	}
 }
 
-
 // Function to call builtin commands
 void builtin_exec(t_data *data, int code)
 {
@@ -136,7 +135,3 @@ void builtin_exec(t_data *data, int code)
 	else if (code == HELP)
 		open_help();	
 }
-
-
-
-
