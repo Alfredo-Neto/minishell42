@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 12:30:10 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/03/24 22:40:10 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/03/26 13:12:52 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,17 @@ char	*get_var_value(char *input)
 	while (*input != '=')
 		input++;
 	input++;
-	while (input[i] != ' ' && input[i])
+	if (*input == '\"')
+	{
+		input++;
+		while (input[i] != '\"' && input[i])
 		i++;
+	}
+	else
+	{
+		while (input[i] != ' ' && input[i])
+		i++;
+	}
 	value = (char *)malloc(i * sizeof(char) + 1);
 	ft_strlcpy(value, input, i + 1);
 	return (value);
@@ -59,6 +68,7 @@ void	grab_vars(t_data *data)
 			str++;
 		name = get_var_name(str);
 		value = get_var_value(str);
+		//check for existent variables (in vars and in env)
 		if (!data->vars)
 			data->vars = new_node(name, value);
 		else
