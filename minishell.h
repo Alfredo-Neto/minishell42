@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/24 22:40:51 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/03/26 18:00:36 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ t_vars	*last_in_list(t_vars *lst);
 void	add_to_list(t_vars **lst, char *name, char *value);
 void	clear_list(t_vars *lst);
 char	*find_in_list(char *var_name, t_vars *lst);
+void	change_in_list(t_vars *lst, char *var_name, char *var_value);
 
 //////////////////////////////////////////////////////////
 

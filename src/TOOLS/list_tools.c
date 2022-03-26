@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 17:30:51 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/03/26 17:45:54 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/03/26 18:09:13 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_vars	*last_in_list(t_vars *lst)
 	return (lst);
 }
 
-// creates a new node on an existent list
+// creates a new node on an existing list
 void	add_to_list(t_vars **lst, char *name, char *value)
 {
 	t_vars *aux;
@@ -73,7 +73,7 @@ void	clear_list(t_vars *lst)
 // finds a variable name on a list
 char	*find_in_list(char *var_name, t_vars *lst)
 {
-	var_name++;
+	//var_name++;
 	if (lst != 0x0)
 		while (lst)
 		{
@@ -82,4 +82,22 @@ char	*find_in_list(char *var_name, t_vars *lst)
 			lst = lst->next;
 		}
 	return "$";
+}
+
+// changes the value of an existing variable on the list
+void	change_in_list(t_vars *lst, char *var_name, char *var_value)
+{
+	if (lst != 0x0)
+	{
+		while (lst)
+		{
+			if (ft_strcmp(var_name, lst->var_name) == 0)
+			{
+				free(lst->var_value);
+				lst->var_value = ft_strdup(var_value);
+				return;
+			}
+			lst = lst->next;
+		}
+	}
 }

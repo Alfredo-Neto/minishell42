@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 12:30:10 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/03/26 17:41:44 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/03/26 18:10:44 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,18 @@ void	grab_vars(t_data *data)
 			str++;
 		name = get_var_name(str);
 		value = get_var_value(str);
-		//check for existent variables (in vars and in env)
 		if (!data->vars)
 			data->vars = new_node(name, value);
 		else
-			add_to_list(&data->vars, name, value);
+		{
+			str = find_in_list(name, data->vars);
+			if (*str == '$')
+				add_to_list(&data->vars, name, value);
+			else
+			{
+				change_in_list(data->vars, name, value);
+			}
+		}
 		free(name);
 		free(value);
 	}

@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 15:34:28 by ebresser          #+#    #+#             */
-/*   Updated: 2022/03/26 17:49:04 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/03/26 18:14:17 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,9 @@ void	expander(t_data *data)
 	while (find_vars(data->argve[0]) != -1)
 	{
 		i = find_vars(data->argve[0]);
+		data->argve[0][i]++;
 		value = find_in_list(data->argve[0][i], data->vars);
+		data->argve[0][i]--;
 		if (*value == '$')
 		{
 			data->exec_flag = -1;
