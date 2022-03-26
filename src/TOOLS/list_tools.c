@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 17:30:51 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/03/24 13:38:31 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/03/26 17:45:54 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 // list handling functions
 
+// creates a new node with received values
 t_vars	*new_node(char *name, char *value)
 {
 	t_vars	*new;
@@ -27,6 +28,7 @@ t_vars	*new_node(char *name, char *value)
 	return (new);
 }
 
+// finds the last node on the list
 t_vars	*last_in_list(t_vars *lst)
 {
 	if (!lst)
@@ -36,6 +38,7 @@ t_vars	*last_in_list(t_vars *lst)
 	return (lst);
 }
 
+// creates a new node on an existent list
 void	add_to_list(t_vars **lst, char *name, char *value)
 {
 	t_vars *aux;
@@ -51,6 +54,7 @@ void	add_to_list(t_vars **lst, char *name, char *value)
 	aux->next = new;
 }
 
+// clears the list and frees its memory
 void	clear_list(t_vars *lst)
 {
 	t_vars *aux;
@@ -66,6 +70,7 @@ void	clear_list(t_vars *lst)
 		}
 }
 
+// finds a variable name on a list
 char	*find_in_list(char *var_name, t_vars *lst)
 {
 	var_name++;

@@ -6,12 +6,13 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 12:30:10 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/03/26 13:12:52 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/03/26 17:41:44 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
+// gets and returns the name of the variable
 char	*get_var_name(char *input)
 {
 	int		i;
@@ -25,6 +26,7 @@ char	*get_var_name(char *input)
 	return (name);
 }
 
+// gets and returns the value of the variable
 char	*get_var_value(char *input)
 {
 	int		i;
@@ -38,18 +40,17 @@ char	*get_var_value(char *input)
 	{
 		input++;
 		while (input[i] != '\"' && input[i])
-		i++;
+			i++;
 	}
 	else
-	{
 		while (input[i] != ' ' && input[i])
-		i++;
-	}
+			i++;
 	value = (char *)malloc(i * sizeof(char) + 1);
 	ft_strlcpy(value, input, i + 1);
 	return (value);
 }
 
+// checks for variables in the input string and stores them on a linked list
 void	grab_vars(t_data *data)
 {
 	char *str;
