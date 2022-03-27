@@ -6,30 +6,27 @@
 /*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 13:55:53 by ebresser          #+#    #+#             */
-/*   Updated: 2022/03/22 22:01:34 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/03/27 16:13:48 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
 // Create an aux **str based on pipe
-char **pull_pipe(t_data *data)
+void pull_pipe(t_data *data, char ***cmds_piped)
 {
-	char	**input_piped;	
-
 	if (!data->input)
 		printf("Input NULO\n");
-	input_piped = ft_split(data->input, '|');
-	if (input_piped == NULL)
+	*cmds_piped = ft_split(data->input, '|');
+	if (*cmds_piped == NULL)
 	{
 		perror("Malloc failure");
 		exit_minishell(data, FAILURE);
 	} 
-	if (input_piped[0] && input_piped[1] == NULL) 
+	if ((*cmds_piped)[0] && (*cmds_piped)[1] == NULL) 
 		data->number_of_pipes = 0;
 	else
-		data->number_of_pipes = ft_str_count(input_piped) - 1;	
-	return (input_piped);
+		data->number_of_pipes = ft_str_count((*cmds_piped)) - 1;
 }
 
 //Aqui ganha o formato da estrutura argve - Por isso n retorna, mexe direto na struct
@@ -84,7 +81,7 @@ void lexer (t_data *data)
 {
 	char	**cmds_piped;
 	
-	cmds_piped = pull_pipe(data); //tenho estrutura de str** - cada string com linha de cmd
+	pull_pipe(data, &cmds_piped); //tenho estrutura de str** - cada string com linha de cmd
 	pull_space(data, cmds_piped); //tenho estrutura de str*** - cada str é um arg(ou cmd)
 	free_double_str(&cmds_piped);
 }

@@ -6,7 +6,7 @@
 /*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/22 22:34:42 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/03/27 16:15:25 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	put_on_history(char *buf, char *old_input);
 //..................................................LEX
 //lexer.c - tokens
 void	lexer (t_data *data);
-char	**pull_pipe(t_data *data);
+void	pull_pipe(t_data *data, char ***cmds_piped);
 void	pull_space(t_data *data, char **cmds_piped);
 
 //..................................................PARSE
