@@ -114,7 +114,7 @@ void 	single_exec(t_data *data);
 void	builtin_exec(t_data *data, int code);
 
 //..................................................BUILTINS
-int		cd(char **directory);
+int cd(t_data *data);
 void 	pwd();
 //exit.c
 int		exit_minishell(t_data *data, int status);
