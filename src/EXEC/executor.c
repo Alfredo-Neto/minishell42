@@ -128,7 +128,7 @@ void builtin_exec(t_data *data, int code)
 	if (code == EXIT)		
 		exit_minishell(data, code);
 	else if (code == CD)
-		chdir(data->argve[0][1]);
+		cd(data);
 	else if (code == ECHO)
 		echo(data);
 	else if (code == HELLO)

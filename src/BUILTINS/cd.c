@@ -1,37 +1,35 @@
 #include "../../minishell.h"
 
-static char *trim_backwards_until_slash(char **absolute_path)
+static int	too_many_arguments(char **str)
+{
+	if (str && str[1] && str[2])
+	{
+		ft_putendl_fd("cd: too many arguments", 2);
+		return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
+}
+
+static char *trim_backwards_until_slash(char *absolute_path)
 {
     size_t i;
 
-    printf("DENTRO DO TRIM %s\n", *absolute_path);
-    i = ft_strlen(*absolute_path);
-    while ((*absolute_path)[i] != '/')
-    {
-        printf("DENTRO DO WHILE\n");
+    i = ft_strlen(absolute_path);
+    while (absolute_path[i] != '/')
         i--;
-    }
-    *absolute_path = ft_substr(*absolute_path, 0, i + 1);
-    printf("ABS %s\n", *absolute_path);
-    return (*absolute_path);
+    absolute_path = ft_substr(absolute_path, 0, i + 1);
+    return (absolute_path);
 }
 
 static char **trim_off_current_dir(char **directory)
 {
-    printf("DIR %s\n", *directory);
-    char *absolute_path;
-    if (absolute_path == NULL)
+    char absolute_path[CHAR_MAX_NUM];
+
+    if(getcwd(absolute_path, sizeof(absolute_path)))
     {
-        printf("DENTRO DO ELSE %s\n", absolute_path);
-        absolute_path = "PWD";
-        absolute_path = getenv(absolute_path);
-        *directory = trim_backwards_until_slash(&absolute_path);
+        
     }
-    else
-    {
-        printf("DENTRO DO IF %s\n", absolute_path);
-        *directory = trim_backwards_until_slash(&absolute_path);
-    }
+    *directory = trim_backwards_until_slash(absolute_path);
     return (directory);
 }
 
@@ -48,12 +46,22 @@ static char **parse_directory(char **directory)
     }
 }
 
-int cd(char **directory)
+int cd(t_data *data)
 {
-    int ret;
+    char **directory;
 
-    ret = 0;
-    directory = parse_directory(directory);
-    ret = chdir(*directory);
-    return (ret);
+    (void)directory;
+    if (!data->argve[0] || too_many_arguments(data->argve[0]))
+        return(EXIT_FAILURE);
+    directory = parse_directory(&(data->argve[0][1]));
+    if(chdir(*directory))
+    {
+        ft_putstr_fd("cd: ", 1);
+		perror(*directory);
+        // free stuff out
+        return (EXIT_FAILURE);
+    }
+    // update_env_pwd
+    // free stuff out
+   return (EXIT_SUCCESS);
 }
