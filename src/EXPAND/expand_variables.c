@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 15:34:28 by ebresser          #+#    #+#             */
-/*   Updated: 2022/03/27 13:16:21 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/03/29 23:25:50 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,8 @@ char **new_argve(char *value, t_data *data)
 }
 
 // makes room for new args and inserts it into data structure
-void	insert_new_args(t_data *data, char **cmdstr, int i, char *value)
+void	insert_new_args(t_data *data, char **cmdstr, int i)
 {
-	cmdstr = new_argve(value, data);
 	free(data->argve[0][i]);
 	data->argve[0][i] = ft_strdup(*cmdstr);
 	while (*(++cmdstr))
@@ -102,6 +101,7 @@ void	expander(t_data *data)
 		data->argve[0][i]++;  // skips '$' in the beggining of the string
 		value = find_in_list(data->argve[0][i], data->vars);
 		data->argve[0][i]--;
+		cmdstr = new_argve(value, data);
 		if (*value == '$')
 		{
 			data->exec_flag = -1;
@@ -109,7 +109,7 @@ void	expander(t_data *data)
 		}
 		data->exec_flag = 1;
 		if (ft_strchr(value, ' '))
-			insert_new_args(data, cmdstr, i, value);
+			insert_new_args(data, cmdstr, i);
 		else
 		{
 			free(data->argve[0][i]);
