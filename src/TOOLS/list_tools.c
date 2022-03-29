@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 17:30:51 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/03/26 18:09:13 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/03/27 13:11:57 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ void	clear_list(t_vars *lst)
 // finds a variable name on a list
 char	*find_in_list(char *var_name, t_vars *lst)
 {
-	//var_name++;
 	if (lst != 0x0)
 		while (lst)
 		{
