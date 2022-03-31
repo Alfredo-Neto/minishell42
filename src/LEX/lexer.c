@@ -6,13 +6,15 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 13:55:53 by ebresser          #+#    #+#             */
-/*   Updated: 2022/03/25 00:51:02 by coder            ###   ########.fr       */
+/*   Updated: 2022/03/31 17:14:40 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-// Create an aux **str based on pipe
+/*	Create an aux **str based on pipe
+   	Conta pipes, retorna array com ponteiros para strings cortadas por pipes
+	Caso não existam pipes, retorna o imput da linha de comando */
 char **pull_pipe(t_data *data)
 {
 	char	**input_piped;	
@@ -32,7 +34,8 @@ char **pull_pipe(t_data *data)
 	return (input_piped);
 }
 
-//Aqui ganha o formato da estrutura argve - Por isso n retorna, mexe direto na struct
+/*	Aqui ganha o formato da estrutura argve - Por isso n retorna, mexe direto na struct
+	Cria novos tokens utilizando espaço como delimitador e coloca dentro do argve */
 void pull_space(t_data *data, char **cmds_piped)
 {
 	int i;
@@ -49,7 +52,7 @@ void pull_space(t_data *data, char **cmds_piped)
 	}	
 	while(cmds_piped[i])
 	{
-		data->argve[i] = ft_split(cmds_piped[i], ' ');//leak
+		data->argve[i] = ft_split(cmds_piped[i], ' ');
 		if (data->argve[i] == NULL)
 		{
 			perror("Malloc failure");
@@ -60,9 +63,31 @@ void pull_space(t_data *data, char **cmds_piped)
 	}
 	data->argve[i] = NULL;
 	data->exec_flag = 1;
+}	
 
-	//FIM
-	// print variable ------RETIRAR--------------------------------------------------------
+void lexer (t_data *data)
+{
+	char	**cmds_piped;
+	
+	cmds_piped = pull_pipe(data); // Conta pipes, retorna array com ponteiros para string ou a linha de comando
+	
+	//cmds_piped = handle_quotes(cmds_piped) // Tratamos aspas e redefinimos o cmds_piped, entregando ele limpo para pull_space
+	
+	pull_space(data, cmds_piped); // Cria tokens utilizando espaço como delimitador
+	free_double_str(&cmds_piped);
+}
+
+/*	linha de comando:	ls -l | wc -l
+	pull_pipe retorna:	ls -l\0 wc -l\0 
+	pull space retorna:	ls\0 -l\0 wc\0 -l\0 (coloca no argve)
+
+	linha de comando:	echo "'jorge' ale marce"
+	pull_pipe retorna: 	echo "'jorge' ale marce"\0
+	pull_space retorna: echo\0 "'jorge'\0 ale\0 marce"\0 -> vamos tratar as aspas antes de entregar o argumento para a pull_space
+*/
+
+/*
+	// debug: printar as variáveis do pull_space
 	i = 0;
 	int j;
 	while (data->argve[i])
@@ -77,14 +102,4 @@ void pull_space(t_data *data, char **cmds_piped)
 		printf("\n");
 		i++;
 	}
-	//fim print variable------------------------------------------------------------------
-}	
-
-void lexer (t_data *data)
-{
-	char	**cmds_piped;
-	
-	cmds_piped = pull_pipe(data); //tenho estrutura de str** - cada string com linha de cmd
-	pull_space(data, cmds_piped); //tenho estrutura de str*** - cada str é um arg(ou cmd)
-	free_double_str(&cmds_piped);
-}
+*/

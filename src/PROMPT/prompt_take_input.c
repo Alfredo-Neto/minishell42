@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 20:56:26 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/25 00:51:16 by coder            ###   ########.fr       */
+/*   Updated: 2022/03/30 23:28:31 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,11 @@ int	take_input(t_data *data)
 	int		status;
 	
 	prompt(data);
-	data->input = readline(""); // jorge
+	data->input = readline("");
 	if (strlen(data->input) != 0)
 	{
-		old_input = data->input; // jorge
+		old_input = data->input;
 		put_on_history(data->input, old_input);
-		handle_quotes(data->input);
 		status = ft_strcpy_handled(&data->input, data->input);
 		if (status == FAILURE)
 			exit_minishell(data, FAILURE);

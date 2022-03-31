@@ -15,6 +15,7 @@ SRC_FILES	=	main.c \
 				data_handler.c \
 				minishell.c \
 				prompt_take_input.c \
+				handle_quotes.c \
 				history.c \
 				lexer.c \
 				parser.c \
