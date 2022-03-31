@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 13:55:53 by ebresser          #+#    #+#             */
-/*   Updated: 2022/03/31 17:14:40 by coder            ###   ########.fr       */
+/*   Updated: 2022/03/31 20:58:49 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,12 @@ void lexer (t_data *data)
 {
 	char	**cmds_piped;
 	
-	cmds_piped = pull_pipe(data); // Conta pipes, retorna array com ponteiros para string ou a linha de comando
+	look_for_quotes_and_split(data);
+	//remove_token_quotes(t_command *command_list)	
 	
 	//cmds_piped = handle_quotes(cmds_piped) // Tratamos aspas e redefinimos o cmds_piped, entregando ele limpo para pull_space
-	
+
+	cmds_piped = pull_pipe(data); // Conta pipes, retorna array com ponteiros para string ou a linha de comando		
 	pull_space(data, cmds_piped); // Cria tokens utilizando espaço como delimitador
 	free_double_str(&cmds_piped);
 }
@@ -81,7 +83,7 @@ void lexer (t_data *data)
 	pull_pipe retorna:	ls -l\0 wc -l\0 
 	pull space retorna:	ls\0 -l\0 wc\0 -l\0 (coloca no argve)
 
-	linha de comando:	echo "'jorge' ale marce"
+	linha de comando:	echo "'jorge' | ale marce"
 	pull_pipe retorna: 	echo "'jorge' ale marce"\0
 	pull_space retorna: echo\0 "'jorge'\0 ale\0 marce"\0 -> vamos tratar as aspas antes de entregar o argumento para a pull_space
 */

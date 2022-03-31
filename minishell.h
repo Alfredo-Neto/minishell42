@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/25 00:51:57 by coder            ###   ########.fr       */
+/*   Updated: 2022/03/31 20:44:00 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,11 @@
 #define DQUOTES 34
 #define NO_QUOTES_FOUND -1
 
+// código da marce
+#define OFF 0
+#define ON  1
+
+
 // Clearing the shell using escape sequences
 #define clear() printf("\033[H\033[J")
 
@@ -68,6 +73,7 @@ typedef struct	s_data
 	int		number_of_pipes;
 	int		exec_flag;
 	int		tirar;
+	int		token_count; //código da marce
 }				t_data;
 
 //..................................................CORE
@@ -97,6 +103,15 @@ void	put_on_history(char *buf, char *old_input);
 void	lexer (t_data *data);
 char	**pull_pipe(t_data *data);
 void	pull_space(t_data *data, char **cmds_piped);
+
+// funções da marce
+char	**look_for_quotes_and_split(t_data *data);
+//void	remove_token_quotes(t_command *command_list);
+
+
+
+
+
 
 //..................................................PARSE
 //parser.c  -  quotes ok: analisa!
