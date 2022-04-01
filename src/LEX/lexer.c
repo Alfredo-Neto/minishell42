@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 13:55:53 by ebresser          #+#    #+#             */
-/*   Updated: 2022/03/31 20:58:49 by coder            ###   ########.fr       */
+/*   Updated: 2022/04/01 17:23:49 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*	Create an aux **str based on pipe
    	Conta pipes, retorna array com ponteiros para strings cortadas por pipes
-	Caso não existam pipes, retorna o imput da linha de comando */
+	Caso não existam pipes, retorna o imput da linha de comando + NULL no segundo ponteiro */
 char **pull_pipe(t_data *data)
 {
 	char	**input_piped;	
@@ -68,23 +68,33 @@ void pull_space(t_data *data, char **cmds_piped)
 void lexer (t_data *data)
 {
 	char	**cmds_piped;
-	
-	look_for_quotes_and_split(data);
-	//remove_token_quotes(t_command *command_list)	
-	
-	//cmds_piped = handle_quotes(cmds_piped) // Tratamos aspas e redefinimos o cmds_piped, entregando ele limpo para pull_space
+	char	**line;
+		
+	line = look_for_quotes_and_split(data); //devolver com as aspas tratadas, sem split
+//	remove_token_quotes(data);	
 
+//	(void)line;
+	while (*line != NULL)
+	{
+		printf("line_array: %s\n", *line);
+		line++;
+	}
+
+	
 	cmds_piped = pull_pipe(data); // Conta pipes, retorna array com ponteiros para string ou a linha de comando		
 	pull_space(data, cmds_piped); // Cria tokens utilizando espaço como delimitador
 	free_double_str(&cmds_piped);
 }
 
+// echo  "ale | jorge"
+//	echo ale | jorge 
+
 /*	linha de comando:	ls -l | wc -l
 	pull_pipe retorna:	ls -l\0 wc -l\0 
 	pull space retorna:	ls\0 -l\0 wc\0 -l\0 (coloca no argve)
 
-	linha de comando:	echo "'jorge' | ale marce"
-	pull_pipe retorna: 	echo "'jorge' ale marce"\0
+	linha de comando:	echo "'jorge' ale marce"
+	pull_pipe retorna: 	echo "'jorge' ale marce"\0 NULL
 	pull_space retorna: echo\0 "'jorge'\0 ale\0 marce"\0 -> vamos tratar as aspas antes de entregar o argumento para a pull_space
 */
 

@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 01:34:34 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/31 20:58:24 by coder            ###   ########.fr       */
+/*   Updated: 2022/04/01 17:18:29 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,11 +199,9 @@ char	**look_for_quotes_and_split(t_data *data) //data->input
 			else if (!double_quote_status && !single_quote_status)
 				double_quote_status = ON;
 		}
-		if (data->input[i[0]] != ' ' || (data->input[i[0]] == ' '
-				&& (single_quote_status || double_quote_status)))
+		if (data->input[i[0]] != ' ' || (data->input[i[0]] == ' ' && (single_quote_status || double_quote_status)))
 			i[1]++;
-		if (i[1] && ((data->input[i[0] + 1] == '\0' || (data->input[i[0] + 1] == ' '
-						&& (!single_quote_status && !double_quote_status)))))
+		if (i[1] && ((data->input[i[0] + 1] == '\0' || (data->input[i[0] + 1] == ' ' && (!single_quote_status && !double_quote_status)))))
 		{
 			line_array[i[2]++] = ft_substr(data->input + i[0] + 1 - i[1], 0, i[1]);
 			i[1] = 0;
@@ -226,7 +224,6 @@ void	remove_middle_quotes(char **command_block, int j)
     *command_block = temp;
 }
 
-
 // 3
 void	remove_token_quotes(t_command *command_list)
 {
@@ -237,14 +234,11 @@ void	remove_token_quotes(t_command *command_list)
 	j = 0;
 	while (command_list->command_block[i])
 	{
-		if (command_list->command_block[i][0] == '\''
-			|| command_list->command_block[i][0] == '\"')
-			command_list->command_block[i] = ft_substr(command_list->command_block[i], 1,
-				ft_strlen(command_list->command_block[i]) - 2);
+		if (command_list->command_block[i][0] == '\'' || command_list->command_block[i][0] == '\"')
+			command_list->command_block[i] = ft_substr(command_list->command_block[i], 1, ft_strlen(command_list->command_block[i]) - 2);
 		while (command_list->command_block[i][j] != '\0')
 		{
-			if (command_list->command_block[i][j] == '\''
-				|| command_list->command_block[i][j] == '\"')
+			if (command_list->command_block[i][j] == '\'' || command_list->command_block[i][j] == '\"')
 				remove_middle_quotes(command_list->command_block, j);
 			j++;
 		}
