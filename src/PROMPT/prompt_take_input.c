@@ -6,7 +6,7 @@
 /*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 20:56:26 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/22 13:52:07 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/04/02 13:34:31 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@ int	take_input(t_data *data)
 	int		status;
 	
 	prompt = "Concatenar User:Dir$ ";//criar func
+	buf = NULL;
 	buf = readline(prompt);
-	if (strlen(buf) != 0)
+	if (buf && ft_strlen(buf) != 0)
 	{
 		old_input = data->input; 
 		put_on_history(buf, old_input);	

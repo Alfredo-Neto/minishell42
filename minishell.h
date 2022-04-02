@@ -6,7 +6,7 @@
 /*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/27 16:15:25 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/04/02 13:11:24 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@
 typedef struct	s_data
 {    
 	char	*input;
+	char	**cmds_piped;
 	char	***argve; //(cmd + args: argumento de execve)
 	char	**envp; //colocar global?
 	int		number_of_pipes;
@@ -64,6 +65,8 @@ typedef struct	s_data
 //data_handler.c
 void	init_data(t_data *data);
 void	data_clean(t_data *data);
+void	free_cmds_piped(t_data *data);
+void	free_argve(t_data *data);
 
 //minishell.c
 void	minishell(t_data *data);
@@ -80,8 +83,8 @@ void	put_on_history(char *buf, char *old_input);
 //..................................................LEX
 //lexer.c - tokens
 void	lexer (t_data *data);
-void	pull_pipe(t_data *data, char ***cmds_piped);
-void	pull_space(t_data *data, char **cmds_piped);
+void	pull_pipe(t_data *data); //, char ***cmds_piped);
+void	pull_space(t_data *data); //), char ***cmds_piped);
 
 //..................................................PARSE
 //parser.c  -  quotes ok: analisa!
@@ -123,9 +126,6 @@ void	hello(void);
 // Vamos usar funcoes proprias
 int		ft_strcpy_handled(char **new, char const *src);
 int		ft_str_count(char **str);
-void	free_str(char **str);
-void	free_double_str(char ***str);
-void	free_triple_str(char ****str);
 
 //////////////////////////////////////////////////////////
 
