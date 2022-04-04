@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 20:56:26 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/30 23:28:31 by coder            ###   ########.fr       */
+/*   Updated: 2022/04/04 15:47:01 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ int	take_input(t_data *data)
 	{
 		old_input = data->input;
 		put_on_history(data->input, old_input);
-		status = ft_strcpy_handled(&data->input, data->input);
+		status = ft_strcpy_handled(&data->input, data->input); // ***-> isso foi alocado?
 		if (status == FAILURE)
 			exit_minishell(data, FAILURE);
-		//free(buf); ---> acho q readline já faz isso
+		//free(buf); ---> acho q readline já faz isso // free status?
 		return (SUCCESS);
 	}
 	else

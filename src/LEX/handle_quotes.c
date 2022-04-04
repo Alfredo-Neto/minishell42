@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 01:34:34 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/01 17:18:29 by coder            ###   ########.fr       */
+/*   Updated: 2022/04/04 18:40:59 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,45 +210,58 @@ char	**look_for_quotes_and_split(t_data *data) //data->input
 	return (line_array);
 }
 
-/*
+
 // 4
-void	remove_middle_quotes(char **command_block, int j)
+void	remove_middle_quotes(char **line, int j)
 {
+	printf("dentro da middle");
 	char    *first_part;
     char    *temp;
 
-    first_part = ft_substr(*command_block, 0, j);
-    temp = ft_strjoin(first_part, *command_block + j + 1);
-    free(*command_block);
+    first_part = ft_substr(*line, 0, j);
+    temp = ft_strjoin(first_part, *line + j + 1);
+    free(*line);
     free(first_part);
-    *command_block = temp;
+    *line = temp;
+
+	printf( "dentro da remove_middle_quotes");
+	while (*line != NULL)
+	{
+		printf("remove_token_quotes: %s\n", *line);
+		line++;
+	}	
+
 }
 
 // 3
-void	remove_token_quotes(t_command *command_list)
+char 	**remove_token_quotes(char **line)
 {
+	printf("dentro da remove_token_quotes\n");
 	int i;
 	int	j;
 
 	i = 0;
 	j = 0;
-	while (command_list->command_block[i])
+	while (line[i]) //não entra aqui
 	{
-		if (command_list->command_block[i][0] == '\'' || command_list->command_block[i][0] == '\"')
-			command_list->command_block[i] = ft_substr(command_list->command_block[i], 1, ft_strlen(command_list->command_block[i]) - 2);
-		while (command_list->command_block[i][j] != '\0')
+		printf("dentro do while da rtq\n");
+		if (line[i][0] == '\'' || line[i][0] == '\"')
+			line[i] = ft_substr(line[i], 1, ft_strlen(line[i]) - 2);
+		printf("antes da remove_middle\n");
+		while (line[i][j] != '\0')
 		{
-			if (command_list->command_block[i][j] == '\'' || command_list->command_block[i][j] == '\"')
-				remove_middle_quotes(command_list->command_block, j);
+			if (line[i][j] == '\'' || line[i][j] == '\"')
+				remove_middle_quotes(line, j);
 			j++;
 		}
 		j = 0;
 		i++;
 	}
-	if (command_list->next)
+	if (*line)
 	{
-		command_list = command_list->next;
-		remove_token_quotes(command_list);
+		line++;
+		remove_token_quotes(line);
 	}
+	printf("mais embaixo na remove_token_quotes\n");
+	return (line);
 }
-*/

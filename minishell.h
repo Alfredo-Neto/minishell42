@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/01 01:37:50 by coder            ###   ########.fr       */
+/*   Updated: 2022/04/04 16:20:39 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	pull_space(t_data *data, char **cmds_piped);
 
 // LEXER CÓDIGO DA MARCE
 char	**look_for_quotes_and_split(t_data *data);
-//void	remove_token_quotes(t_command *command_list);
+char 	**remove_token_quotes(char **line);
 
 
 

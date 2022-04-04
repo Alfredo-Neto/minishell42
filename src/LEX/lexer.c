@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 13:55:53 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/01 17:23:49 by coder            ###   ########.fr       */
+/*   Updated: 2022/04/04 18:39:27 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,22 +65,45 @@ void pull_space(t_data *data, char **cmds_piped)
 	data->exec_flag = 1;
 }	
 
+/*
+	Caminho que estamos fazendo em quatro fases:
+	1 - pegar a linha de comando e separar pelos espaços: ->	look_for_quotes_and_split()
+	2 - retirar as aspas: ->									remove_token_quotes()
+	3 - juntar tudo de novo: ->									join_treated_line()
+	4 - entregar para a pull_pipe(data)
+*/
 void lexer (t_data *data)
 {
 	char	**cmds_piped;
 	char	**line;
-		
-	line = look_for_quotes_and_split(data); //devolver com as aspas tratadas, sem split
-//	remove_token_quotes(data);	
+	char	**line1;
 
-//	(void)line;
+	//aqui a fase 1
+	line = look_for_quotes_and_split(data);
+	
+	//testando o output da fase 1
 	while (*line != NULL)
 	{
-		printf("line_array: %s\n", *line);
+		printf("look_for_quotes_and_split: %s\n", *line);
 		line++;
-	}
-
+	}	
 	
+	printf("aqui");
+	//aqui a fase 2:
+	line1 = remove_token_quotes(line);
+	
+	//testando output fase 2:
+	printf("aqui 2");
+	while (*line1 != NULL)
+	{
+		printf("remove_token_quotes: %s\n", *line1);
+		line1++;
+	}	
+	
+	//aqui a fase 3:
+	//join_treated_line(line1)
+	
+	//aqui a fase 4:
 	cmds_piped = pull_pipe(data); // Conta pipes, retorna array com ponteiros para string ou a linha de comando		
 	pull_space(data, cmds_piped); // Cria tokens utilizando espaço como delimitador
 	free_double_str(&cmds_piped);
