@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 13:55:53 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/04 18:39:27 by coder            ###   ########.fr       */
+/*   Updated: 2022/04/05 02:27:18 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,18 +82,18 @@ void lexer (t_data *data)
 	line = look_for_quotes_and_split(data);
 	
 	//testando o output da fase 1
-	while (*line != NULL)
-	{
-		printf("look_for_quotes_and_split: %s\n", *line);
-		line++;
-	}	
+	// while (*line != NULL)
+	// {
+	// 	printf("look_for_quotes_and_split: %s\n", *line);
+	// 	line++;
+	// }	
 	
-	printf("aqui");
+	//printf("aqui\n");
 	//aqui a fase 2:
 	line1 = remove_token_quotes(line);
 	
 	//testando output fase 2:
-	printf("aqui 2");
+	//printf("aqui 2\n");
 	while (*line1 != NULL)
 	{
 		printf("remove_token_quotes: %s\n", *line1);

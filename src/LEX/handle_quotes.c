@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 01:34:34 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/04 18:40:59 by coder            ###   ########.fr       */
+/*   Updated: 2022/04/05 02:49:29 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,7 +214,6 @@ char	**look_for_quotes_and_split(t_data *data) //data->input
 // 4
 void	remove_middle_quotes(char **line, int j)
 {
-	printf("dentro da middle");
 	char    *first_part;
     char    *temp;
 
@@ -223,20 +222,18 @@ void	remove_middle_quotes(char **line, int j)
     free(*line);
     free(first_part);
     *line = temp;
-
-	printf( "dentro da remove_middle_quotes");
-	while (*line != NULL)
-	{
-		printf("remove_token_quotes: %s\n", *line);
-		line++;
-	}	
-
 }
 
 // 3
 char 	**remove_token_quotes(char **line)
 {
-	printf("dentro da remove_token_quotes\n");
+	// while (*line != NULL)
+	// {
+	// 	printf("conteudo da linha dentro da rtq: %s\n", *line);
+	// 	line++;
+	// }	
+
+//	printf("dentro da remove_token_quotes\n");
 	int i;
 	int	j;
 
@@ -244,10 +241,9 @@ char 	**remove_token_quotes(char **line)
 	j = 0;
 	while (line[i]) //não entra aqui
 	{
-		printf("dentro do while da rtq\n");
+//		printf("dentro do while da rtq\n");
 		if (line[i][0] == '\'' || line[i][0] == '\"')
 			line[i] = ft_substr(line[i], 1, ft_strlen(line[i]) - 2);
-		printf("antes da remove_middle\n");
 		while (line[i][j] != '\0')
 		{
 			if (line[i][j] == '\'' || line[i][j] == '\"')
@@ -262,6 +258,11 @@ char 	**remove_token_quotes(char **line)
 		line++;
 		remove_token_quotes(line);
 	}
-	printf("mais embaixo na remove_token_quotes\n");
+//	printf("mais embaixo na remove_token_quotes\n");
 	return (line);
 }
+
+
+echo "'jorge' ale"
+look_for_quotes: "'jorge' ale"\0
+remove_quotes: 'jorge' ale\0
