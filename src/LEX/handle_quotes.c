@@ -171,40 +171,44 @@ int	count_tokens(t_data *data)
 // 1
 char	**look_for_quotes_and_split(t_data *data) //data->input
 {
-	int		i[3];
+	int		palavra[3];
 	int		single_quote_status;
 	int		double_quote_status;
 	char	**line_array;
 
-	i[0] = -1;
-	i[1] = 0;
-	i[2] = 0;
+	palavra[0] = -1;
+	palavra[1] = 0;
+	palavra[2] = 0;
 	single_quote_status = OFF;
 	double_quote_status = OFF;
 	line_array = malloc(sizeof(char *) * (count_tokens(data) + 1));
 	line_array[count_tokens(data)] = NULL;
-	while (data->input[++i[0]])
+	while (data->input[++palavra[0]])
 	{
-		if (data->input[i[0]] == '\'')
+		if (data->input[palavra[0]] == '\'')
 		{
 			if (single_quote_status)
 				single_quote_status = OFF;
 			else if (!single_quote_status && !double_quote_status)
 				single_quote_status = ON;
 		}
-		if (data->input[i[0]] == '\"')
+		if (data->input[palavra[0]] == '\"')
 		{
 			if (double_quote_status)
 				double_quote_status = OFF;
 			else if (!double_quote_status && !single_quote_status)
 				double_quote_status = ON;
 		}
-		if (data->input[i[0]] != ' ' || (data->input[i[0]] == ' ' && (single_quote_status || double_quote_status)))
-			i[1]++;
-		if (i[1] && ((data->input[i[0] + 1] == '\0' || (data->input[i[0] + 1] == ' ' && (!single_quote_status && !double_quote_status)))))
+		if (data->input[palavra[0]] != ' ' || (data->input[palavra[0]] == ' ' && (single_quote_status || double_quote_status)))
 		{
-			line_array[i[2]++] = ft_substr(data->input + i[0] + 1 - i[1], 0, i[1]);
-			i[1] = 0;
+			palavra[1]++;
+			// printf("primeiro if\n");
+		}
+		if (palavra[1] && ((data->input[palavra[0] + 1] == '\0' || (data->input[palavra[0] + 1] == ' ' && (!single_quote_status && !double_quote_status)))))
+		{
+			line_array[palavra[2]++] = ft_substr(data->input + palavra[0] + 1 - palavra[1], 0, palavra[1]);
+			palavra[1] = 0;
+			// printf("line_array 2nd if: %s\n", *line_array);
 		}
 	}
 	return (line_array);
@@ -225,23 +229,16 @@ void	remove_middle_quotes(char **line, int j)
 }
 
 // 3
-char 	**remove_token_quotes(char **line)
+char 	**remove_token_quotes(char **line)   // echo "jorge"
 {
-	// while (*line != NULL)
-	// {
-	// 	printf("conteudo da linha dentro da rtq: %s\n", *line);
-	// 	line++;
-	// }	
-
-//	printf("dentro da remove_token_quotes\n");
 	int i;
 	int	j;
 
 	i = 0;
 	j = 0;
-	while (line[i]) //não entra aqui
+	while (line[i])
 	{
-//		printf("dentro do while da rtq\n");
+		printf("dentro do while da rtq\n");
 		if (line[i][0] == '\'' || line[i][0] == '\"')
 			line[i] = ft_substr(line[i], 1, ft_strlen(line[i]) - 2);
 		while (line[i][j] != '\0')
@@ -263,6 +260,6 @@ char 	**remove_token_quotes(char **line)
 }
 
 
-echo "'jorge' ale"
-look_for_quotes: "'jorge' ale"\0
-remove_quotes: 'jorge' ale\0
+// echo "'jorge' ale"
+// look_for_quotes: "'jorge' ale"\0
+// remove_quotes: 'jorge' ale\0

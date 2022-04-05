@@ -82,11 +82,11 @@ void lexer (t_data *data)
 	line = look_for_quotes_and_split(data);
 	
 	//testando o output da fase 1
-	// while (*line != NULL)
-	// {
-	// 	printf("look_for_quotes_and_split: %s\n", *line);
-	// 	line++;
-	// }	
+	while (*line != NULL)
+	{
+		printf("look_for_quotes_and_split: %s\n", *line);
+		line++;
+	}	
 	
 	//printf("aqui\n");
 	//aqui a fase 2:
