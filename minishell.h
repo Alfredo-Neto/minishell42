@@ -34,6 +34,7 @@
 #define TRUE		1
 #define GARBAGE		-1
 
+#define FIRST_CMD	0
 #define NO_PIPE		0
 #define WITH_PIPE	1
 
@@ -115,10 +116,20 @@ void	exec_selector(t_data *data);
 //executor.c
 void	executor(t_data *data);
 void	ft_execve(t_data *data, int argve_index);
-int		fork_and_execute(t_data *data, int argve_index, int builtin_flag);
-void	multiple_exec(t_data *data);
+int		execute_single_cmd(t_data *data, int builtin_flag);
+int		multiple_exec(t_data *data);
 void 	single_exec(t_data *data);
 void	builtin_exec(t_data *data, int code);
+
+//pipes_fds_handling.c 
+int		open_pipes(int n_pipes, int fd[n_pipes][2]);
+int		close_pipes(int id, int n_pipes, int fd[n_pipes][2]);
+int		stdin_stdout_redirect(int in, int out);
+int		file_descriptor_handler(int id, int n_pipes, int fd[n_pipes][2]);
+int		scope_pipe_select(int id, int n_pipes, int fd[n_pipes][2]);
+
+//processes_handler.c
+int		main_process_handler(int *pid, int n_pipes, int fd[n_pipes][2]);
 
 //..................................................BUILTINS
 //exit.c

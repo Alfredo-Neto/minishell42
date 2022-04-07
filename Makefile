@@ -24,7 +24,9 @@ SRC_FILES	=	main.c \
 				exit.c \
 				help.c \
 				echo.c \
-				str_tools.c
+				str_tools.c \
+				pipes_fds_handling.c \
+				processes_handler.c
 
 OBJ			=	$(SRC_FILES:%.c=%.o)
 OBJ_DIR		=	obj

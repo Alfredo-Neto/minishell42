@@ -12,6 +12,7 @@
 
 #include "../../minishell.h"
 
+//triagem de execução -> com ou sem pipe
 void executor(t_data *data)
 {
 	exec_selector(data);  
@@ -21,6 +22,7 @@ void executor(t_data *data)
 		single_exec(data);
 }
 
+//executa o comando argve_index
 void ft_execve(t_data *data, int argve_index)
 {
 	char *path_aux;
@@ -41,12 +43,13 @@ void ft_execve(t_data *data, int argve_index)
     		i++;
 		}
     }
-	printf("%s: command not found\n", data->argve[argve_index][0]); //implementar c saida wait, no pai
+	printf("Minishell: command not found: %s\n", data->argve[argve_index][0]); 
 	if (path_aux)
 		free(path_aux);
 }
 
-int fork_and_execute(t_data *data, int argve_index, int builtin_flag) //[ok]
+//Cria um filho e executa Builtin ou Sys_cmd (ft_execve)
+int execute_single_cmd(t_data *data, int builtin_flag) 
 {
 	pid_t	chlpid;
 	int		wstatus;	
@@ -58,7 +61,7 @@ int fork_and_execute(t_data *data, int argve_index, int builtin_flag) //[ok]
 		return (FAILURE);
 	}
 	if (chlpid == 0) 
-	{	
+	{
 		if (builtin_flag)
 		{
 			builtin_exec(data, builtin_flag);
@@ -66,8 +69,7 @@ int fork_and_execute(t_data *data, int argve_index, int builtin_flag) //[ok]
 		}
 		else
 		{
-			ft_execve(data, argve_index);
-			//printf("\nCould not execute command..\n");
+			ft_execve(data, FIRST_CMD);
 			return (FAILURE); //			
 		}		
 	}
@@ -77,96 +79,6 @@ int fork_and_execute(t_data *data, int argve_index, int builtin_flag) //[ok]
 		return (SUCCESS);
 	}		
 }
-
-/*
-* Só fiz a SINGLE EXEC. Parei para resolver o problema do exit: Saí depois de umas vezes, apenas
-*
-*
-*/
-
-void single_exec(t_data *data) // [ok]
-{
-	int	  builtin_flag;
-	int index;                 
-
-	index = 0;
-
-	builtin_flag = is_builtins(data->argve[index][0]);
-	if (builtin_flag == EXIT) //Exit n forka, sai direto
-		mini_exit(data);
-	else
-		fork_and_execute(data, index, builtin_flag);
-}
-
-
-//FALTA IMPLEMENTAR!::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-void multiple_exec(t_data *data)
-{
-	int pipefd[2];
-	int index;
-	int	  builtin_flag;
-	pid_t p1;
-	pid_t p2;
-
-	index = 0;
-	if (pipe(pipefd) < 0)
-	{
-		printf("\nPipe could not be initialized\n");
-		return;
-	}
-	p1 = fork();
-	builtin_flag = is_builtins(data->argve[index][0]);
-	if (p1 < 0)
-	{
-		printf("\nCould not fork\n");
-		return;
-	}
-	if (p1 == 0)
-	{
-		close(pipefd[0]);
-		dup2(pipefd[1], STDOUT_FILENO);
-		close(pipefd[1]);
-
-		if (builtin_flag)
-			builtin_exec(data, builtin_flag);
-		else if (execvp(data->argve[index][0], data->argve[0]) < 0) //n vai rodar
-		{
-			printf("\nCould not execute command 1..\n");
-			exit(0);
-		}
-	}
-	else
-	{
-		index++;
-		p2 = fork();
-		builtin_flag = is_builtins(data->argve[index][0]);
-		if (p2 < 0)
-		{
-			printf("\nCould not fork\n");
-			return;
-		}
-		if (p2 == 0)
-		{
-			close(pipefd[1]);
-			dup2(pipefd[0], STDIN_FILENO);
-			close(pipefd[0]);
-			if (builtin_flag)
-				builtin_exec(data, builtin_flag);
-			else if (execvp(data->argve[index][0], data->argve[1]) < 0) //n vai rodar
-			{
-				printf("\nCould not execute command 2..\n");
-				exit(0);
-			}
-		}
-		else
-		{
-			wait(NULL);
-			wait(NULL);
-		}
-	}
-}
-
 
 // Function to call builtin commands [ok]
 void builtin_exec(t_data *data, int code)
@@ -182,6 +94,130 @@ void builtin_exec(t_data *data, int code)
 	else if (code == HELP)
 		open_help();	
 }
+/*
+* Só fiz a SINGLE EXEC. Parei para resolver o problema do exit: Saí depois de umas vezes, apenas
+*
+*
+*/
+
+void single_exec(t_data *data) // [ok]
+{
+	int	  builtin_flag;
+	
+	builtin_flag = is_builtins(data->argve[FIRST_CMD][0]);
+	if (builtin_flag == EXIT) //Exit n forka, sai direto
+		mini_exit(data);
+	else
+		execute_single_cmd(data, builtin_flag);
+}
+
+
+//FALTA IMPLEMENTAR!::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+int multiple_exec(t_data *data)
+{
+	int id;
+	int builtin_flag;
+    int fd[data->number_of_pipes][2];
+    int pid[data->number_of_pipes + 1];
+
+	open_pipes(data->number_of_pipes, fd);
+	id = 0;
+	while (id < data->number_of_pipes + 1)
+	{
+		pid[id] = fork();		
+		if (pid[id] < 0)
+		{
+			perror("fork");
+			return FAILURE;
+		}			
+		if (pid[id] == 0)
+		{	
+			//signal(SIGINT, SIG_DFL);			
+			scope_pipe_select(id, data->number_of_pipes, fd);//aqui entra redir			
+			builtin_flag = is_builtins(data->argve[id][0]);
+			if (builtin_flag)
+			{
+				builtin_exec(data, builtin_flag);
+				exit (SUCCESS);//sai ok, n forka mais
+			}
+			else
+			{
+				ft_execve(data, id);
+				exit (FAILURE); //sai ok, n forka mais			
+			}
+		}
+		id++;
+	}
+	main_process_handler(pid, data->number_of_pipes, fd);	
+	return SUCCESS;//tratar erros		
+
+	//int pipefd[2];
+	//int index;
+	//int	  builtin_flag;
+	//pid_t p1;
+	//pid_t p2;
+//
+	//index = 0;
+	//if (pipe(pipefd) < 0)
+	//{
+	//	printf("\nPipe could not be initialized\n");
+	//	return;
+	//}
+	//p1 = fork();
+	//builtin_flag = is_builtins(data->argve[index][0]);
+	//if (p1 < 0)
+	//{
+	//	printf("\nCould not fork\n");
+	//	return;
+	//}
+	//if (p1 == 0)
+	//{
+	//	close(pipefd[0]);
+	//	dup2(pipefd[1], STDOUT_FILENO);
+	//	close(pipefd[1]);
+//
+	//	if (builtin_flag)
+	//		builtin_exec(data, builtin_flag);
+	//	else if (execvp(data->argve[index][0], data->argve[0]) < 0) //n vai rodar
+	//	{
+	//		printf("\nCould not execute command 1..\n");
+	//		exit(0);
+	//	}
+	//}
+	//else
+	//{
+	//	index++;
+	//	p2 = fork();
+	//	builtin_flag = is_builtins(data->argve[index][0]);
+	//	if (p2 < 0)
+	//	{
+	//		printf("\nCould not fork\n");
+	//		return;
+	//	}
+	//	if (p2 == 0)
+	//	{
+	//		close(pipefd[1]);
+	//		dup2(pipefd[0], STDIN_FILENO);
+	//		close(pipefd[0]);
+	//		if (builtin_flag)
+	//			builtin_exec(data, builtin_flag);
+	//		else if (execvp(data->argve[index][0], data->argve[1]) < 0) //n vai rodar
+	//		{
+	//			printf("\nCould not execute command 2..\n");
+	//			exit(0);
+	//		}
+	//	}
+	//	else
+	//	{
+	//		wait(NULL);
+	//		wait(NULL);
+	//	}
+	//}
+}
+
+
+
 
 
 
