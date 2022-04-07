@@ -6,7 +6,7 @@
 /*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 12:16:34 by ebresser          #+#    #+#             */
-/*   Updated: 2022/03/22 22:05:01 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/04/06 21:53:31 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,9 @@ int is_builtins(char *cmd)
 void exec_selector(t_data *data)
 {
 	if (data->number_of_pipes)
-		multiple_exec(data);
+		data->exec_mode = WITH_PIPE;
 	else
-		single_exec(data);
+		data->exec_mode = NO_PIPE;
 }
 
-//void system_exec(t_data *data)
-//{
-//	
-//}
-//
 	

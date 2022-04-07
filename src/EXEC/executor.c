@@ -6,7 +6,7 @@
 /*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 23:19:00 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/22 21:57:49 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/04/07 00:30:54 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,94 @@
 
 void executor(t_data *data)
 {
-	exec_selector(data);
+	exec_selector(data);  
+	if (data->exec_mode == WITH_PIPE)
+		multiple_exec(data);
+	else if (data->exec_mode == NO_PIPE)
+		single_exec(data);
 }
 
-// Function to call one sys cmds
-void single_exec(t_data *data) //char **parsed)
+void ft_execve(t_data *data, int argve_index)
 {
-	pid_t pid;
+	char *path_aux;
+	int i;
+
+	path_aux = NULL;
+	i = 0;  
+	while (data->command_path[i])
+    {
+    	path_aux = ft_strjoin(data->command_path[i], data->argve[argve_index][0]);
+    	if (execve(path_aux, data->argve[argve_index], data->envp) < 0 )
+		{
+			if (path_aux)
+			{
+				free(path_aux);
+				path_aux = NULL;
+			}								
+    		i++;
+		}
+    }
+	printf("%s: command not found\n", data->argve[argve_index][0]); //implementar c saida wait, no pai
+	if (path_aux)
+		free(path_aux);
+}
+
+int fork_and_execute(t_data *data, int argve_index, int builtin_flag) //[ok]
+{
+	pid_t	chlpid;
+	int		wstatus;	
+	
+	chlpid = fork();
+	if (chlpid < 0)
+	{
+		perror("Fork failed"); 
+		return (FAILURE);
+	}
+	if (chlpid == 0) 
+	{	
+		if (builtin_flag)
+		{
+			builtin_exec(data, builtin_flag);
+			return (SUCCESS);
+		}
+		else
+		{
+			ft_execve(data, argve_index);
+			//printf("\nCould not execute command..\n");
+			return (FAILURE); //			
+		}		
+	}
+	else
+	{
+		waitpid(chlpid, &wstatus, 0); //wait(&wstatus);	
+		return (SUCCESS);
+	}		
+}
+
+/*
+* Só fiz a SINGLE EXEC. Parei para resolver o problema do exit: Saí depois de umas vezes, apenas
+*
+*
+*/
+
+void single_exec(t_data *data) // [ok]
+{
 	int	  builtin_flag;
-	int index;
+	int index;                 
 
 	index = 0;
 
 	builtin_flag = is_builtins(data->argve[index][0]);
-
-	pid = fork();
-	if (pid == -1)
-	{
-		printf("\nFailed forking child..");
-		return;
-	}
-	else if (pid == 0)
-	{
-		if (builtin_flag)
-			builtin_exec(data, builtin_flag);
-		else if (execvp(data->argve[index][0], data->argve[0]) < 0)//mudar p execve - n vai rodar
-			printf("\nCould not execute command..");
-		exit(0);
-	}
+	if (builtin_flag == EXIT) //Exit n forka, sai direto
+		mini_exit(data);
 	else
-	{
-		wait(NULL);
-		return;
-	}
+		fork_and_execute(data, index, builtin_flag);
 }
 
-// Function to call multiple sys cmds
-void multiple_exec(t_data *data) //char **parsed, char **parsedpipe)
+
+//FALTA IMPLEMENTAR!::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+void multiple_exec(t_data *data)
 {
 	int pipefd[2];
 	int index;
@@ -61,14 +112,14 @@ void multiple_exec(t_data *data) //char **parsed, char **parsedpipe)
 	index = 0;
 	if (pipe(pipefd) < 0)
 	{
-		printf("\nPipe could not be initialized");
+		printf("\nPipe could not be initialized\n");
 		return;
 	}
 	p1 = fork();
 	builtin_flag = is_builtins(data->argve[index][0]);
 	if (p1 < 0)
 	{
-		printf("\nCould not fork");
+		printf("\nCould not fork\n");
 		return;
 	}
 	if (p1 == 0)
@@ -81,7 +132,7 @@ void multiple_exec(t_data *data) //char **parsed, char **parsedpipe)
 			builtin_exec(data, builtin_flag);
 		else if (execvp(data->argve[index][0], data->argve[0]) < 0) //n vai rodar
 		{
-			printf("\nCould not execute command 1..");
+			printf("\nCould not execute command 1..\n");
 			exit(0);
 		}
 	}
@@ -92,7 +143,7 @@ void multiple_exec(t_data *data) //char **parsed, char **parsedpipe)
 		builtin_flag = is_builtins(data->argve[index][0]);
 		if (p2 < 0)
 		{
-			printf("\nCould not fork");
+			printf("\nCould not fork\n");
 			return;
 		}
 		if (p2 == 0)
@@ -104,7 +155,7 @@ void multiple_exec(t_data *data) //char **parsed, char **parsedpipe)
 				builtin_exec(data, builtin_flag);
 			else if (execvp(data->argve[index][0], data->argve[1]) < 0) //n vai rodar
 			{
-				printf("\nCould not execute command 2..");
+				printf("\nCould not execute command 2..\n");
 				exit(0);
 			}
 		}
@@ -117,11 +168,11 @@ void multiple_exec(t_data *data) //char **parsed, char **parsedpipe)
 }
 
 
-// Function to call builtin commands
+// Function to call builtin commands [ok]
 void builtin_exec(t_data *data, int code)
 {
 	if (code == EXIT)		
-		exit_minishell(data, code);
+		mini_exit(data);				
 	else if (code == CD)
 		chdir(data->argve[0][1]);
 	else if (code == ECHO)

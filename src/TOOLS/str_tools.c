@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_tools.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 22:54:50 by ebresser          #+#    #+#             */
-/*   Updated: 2022/03/22 23:19:56 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/04/06 21:01:20 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,33 +54,37 @@ int	ft_str_count(char **str)
 	return (count);
 }
 
-void free_str(char **str) //Uso: passar endereço da str
+static void	copylen(char *scpy, const char *s)
 {
-    if (str)
-    {
-        if (*str)
-        {
-            free(*str);
-            *str = NULL;
-        }
-        str = NULL;
-    }
+	int	i;
+
+	if (!s)
+		return ;
+	i = 0;
+	while (s[i] != '\0')
+	{
+		scpy[i] = s[i];
+		i++;
+	}
 }
 
-void free_double_str(char ***str) //Uso: passar endereço da **str
-{
-    if (str)
-    {
-        free_str(*str);
-        *str = NULL;
-    }    
-}
+int		ft_strjoin_handled(char **s1, char const *s2) 
+{ //tratada: libera string antiga - adiciona s2 ao final de s1
+	size_t	len;
+	size_t	k;
+	char	*s;
 
-void free_triple_str(char ****str) //Uso: passar endereço da ***str
-{
-    if (str)
-    {
-        free_double_str(*str);
-        *str = NULL;
-    }    
-} 
+	if (!*s1 || !s2)
+		return 1;
+	len = ft_strlen(*s1) + ft_strlen(s2) + 1;
+	if (!(s = (char*)malloc(len * sizeof(char))))
+		return FAILURE;
+	copylen(s, *s1);
+	k = ft_strlen(*s1);
+	copylen(&s[k], s2);
+	k = k + ft_strlen(s2);
+	s[k] = '\0';
+	free(*s1); //desprezo s1 antiga
+	*s1 = s;
+	return SUCCESS;
+}

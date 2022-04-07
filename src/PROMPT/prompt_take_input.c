@@ -6,7 +6,7 @@
 /*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 20:56:26 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/02 13:34:31 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/04/03 11:11:00 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	take_input(t_data *data)
 	char	*prompt;
 	int		status;
 	
-	prompt = "Concatenar User:Dir$ ";//criar func
+	prompt = "\e[32mPrompt$ \e[39m";//criar func
 	buf = NULL;
 	buf = readline(prompt);
 	if (buf && ft_strlen(buf) != 0)

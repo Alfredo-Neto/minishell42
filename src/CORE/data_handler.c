@@ -6,7 +6,7 @@
 /*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 16:50:20 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/02 13:31:32 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/04/07 00:37:12 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,43 @@ void	init_data(t_data *data)
 	data->cmds_piped = NULL;
 	data->argve = NULL; //(cmd + args)
 	data->envp = NULL;
-	data->number_of_pipes = -1;
-	data->exec_flag = -1;
+	init_command_path(data);
+	data->number_of_pipes = GARBAGE;
+	data->exec_flag = GARBAGE;
+	data->exec_mode = GARBAGE;
+	data->exit_flag = FALSE;
 }
+
+int init_command_path(t_data *data)
+{
+	int i;
+	int ret;
+
+	data->command_path = ft_split(getenv("PATH"), ':');
+	i = 0;
+	while(data->command_path[i] != NULL)
+	{
+		ret = ft_strjoin_handled(&(data->command_path[i]), "/");
+		if (ret == FAILURE)
+		{
+			perror("Malloc failed");
+			exit_minishell(data, FAILURE);
+		}
+		i++;
+		
+	}
+	return SUCCESS;
+}
+
 
 void	data_clean(t_data *data)
 {
 	free(data->input);
 	data->input = NULL;
 	free_cmds_piped(data);
-	free_argve(data);	
-	data->number_of_pipes = -1;
-	data->exec_flag = -1;
+	free_argve(data);		
+	data->number_of_pipes = GARBAGE;
+	data->exec_flag = GARBAGE;
 }
 
 void free_cmds_piped(t_data *data)
@@ -49,6 +74,25 @@ void free_cmds_piped(t_data *data)
 		data->cmds_piped = NULL;
 	}
 }
+
+void free_command_path(t_data *data)
+{
+	int index;
+
+	index = 0;
+	if (data->command_path)
+	{
+		while(data->command_path[index])
+		{
+			free(data->command_path[index]);
+			data->command_path[index] = NULL;
+			index++;
+		}
+		free(data->command_path);
+		data->command_path = NULL;
+	}
+}
+
 
 void free_argve(t_data *data) //Uso: passar endereço da ***str
 {

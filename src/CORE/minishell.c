@@ -6,7 +6,7 @@
 /*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 18:47:57 by ebresser          #+#    #+#             */
-/*   Updated: 2022/03/22 22:34:36 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/04/07 00:31:54 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,5 @@ void minishell(t_data *data)
     lexer(data); //analise lexica - tokens - apenas divisao
 	//parser(data);//analise sintatica - quotes, etc
 	//expander(data);	//final do processo - alias
-	executor(data); //triagem e execução
+	executor(data); //triagem e execução		
 }
