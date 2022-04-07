@@ -105,6 +105,7 @@ void free_argve(t_data *data) //Uso: passar endereço da ***str
 	{
 		while (data->argve[index_block])
 		{
+			index_cmd = 0;
 			//libera cada bloco(cada processo)
 			while(data->argve[index_block][index_cmd])
 			{
@@ -113,9 +114,8 @@ void free_argve(t_data *data) //Uso: passar endereço da ***str
 				index_cmd++;
 			}
 			free(data->argve[index_block]);
-			index_block++;
-		
-		}
+			index_block++;		
+		}		
 		free(data->argve);
 		data->argve = NULL;
 	}	    

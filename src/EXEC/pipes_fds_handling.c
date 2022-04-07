@@ -72,6 +72,7 @@ int stdin_stdout_redirect(int in, int out)
     }
 	return (0); //tratar erros
 }
+
 int file_descriptor_handler(int id, int n_pipes, int fd[n_pipes][2])
 {
 	int fd_in;
