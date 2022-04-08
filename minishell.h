@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/04 16:20:39 by coder            ###   ########.fr       */
+/*   Updated: 2022/04/08 03:25:10 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ typedef struct	s_data
 	int		number_of_pipes;
 	int		exec_flag;
 	int		tirar;
-	int		token_count; //CODIGO MARCE
+	char	**tokens;
 }				t_data;
 
 //..................................................CORE
