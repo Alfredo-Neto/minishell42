@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 01:34:34 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/08 02:48:15 by coder            ###   ########.fr       */
+/*   Updated: 2022/04/08 17:53:29 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ char *handle_quotes(char *str)
 /*
 ---------------------------------------------------------------------------------------------------
 */
-
+/*
 // 2
 int	count_tokens(t_data *data)
 {
@@ -260,7 +260,7 @@ char 	**remove_token_quotes(char **line)   // echo "jorge"
 //	printf("mais embaixo na remove_token_quotes\n");
 	return (line);
 }
-
+*/
 
 // echo "'jorge' ale"
 // look_for_quotes: "'jorge' ale"\0

@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/08 03:25:10 by azamario         ###   ########.fr       */
+/*   Updated: 2022/04/08 18:48:58 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,9 +104,11 @@ void	lexer (t_data *data);
 char	**pull_pipe(t_data *data);
 void	pull_space(t_data *data, char **cmds_piped);
 
-// LEXER CÓDIGO DA MARCE
-char	**look_for_quotes_and_split(t_data *data);
-char 	**remove_token_quotes(char **line);
+//---------LEXER------------//
+void	treat_input(t_data *data);
+void	treat_input_chars(t_data *data);
+void	treat_char(t_data *data, char c, int number);
+void	treat_token_strings(t_data *data);
 
 
 
