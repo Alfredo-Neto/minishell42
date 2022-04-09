@@ -16,10 +16,10 @@
 void executor(t_data *data)
 {
 	exec_selector(data);  
-	if (data->exec_mode == WITH_PIPE)
+	//if (data->exec_mode == WITH_PIPE)
 		multiple_exec(data);
-	else if (data->exec_mode == NO_PIPE)
-		single_exec(data);
+	//else if (data->exec_mode == NO_PIPE)
+	//	single_exec(data);
 }
 
 //executa o comando argve_index
