@@ -19,6 +19,11 @@ void	init_data(t_data *data)
 	data->argve = NULL; //(cmd + args)
 	data->envp = NULL;
 	init_command_path(data);
+	
+	data->infile = NULL;
+	data->outfile = NULL;
+	data->outfile_mode = NULL;
+
 	data->number_of_pipes = GARBAGE;
 	data->exec_flag = GARBAGE;
 	data->exec_mode = GARBAGE;
@@ -52,7 +57,10 @@ void	data_clean(t_data *data)
 	free(data->input);
 	data->input = NULL;
 	free_cmds_piped(data);
-	free_argve(data);		
+	free_argve(data);
+	//data->infile = NULL;//
+	//data->outfile = NULL;//
+	
 	data->number_of_pipes = GARBAGE;
 	data->exec_flag = GARBAGE;
 }

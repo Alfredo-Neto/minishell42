@@ -39,9 +39,14 @@ int	main(int argc, char **argv, char **envp)
 	data = (t_data *)malloc(sizeof(t_data));
 	welcome();
 	init_data(data);
-	data->envp = envp;
+	data->envp = envp;	
 	while (!data->exit_flag) //Resolver questão exit
+	{
+		//data->infile = "\n\n\n./sou_um_arquivo.txt";
+		//printf("%s\n", data->infile);
 		minishell(data);
+	}
+		
 	return 0;
 }
 	

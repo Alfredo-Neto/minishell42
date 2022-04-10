@@ -27,16 +27,16 @@
 #define SUCCESS		0
 #define FAILURE		1
 
-#define CONTINUE	1
-#define	STOP		0
+#define CONTINUE	1 //
+#define	STOP		0 //
 
 #define FALSE		0
 #define TRUE		1
 #define GARBAGE		-1
 
-#define FIRST_CMD	0
-#define NO_PIPE		0
-#define WITH_PIPE	1
+#define NOT_EXIST	-2
+#define NO_PIPE		0 //
+#define WITH_PIPE	1 //
 
 #define NUMBER_OF_BUILTINS 5
 
@@ -58,15 +58,24 @@
 
 typedef struct	s_data
 {    
+	char	**envp; //devemos alocar
+	char	**command_path;// = envp[PATH]
+
 	char	*input;
 	char	**cmds_piped;
 	char	***argve; //(cmd + args: argumento de execve)
-	char	**envp; //colocar global?
-	char	**command_path;
+	
 	int		number_of_pipes;
 	int		exec_flag;
 	int		exec_mode;
 	int		exit_flag;
+
+	char	**infile;
+	char	**outfile;
+	int		*outfile_mode; //1: > | 2: >>
+	int		redirect_mode;
+
+
 	int		tirar;
 }				t_data;
 
@@ -115,6 +124,7 @@ void	exec_selector(t_data *data);
 
 //executor.c
 void	executor(t_data *data);
+int		execute_pid(t_data *data, int id);
 void	ft_execve(t_data *data, int argve_index);
 int		execute_single_cmd(t_data *data, int builtin_flag);
 int		multiple_exec(t_data *data);
@@ -123,10 +133,11 @@ void	builtin_exec(t_data *data, int code);
 
 //pipes_fds_handling.c 
 int		open_pipes(int n_pipes, int fd[n_pipes][2]);
-int		close_pipes(int id, int n_pipes, int fd[n_pipes][2]);
-int		stdin_stdout_redirect(int in, int out);
+int		close_other_fds(int id, int n_pipes, int fd[n_pipes][2]);
+int		stdin_stdout_handler(int in, int out);
 int		file_descriptor_handler(int id, int n_pipes, int fd[n_pipes][2]);
-int		scope_pipe_select(int id, int n_pipes, int fd[n_pipes][2]);
+int		scope_fd_select(int id, int n_pipes, int fd[n_pipes][2]); //t_data *data, 
+int		redir_execute_pid(t_data *data, int id); //, int n_pipes, int fd[n_pipes][2]);
 
 //processes_handler.c
 int		main_process_handler(int *pid, int n_pipes, int fd[n_pipes][2]);
