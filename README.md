@@ -1,6 +1,12 @@
 # minishell42
 
-**lembrar de falar do echo proc na reuniao
+## Data struct: Redirects
+![redir](./redirects.png)</br></br>
 
-## Estrutura dos tokens de cmd:
+- Exit funciona em modo sem redirect > ok
+(N funciona com redirect.)
+
+## Data struct: argve
 ![argve](./argve.png)</br></br>
+
+(Lembrar cd cmd)
