@@ -24,28 +24,33 @@
 #include <readline/history.h>
 #include <signal.h>
   
-#define SUCCESS		0
-#define FAILURE		1
+#define SUCCESS				0
+#define FAILURE				1
 
-#define CONTINUE	1 //
-#define	STOP		0 //
+//#define CONTINUE			1 //
+//#define	STOP				0 //
 
-#define FALSE		0
-#define TRUE		1
-#define GARBAGE		-1
+#define FALSE				0
+#define TRUE				1
+#define GARBAGE				-1
+#define NOT_EXIST			-2
 
-#define NOT_EXIST	-2
-#define NO_PIPE		0 //
-#define WITH_PIPE	1 //
+//#define NO_PIPE				0 //
+//#define WITH_PIPE			1 //
 
-#define NUMBER_OF_BUILTINS 5
+#define	GREAT				2
+#define GREATGREAT			4
+#define LESS				3
+#define LESSLESS			6
 
-#define EXIT		1
-#define CD			2
-#define ECHO		3
-#define HELLO		4
-#define HELP		5
-#define	NONE		0
+#define NUMBER_OF_BUILTINS	5
+
+#define EXIT				1
+#define CD					2
+#define ECHO				3
+#define HELLO				4
+#define HELP				5
+#define	NONE				0
 
 
 
@@ -67,13 +72,16 @@ typedef struct	s_data
 	
 	int		number_of_pipes;
 	int		exec_flag;
-	int		exec_mode;
+	//int		exec_mode;
 	int		exit_flag;
 
-	char	**infile;
-	char	**outfile;
-	int		*outfile_mode; //1: > | 2: >>
-	int		redirect_mode;
+	char	***infile;
+	int		***infile_mode;
+	//int		*redirect_in_mode; //VAI SAIR
+
+	char	***outfile;
+	int		**outfile_mode; //2: > | 4: >> se pipe, +1: 3 | 5
+	//int		*redirect_out_mode; //VAI SAIR
 
 
 	int		tirar;
@@ -119,16 +127,16 @@ void expand_vars(t_data *data);
 //..................................................EXEC
 //sorting.c
 int		is_builtins(char *cmd);
-void	exec_selector(t_data *data);
+//void	exec_selector(t_data *data);
 
 
 //executor.c
-void	executor(t_data *data);
+int		executor(t_data *data);
 int		execute_pid(t_data *data, int id);
 void	ft_execve(t_data *data, int argve_index);
-int		execute_single_cmd(t_data *data, int builtin_flag);
+//int		execute_single_cmd(t_data *data, int builtin_flag);
 int		multiple_exec(t_data *data);
-void 	single_exec(t_data *data);
+//void 	single_exec(t_data *data);
 void	builtin_exec(t_data *data, int code);
 
 //pipes_fds_handling.c 

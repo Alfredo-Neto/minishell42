@@ -40,12 +40,12 @@ int is_builtins(char *cmd)
 }
 
 
-void exec_selector(t_data *data)
-{
-	if (data->number_of_pipes)
-		data->exec_mode = WITH_PIPE;
-	else
-		data->exec_mode = NO_PIPE;
-}
+//void exec_selector(t_data *data)
+//{
+//	if (data->number_of_pipes)
+//		data->exec_mode = WITH_PIPE;
+//	else
+//		data->exec_mode = NO_PIPE;
+//}
 
 	

@@ -23,10 +23,11 @@ void	init_data(t_data *data)
 	data->infile = NULL;
 	data->outfile = NULL;
 	data->outfile_mode = NULL;
+	//data->redirect_out_mode = NULL; //DEBUG
 
 	data->number_of_pipes = GARBAGE;
 	data->exec_flag = GARBAGE;
-	data->exec_mode = GARBAGE;
+	//data->exec_mode = GARBAGE;
 	data->exit_flag = FALSE;
 }
 

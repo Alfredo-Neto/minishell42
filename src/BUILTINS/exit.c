@@ -22,7 +22,8 @@ int	exit_minishell(t_data *data, int status)
 
 void mini_exit (t_data *data) //resolver exit!
 {
-	if (data->exec_mode == NO_PIPE) //qdo tem pipe n faz nada - testar depois
+	//if (data->exec_mode == NO_PIPE) //qdo tem pipe n faz nada - testar depois
+	if (data->number_of_pipes == 0)
 	{
 		data->exit_flag = TRUE; //Setada apenas no pai (single exec)
 		printf("\nGoodbye!\n");
