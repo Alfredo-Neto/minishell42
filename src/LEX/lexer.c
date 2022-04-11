@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 13:55:53 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/08 03:22:42 by azamario         ###   ########.fr       */
+/*   Updated: 2022/04/11 16:31:46 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,18 +76,6 @@ void lexer (t_data *data)
 	free_double_str(&cmds_piped);
 }
 
-// echo  "ale | jorge"
-//	echo ale | jorge 
-
-/*	linha de comando:	ls -l | wc -l
-	pull_pipe retorna:	ls -l\0 wc -l\0 
-	pull space retorna:	ls\0 -l\0 wc\0 -l\0 (coloca no argve)
-
-	linha de comando:	echo "'jorge' ale marce"
-	pull_pipe retorna: 	echo "'jorge' ale marce"\0 NULL
-	pull_space retorna: echo\0 "'jorge'\0 ale\0 marce"\0 -> vamos tratar as aspas antes de entregar o argumento para a pull_space
-*/
-
 /*
 	// debug: printar as variáveis do pull_space
 	i = 0;
@@ -98,7 +86,7 @@ void lexer (t_data *data)
 		printf("\n");
 		while(data->argve[i][j])
 		{
-			printf("......................LEXED %d: %s\n", i, data->argve[i][j]);
+			printf("...........LEXED %d: %s\n", i, data->argve[i][j]);
 			j++;
 		}
 		printf("\n");
