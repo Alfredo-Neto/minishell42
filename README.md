@@ -7,7 +7,8 @@ Para voltar ao modo normal, setar em src/EXEC/executor - linha 143 a flag para *
 	int **redirect_out** = **FALSE**;<br/>
 //TESTE-----------------------------------------------------------------------<br/>
   
-  
+### Entendendo a estrutura:
+
 ![redir](./redirects.png)</br></br>
 
 - Exit funciona em modo sem redirect > ok
