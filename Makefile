@@ -13,11 +13,11 @@ HEADERS		=	minishell.h
 SRC_FILES	=	main.c \
 				hello.c \
 				data_handler.c \
-				minishell.c \
 				prompt_take_input.c \
 				history.c \
 				lexer.c \
 				parser.c \
+				redirects.c \
 				expand_variables.c \
 				sorting.c \
 				executor.c \

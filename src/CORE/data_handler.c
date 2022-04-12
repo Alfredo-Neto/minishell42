@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 16:50:20 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/07 00:37:12 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/04/12 00:04:43 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,9 @@ void	init_data(t_data *data)
 	data->argve = NULL; //(cmd + args)
 	data->envp = NULL;
 	init_command_path(data);
-	
-	data->infile = NULL;
-	data->outfile = NULL;
-	data->outfile_mode = NULL;
+	data->file = NULL;
+	data->file_mode = NULL;
 	//data->redirect_out_mode = NULL; //DEBUG
-
 	data->number_of_pipes = GARBAGE;
 	data->exec_flag = GARBAGE;
 	//data->exec_mode = GARBAGE;
@@ -52,7 +49,6 @@ int init_command_path(t_data *data)
 	return SUCCESS;
 }
 
-
 void	data_clean(t_data *data)
 {
 	free(data->input);
@@ -61,7 +57,6 @@ void	data_clean(t_data *data)
 	free_argve(data);
 	//data->infile = NULL;//
 	//data->outfile = NULL;//
-	
 	data->number_of_pipes = GARBAGE;
 	data->exec_flag = GARBAGE;
 }
@@ -123,11 +118,11 @@ void free_argve(t_data *data) //Uso: passar endereço da ***str
 				index_cmd++;
 			}
 			free(data->argve[index_block]);
-			index_block++;		
-		}		
+			index_block++;
+		}
 		free(data->argve);
 		data->argve = NULL;
-	}	    
+	}
 } 
 
 

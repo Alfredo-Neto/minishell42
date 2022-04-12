@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 23:19:00 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/07 00:30:54 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/04/12 00:09:12 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void ft_execve(t_data *data, int argve_index)
 	while (data->command_path[i])
     {
     	path_aux = ft_strjoin(data->command_path[i], data->argve[argve_index][0]);
-    	if (execve(path_aux, data->argve[argve_index], data->envp) < 0 )
+    	if (execve(path_aux, data->argve[argve_index], data->envp) < 0)
 		{
 			if (path_aux)
 			{
@@ -115,10 +115,11 @@ void builtin_exec(t_data *data, int code)
 //::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 int execute_pid(t_data *data, int id) 
 {
-	int builtin_flag;	
+	int builtin_flag;
 
+	exec_signals();
 	builtin_flag = is_builtins(data->argve[id][0]);
-
+	check_redirections(data->argve[id]);
 	if (builtin_flag)
 	{
 		builtin_exec(data, builtin_flag);
@@ -127,23 +128,21 @@ int execute_pid(t_data *data, int id)
 	else
 	{
 		ft_execve(data, id);
-		exit (FAILURE); //sai ok, n forka mais			
+		exit (FAILURE); //sai ok, n forka mais
 	}
 }
 
 //int multiple_exec(t_data *data) //executor
 int executor(t_data *data) //executor
 {
-	int id;	
-    int fd[data->number_of_pipes][2];
-    int pid[data->number_of_pipes + 1];
+	int id;
+	int fd[data->number_of_pipes][2];
+	int pid[data->number_of_pipes + 1];
 	int	builtin_flag;
 
 	//TESTE-------------------------- > >>  MEXER AQUI --------------------------
-	int redirect_out = TRUE;
+	int redirect_out = FALSE;
 	//TESTE-----------------------------------------------------------------------
-
-	
 	if (data->number_of_pipes == 0)
 	{
 		builtin_flag = is_builtins(data->argve[0][0]);
@@ -153,35 +152,27 @@ int executor(t_data *data) //executor
 			return SUCCESS;
 		}		
 	}
-
 	open_pipes(data->number_of_pipes, fd);
 	id = 0;
 	while (id < data->number_of_pipes + 1)
 	{
-		pid[id] = fork();		
+		pid[id] = fork();
 		if (pid[id] < 0)
 		{
 			perror("fork");
 			return FAILURE;
-		}			
+		}
 		if (pid[id] == 0)
 		{	
-			scope_fd_select(id, data->number_of_pipes, fd); //data, 
+			scope_fd_select(id, data->number_of_pipes, fd); //data,
 			if (redirect_out) //MUDAR: data->outfile && data->outfile[id]
 				redir_execute_pid(data, id); //, data->number_of_pipes, fd); //file_redirect_fds
 			else
-				execute_pid(data, id);//executa direto, senao já executou no cmd anterior	
+				execute_pid(data, id);//executa direto, senao já executou no cmd anterior
 			return SUCCESS;
 		}
 		id++;
 	}
-	main_process_handler(pid, data->number_of_pipes, fd);	
-	return SUCCESS;//tratar erros	
+	main_process_handler(pid, data->number_of_pipes, fd);
+	return SUCCESS;//tratar erros
 }
-
-
-
-
-
-
-

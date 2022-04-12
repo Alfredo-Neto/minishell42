@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/06 21:57:18 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/04/12 00:07:40 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,9 @@ typedef struct	s_data
 	//int		exec_mode;
 	int		exit_flag;
 
-	char	***infile;
-	int		***infile_mode;
-	//int		*redirect_in_mode; //VAI SAIR
-
-	char	***outfile;
-	int		**outfile_mode; //2: > | 4: >> se pipe, +1: 3 | 5
-	//int		*redirect_out_mode; //VAI SAIR
-
+	char	***file;
+	char	***file_mode;
+	//int		*redirect_in_mode; //
 
 	int		tirar;
 }				t_data;
@@ -174,5 +169,8 @@ int		ft_str_count(char **str);
 //////////////////////////////////////////////////////////
 
 void	welcome(void);
+void	check_redirections(char **argve);
+void	exec_signals(void);
+void	new_prompt(int signal);
 
 #endif
