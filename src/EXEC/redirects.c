@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 19:26:28 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/04/12 00:07:40 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/12 00:12:41 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,6 @@ void	check_redirections(char **redirect_mode)
 		i++;
 	}
 }
+
+// Eg. [COMMAND] <
 // bash: syntax error near unexpected token `newline'
