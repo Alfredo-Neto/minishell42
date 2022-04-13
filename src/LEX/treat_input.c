@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 02:55:15 by azamario          #+#    #+#             */
-/*   Updated: 2022/04/11 20:51:12 by azamario         ###   ########.fr       */
+/*   Updated: 2022/04/13 03:22:13 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	treat_token_strings(t_data *data)
 	
 	while (*data->tokens != NULL)
 	{
-		printf("token NÃO tratado: %s\n", *data->tokens);
+	//	printf("token NÃO tratado: %s\n", *data->tokens);
 		treat_quotes(data->tokens);		
 		no_quotes(data->tokens);
 		printf("token tratado: %s\n", *data->tokens);
@@ -140,10 +140,14 @@ void	treat_quotes(char **token)
 				j++;	
 		}
 		token[i] = reverse_quotes_treat(str); //não está colocando na struct
-		printf("str1: %s\n", token[i]);
 		free(str);
 	}	
  }
+
+// echo "'jorge'"
+// echo\0 "'jorge'"\0
+// echo\0 'jorge'\0
+
 
 char	*reverse_quotes_treat(char *str)
 {
