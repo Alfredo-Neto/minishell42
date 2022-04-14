@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 02:55:15 by azamario          #+#    #+#             */
-/*   Updated: 2022/04/14 03:46:51 by azamario         ###   ########.fr       */
+/*   Updated: 2022/04/14 20:26:59 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,20 @@ void	treat_token_strings(t_data *data)
 		
 	while (*data->tokens)
 	{
-		treat_quotes(*data->tokens);		
+		treat_quotes(*data->tokens);	
+		printf("treat_quotes: %s\n", *data->tokens);	
 		no_quotes(*data->tokens);
-		data->input = token_strings_to_string(data->input, *data->tokens);
-		printf("data->input %s\n", data->input);
+		printf("data->tokens %s\n", *data->tokens);
+		data->string = token_strings_to_string(data->string, *data->tokens);
 		data->tokens++;
 	}
+	printf("data->input %s\n", data->input);
+	printf("data->string %s\n", data->string);
+
+	// while
+	//data->tokens[0];
+	//chama o token_strings_to_string aqui
+	
 	//*data->tokens: echo\0 	
 	// treat_dollar;
 }
@@ -102,11 +110,11 @@ void	treat_quotes(char *token)
 	}	
 }
 
- void	no_quotes(char *token)
+ void	no_quotes(char *token) //data->tokens
  {
 	int quotes;
 	int len;
-	char *str;
+	char *string;
 	int i;
 	int j;
 	
@@ -123,18 +131,27 @@ void	treat_quotes(char *token)
 	if (quotes != 0)
 	{
 		len = ft_strlen(token) - quotes + 1;
-		str = ft_calloc((len), sizeof(char));
+		string = ft_calloc((len), sizeof(char));
 		i = 0;
 		while (token[i])
 		{
 			while (token[i] == '\'' || token[i] == '\"')
 				i++;
-			str[j++] = token[i];
+			string[j++] = token[i];
 			if (token[i])
 				i++;	
 		}			
-		token = reverse_quotes_treat(str); //não está colocando na struct
-		free(str);
+		string = reverse_quotes_treat(string); //não está colocando na struct
+		printf("token tratado 1: %s\n", string);
+		i = 0;
+		free(token);
+		while (string[i])
+		{
+			token[i] = string[i];
+			i++;
+		}
+		printf("token tratado 2: %s\n", token);
+		free(string);
 	}	
  }
 
@@ -184,6 +201,5 @@ char	*token_strings_to_string(char const *s1, char const *s2)
         j++;
     }
     string[++i] = '\0';
-	printf("string: %s", string);
     return (string);	
 }

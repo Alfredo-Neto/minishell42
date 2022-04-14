@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_vars.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 12:30:10 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/03/24 12:34:30 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/04/14 20:54:53 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	grab_vars(t_data *data)
 	char *name;
 	char *value;
 
-	str = data->input;
+	str = data->string;
 	if (ft_strchr(str, '='))
 	{
 		data->exec_flag = -1;

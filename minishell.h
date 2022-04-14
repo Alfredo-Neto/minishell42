@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/14 03:19:15 by azamario         ###   ########.fr       */
+/*   Updated: 2022/04/14 20:25:32 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct	s_data
 	int		exec_flag;
 	int		tirar;
 	char	**tokens;
+	char	*string;
 }				t_data;
 
 //..................................................CORE
