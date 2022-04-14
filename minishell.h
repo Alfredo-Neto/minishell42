@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/13 23:54:18 by azamario         ###   ########.fr       */
+/*   Updated: 2022/04/14 03:19:15 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ void	no_quotes(char *token);
 void	reverse_input_chars(t_data *data);	
 
 char	*reverse_quotes_treat(char *str);
+char	*token_strings_to_string(char const *s1, char const *s2);
 
 
 

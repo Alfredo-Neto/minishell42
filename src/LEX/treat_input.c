@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 02:55:15 by azamario          #+#    #+#             */
-/*   Updated: 2022/04/14 02:14:37 by azamario         ###   ########.fr       */
+/*   Updated: 2022/04/14 03:46:51 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,18 @@ void	treat_char(t_data *data, char c, int number)
 void	treat_token_strings(t_data *data)
 {	
 	// check_input() | checa se é builtin, operador, comando
-
+	//data->input = NULL;
+		
 	while (*data->tokens)
 	{
 		treat_quotes(*data->tokens);		
 		no_quotes(*data->tokens);
+		data->input = token_strings_to_string(data->input, *data->tokens);
+		printf("data->input %s\n", data->input);
 		data->tokens++;
 	}
+	//*data->tokens: echo\0 	
 	// treat_dollar;
-	reverse_input_chars(data);	
 }
 
 void	treat_quotes(char *token)
@@ -131,7 +134,6 @@ void	treat_quotes(char *token)
 				i++;	
 		}			
 		token = reverse_quotes_treat(str); //não está colocando na struct
-		printf("token tratado: %s\n", token);
 		free(str);
 	}	
  }
@@ -156,3 +158,32 @@ char	*reverse_quotes_treat(char *str)
 	return (str);
 }
 
+char	*token_strings_to_string(char const *s1, char const *s2)
+{
+	printf("s1: %s\n s2: %s\n", s1, s2);
+	char        *string;
+    size_t        i;
+    size_t        j;
+
+    if (!s1 || !s2)
+        return (0);
+    i = 0;
+    string = malloc((ft_strlen(s1) + ft_strlen(s2) + 2) * sizeof(*string));
+    if (!string)
+        return (0);
+    while (s1[i])
+    {
+        string[i] = s1[i];
+        i++;
+    }
+    j = 0;
+    string[i] = ' ';
+    while (s2[j])
+    {
+        string[++i] = s2[j];
+        j++;
+    }
+    string[++i] = '\0';
+	printf("string: %s", string);
+    return (string);	
+}
