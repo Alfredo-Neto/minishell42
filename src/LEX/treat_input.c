@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 02:55:15 by azamario          #+#    #+#             */
-/*   Updated: 2022/04/13 03:22:13 by azamario         ###   ########.fr       */
+/*   Updated: 2022/04/14 02:14:37 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,97 +57,84 @@ void	treat_char(t_data *data, char c, int number)
 void	treat_token_strings(t_data *data)
 {	
 	// check_input() | checa se é builtin, operador, comando
-	
-	while (*data->tokens != NULL)
-	{
-	//	printf("token NÃO tratado: %s\n", *data->tokens);
-		treat_quotes(data->tokens);		
-		no_quotes(data->tokens);
-		printf("token tratado: %s\n", *data->tokens);
 
+	while (*data->tokens)
+	{
+		treat_quotes(*data->tokens);		
+		no_quotes(*data->tokens);
 		data->tokens++;
 	}
 	// treat_dollar;
-	//reverse_input_chars(data);	
+	reverse_input_chars(data);	
 }
 
-
-void	treat_quotes(char **token)
+void	treat_quotes(char *token)
 {
 	int	i;
-	int j;
 	
 	i = 0;
-	j = 0;
-
-	while (token[i][j])
+	while (token[i])
 	{
-		if (token[i][j] == '\'')
+		if (token[i] == '\'')
 		{
-			j++;
-			while (token[i][j] != '\'')
+			i++;
+			while (token[i] != '\'')
 			{
-				if (token[i][j] == '\"')
-					token[i][j] = 2;
-				j++;
+				if (token[i] == '\"')
+					token[i] = 2;
+				i++;
 			}
 		}
-		if (token[i][j] == '\"')
+		if (token[i] == '\"')
 		{
-			j++;
-			while (token[i][j] != '\"')
+			i++;
+			while (token[i] != '\"')
 			{
-				if (token[i][j] == '\'')
-					token[i][j] = 3;
-				j++;
+				if (token[i] == '\'')
+					token[i] = 3;
+				i++;
 			}
 		}
-		j++;
+		i++;
 	}	
 }
 
- void	no_quotes(char **token)
+ void	no_quotes(char *token)
  {
 	int quotes;
-	int j;
 	int len;
 	char *str;
 	int i;
-	int k;
-	 
+	int j;
+	
 	quotes = 0;
-	j = 0;
 	len = 0;
 	i = 0;
-	k = 0;
-	while (token[i][j])
+	j = 0;
+	while (token[i])
 	{
-		if (token[i][j] == '\'' || token[i][j] == '\"')
+		if (token[i] == '\'' || token[i] == '\"')
 		 	quotes++;
-		j++;
+		i++;
 	}
 	if (quotes != 0)
 	{
-		len = ft_strlen(token[i]) - quotes + 1;
+		len = ft_strlen(token) - quotes + 1;
 		str = ft_calloc((len), sizeof(char));
-		j = 0;		
-		while (token[i][j])
+		i = 0;
+		while (token[i])
 		{
-			while (token[i][j] == '\'' || token[i][j] == '\"')
-				j++;
-			str[k++] = token[i][j];
-			if (token[i][j])
-				j++;	
-		}
-		token[i] = reverse_quotes_treat(str); //não está colocando na struct
+			while (token[i] == '\'' || token[i] == '\"')
+				i++;
+			str[j++] = token[i];
+			if (token[i])
+				i++;	
+		}			
+		token = reverse_quotes_treat(str); //não está colocando na struct
+		printf("token tratado: %s\n", token);
 		free(str);
 	}	
  }
-
-// echo "'jorge'"
-// echo\0 "'jorge'"\0
-// echo\0 'jorge'\0
-
 
 char	*reverse_quotes_treat(char *str)
 {
