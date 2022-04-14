@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 16:50:20 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/12 00:04:43 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/13 21:08:24 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,21 @@
 
 void	init_data(t_data *data)
 {	
+	data->envp = NULL;//envp -> trazer p nossa estrutura
+	init_command_path(data);
+
 	data->input = NULL;
 	data->cmds_piped = NULL;
 	data->argve = NULL; //(cmd + args)
-	data->envp = NULL;
-	init_command_path(data);
-	data->file = NULL;
-	data->file_mode = NULL;
-	//data->redirect_out_mode = NULL; //DEBUG
+
 	data->number_of_pipes = GARBAGE;
 	data->exec_flag = GARBAGE;
-	//data->exec_mode = GARBAGE;
+
 	data->exit_flag = FALSE;
+	
+	data->file = NULL;
+	data->file_mode = NULL;
+		
 }
 
 int init_command_path(t_data *data)
@@ -53,12 +56,14 @@ void	data_clean(t_data *data)
 {
 	free(data->input);
 	data->input = NULL;
-	free_cmds_piped(data);
+	free_cmds_piped(data);	
 	free_argve(data);
-	//data->infile = NULL;//
-	//data->outfile = NULL;//
+
 	data->number_of_pipes = GARBAGE;
 	data->exec_flag = GARBAGE;
+
+	data->file = NULL; //implemetar free data file
+	data->file_mode = NULL; //implemetar free data file mode	
 }
 
 void free_cmds_piped(t_data *data)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 21:52:40 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/04/12 00:07:51 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/13 21:08:45 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
 	Creates a new prompt.
 */
-void	new_prompt(int signal)
+void	new_prompt_mini(int signal)
 {
 	(void)signal;
 	write(1, "\n", 1);

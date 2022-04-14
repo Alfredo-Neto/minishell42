@@ -1,6 +1,6 @@
 NAME		=	minishell
 CC			=	gcc
-CFLAGS		=	-Wall -Wextra -Werror -lreadline #-g -fsanitize=address 
+CFLAGS		=	-Wall -Wextra -Werror -lreadline -g -fsanitize=address 
 LIBFT_DIR	=	libft
 LIBFT		=	$(LIBFT_DIR)/libft.a
 LIBFLAGS	=	-L $(LIBFT_DIR) -lft
@@ -11,6 +11,7 @@ RM			=	rm -fr
 HEADERS		=	minishell.h
 
 SRC_FILES	=	main.c \
+				minishell.c \
 				hello.c \
 				data_handler.c \
 				prompt_take_input.c \
@@ -26,7 +27,8 @@ SRC_FILES	=	main.c \
 				echo.c \
 				str_tools.c \
 				pipes_fds_handling.c \
-				processes_handler.c
+				processes_handler.c \
+				signals.c
 
 OBJ			=	$(SRC_FILES:%.c=%.o)
 OBJ_DIR		=	obj
@@ -63,9 +65,6 @@ install:
 	@sudo apt-get -y install libreadline-dev
 
 re: fclean all
-
-install:
-	sudo apt-get install libreadline-dev
 
 git:
 	git add .

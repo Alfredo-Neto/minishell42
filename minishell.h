@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/12 00:07:40 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/13 21:46:33 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,15 @@
 #define SUCCESS				0
 #define FAILURE				1
 
-//#define CONTINUE			1 //
-//#define	STOP				0 //
-
 #define FALSE				0
 #define TRUE				1
 #define GARBAGE				-1
 #define NOT_EXIST			-2
 
-//#define NO_PIPE				0 //
-//#define WITH_PIPE			1 //
-
-#define	GREAT				2
-#define GREATGREAT			4
+#define	GREAT				1
+#define GREATGREAT			2
 #define LESS				3
-#define LESSLESS			6
+#define LESSLESS			4
 
 #define NUMBER_OF_BUILTINS	5
 
@@ -52,14 +46,8 @@
 #define HELP				5
 #define	NONE				0
 
-
-
-
-
-
 // Clearing the shell using escape sequences
 #define clear() printf("\033[H\033[J")
-
 
 typedef struct	s_data
 {    
@@ -72,13 +60,12 @@ typedef struct	s_data
 	
 	int		number_of_pipes;
 	int		exec_flag;
-	//int		exec_mode;
+	
 	int		exit_flag;
 
 	char	***file;
-	char	***file_mode;
-	//int		*redirect_in_mode; //
-
+	char	**file_mode;
+	
 	int		tirar;
 }				t_data;
 
@@ -91,13 +78,18 @@ void	free_cmds_piped(t_data *data);
 void	free_command_path(t_data *data);
 void	free_argve(t_data *data);
 
+//signals.c
+void	handler(int signal);
+void	exec_signals(void);
+void	new_prompt_mini(int signal);
+
 //minishell.c
 void	minishell(t_data *data);
 
 //..................................................PROMPT
 //prompt_take_input.c
 int		take_input(t_data *data);
-void	print_dir(void); //Faremos pwd?
+void	print_dir(void);
 //void prompt() FAZER
 
 //history.c
@@ -106,14 +98,12 @@ void	put_on_history(char *buf, char *old_input);
 //..................................................LEX
 //lexer.c - tokens
 void	lexer (t_data *data);
-void	pull_pipe(t_data *data); //, char ***cmds_piped);
-void	pull_space(t_data *data); //), char ***cmds_piped);
+void	pull_pipe(t_data *data); 
+void	pull_space(t_data *data); 
 
 //..................................................PARSE
 //parser.c  -  quotes ok: analisa!
 void	parser(t_data *data);
-//parse_quotes();
-//parse_redirects();
 
 //..................................................EXPANDER
 //expand_variables.c
@@ -122,16 +112,18 @@ void expand_vars(t_data *data);
 //..................................................EXEC
 //sorting.c
 int		is_builtins(char *cmd);
-//void	exec_selector(t_data *data);
 
+//redirects.c
+void	new_prompt_heredoc(int signal);
+void	redirect(char *file, int flags, int std_fd);
+void	heredoc(char *eof);
+void	redirect_filter(t_data *data, int id);
 
 //executor.c
 int		executor(t_data *data);
 int		execute_pid(t_data *data, int id);
 void	ft_execve(t_data *data, int argve_index);
-//int		execute_single_cmd(t_data *data, int builtin_flag);
 int		multiple_exec(t_data *data);
-//void 	single_exec(t_data *data);
 void	builtin_exec(t_data *data, int code);
 
 //pipes_fds_handling.c 
@@ -139,8 +131,8 @@ int		open_pipes(int n_pipes, int fd[n_pipes][2]);
 int		close_other_fds(int id, int n_pipes, int fd[n_pipes][2]);
 int		stdin_stdout_handler(int in, int out);
 int		file_descriptor_handler(int id, int n_pipes, int fd[n_pipes][2]);
-int		scope_fd_select(int id, int n_pipes, int fd[n_pipes][2]); //t_data *data, 
-int		redir_execute_pid(t_data *data, int id); //, int n_pipes, int fd[n_pipes][2]);
+int		scope_fd_select(int id, int n_pipes, int fd[n_pipes][2]); 
+int		redir_execute_pid(t_data *data, int id); 
 
 //processes_handler.c
 int		main_process_handler(int *pid, int n_pipes, int fd[n_pipes][2]);
@@ -148,6 +140,7 @@ int		main_process_handler(int *pid, int n_pipes, int fd[n_pipes][2]);
 //..................................................BUILTINS
 //exit.c
 int		exit_minishell(t_data *data, int status);
+void	check_exit(t_data *data);
 void	mini_exit (t_data *data);
 
 //help.c
@@ -169,8 +162,5 @@ int		ft_str_count(char **str);
 //////////////////////////////////////////////////////////
 
 void	welcome(void);
-void	check_redirections(char **argve);
-void	exec_signals(void);
-void	new_prompt(int signal);
 
 #endif

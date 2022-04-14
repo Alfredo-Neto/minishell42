@@ -3,26 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 23:19:00 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/12 00:09:12 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/13 21:46:04 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-//triagem de execução -> com ou sem pipe
-//void executor(t_data *data)
-//{
-//	exec_selector(data);  
-//	//if (data->exec_mode == WITH_PIPE)
-//		multiple_exec(data);
-//	//else if (data->exec_mode == NO_PIPE)
-//	//	single_exec(data);
-//}
-
-//executa o comando argve_index
 void ft_execve(t_data *data, int argve_index)
 {
 	char *path_aux;
@@ -48,39 +37,6 @@ void ft_execve(t_data *data, int argve_index)
 		free(path_aux);
 }
 
-//Cria um filho e executa Builtin ou Sys_cmd (ft_execve)
-//int execute_single_cmd(t_data *data, int builtin_flag) 
-//{
-//	pid_t	chlpid;
-//	int		wstatus;	
-//	
-//	chlpid = fork();
-//	if (chlpid < 0)
-//	{
-//		perror("Fork failed"); 
-//		return (FAILURE);
-//	}
-//	if (chlpid == 0) 
-//	{
-//		if (builtin_flag)
-//		{
-//			builtin_exec(data, builtin_flag);
-//			return (SUCCESS);
-//		}
-//		else
-//		{
-//			ft_execve(data, 0);
-//			return (FAILURE); //			
-//		}		
-//	}
-//	else
-//	{
-//		waitpid(chlpid, &wstatus, 0); //wait(&wstatus);	
-//		return (SUCCESS);
-//	}		
-//}
-
-// Function to call builtin commands [ok]
 void builtin_exec(t_data *data, int code)
 {
 	if (code == EXIT)		
@@ -94,64 +50,33 @@ void builtin_exec(t_data *data, int code)
 	else if (code == HELP)
 		open_help();	
 }
-/*
-* Só fiz a SINGLE EXEC. Parei para resolver o problema do exit: Saí depois de umas vezes, apenas
-*
-*
-*/
 
-//void single_exec(t_data *data) // [ok]
-//{
-//	int	  builtin_flag;
-//	
-//	builtin_flag = is_builtins(data->argve[0][0]);
-//	if (builtin_flag == EXIT) //Exit n forka, sai direto
-//		mini_exit(data);
-//	else
-//		execute_single_cmd(data, builtin_flag);
-//}
-
-
-//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 int execute_pid(t_data *data, int id) 
 {
 	int builtin_flag;
 
 	exec_signals();
-	builtin_flag = is_builtins(data->argve[id][0]);
-	check_redirections(data->argve[id]);
+	redirect_filter(data, id);
+	builtin_flag = is_builtins(data->argve[id][0]);	
 	if (builtin_flag)
 	{
 		builtin_exec(data, builtin_flag);
-		exit (SUCCESS);//sai ok, n forka mais
+		exit (SUCCESS);
 	}
 	else
 	{
 		ft_execve(data, id);
-		exit (FAILURE); //sai ok, n forka mais
+		exit (FAILURE); 
 	}
 }
 
-//int multiple_exec(t_data *data) //executor
 int executor(t_data *data) //executor
 {
 	int id;
 	int fd[data->number_of_pipes][2];
 	int pid[data->number_of_pipes + 1];
-	int	builtin_flag;
-
-	//TESTE-------------------------- > >>  MEXER AQUI --------------------------
-	int redirect_out = FALSE;
-	//TESTE-----------------------------------------------------------------------
-	if (data->number_of_pipes == 0)
-	{
-		builtin_flag = is_builtins(data->argve[0][0]);
-		if (builtin_flag == EXIT) //Exit n forka, sai direto
-		{
-			mini_exit(data);
-			return SUCCESS;
-		}		
-	}
+		
+	check_exit(data);	
 	open_pipes(data->number_of_pipes, fd);
 	id = 0;
 	while (id < data->number_of_pipes + 1)
@@ -164,11 +89,8 @@ int executor(t_data *data) //executor
 		}
 		if (pid[id] == 0)
 		{	
-			scope_fd_select(id, data->number_of_pipes, fd); //data,
-			if (redirect_out) //MUDAR: data->outfile && data->outfile[id]
-				redir_execute_pid(data, id); //, data->number_of_pipes, fd); //file_redirect_fds
-			else
-				execute_pid(data, id);//executa direto, senao já executou no cmd anterior
+			scope_fd_select(id, data->number_of_pipes, fd); 			
+			execute_pid(data, id);
 			return SUCCESS;
 		}
 		id++;
