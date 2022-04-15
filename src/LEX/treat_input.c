@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 02:55:15 by azamario          #+#    #+#             */
-/*   Updated: 2022/04/14 20:26:59 by azamario         ###   ########.fr       */
+/*   Updated: 2022/04/15 03:18:17 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	treat_input(t_data *data)			// echo "'jorge' ale"
 void	treat_input_chars(t_data *data)
 {
 	treat_char(data, ' ', 1);
-	treat_char(data, '>', 1);
-	treat_char(data, '<', 1);
-	treat_char(data, '|', 1);	
+	treat_char(data, '>', 4);
+	treat_char(data, '<', 5);
+	treat_char(data, '|', 6);	
 }
 
 void	treat_char(t_data *data, char c, int number)
@@ -56,27 +56,19 @@ void	treat_char(t_data *data, char c, int number)
 
 void	treat_token_strings(t_data *data)
 {	
-	// check_input() | checa se é builtin, operador, comando
-	//data->input = NULL;
-		
+	// check_input() | checa se é builtin, operador, comando		
 	while (*data->tokens)
 	{
 		treat_quotes(*data->tokens);	
-		printf("treat_quotes: %s\n", *data->tokens);	
+//		printf("treat_quotes: %s\n", *data->tokens);	
 		no_quotes(*data->tokens);
 		printf("data->tokens %s\n", *data->tokens);
+		reverse_input_chars(*data->tokens);
 		data->string = token_strings_to_string(data->string, *data->tokens);
 		data->tokens++;
 	}
 	printf("data->input %s\n", data->input);
 	printf("data->string %s\n", data->string);
-
-	// while
-	//data->tokens[0];
-	//chama o token_strings_to_string aqui
-	
-	//*data->tokens: echo\0 	
-	// treat_dollar;
 }
 
 void	treat_quotes(char *token)
@@ -175,9 +167,31 @@ char	*reverse_quotes_treat(char *str)
 	return (str);
 }
 
+void	reverse_input_chars(char *token) // echo\0 23jorge31ale2\0
+{
+	reverse_char(token, 1, ' ');
+	reverse_char(token, 4, '>');
+	reverse_char(token, 5, '<');
+	reverse_char(token, 6, '|');
+}
+
+void	reverse_char(char *cmd, int nbr, char c)
+{
+	int	i;
+
+	i = 0;
+	while (cmd[i])
+	{
+		if (cmd[i] == nbr)
+			cmd[i] = c;
+		i++;
+	}
+}
+
+
+
 char	*token_strings_to_string(char const *s1, char const *s2)
 {
-	printf("s1: %s\n s2: %s\n", s1, s2);
 	char        *string;
     size_t        i;
     size_t        j;
