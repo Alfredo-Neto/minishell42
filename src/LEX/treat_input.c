@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 02:55:15 by azamario          #+#    #+#             */
-/*   Updated: 2022/04/15 03:18:17 by azamario         ###   ########.fr       */
+/*   Updated: 2022/04/16 20:24:53 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,15 +134,17 @@ void	treat_quotes(char *token)
 				i++;	
 		}			
 		string = reverse_quotes_treat(string); //não está colocando na struct
-		printf("token tratado 1: %s\n", string);
+		printf("data->tokens: %s\n", token);
+		printf("token tratado: %s\n", string);
 		i = 0;
-		free(token);
-		while (string[i])
+//		free(token);
+		while (string[i]) // uvamorango\0
 		{
-			token[i] = string[i];
+			token[i] = string[i];		// uvamorangoo"
 			i++;
 		}
-		printf("token tratado 2: %s\n", token);
+		token[i] = '\0';
+		printf("entrou no data->tokens %s\n", token);
 		free(string);
 	}	
  }
@@ -187,8 +189,6 @@ void	reverse_char(char *cmd, int nbr, char c)
 		i++;
 	}
 }
-
-
 
 char	*token_strings_to_string(char const *s1, char const *s2)
 {
