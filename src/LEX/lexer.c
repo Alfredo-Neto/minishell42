@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 13:55:53 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/16 20:32:28 by azamario         ###   ########.fr       */
+/*   Updated: 2022/04/19 23:52:46 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ char **pull_pipe(t_data *data)
 {
 	char	**input_piped;	
 
-	if (!data->string)
+	if (!data->input)
 		printf("Input NULO\n");
-	input_piped = ft_split(data->string, '|');
+	input_piped = ft_split(data->input, '|');
 	if (input_piped == NULL)
 	{
 		perror("Malloc failure");
@@ -69,11 +69,14 @@ void lexer (t_data *data)
 {
 	char	**cmds_piped;
 
-	treat_input(data); 			// devolver linha de comando tratada (aspas) para pull_pipe	
-	cmds_piped = pull_pipe(data); // Conta pipes, retorna array com ponteiros para string ou a linha de comando		
-	pull_space(data, cmds_piped); // Cria tokens utilizando espaço como delimitador
+	treat_input(data); 				// devolver linha de comando tratada (aspas) para pull_pipe	| devolve como data->string
+	cmds_piped = pull_pipe(data);	// Conta pipes, retorna array com ponteiros para string ou a linha de comando		
+	pull_space(data, cmds_piped);	// Cria tokens utilizando espaço como delimitador
 	free_double_str(&cmds_piped);
 }
+
+
+
 
 /*
 	// debug: printar as variáveis do pull_space

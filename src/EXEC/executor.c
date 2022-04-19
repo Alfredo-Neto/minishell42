@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 23:19:00 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/16 20:32:47 by azamario         ###   ########.fr       */
+/*   Updated: 2022/04/19 18:47:05 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@ void executor(t_data *data)
 {
 	if (data->exec_flag != -1)  //só executa se tiver algo pra executar, pode ser só def de variável
 		exec_selector(data);
-	// free(data->input);
-	// free(data->tokens);
-	// free(data->string);
 }
 
 // Function to call one sys cmds

@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 02:55:15 by azamario          #+#    #+#             */
-/*   Updated: 2022/04/16 20:24:53 by azamario         ###   ########.fr       */
+/*   Updated: 2022/04/20 00:15:43 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,10 @@
 void	treat_input(t_data *data)			// echo "'jorge' ale"
 {	
 	//validate input()											
-	treat_input_chars(data); 						// echo "'jorge'1ale"  - > se entre as aspas tiver ' ' ou > ou  < ou |, substitui por um char não imprimível
+	treat_input_chars(data); 						// se entre as aspas tiver ' ' ou > ou  < ou |, substitui por um char não imprimível
 	//treat_operators()								// verifica se tem espaços antes de | e redirects
-	data->tokens = ft_split(data->input, ' '); 		// echo\0 "'jorge'1ale"\0 	->quebra os inputs em token para tratar, o que estiver entre aspas será um token único: "'jorge'1ale"
-	treat_token_strings(data);						//	coloca token em variável temporária dentro de nova struct | trata quotes-dollar no-quotes reverse_input_chars
-	// data->input = restore_command_line(data->token);
+	data->tokens = ft_split(data->input, ' '); 		// quebra os inputs em token para tratar, o que estiver entre aspas será um token único: "'jorge'1ale"
+	treat_token_strings(data);						// trata os tokens e restabelece a string no data->string || aqui tratamos dollar?
 }
 
 void	treat_input_chars(t_data *data)
@@ -56,17 +55,17 @@ void	treat_char(t_data *data, char c, int number)
 
 void	treat_token_strings(t_data *data)
 {	
-	// check_input() | checa se é builtin, operador, comando		
+	// check_input() | checa se é builtin, operador, comando	
 	while (*data->tokens)
 	{
 		treat_quotes(*data->tokens);	
-//		printf("treat_quotes: %s\n", *data->tokens);	
 		no_quotes(*data->tokens);
 		printf("data->tokens %s\n", *data->tokens);
 		reverse_input_chars(*data->tokens);
-		data->string = token_strings_to_string(data->string, *data->tokens);
+		data->string = tokens_to_string(data->string, *data->tokens); // echo\0 "jorge | ale"\0
 		data->tokens++;
 	}
+	data->input = data->string;
 	printf("data->input %s\n", data->input);
 	printf("data->string %s\n", data->string);
 }
@@ -133,14 +132,13 @@ void	treat_quotes(char *token)
 			if (token[i])
 				i++;	
 		}			
-		string = reverse_quotes_treat(string); //não está colocando na struct
+		string = reverse_quotes_treat(string);
 		printf("data->tokens: %s\n", token);
 		printf("token tratado: %s\n", string);
 		i = 0;
-//		free(token);
-		while (string[i]) // uvamorango\0
+		while (string[i])
 		{
-			token[i] = string[i];		// uvamorangoo"
+			token[i] = string[i];
 			i++;
 		}
 		token[i] = '\0';
@@ -190,7 +188,7 @@ void	reverse_char(char *cmd, int nbr, char c)
 	}
 }
 
-char	*token_strings_to_string(char const *s1, char const *s2)
+char	*tokens_to_string(char const *s1, char const *s2)
 {
 	char        *string;
     size_t        i;
@@ -215,5 +213,5 @@ char	*token_strings_to_string(char const *s1, char const *s2)
         j++;
     }
     string[++i] = '\0';
-    return (string);	
+	return (string);	
 }

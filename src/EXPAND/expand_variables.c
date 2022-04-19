@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 15:34:28 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/14 20:55:45 by azamario         ###   ########.fr       */
+/*   Updated: 2022/04/19 23:53:56 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void expander(t_data *data)
 	char *value;
 
 	i = 0;
-	if (ft_strchr(data->string, '$'))
+	if (ft_strchr(data->input, '$'))
 	{
 		data->exec_flag = 1;
 		i = find_vars(data->argve[0]);
