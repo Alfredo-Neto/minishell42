@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 19:08:49 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/21 12:49:37 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/04/13 17:38:28 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,16 @@ int	main(int argc, char **argv, char **envp)
 	
 	(void)argc;
 	(void)argv;
+	data.envp = envp;
 	init_data(&data);
 	welcome();
-	data.envp = envp;
 	while (TRUE)
 		minishell(&data);
 	exit_minishell(&data, SUCCESS);
 }
+
+
+/// envp
+// mesclar com developer
+// adicionar o envp na lista ligada
+// realocar o envp quando essa for alterada

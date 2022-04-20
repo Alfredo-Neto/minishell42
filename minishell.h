@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/26 18:00:36 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/04/20 12:49:57 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ void	parser(t_data *data);
 //parse_redirects();
 
 //parse_vars.c
-void	grab_vars(t_data *data);
-char	*get_var_value(char *input);
+void	grab_vars(t_data *data, char *str, int parse);
+char	*get_var_value(char *input, int parse);
 char	*get_var_name(char *input);
 
 //..................................................EXPANDER
