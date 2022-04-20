@@ -6,7 +6,7 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 02:55:15 by azamario          #+#    #+#             */
-/*   Updated: 2022/04/20 00:15:43 by azamario         ###   ########.fr       */
+/*   Updated: 2022/04/20 01:02:37 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	treat_token_strings(t_data *data)
 		no_quotes(*data->tokens);
 		printf("data->tokens %s\n", *data->tokens);
 		reverse_input_chars(*data->tokens);
-		data->string = tokens_to_string(data->string, *data->tokens); // echo\0 "jorge | ale"\0
+		data->string = tokens_to_string(data->string, *data->tokens);
 		data->tokens++;
 	}
 	data->input = data->string;
