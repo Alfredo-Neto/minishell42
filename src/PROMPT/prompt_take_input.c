@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_take_input.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 20:56:26 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/04 15:47:01 by coder            ###   ########.fr       */
+/*   Updated: 2022/04/19 22:48:37 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,15 @@ void prompt(t_data *data)
 {
 	char	cwd[1024];
 	char	*prompt;
+	char	*buf;
 
 	data->username = getenv("USER");
 	getcwd(cwd, sizeof(cwd));
-	data->username = ft_strjoin(data->username, ":~");
-	prompt = ft_strjoin(data->username, cwd);
-	printf("\n%s%s:$ ", KBLU, prompt);
+	buf = ft_strjoin(data->username, ":~");
+	prompt = ft_strjoin(buf, cwd);
+	free(buf);
+	printf("\n\e[32m%s:$ \e[39m", prompt);
+	free(prompt);
 }
 
 //Function to print Current Directory.
