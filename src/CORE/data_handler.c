@@ -6,11 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 16:50:20 by ebresser          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/04/19 22:58:57 by vlima-nu         ###   ########.fr       */
-=======
-/*   Updated: 2022/04/20 01:04:03 by azamario         ###   ########.fr       */
->>>>>>> edd043344139372f4985b533fce33c99b2e1eac3
+/*   Updated: 2022/04/20 15:30:52 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +43,6 @@ int init_command_path(t_data *data)
 
 void	data_clean(t_data *data)
 {
-<<<<<<< HEAD
 	free(data->input);
 	data->input = NULL;
 	free_cmds_piped(data);
@@ -94,14 +89,6 @@ void free_command_path(t_data *data)
 		free(data->command_path);
 		data->command_path = NULL;
 	}
-=======
-	free_str(&data->input);
-//	free_str(&data->string); // não foi malocado
-//	free_double_str(&data->tokens);
-	free_triple_str(&data->argve);
-	data->number_of_pipes = -1;
-	data->exec_flag = -1;
->>>>>>> edd043344139372f4985b533fce33c99b2e1eac3
 }
 
 
