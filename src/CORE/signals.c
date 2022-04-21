@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 21:52:40 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/04/20 16:35:20 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/21 14:16:00 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	new_prompt_mini(int signal)
 {
 	(void)signal;
 	write(1, "\n", 1);
-	rl_on_new_line();
-	rl_redisplay();
+	rl_on_new_line(); //Como funciona?
+	rl_redisplay();  //Como funciona?
 }
 
 /*

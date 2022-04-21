@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_tools.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 22:54:50 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/19 21:33:10 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/21 12:50:45 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	copylen(char *scpy, const char *s)
 {
 	int	i;
 
-	if (!s)
+	if (!s || ft_strlen(s) > ft_strlen(scpy))
 		return ;
 	i = 0;
 	while (s[i] != '\0')
@@ -75,7 +75,7 @@ int		ft_strjoin_handled(char **s1, char const *s2)
 	char	*s;
 
 	if (!*s1 || !s2)
-		return 1;
+		return FAILURE;
 	len = ft_strlen(*s1) + ft_strlen(s2) + 1;
 	if (!(s = (char*)malloc(len * sizeof(char))))
 		return FAILURE;

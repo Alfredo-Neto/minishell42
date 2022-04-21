@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_take_input.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 20:56:26 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/20 21:06:27 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/21 15:04:24 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,21 +46,15 @@ void	print_dir(void)
 /** Function to take input - MALLOC input*/
 int	take_input(t_data *data)
 {
-	int		status;
-
-	prompt(data);
-	if (data->old_input)
-		free(data->old_input);
-	data->old_input = ft_strdup(data->input);
+	prompt(data);	
 	if (!data->input)
 		exit_minishell(data, FAILURE);
 	if (ft_strlen(data->input) != 0)
-	{
+	{		
 		put_on_history(data->input, data->old_input);
-		status = ft_strcpy_handled(&data->input, data->input); // ***-> isso foi alocado?
-		if (status == FAILURE)
-			exit_minishell(data, FAILURE);
-		//free(buf); ---> acho q readline já faz isso // free status?
+		if (data->old_input)
+			free(data->old_input);
+		data->old_input = ft_strdup(data->input);
 		return (SUCCESS);
 	}
 	else

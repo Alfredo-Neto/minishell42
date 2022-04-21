@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 20:28:30 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/20 17:48:26 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/21 13:51:04 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	minishell(t_data *data)
 {
-	signal(SIGINT, new_prompt_mini);
-	signal(SIGTERM, SIG_IGN);
+	signal(SIGINT, new_prompt_mini); //Ctrl C
+	signal(SIGTERM, SIG_IGN); //Ctrl D --SIGQUIT?
 	data_clean(data);
 	if (take_input(data))
 		return ; //captura na estrutura data->input		

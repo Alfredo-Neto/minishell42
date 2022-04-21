@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 21:09:01 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/20 16:32:51 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/21 15:01:04 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void put_on_history(char *buf, char *old_input)
 {	
-	if (!old_input || !ft_strcmp(old_input, buf)) //N repete hist
+	if (!old_input || ft_strcmp(old_input, buf)) //N repete hist
 		add_history(buf); 
 }

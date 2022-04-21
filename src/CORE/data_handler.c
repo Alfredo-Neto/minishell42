@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 16:50:20 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/20 17:46:49 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/21 14:48:32 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int init_command_path(t_data *data)
 		ret = ft_strjoin_handled(&(data->command_path[i]), "/");
 		if (ret == FAILURE)
 		{
-			perror("Malloc failed");
+			printf("Init failed\n");
 			exit_minishell(data, FAILURE);
 		}
 		i++;
