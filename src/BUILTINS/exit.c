@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 19:27:43 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/19 21:25:01 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/20 17:44:21 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	exit_minishell(t_data *data, int status)
 {	
 	data_clean(data);
-	free_command_path(data);
+	double_free(&data->command_path);
 	rl_clear_history();
 	exit (status);
 }

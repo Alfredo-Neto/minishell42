@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/19 21:41:58 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/20 17:45:07 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,6 @@
 #define HELLO		4
 #define HELP		5
 #define	NONE		0
-
-#define KBLU  "\x1B[34m"
-#define KGRN  "\x1B[32m"
 
 #define SQUOTES 39
 #define DQUOTES 34
@@ -76,6 +73,7 @@ typedef struct	s_data
 	char	**command_path;// = envp[PATH]
 
 	char	*input;
+	char	*old_input;
 	char	**cmds_piped;
 	char	***argve; //(cmd + args: argumento de execve)
 	t_vars	*vars;
@@ -96,8 +94,9 @@ typedef struct	s_data
 void	init_data(t_data *data);
 int		init_command_path(t_data *data);
 void	data_clean(t_data *data);
-void	free_cmds_piped(t_data *data);
-void	free_command_path(t_data *data);
+// void	free_cmds_piped(t_data *data);
+// void	free_command_path(t_data *data);
+void	double_free(char ***ptr);
 void	free_argve(t_data *data);
 
 //signals.c

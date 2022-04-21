@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 16:50:20 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/20 15:30:52 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/20 17:46:49 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,19 @@ int init_command_path(t_data *data)
 
 void	data_clean(t_data *data)
 {
-	free(data->input);
-	data->input = NULL;
-	free_cmds_piped(data);
+	if (data->string)
+	{
+		free(data->string);
+		data->string = NULL;
+	}
+	if (data->input)
+	{
+		free(data->input);
+		data->input = NULL;
+	}
+	double_free(&data->cmds_piped);
+	double_free(&data->tokens);
 	free_argve(data);
-
 	data->number_of_pipes = GARBAGE;
 	data->exec_flag = GARBAGE;
 
@@ -55,44 +63,25 @@ void	data_clean(t_data *data)
 	data->file_mode = NULL; //implemetar free data file mode	
 }
 
-void free_cmds_piped(t_data *data)
+void	double_free(char ***ptr)
 {
-	int index;
+	int		i;
 
-	index = 0;
-	if (data->cmds_piped)
+	i = 0;
+	if (!*ptr)
+		return ;
+	while ((*ptr)[i])
 	{
-		while(data->cmds_piped[index])
-		{
-			free(data->cmds_piped[index]);
-			data->cmds_piped[index] = NULL;
-			index++;
-		}
-		free(data->cmds_piped);
-		data->cmds_piped = NULL;
+		if ((*ptr)[i])
+			free((*ptr)[i]);
+		(*ptr)[i] = NULL;
+		i++;
 	}
+	free(*ptr);
+	*ptr = NULL;
 }
 
-void free_command_path(t_data *data)
-{
-	int index;
-
-	index = 0;
-	if (data->command_path)
-	{
-		while(data->command_path[index])
-		{
-			free(data->command_path[index]);
-			data->command_path[index] = NULL;
-			index++;
-		}
-		free(data->command_path);
-		data->command_path = NULL;
-	}
-}
-
-
-void free_argve(t_data *data) //Uso: passar endereço da ***str
+void	free_argve(t_data *data) //Uso: passar endereço da ***str
 {
 	int index_block;
 	int index_cmd;

@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 13:55:53 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/19 22:24:42 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/20 21:07:55 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 // Create an aux **str based on pipe
 void pull_pipe(t_data *data) //, char ***cmds_piped)
 {
-	printf("\n\n%s\n\n", data->input);
 	data->cmds_piped = ft_split(data->input, '|');
 	if (data->cmds_piped == NULL)
 	{
@@ -41,7 +40,7 @@ void pull_space(t_data *data) //, char ***cmds_piped)
 	{
 		perror("Malloc failure 2");
 		exit_minishell(data, FAILURE);
-	}	
+	}
 	while((data->cmds_piped)[i])
 	{
 		data->argve[i] = ft_split((data->cmds_piped)[i], ' ');//leak
@@ -79,6 +78,6 @@ void pull_space(t_data *data) //, char ***cmds_piped)
 void lexer (t_data *data)
 {
 	treat_input(data); 	// devolver linha de comando tratada (aspas) para pull_pipe	| devolve como data->string
-	pull_pipe(data); //, &cmds_piped); //tenho estrutura de str** - cada string com linha de cmd
+	// pull_pipe(data); //, &cmds_piped); //tenho estrutura de str** - cada string com linha de cmd
 	pull_space(data); //, &cmds_piped); //tenho estrutura de str*** - cada str é um arg(ou cmd)
 }

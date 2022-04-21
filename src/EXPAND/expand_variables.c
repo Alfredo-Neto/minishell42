@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_variables.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 15:34:28 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/19 23:53:56 by azamario         ###   ########.fr       */
+/*   Updated: 2022/04/20 21:44:49 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	find_vars(char **argve)
 	return (-1);
 }
 
-void expander(t_data *data)
+void	expander(t_data *data)
 {
 	int	i;
 	char *value;
@@ -40,6 +40,4 @@ void expander(t_data *data)
 		free(data->argve[0][i]);
 		data->argve[0][i] = ft_strdup(value);
 	}
-	else
-		printf("there is no variable\n");
 }

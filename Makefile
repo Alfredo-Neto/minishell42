@@ -37,9 +37,16 @@ OBJ			=	$(SRC_FILES:%.c=%.o)
 OBJ_DIR		=	obj
 
 $(OBJ_DIR)/%.o: %.c $(HEADERS)
-		$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES) 
+	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
 
 all: $(NAME)
+
+debub: $(OBJ_DIR) $(LIBFT) $(OBJ)
+	mv $(OBJ) $(OBJ_DIR)
+	$(CC) $(addprefix obj/, $(OBJ)) $(CFLAGS) $(LIBFLAGS) -o $@
+	@echo ""
+	@echo "|		minishell with debug created		|"
+	@echo ""
 
 $(NAME): $(OBJ_DIR) $(LIBFT) $(OBJ)
 	mv $(OBJ) $(OBJ_DIR)

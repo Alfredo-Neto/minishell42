@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 20:56:26 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/19 22:48:37 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/20 21:06:27 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,23 @@
 void prompt(t_data *data)
 {
 	char	cwd[1024];
-	char	*prompt;
 	char	*buf;
+	char	*prompt_str;
+	char	*path;
 
 	data->username = getenv("USER");
 	getcwd(cwd, sizeof(cwd));
-	buf = ft_strjoin(data->username, ":~");
-	prompt = ft_strjoin(buf, cwd);
+	buf = ft_strjoin("\e[32m", data->username);
+	prompt_str = ft_strjoin(buf, ":\e[39m");
+	path = ft_strjoin("\e[35m", cwd);
 	free(buf);
-	printf("\n\e[32m%s:$ \e[39m", prompt);
-	free(prompt);
+	buf = ft_strjoin(prompt_str, path);
+	free(prompt_str);
+	prompt_str = ft_strjoin(buf, "\e[39m$ ");
+	data->input = readline(prompt_str);
+	free(buf);
+	free(prompt_str);
+	free(path);
 }
 
 //Function to print Current Directory.
@@ -39,15 +46,17 @@ void	print_dir(void)
 /** Function to take input - MALLOC input*/
 int	take_input(t_data *data)
 {
-	char	*old_input;
 	int		status;
-	
+
 	prompt(data);
-	data->input = readline("");
-	if (strlen(data->input) != 0)
+	if (data->old_input)
+		free(data->old_input);
+	data->old_input = ft_strdup(data->input);
+	if (!data->input)
+		exit_minishell(data, FAILURE);
+	if (ft_strlen(data->input) != 0)
 	{
-		old_input = data->input;
-		put_on_history(data->input, old_input);
+		put_on_history(data->input, data->old_input);
 		status = ft_strcpy_handled(&data->input, data->input); // ***-> isso foi alocado?
 		if (status == FAILURE)
 			exit_minishell(data, FAILURE);
