@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 02:55:15 by azamario          #+#    #+#             */
-/*   Updated: 2022/04/21 17:25:21 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/21 17:36:27 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 void	treat_input(t_data *data)			// echo "'jorge' ale"
 {
 	//validate input()											
-	treat_input_chars(data); 						// se entre as aspas tiver ' ' ou > ou  < ou |, substitui por um char não imprimível
+	treat_input_chars(data); 						// se entre as aspas tiver ' ' ou > ou  < ou |, substitui por um char não imprimível echo "'jorge1ale"\0
 	//treat_operators()								// verifica se tem espaços antes de | e redirects
-	data->tokens = ft_split(data->input, ' '); 		// quebra os inputs em token para tratar, o que estiver entre aspas será um token único: "'jorge'1ale"
+	data->tokens = ft_split(data->input, ' '); 		// quebra os inputs em token para tratar, o que estiver entre aspas será um token único: echo\0 "'jorge1ale"\0
 	treat_token_strings(data);						// trata os tokens e restabelece a string no data->string || aqui tratamos dollar?
 	pull_pipe(data);
 }
@@ -55,7 +55,7 @@ void	treat_char(t_data *data, char c, int number)
 	}
 }
 
-void	treat_token_strings(t_data *data)
+void	treat_token_strings(t_data *data) //echo\0 "'jorge1ale"\0
 {
 	char	*buf;
 	int		i;
@@ -64,12 +64,12 @@ void	treat_token_strings(t_data *data)
 	i = 0;
 	while (data->tokens[i])
 	{
-		treat_quotes(data->tokens[i]);
-		no_quotes(data->tokens[i]);
-		reverse_input_chars(data->tokens[i]);
+		treat_quotes(data->tokens[i]); 	//substitui as aspas internas por 2 ou 3: echo\0 "3jorge31ale"\0
+		no_quotes(data->tokens[i]);		//retira as aspas: 3jorge31ale\0 e depois reverte aspas escondidas: 'jorge'1ale\0
+		reverse_input_chars(data->tokens[i]); //reverte os outros caracteres escondidos: 'jorge' ale\0
 		// printf("data->tokens %s\n", data->tokens[i]);
 		if (!data->string)
-			data->string = tokens_to_string(data->string, data->tokens[i]); // echo\0 "jorge | ale"\0
+			data->string = tokens_to_string(data->string, data->tokens[i]); // echo 'jorge' ale\0
 		else
 		{
 			buf = tokens_to_string(data->string, data->tokens[i]); // echo\0 "jorge | ale"\0
@@ -116,7 +116,7 @@ void	treat_quotes(char *token)
 	}	
 }
 
- void	no_quotes(char *token) //data->tokens
+ void	no_quotes(char *token) //echo\0 "3jorge31ale"\0
  {
 	int		quotes;
 	int		len;
@@ -139,7 +139,7 @@ void	treat_quotes(char *token)
 		len = ft_strlen(token) - quotes + 1;
 		string = ft_calloc((len), sizeof(char));
 		i = 0;
-		while (token[i])
+		while (token[i]) //"3jorge31ale"\0
 		{
 			while (token[i] == '\'' || token[i] == '\"')
 				i++;
@@ -147,7 +147,7 @@ void	treat_quotes(char *token)
 			if (token[i])
 				i++;	
 		}			
-		string = reverse_quotes_treat(string);
+		string = reverse_quotes_treat(string); //reverte as aspas
 		// printf("data->tokens: %s\n", token);
 		// printf("token tratado: %s\n", string);
 		i = 0;
