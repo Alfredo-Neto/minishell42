@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   treat_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 02:55:15 by azamario          #+#    #+#             */
-/*   Updated: 2022/04/20 01:02:37 by azamario         ###   ########.fr       */
+/*   Updated: 2022/04/20 15:26:12 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,29 @@ void	treat_char(t_data *data, char c, int number)
 }
 
 void	treat_token_strings(t_data *data)
-{	
-	// check_input() | checa se é builtin, operador, comando	
+{
+	char	*buf;
+
+	// check_input() | checa se é builtin, operador, comando
 	while (*data->tokens)
 	{
 		treat_quotes(*data->tokens);	
 		no_quotes(*data->tokens);
-		printf("data->tokens %s\n", *data->tokens);
 		reverse_input_chars(*data->tokens);
-		data->string = tokens_to_string(data->string, *data->tokens);
+		printf("data->tokens %s\n", *data->tokens);
+		if (!data->string)
+			data->string = tokens_to_string(data->string, *data->tokens); // echo\0 "jorge | ale"\0
+		else
+		{
+			buf = tokens_to_string(data->string, *data->tokens); // echo\0 "jorge | ale"\0
+			free(data->string);
+			printf("\n%s\n", buf);
+			data->string = ft_strdup(buf);
+			free(buf);
+		}
 		data->tokens++;
 	}
+	printf("data->input %s\n", data->input);
 	data->input = data->string;
 	printf("data->input %s\n", data->input);
 	printf("data->string %s\n", data->string);
@@ -190,28 +202,31 @@ void	reverse_char(char *cmd, int nbr, char c)
 
 char	*tokens_to_string(char const *s1, char const *s2)
 {
-	char        *string;
-    size_t        i;
-    size_t        j;
+	char		*string;
+	int			space;
+	size_t		i;
+	size_t		j;
 
-    if (!s1 || !s2)
-        return (0);
-    i = 0;
-    string = malloc((ft_strlen(s1) + ft_strlen(s2) + 2) * sizeof(*string));
-    if (!string)
-        return (0);
-    while (s1[i])
-    {
-        string[i] = s1[i];
-        i++;
-    }
-    j = 0;
-    string[i] = ' ';
-    while (s2[j])
-    {
-        string[++i] = s2[j];
-        j++;
-    }
-    string[++i] = '\0';
-	return (string);	
+	i = 0;
+	space = ft_strlen(s1) != 0;
+	string = malloc((ft_strlen(s1) + ft_strlen(s2) + 1 + space) * sizeof(char));
+	if (!string)
+		return (NULL);
+	if (s1)
+	{
+		while (s1[i])
+		{
+			string[i] = s1[i];
+			i++;
+		}
+		string[i] = ' ';
+	}
+	j = 0;
+	while (s2[j])
+	{
+		string[++i] = s2[j];
+		j++;
+	}
+	string[++i] = '\0';
+	return (string);
 }
