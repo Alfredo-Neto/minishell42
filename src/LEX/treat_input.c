@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   treat_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 02:55:15 by azamario          #+#    #+#             */
-/*   Updated: 2022/04/20 15:26:12 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/21 19:46:42 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@
 void	treat_input(t_data *data)			// echo "'jorge' ale"
 {	
 	//validate input()											
-	treat_input_chars(data); 						// se entre as aspas tiver ' ' ou > ou  < ou |, substitui por um char não imprimível
+	treat_input_chars(data); 						// se entre as aspas tiver ' ' ou > ou  < ou |, substitui por um char não imprimível echo "'jorge1ale"\0
 	//treat_operators()								// verifica se tem espaços antes de | e redirects
-	data->tokens = ft_split(data->input, ' '); 		// quebra os inputs em token para tratar, o que estiver entre aspas será um token único: "'jorge'1ale"
+	data->tokens = ft_split(data->input, ' '); 		// quebra os inputs em token para tratar, o que estiver entre aspas será um token único: echo\0 "'jorge1ale"\0
 	treat_token_strings(data);						// trata os tokens e restabelece a string no data->string || aqui tratamos dollar?
+	pull_pipe(data);
 }
 
 void	treat_input_chars(t_data *data)
@@ -27,7 +28,8 @@ void	treat_input_chars(t_data *data)
 	treat_char(data, ' ', 1);
 	treat_char(data, '>', 4);
 	treat_char(data, '<', 5);
-	treat_char(data, '|', 6);	
+	treat_char(data, '|', 6);
+	treat_char(data, '$', 7);
 }
 
 void	treat_char(t_data *data, char c, int number)
@@ -40,46 +42,47 @@ void	treat_char(t_data *data, char c, int number)
 	{
 		if (data->input[i] == '\'' || data->input[i] == '\"')
 		{
-			sign = data->input[i];
-			i++;
+			sign = data->input[i++];
 			while (data->input[i] != sign && data->input[i])
 			{
 				if (data->input[i] == c)
-					data->input[i] = number;
-				i++;				
+					if ((c == '$' && sign == '\'') || c != '$')
+						data->input[i] = number;
+				i++;
 			}
 		}
 		i++;
 	}
 }
 
-void	treat_token_strings(t_data *data)
+void	treat_token_strings(t_data *data) //echo\0 "'jorge1ale"\0
 {
 	char	*buf;
+	int		i;
 
 	// check_input() | checa se é builtin, operador, comando
-	while (*data->tokens)
+	i = 0;
+	while (data->tokens[i])
 	{
-		treat_quotes(*data->tokens);	
-		no_quotes(*data->tokens);
-		reverse_input_chars(*data->tokens);
-		printf("data->tokens %s\n", *data->tokens);
+		treat_quotes(data->tokens[i]); 	//substitui as aspas internas por 2 ou 3: echo\0 "3jorge31ale"\0
+		no_quotes(data->tokens[i]);		//retira as aspas: 3jorge31ale\0 e depois reverte aspas escondidas: 'jorge'1ale\0
+		reverse_input_chars(data->tokens[i]); //reverte os outros caracteres escondidos: 'jorge' ale\0
+		// printf("data->tokens %s\n", data->tokens[i]);
 		if (!data->string)
-			data->string = tokens_to_string(data->string, *data->tokens); // echo\0 "jorge | ale"\0
+			data->string = tokens_to_string(data->string, data->tokens[i]); // echo 'jorge' ale\0
 		else
 		{
-			buf = tokens_to_string(data->string, *data->tokens); // echo\0 "jorge | ale"\0
+			buf = tokens_to_string(data->string, data->tokens[i]); // echo\0 "jorge | ale"\0
 			free(data->string);
-			printf("\n%s\n", buf);
 			data->string = ft_strdup(buf);
 			free(buf);
 		}
-		data->tokens++;
+		i++;
 	}
-	printf("data->input %s\n", data->input);
-	data->input = data->string;
-	printf("data->input %s\n", data->input);
-	printf("data->string %s\n", data->string);
+	// printf("data->input %s\n", data->input);
+	// printf("data->string %s\n", data->string);
+	free(data->input);
+	data->input = ft_strdup(data->string);
 }
 
 void	treat_quotes(char *token)
@@ -113,13 +116,13 @@ void	treat_quotes(char *token)
 	}	
 }
 
- void	no_quotes(char *token) //data->tokens
+ void	no_quotes(char *token) //echo\0 "3jorge31ale"\0
  {
-	int quotes;
-	int len;
-	char *string;
-	int i;
-	int j;
+	int		quotes;
+	int		len;
+	char	*string;
+	int		i;
+	int		j;
 	
 	quotes = 0;
 	len = 0;
@@ -136,7 +139,7 @@ void	treat_quotes(char *token)
 		len = ft_strlen(token) - quotes + 1;
 		string = ft_calloc((len), sizeof(char));
 		i = 0;
-		while (token[i])
+		while (token[i]) //"3jorge31ale"\0
 		{
 			while (token[i] == '\'' || token[i] == '\"')
 				i++;
@@ -144,9 +147,9 @@ void	treat_quotes(char *token)
 			if (token[i])
 				i++;	
 		}			
-		string = reverse_quotes_treat(string);
-		printf("data->tokens: %s\n", token);
-		printf("token tratado: %s\n", string);
+		string = reverse_quotes_treat(string); //reverte as aspas
+		// printf("data->tokens: %s\n", token);
+		// printf("token tratado: %s\n", string);
 		i = 0;
 		while (string[i])
 		{
@@ -154,10 +157,10 @@ void	treat_quotes(char *token)
 			i++;
 		}
 		token[i] = '\0';
-		printf("entrou no data->tokens %s\n", token);
+		// printf("entrou no data->tokens %s\n", token);
 		free(string);
-	}	
- }
+	}
+}
 
 char	*reverse_quotes_treat(char *str)
 {
@@ -185,6 +188,7 @@ void	reverse_input_chars(char *token) // echo\0 23jorge31ale2\0
 	reverse_char(token, 4, '>');
 	reverse_char(token, 5, '<');
 	reverse_char(token, 6, '|');
+	reverse_char(token, 7, '$');
 }
 
 void	reverse_char(char *cmd, int nbr, char c)
@@ -219,14 +223,14 @@ char	*tokens_to_string(char const *s1, char const *s2)
 			string[i] = s1[i];
 			i++;
 		}
-		string[i] = ' ';
+		string[i++] = ' ';
 	}
 	j = 0;
 	while (s2[j])
 	{
-		string[++i] = s2[j];
+		string[i + j] = s2[j];
 		j++;
 	}
-	string[++i] = '\0';
+	string[i + j] = '\0';
 	return (string);
 }
