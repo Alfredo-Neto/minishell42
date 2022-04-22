@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/20 12:49:57 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/04/21 14:19:15 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,19 @@
 // Clearing the shell using escape sequences
 #define clear() printf("\033[H\033[J")
 
-typedef	struct s_vars
+typedef struct	s_vdt
+{
+	char	*value;
+	int		is_envp;
+	int		is_malloc;
+}				t_vdt;
+
+typedef struct	s_vars
 {
 	char			*var_name;
 	char			*var_value;
+	int				env;
+	int				is_malloc;
 	struct s_vars	*next;
 }				t_vars;
 
@@ -93,9 +102,10 @@ void	parser(t_data *data);
 //parse_redirects();
 
 //parse_vars.c
-void	grab_vars(t_data *data, char *str, int parse);
 char	*get_var_value(char *input, int parse);
 char	*get_var_name(char *input);
+void	update_envp(t_data *data, char* name, char* value, t_vdt vdt);
+void	grab_vars(t_data *data, char *str, int parse);
 
 //..................................................EXPANDER
 //expand_variables.c
@@ -141,8 +151,9 @@ t_vars	*new_node(char *name, char *value);
 t_vars	*last_in_list(t_vars *lst);
 void	add_to_list(t_vars **lst, char *name, char *value);
 void	clear_list(t_vars *lst);
-char	*find_in_list(char *var_name, t_vars *lst);
+t_vdt	find_in_list(char *var_name, t_vars *lst);
 void	change_in_list(t_vars *lst, char *var_name, char *var_value);
+int		is_envp(char *name, t_vars *lst);
 
 //////////////////////////////////////////////////////////
 

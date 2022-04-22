@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 15:34:28 by ebresser          #+#    #+#             */
-/*   Updated: 2022/03/29 23:25:50 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/04/21 14:21:40 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,29 +91,29 @@ void	insert_new_args(t_data *data, char **cmdstr, int i)
 void	expander(t_data *data)
 {
 	int		i;
-	char	*value;
 	char	**cmdstr;
+	t_vdt	vdt;
 
 	i = 0;
 	while (find_vars(data->argve[0]) != -1)
 	{
 		i = find_vars(data->argve[0]);
 		data->argve[0][i]++;  // skips '$' in the beggining of the string
-		value = find_in_list(data->argve[0][i], data->vars);
+		vdt = find_in_list(data->argve[0][i], data->vars);
 		data->argve[0][i]--;
-		cmdstr = new_argve(value, data);
-		if (*value == '$')
+		cmdstr = new_argve(vdt.value, data);
+		if (*vdt.value == '$')
 		{
 			data->exec_flag = -1;
 			return;
 		}
 		data->exec_flag = 1;
-		if (ft_strchr(value, ' '))
+		if (ft_strchr(vdt.value, ' '))
 			insert_new_args(data, cmdstr, i);
 		else
 		{
 			free(data->argve[0][i]);
-			data->argve[0][i] = ft_strdup(value);
+			data->argve[0][i] = ft_strdup(vdt.value);
 		}
 	}
 }
