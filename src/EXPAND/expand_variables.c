@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 15:34:28 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/21 14:21:40 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/04/22 21:13:20 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	expander(t_data *data)
 		data->argve[0][i]++;  // skips '$' in the beggining of the string
 		vdt = find_in_list(data->argve[0][i], data->vars);
 		data->argve[0][i]--;
-		cmdstr = new_argve(vdt.value, data);
+		cmdstr = new_argve(vdt.value, data);  // check for memleak here
 		if (*vdt.value == '$')
 		{
 			data->exec_flag = -1;
@@ -109,7 +109,7 @@ void	expander(t_data *data)
 		}
 		data->exec_flag = 1;
 		if (ft_strchr(vdt.value, ' '))
-			insert_new_args(data, cmdstr, i);
+			insert_new_args(data, cmdstr, i);  // check for memleak here
 		else
 		{
 			free(data->argve[0][i]);
