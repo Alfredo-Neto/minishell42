@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirects.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 19:26:28 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/04/13 21:28:54 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/04/22 12:34:27 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void redirect_filter(t_data *data, int id) //, int n_pipes, int fd[n_pipes][2]) 
 {       
     int i; 
     
-	if (data->file) 
+	if (data->file[id])
 	{
 		i = 0;
 		while(data->file_mode[id][i]) 

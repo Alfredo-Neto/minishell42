@@ -17,6 +17,7 @@ SRC_FILES	=	main.c \
 				prompt_take_input.c \
 				history.c \
 				lexer.c \
+				fill_redirects.c \
 				parser.c \
 				redirects.c \
 				expand_variables.c \

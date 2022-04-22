@@ -6,12 +6,11 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 02:55:15 by azamario          #+#    #+#             */
-/*   Updated: 2022/04/21 17:36:27 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/22 14:09:06 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
 
 void	treat_input(t_data *data)			// echo "'jorge' ale"
 {
@@ -21,6 +20,7 @@ void	treat_input(t_data *data)			// echo "'jorge' ale"
 	data->tokens = ft_split(data->input, ' '); 		// quebra os inputs em token para tratar, o que estiver entre aspas será um token único: echo\0 "'jorge1ale"\0
 	treat_token_strings(data);						// trata os tokens e restabelece a string no data->string || aqui tratamos dollar?
 	pull_pipe(data);
+	fill_redirects(data); // falta desmascarar redirects
 }
 
 void	treat_input_chars(t_data *data)
@@ -185,8 +185,8 @@ char	*reverse_quotes_treat(char *str)
 void	reverse_input_chars(char *token) // echo\0 23jorge31ale2\0
 {
 	reverse_char(token, 1, ' ');
-	reverse_char(token, 4, '>');
-	reverse_char(token, 5, '<');
+	// reverse_char(token, 4, '>');
+	// reverse_char(token, 5, '<');
 	// reverse_char(token, 7, '$'); // Tirar expander
 }
 

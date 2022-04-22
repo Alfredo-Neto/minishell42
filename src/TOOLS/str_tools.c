@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 22:54:50 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/21 17:01:15 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/22 13:36:58 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,31 @@ int		ft_strjoin_handled(char **s1, char const *s2)
 	free(*s1); //desprezo s1 antiga
 	*s1 = s;
 	return SUCCESS;
+}
+
+/*
+	Retira da str o que está entre init e end, deixando apenas as extremidades.
+	Eg. str = "Paralelepipedo"
+	ft_strcut(&str, 4, 8);
+	str ==> "Parapipedo"
+*/
+void	ft_strcut(char **str, size_t init, size_t end)
+{
+	char	*first;
+	char	*second;
+
+	if (init)
+		first = ft_substr(*str, 0, init); // malloc
+	else
+		first = ft_strdup("");
+	if (end != ft_strlen(*str))
+		second = ft_substr(*str, end, ft_strlen(*str)); // malloc
+	else
+		second = ft_strdup("");
+	free(*str);
+	*str = ft_strjoin(first, second);
+	free(first);
+	free(second);
+	first = NULL;
+	second = NULL;
 }

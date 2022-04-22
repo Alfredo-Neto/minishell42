@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 16:50:20 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/21 14:48:32 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/04/22 13:42:25 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,11 @@ void	data_clean(t_data *data)
 	}
 	double_free(&data->cmds_piped);
 	double_free(&data->tokens);
-	free_argve(data);
+	double_free(&data->file_mode);
+	triple_free(&data->file, data->number_of_pipes + 1);
+	triple_free(&data->argve, data->number_of_pipes + 1);
 	data->number_of_pipes = GARBAGE;
 	data->exec_flag = GARBAGE;
-
-	data->file = NULL; //implemetar free data file
-	data->file_mode = NULL; //implemetar free data file mode	
 }
 
 void	double_free(char ***ptr)
@@ -81,31 +80,31 @@ void	double_free(char ***ptr)
 	*ptr = NULL;
 }
 
-void	free_argve(t_data *data) //Uso: passar endereço da ***str
+void	triple_free(char ****ptr, int number_of_ids)
 {
-	int index_block;
-	int index_cmd;
+	int		id;
+	int		cmd;
 
-	index_block = 0;
-	index_cmd = 0;
-	if (data->argve)
+	if (!*ptr)
+		return ;
+	id = 0;
+	while (id < number_of_ids)
 	{
-		while (data->argve[index_block])
+		if ((*ptr)[id])
 		{
-			index_cmd = 0;
-			//libera cada bloco(cada processo)
-			while(data->argve[index_block][index_cmd])
+			cmd = 0;
+			while ((*ptr)[id][cmd])
 			{
-				free(data->argve[index_block][index_cmd]);
-				data->argve[index_block][index_cmd] = NULL;
-				index_cmd++;
+				if ((*ptr)[id][cmd])
+					free((*ptr)[id][cmd]);
+				(*ptr)[id][cmd] = NULL;
+				cmd++;
 			}
-			free(data->argve[index_block]);
-			index_block++;
+			free((*ptr)[id]);
+			(*ptr)[id] = NULL;
 		}
-		free(data->argve);
-		data->argve = NULL;
+		id++;
 	}
-} 
-
-
+	free(*ptr);
+	*ptr = NULL;
+}

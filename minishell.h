@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/20 17:45:07 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/22 13:42:42 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,7 @@
 #define	GREAT				1
 #define GREATGREAT			2
 #define LESS				3
-#define LESSLESS			4
-
+#define LESSLESS			6
 
 // Clearing the shell using escape sequences
 #define clear() printf("\033[H\033[J")
@@ -94,10 +93,8 @@ typedef struct	s_data
 void	init_data(t_data *data);
 int		init_command_path(t_data *data);
 void	data_clean(t_data *data);
-// void	free_cmds_piped(t_data *data);
-// void	free_command_path(t_data *data);
 void	double_free(char ***ptr);
-void	free_argve(t_data *data);
+void	triple_free(char ****ptr, int number_of_ids);
 
 //signals.c
 void	handler(int signal);
@@ -140,6 +137,7 @@ void	reverse_char(char *cmd, int nbr, char c);
 
 char	*reverse_quotes_treat(char *str);
 char	*tokens_to_string(char const *s1, char const *s2);
+void	fill_redirects(t_data *data);
 
 
 
@@ -209,6 +207,7 @@ void	hello(void);
 int		ft_strcpy_handled(char **new, char const *src);
 int		ft_strjoin_handled(char **s1, char const *s2);
 int		ft_str_count(char **str);
+void	ft_strcut(char **str, size_t init, size_t end);
 
 //list_tools.c
 t_vars	*new_node(char *name, char *value);
