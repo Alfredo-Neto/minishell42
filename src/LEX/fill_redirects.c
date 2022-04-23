@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_redirects.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 20:31:09 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/04/22 21:16:45 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/04/23 13:50:58 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,13 @@ void	fill_redirects(t_data *data)
 			malloc_file(data, 1, id, redirects_nbr + 1);
 			find_redirects(data, id);
 		}
+		id++;
+	}
+	id = 0;
+	while (data->cmds_piped[id])
+	{
+		reverse_char(data->cmds_piped[id], 4, '>');
+		reverse_char(data->cmds_piped[id], 5, '<');
 		id++;
 	}
 	// debug_redirects(data);

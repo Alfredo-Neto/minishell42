@@ -6,82 +6,81 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/22 13:42:42 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/23 14:42:52 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
-#define MINISHELL_H
+# define MINISHELL_H
 
-#include "libft/libft.h"
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <signal.h>
+# include "libft/libft.h"
+# include <stdio.h>
+# include <string.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <signal.h>
 
-#define NO_PIPE		0
+# define NO_PIPE		0
 
-#define NUMBER_OF_BUILTINS 5
+# define NUMBER_OF_BUILTINS 5
 
-#define EXIT		1
-#define CD			2
-#define ECHO		3
-#define HELLO		4
-#define HELP		5
-#define	NONE		0
+# define EXIT		1
+# define CD			2
+# define ECHO		3
+# define HELLO		4
+# define HELP		5
+# define NONE		0
 
-#define SQUOTES 39
-#define DQUOTES 34
-#define NO_QUOTES_FOUND -1
+# define SQUOTES 39
+# define DQUOTES 34
+# define NO_QUOTES_FOUND -1
 
 // CÓDIGO DA MARCE
-#define OFF 0
-#define ON  1
-#define SUCCESS				0
-#define FAILURE				1
+# define OFF 0
+# define ON  1
+# define SUCCESS			0
+# define FAILURE			1
 
-#define FALSE				0
-#define TRUE				1
-#define GARBAGE				-1
-#define NOT_EXIST			-2
+# define FALSE				0
+# define TRUE				1
+# define GARBAGE			-1
+# define NOT_EXIST			-2
 
-#define	GREAT				1
-#define GREATGREAT			2
-#define LESS				3
-#define LESSLESS			6
+# define GREAT				1
+# define GREATGREAT			2
+# define LESS				3
+# define LESSLESS			6
 
 // Clearing the shell using escape sequences
-#define clear() printf("\033[H\033[J")
+# define clear() printf("\033[H\033[J")
 
-typedef	struct s_vars
+typedef struct s_vars
 {
 	char			*var_name;
 	char			*var_value;
 	struct s_vars	*next;
 }				t_vars;
 
-typedef struct	s_data
-{   
-	char	*username; 
-	char	**envp; //devemos alocar
-	char	**command_path;// = envp[PATH]
-
+typedef struct s_data
+{
+	char	*username;
+	char	**envp;
+	char	**command_path;
+	char	*path_aux;
 	char	*input;
 	char	*old_input;
 	char	**cmds_piped;
-	char	***argve; //(cmd + args: argumento de execve)
+	char	***argve;
 	t_vars	*vars;
-
 	int		number_of_pipes;
+	int		**fd;
+	int		*pid;
 	int		exec_flag;
-
 	int		exit_flag;
-
 	char	***file;
 	char	**file_mode;
 	char	**tokens;
@@ -93,7 +92,7 @@ typedef struct	s_data
 void	init_data(t_data *data);
 int		init_command_path(t_data *data);
 void	data_clean(t_data *data);
-void	double_free(char ***ptr);
+void	double_free(void ***ptr);
 void	triple_free(char ****ptr, int number_of_ids);
 
 //signals.c
@@ -120,9 +119,9 @@ void	put_on_history(char *buf, char *old_input);
 
 //..................................................LEX
 //lexer.c - tokens
-void	lexer (t_data *data);
-void	pull_pipe(t_data *data); 
-void	pull_space(t_data *data); 
+void	lexer(t_data *data);
+void	pull_pipe(t_data *data);
+void	pull_space(t_data *data);
 
 //---------LEXER------------//
 void	treat_input(t_data *data);
@@ -132,14 +131,11 @@ void	treat_char(t_data *data, char c, int number);
 void	treat_token_strings(t_data *data);
 void	treat_quotes(char *token);
 void	no_quotes(char *token);
-void	reverse_input_chars(char *token);
 void	reverse_char(char *cmd, int nbr, char c);
 
 char	*reverse_quotes_treat(char *str);
 char	*tokens_to_string(char const *s1, char const *s2);
 void	fill_redirects(t_data *data);
-
-
 
 //..................................................PARSE
 //parser.c  -  quotes ok: analisa!
@@ -152,7 +148,7 @@ char	*get_var_name(char *input);
 
 //..................................................EXPANDER
 //expand_variables.c
-void expander(t_data *data);
+void	expander(t_data *data);
 
 //..................................................EXEC
 //sorting.c
@@ -172,24 +168,24 @@ int		multiple_exec(t_data *data);
 void	builtin_exec(t_data *data, int code);
 
 //pipes_fds_handling.c 
-int		open_pipes(int n_pipes, int fd[n_pipes][2]);
-int		close_other_fds(int id, int n_pipes, int fd[n_pipes][2]);
+int		open_pipes(t_data *data);
+int		close_other_fds(int id, t_data *data);
 int		stdin_stdout_handler(int in, int out);
-int		file_descriptor_handler(int id, int n_pipes, int fd[n_pipes][2]);
-int		scope_fd_select(int id, int n_pipes, int fd[n_pipes][2]); 
-int		redir_execute_pid(t_data *data, int id); 
+int		file_descriptor_handler(int id, t_data *data);
+int		scope_fd_select(int id, t_data *data);
+int		redir_execute_pid(t_data *data, int id);
 
 //processes_handler.c
-int		main_process_handler(int *pid, int n_pipes, int fd[n_pipes][2]);
+void	main_process_handler(t_data *data);
 
 //..................................................BUILTINS
 //exit.c
 int		exit_minishell(t_data *data, int status);
 void	check_exit(t_data *data);
-void	mini_exit (t_data *data);
+void	mini_exit(t_data *data);
 
 //main.c
-void init_data(t_data *data);
+void	init_data(t_data *data);
 //help.c
 void	open_help(void);
 
@@ -198,7 +194,6 @@ void	echo(t_data *data);
 
 //hello.c
 void	hello(void);
-
 
 //..................................................TOOLS
 // Vamos usar funcoes proprias

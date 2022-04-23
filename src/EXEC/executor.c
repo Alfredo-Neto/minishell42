@@ -6,58 +6,56 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 23:19:00 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/19 21:38:14 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/23 14:42:07 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void ft_execve(t_data *data, int argve_index)
+void	ft_execve(t_data *data, int argve_index)
 {
-	char *path_aux;
-	int i;
+	int		i;
 
-	path_aux = NULL;
-	i = 0;  
+	data->path_aux = NULL;
+	i = 0;
 	while (data->command_path[i])
-    {
-    	path_aux = ft_strjoin(data->command_path[i], data->argve[argve_index][0]);
-    	if (execve(path_aux, data->argve[argve_index], data->envp) < 0)
+	{
+		data->path_aux = ft_strjoin(data->command_path[i], \
+			data->argve[argve_index][0]);
+		if (execve(data->path_aux, data->argve[argve_index], data->envp) < 0)
 		{
-			if (path_aux)
+			if (data->path_aux)
 			{
-				free(path_aux);
-				path_aux = NULL;
-			}								
-    		i++;
+				free(data->path_aux);
+				data->path_aux = NULL;
+			}
+			i++;
 		}
-    }
-	printf("Minishell: command not found: %s\n", data->argve[argve_index][0]); 
-	if (path_aux)
-		free(path_aux);
+	}
+	printf("Minishell: command not found: %s\n", data->argve[argve_index][0]);
 }
 
-void builtin_exec(t_data *data, int code)
+void	builtin_exec(t_data *data, int code)
 {
-	if (code == EXIT)		
-		mini_exit(data);				
+	if (code == EXIT)
+		mini_exit(data);
 	else if (code == CD)
 		chdir(data->argve[0][1]);
 	else if (code == ECHO)
 		echo(data);
 	else if (code == HELLO)
-		hello();	
+		hello();
 	else if (code == HELP)
-		open_help();	
+		open_help();
 }
 
-int execute_pid(t_data *data, int id) 
+int	execute_pid(t_data *data, int id)
 {
-	int builtin_flag;
+	int	builtin_flag;
 
 	exec_signals();
 	redirect_filter(data, id);
-	builtin_flag = is_builtins(data->argve[id][0]);	
+	builtin_flag = is_builtins(data->argve[id][0]);
 	if (builtin_flag)
 	{
 		builtin_exec(data, builtin_flag);
@@ -66,35 +64,54 @@ int execute_pid(t_data *data, int id)
 	else
 	{
 		ft_execve(data, id);
-		exit (FAILURE); 
+		exit (FAILURE);
 	}
 }
 
-int executor(t_data *data) //executor
+void	create_executor_parametes(t_data *data)
 {
-	int id;
-	int fd[data->number_of_pipes][2];
-	int pid[data->number_of_pipes + 1];
-		
-	check_exit(data);	
-	open_pipes(data->number_of_pipes, fd);
+	int		i;
+
+	i = 0;
+	data->pid = (int *)ft_calloc(sizeof(int), data->number_of_pipes + 1);
+	data->fd = (int **)ft_calloc(sizeof(int *), data->number_of_pipes + 1);
+	if (!data->pid || !data->fd)
+		exit_minishell(data, FAILURE);
+	while (i < data->number_of_pipes)
+	{
+		data->fd[i] = (int *)malloc(sizeof(int) * 2);
+		if (!data->fd[i])
+			exit_minishell(data, FAILURE);
+		i++;
+	}
+}
+
+int	executor(t_data *data)
+{
+	int		id;
+
+	check_exit(data);
+	create_executor_parametes(data);
+	open_pipes(data);
 	id = 0;
 	while (id < data->number_of_pipes + 1)
 	{
-		pid[id] = fork();
-		if (pid[id] < 0)
+		data->pid[id] = fork();
+		if (data->pid[id] < 0)
 		{
-			perror("fork");
-			return FAILURE;
+			perror("Fork");
+			return (FAILURE);
 		}
-		if (pid[id] == 0)
+		if (data->pid[id] == 0)
 		{	
-			scope_fd_select(id, data->number_of_pipes, fd); 			
+			scope_fd_select(id, data);
 			execute_pid(data, id);
-			return SUCCESS;
+			return (SUCCESS);
 		}
+		if (data->path_aux)
+			free(data->path_aux);
 		id++;
 	}
-	main_process_handler(pid, data->number_of_pipes, fd);
-	return SUCCESS;//tratar erros
+	main_process_handler(data);
+	return (SUCCESS); //tratar erros
 }

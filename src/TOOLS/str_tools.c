@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 22:54:50 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/22 13:36:58 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/23 13:23:17 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 /* DICA: Usar "new" como argumento onde este é alocado
 * para mapeamento de leak
 */
-int ft_strcpy_handled(char **new, char const *src)
+int	ft_strcpy_handled(char **new, char const *src)
 {
 	size_t	len;
 	int		i;
@@ -34,7 +34,7 @@ int ft_strcpy_handled(char **new, char const *src)
 	{
 		(*new)[i] = src[i];
 		if (src[i])
-			i++;	
+			i++;
 	}
 	(*new)[i] = '\0';
 	return (SUCCESS);
@@ -48,7 +48,7 @@ int	ft_str_count(char **str)
 	count = 0;
 	if (str)
 	{
-		while(str[count])
+		while (str[count])
 			count++;
 	}
 	return (count);
@@ -58,7 +58,7 @@ static void	copylen(char *scpy, const char *s)
 {
 	int	i;
 
-	if (!s || ft_strlen(s) > ft_strlen(scpy))
+	if (!s)
 		return ;
 	i = 0;
 	while (s[i] != '\0')
@@ -68,17 +68,19 @@ static void	copylen(char *scpy, const char *s)
 	}
 }
 
-int		ft_strjoin_handled(char **s1, char const *s2) 
-{ //tratada: libera string antiga - adiciona s2 ao final de s1
+// tratada: libera string antiga - adiciona s2 ao final de s1
+int	ft_strjoin_handled(char **s1, char const *s2)
+{
 	size_t	len;
 	size_t	k;
 	char	*s;
 
 	if (!*s1 || !s2)
-		return FAILURE;
+		return (FAILURE);
 	len = ft_strlen(*s1) + ft_strlen(s2) + 1;
-	if (!(s = (char*)malloc(len * sizeof(char))))
-		return FAILURE;
+	s = (char *)malloc(len * sizeof(char));
+	if (!s)
+		return (FAILURE);
 	copylen(s, *s1);
 	k = ft_strlen(*s1);
 	copylen(&s[k], s2);
@@ -86,7 +88,7 @@ int		ft_strjoin_handled(char **s1, char const *s2)
 	s[k] = '\0';
 	free(*s1); //desprezo s1 antiga
 	*s1 = s;
-	return SUCCESS;
+	return (SUCCESS);
 }
 
 /*

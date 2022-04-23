@@ -6,30 +6,28 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 02:55:15 by azamario          #+#    #+#             */
-/*   Updated: 2022/04/22 14:09:06 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/23 14:02:19 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	treat_input(t_data *data)			// echo "'jorge' ale"
+void	treat_input(t_data *data) // echo "'jorge' ale"
 {
-	//validate input()											
-	treat_input_chars(data); 						// se entre as aspas tiver ' ' ou > ou  < ou |, substitui por um char não imprimível echo "'jorge1ale"\0
-	//treat_operators()								// verifica se tem espaços antes de | e redirects
-	data->tokens = ft_split(data->input, ' '); 		// quebra os inputs em token para tratar, o que estiver entre aspas será um token único: echo\0 "'jorge1ale"\0
-	treat_token_strings(data);						// trata os tokens e restabelece a string no data->string || aqui tratamos dollar?
-	pull_pipe(data);
-	fill_redirects(data); // falta desmascarar redirects
+	//validate input()
+	treat_input_chars(data); // se entre as aspas tiver ' ' ou > ou  < ou |, substitui por um char não imprimível echo "'jorge1ale"\0
+	//treat_operators() // verifica se tem espaços antes de | e redirects
+	data->tokens = ft_split(data->input, ' '); // quebra os inputs em token para tratar, o que estiver entre aspas será um token único: echo\0 "'jorge1ale"\0
+	treat_token_strings(data); // trata os tokens e restabelece a string no data->string || aqui tratamos dollar?
 }
 
 void	treat_input_chars(t_data *data)
 {
 	treat_char(data, ' ', 1);
+	treat_char(data, '|', 6);
 	treat_char(data, '>', 4);
 	treat_char(data, '<', 5);
-	treat_char(data, '|', 6);
-	// treat_char(data, '$', 7);
+	treat_char(data, '$', 7);
 }
 
 void	treat_char(t_data *data, char c, int number)
@@ -66,8 +64,7 @@ void	treat_token_strings(t_data *data) //echo\0 "'jorge1ale"\0
 	{
 		treat_quotes(data->tokens[i]); 	//substitui as aspas internas por 2 ou 3: echo\0 "3jorge31ale"\0
 		no_quotes(data->tokens[i]);		//retira as aspas: 3jorge31ale\0 e depois reverte aspas escondidas: 'jorge'1ale\0
-		reverse_input_chars(data->tokens[i]); //reverte os outros caracteres escondidos: 'jorge' ale\0
-		// printf("data->tokens %s\n", data->tokens[i]);
+		reverse_char(data->tokens[i], 1, ' '); //reverte os outros caracteres escondidos: 'jorge' ale\0
 		if (!data->string)
 			data->string = tokens_to_string(data->string, data->tokens[i]); // echo 'jorge' ale\0
 		else
@@ -79,8 +76,6 @@ void	treat_token_strings(t_data *data) //echo\0 "'jorge1ale"\0
 		}
 		i++;
 	}
-	// printf("data->input %s\n", data->input);
-	// printf("data->string %s\n", data->string);
 	free(data->input);
 	data->input = ft_strdup(data->string);
 }
@@ -116,50 +111,34 @@ void	treat_quotes(char *token)
 	}	
 }
 
- void	no_quotes(char *token) //echo\0 "3jorge31ale"\0
- {
+void	no_quotes(char *token) //echo\0 "3jorge31ale"\0
+{
 	int		quotes;
-	int		len;
 	char	*string;
 	int		i;
 	int		j;
-	
+
 	quotes = 0;
-	len = 0;
-	i = 0;
-	j = 0;
-	while (token[i])
-	{
+	i = -1;
+	while (token[++i])
 		if (token[i] == '\'' || token[i] == '\"')
 		 	quotes++;
-		i++;
-	}
-	if (quotes != 0)
+	if (!quotes)
+		return ;
+	string = ft_calloc((ft_strlen(token) - quotes + 1), sizeof(char));
+	i = 0;
+	j = 0;
+	while (token[i]) //"3jorge31ale"\0
 	{
-		len = ft_strlen(token) - quotes + 1;
-		string = ft_calloc((len), sizeof(char));
-		i = 0;
-		while (token[i]) //"3jorge31ale"\0
-		{
-			while (token[i] == '\'' || token[i] == '\"')
-				i++;
-			string[j++] = token[i];
-			if (token[i])
-				i++;	
-		}			
-		string = reverse_quotes_treat(string); //reverte as aspas
-		// printf("data->tokens: %s\n", token);
-		// printf("token tratado: %s\n", string);
-		i = 0;
-		while (string[i])
-		{
-			token[i] = string[i];
+		while (token[i] == '\'' || token[i] == '\"')
 			i++;
-		}
-		token[i] = '\0';
-		// printf("entrou no data->tokens %s\n", token);
-		free(string);
+		string[j++] = token[i];
+		if (token[i])
+			i++;
 	}
+	string = reverse_quotes_treat(string);
+	ft_strlcpy(token, string, ft_strlen(string) + 1);
+	free(string);
 }
 
 char	*reverse_quotes_treat(char *str)
@@ -180,14 +159,6 @@ char	*reverse_quotes_treat(char *str)
 		i++;
 	}
 	return (str);
-}
-
-void	reverse_input_chars(char *token) // echo\0 23jorge31ale2\0
-{
-	reverse_char(token, 1, ' ');
-	// reverse_char(token, 4, '>');
-	// reverse_char(token, 5, '<');
-	// reverse_char(token, 7, '$'); // Tirar expander
 }
 
 void	reverse_char(char *cmd, int nbr, char c)

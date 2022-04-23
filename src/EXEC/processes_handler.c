@@ -3,31 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   processes_handler.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 23:19:00 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/07 00:30:54 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/04/23 14:43:17 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int main_process_handler(int *pid, int n_pipes, int fd[n_pipes][2])
+void	main_process_handler(t_data *data)
 {
-	int count;
-	
+	int	count;
+
 	count = 0;
-	while (count < n_pipes)
+	while (count < data->number_of_pipes)
 	{
-		close(fd[count][0]);
-		close(fd[count][1]);
+		close(data->fd[count][0]);
+		close(data->fd[count][1]);
 		count++;
 	}
 	count = 0;
-	while (count < n_pipes + 1)
+	while (count < data->number_of_pipes + 1)
 	{
-		waitpid(pid[count], NULL, 0);
+		waitpid(data->pid[count], NULL, 0);
 		count++;
 	}
-	return SUCCESS;//tratar erros	
 }
