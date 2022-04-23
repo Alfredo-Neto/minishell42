@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_tools.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 22:54:50 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/22 13:36:58 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/23 12:08:57 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	copylen(char *scpy, const char *s)
 {
 	int	i;
 
-	if (!s || ft_strlen(s) > ft_strlen(scpy))
+	if (!s)
 		return ;
 	i = 0;
 	while (s[i] != '\0')
