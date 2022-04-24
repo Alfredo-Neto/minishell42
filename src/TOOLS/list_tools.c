@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 17:30:51 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/04/24 13:41:50 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/04/24 14:04:32 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ t_vars	*last_in_list(t_vars *lst)
 // creates a new node on an existing list
 void	add_to_list(t_vars **lst, char *name, char *value)
 {
-	t_vars *aux;
-	t_vars *new;
+	t_vars	*aux;
+	t_vars	*new;
 
 	new = new_node(name, value);
 	if (!*lst)
@@ -59,9 +59,10 @@ void	add_to_list(t_vars **lst, char *name, char *value)
 // clears the list and frees its memory
 void	clear_list(t_vars *lst)
 {
-	t_vars *aux;
+	t_vars	*aux;
 
 	if (lst != 0x0)
+	{
 		while (lst)
 		{
 			aux = lst->next;
@@ -70,6 +71,7 @@ void	clear_list(t_vars *lst)
 			free(lst);
 			lst = aux;
 		}
+	}
 }
 
 // finds a variable name on a list

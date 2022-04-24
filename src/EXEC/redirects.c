@@ -6,11 +6,14 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 19:26:28 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/04/22 12:34:27 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/23 13:15:56 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+#define NO_DELIMITER "minishell: warning: here-document at \
+		line 13 delimited by end-of-file (wanted `%s')"
 
 void	new_prompt_heredoc(int signal)
 {
@@ -22,7 +25,6 @@ void	new_prompt_heredoc(int signal)
 void	heredoc(char *eof)
 {
 	char	*input;
-	int		status;
 
 	signal(SIGINT, SIG_IGN);
 	if (!fork())
@@ -33,7 +35,7 @@ void	heredoc(char *eof)
 			input = readline("> ");
 			if (!input)
 			{
-				printf("bash: warning: here-document at line 13 delimited by end-of-file (wanted `%s')", eof);
+				printf(NO_DELIMITER, eof);
 				exit(1);
 			}
 			if (!strcmp(input, eof))
@@ -45,15 +47,8 @@ void	heredoc(char *eof)
 			free(input);
 		}
 	}
-	wait(&status);
-	if (WIFEXITED(status))
-	{
-		status = WEXITSTATUS(status);
-		if (status)
-			printf("Error with code %d\n", status);
-	}
+	wait(NULL);
 }
-
 
 void	redirect(char *file, int flags, int std_fd)
 {
@@ -72,33 +67,30 @@ void	redirect(char *file, int flags, int std_fd)
 	}
 }
 
+void	redirect_filter(t_data *data, int id)
+{
+	int	i;
 
-// Eg. [COMMAND] <
-// bash: syntax error near unexpected token `newline'
-
-
-void redirect_filter(t_data *data, int id) //, int n_pipes, int fd[n_pipes][2]) //file_redirect_fds(t_data *data, int id) //, int n_pipes, int fd[n_pipes][2])
-{       
-    int i; 
-    
 	if (data->file[id])
 	{
 		i = 0;
-		while(data->file_mode[id][i]) 
-    	{
+		while (data->file_mode[id][i])
+		{
 			if (data->file_mode[id][i] == GREAT)
-				redirect(data->file[id][i], O_WRONLY | O_CREAT | O_TRUNC, STDOUT_FILENO);
+				redirect(data->file[id][i], \
+					O_WRONLY | O_CREAT | O_TRUNC, STDOUT_FILENO);
 			else if (data->file_mode[id][i] == GREATGREAT)
-				redirect(data->file[id][i], O_WRONLY | O_CREAT | O_APPEND, STDOUT_FILENO);
+				redirect(data->file[id][i], \
+					O_WRONLY | O_CREAT | O_APPEND, STDOUT_FILENO);
 			else if (data->file_mode[id][i] == LESS)
-				redirect(data->file[id][i], O_RDONLY | O_CREAT, STDIN_FILENO);
+				redirect(data->file[id][i], \
+					O_RDONLY | O_CREAT, STDIN_FILENO);
 			else if (data->file_mode[id][i] == LESSLESS)
 				heredoc(data->file[id][i]);
 			i++;
 		}
-	}	
+	}
 }
-
 
 //:::::pensar em testes eqto terminam parse
 // static void _TESTEredir_execute_pid(t_data *data, int id)
@@ -121,5 +113,3 @@ void redirect_filter(t_data *data, int id) //, int n_pipes, int fd[n_pipes][2]) 
 //     (data->file_mode)[id][2] = GREAT; // 
 //     //---para teste fecha
 // }
-
-

@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 16:50:20 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/22 21:44:08 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/04/24 14:02:38 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,16 @@ void	init_data(t_data *data, char **envp)
 	data->exec_flag = GARBAGE;
 }
 
-int init_command_path(t_data *data)
+int	init_command_path(t_data *data)
 {
 	int i;
 	int ret;
 	t_vars	*temp;
 
 	data->command_path = ft_split(getenv("PATH"), ':');
+	
 	i = 0;
-	while(data->command_path[i] != NULL)
+	while (data->command_path[i] != NULL)
 	{
 		ret = ft_strjoin_handled(&(data->command_path[i]), "/");
 		if (ret == FAILURE)
@@ -38,7 +39,6 @@ int init_command_path(t_data *data)
 			exit_minishell(data, FAILURE);
 		}
 		i++;
-		
 	}
 	i = 0;
 	while (data->envp[i])
@@ -63,16 +63,22 @@ void	data_clean(t_data *data)
 		free(data->input);
 		data->input = NULL;
 	}
-	double_free(&data->cmds_piped);
-	double_free(&data->tokens);
-	double_free(&data->file_mode);
+	if (data->pid)
+	{
+		free(data->pid);
+		data->pid = NULL;
+	}
+	double_free((void ***)&data->fd);
+	double_free((void ***)&data->cmds_piped);
+	double_free((void ***)&data->tokens);
+	double_free((void ***)&data->file_mode);
 	triple_free(&data->file, data->number_of_pipes + 1);
 	triple_free(&data->argve, data->number_of_pipes + 1);
 	data->number_of_pipes = GARBAGE;
 	data->exec_flag = GARBAGE;
 }
 
-void	double_free(char ***ptr)
+void	double_free(void ***ptr)
 {
 	int		i;
 
