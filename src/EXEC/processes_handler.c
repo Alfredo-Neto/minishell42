@@ -1,42 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sorting.c                                          :+:      :+:    :+:   */
+/*   processes_handler.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/20 12:16:34 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/13 21:35:13 by ebresser         ###   ########.fr       */
+/*   Created: 2022/03/08 23:19:00 by joeduard          #+#    #+#             */
+/*   Updated: 2022/04/07 00:30:54 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int is_builtins(char *cmd)
+int main_process_handler(int *pid, int n_pipes, int fd[n_pipes][2])
 {
-	int i;
-	int switcher;
-	char *builtin_cmd[NUMBER_OF_BUILTINS];
+	int count;
 	
-	i = 0;
-	switcher = 0;
-	builtin_cmd[0] = "exit";
-	builtin_cmd[1] = "cd";
-	builtin_cmd[2] = "echo";
-	builtin_cmd[3] = "hello";
-	builtin_cmd[4] = "help"; //
-	while (i < NUMBER_OF_BUILTINS)
+	count = 0;
+	while (count < n_pipes)
 	{
-		if (strcmp(cmd, builtin_cmd[i]) == 0)
-		{
-			switcher = i + 1;
-			break;
-		}
-		i++;
+		close(fd[count][0]);
+		close(fd[count][1]);
+		count++;
 	}
-	if(switcher)
-		return (switcher);
-	return (FALSE);	
+	count = 0;
+	while (count < n_pipes + 1)
+	{
+		waitpid(pid[count], NULL, 0);
+		count++;
+	}
+	return SUCCESS;//tratar erros	
 }
-
-	

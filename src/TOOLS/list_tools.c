@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 17:30:51 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/04/22 20:24:14 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/04/24 13:41:50 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,12 @@ t_vdt	find_in_list(char *var_name, t_vars *lst)
 	t_vdt	ret;
 
 	ret = (t_vdt){0};
+	if (!(++var_name))
+	{
+		ret.value = "$";
+		return (ret);
+	}
+	var_name--;
 	if (lst != 0x0)
 		while (lst)
 		{

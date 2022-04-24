@@ -1,6 +1,6 @@
 NAME		=	minishell
 CC			=	gcc
-CFLAGS		=	-Wall -Wextra -Werror -lreadline -g -fsanitize=address
+CFLAGS		=	-Wall -Wextra -Werror -lreadline -g #-fsanitize=address 
 LIBFT_DIR	=	libft
 LIBFT		=	$(LIBFT_DIR)/libft.a
 LIBFLAGS	=	-L $(LIBFT_DIR) -lft
@@ -11,13 +11,15 @@ RM			=	rm -fr
 HEADERS		=	minishell.h
 
 SRC_FILES	=	main.c \
+				minishell.c \
 				hello.c \
 				data_handler.c \
-				minishell.c \
 				prompt_take_input.c \
 				history.c \
 				lexer.c \
+				fill_redirects.c \
 				parser.c \
+				redirects.c \
 				expand_variables.c \
 				sorting.c \
 				executor.c \
@@ -26,15 +28,26 @@ SRC_FILES	=	main.c \
 				echo.c \
 				str_tools.c \
 				list_tools.c \
-				parse_vars.c
+				parse_vars.c \
+				treat_input.c \
+				pipes_fds_handling.c \
+				processes_handler.c \
+				signals.c
 
 OBJ			=	$(SRC_FILES:%.c=%.o)
 OBJ_DIR		=	obj
 
 $(OBJ_DIR)/%.o: %.c $(HEADERS)
-		$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES) 
+	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
 
 all: $(NAME)
+
+debub: $(OBJ_DIR) $(LIBFT) $(OBJ)
+	mv $(OBJ) $(OBJ_DIR)
+	$(CC) $(addprefix obj/, $(OBJ)) $(CFLAGS) $(LIBFLAGS) -o $@
+	@echo ""
+	@echo "|		minishell with debug created		|"
+	@echo ""
 
 $(NAME): $(OBJ_DIR) $(LIBFT) $(OBJ)
 	mv $(OBJ) $(OBJ_DIR)
@@ -63,9 +76,6 @@ install:
 	@sudo apt-get -y install libreadline-dev
 
 re: fclean all
-
-install:
-	sudo apt-get install libreadline-dev
 
 git:
 	git add .

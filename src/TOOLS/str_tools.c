@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_tools.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 22:54:50 by ebresser          #+#    #+#             */
-/*   Updated: 2022/03/24 12:33:41 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/04/22 13:36:58 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int ft_strcpy_handled(char **new, char const *src)
 //conta strings em char**
 int	ft_str_count(char **str)
 {
-	int count;
+	int		count;
 
 	count = 0;
 	if (str)
@@ -54,33 +54,64 @@ int	ft_str_count(char **str)
 	return (count);
 }
 
-void free_str(char **str) //Uso: passar endereço da str
+static void	copylen(char *scpy, const char *s)
 {
-    if (str)
-    {
-        if (*str)
-        {
-            free(*str);
-            *str = NULL;
-        }
-        str = NULL;
-    }
+	int	i;
+
+	if (!s || ft_strlen(s) > ft_strlen(scpy))
+		return ;
+	i = 0;
+	while (s[i] != '\0')
+	{
+		scpy[i] = s[i];
+		i++;
+	}
 }
 
-void free_double_str(char ***str) //Uso: passar endereço da **str
-{
-    if (str)
-    {
-        free_str(*str);
-        *str = NULL;
-    }    
+int		ft_strjoin_handled(char **s1, char const *s2) 
+{ //tratada: libera string antiga - adiciona s2 ao final de s1
+	size_t	len;
+	size_t	k;
+	char	*s;
+
+	if (!*s1 || !s2)
+		return FAILURE;
+	len = ft_strlen(*s1) + ft_strlen(s2) + 1;
+	if (!(s = (char*)malloc(len * sizeof(char))))
+		return FAILURE;
+	copylen(s, *s1);
+	k = ft_strlen(*s1);
+	copylen(&s[k], s2);
+	k = k + ft_strlen(s2);
+	s[k] = '\0';
+	free(*s1); //desprezo s1 antiga
+	*s1 = s;
+	return SUCCESS;
 }
 
-void free_triple_str(char ****str) //Uso: passar endereço da ***str
+/*
+	Retira da str o que está entre init e end, deixando apenas as extremidades.
+	Eg. str = "Paralelepipedo"
+	ft_strcut(&str, 4, 8);
+	str ==> "Parapipedo"
+*/
+void	ft_strcut(char **str, size_t init, size_t end)
 {
-    if (str)
-    {
-        free_double_str(*str);
-        *str = NULL;
-    }    
+	char	*first;
+	char	*second;
+
+	if (init)
+		first = ft_substr(*str, 0, init); // malloc
+	else
+		first = ft_strdup("");
+	if (end != ft_strlen(*str))
+		second = ft_substr(*str, end, ft_strlen(*str)); // malloc
+	else
+		second = ft_strdup("");
+	free(*str);
+	*str = ft_strjoin(first, second);
+	free(first);
+	free(second);
+	first = NULL;
+	second = NULL;
 }

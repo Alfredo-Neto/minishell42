@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 12:30:10 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/04/22 20:28:29 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/04/24 13:56:00 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ char	*get_var_value(char *input, int parse)
 	}
 	else
 		if (parse)
-			while (input[i] != ' ' && input[i])
+			//while (input[i] != ' ' && input[i])  // aspas sendo removidas no lexer
+			while (input[i])
 				i++;
 		else
 			while (input[i])

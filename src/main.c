@@ -6,15 +6,10 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 19:08:49 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/13 17:38:28 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/04/24 12:59:18 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/** execflag returns zero if there is no command
-		// or it is a builtin command,
-		// 1 if it is a simple command
-		// 2 if it is including a pipe.
-*/
 #include "../minishell.h"
 
 void	welcome(void)
@@ -23,28 +18,33 @@ void	welcome(void)
 
 	clear();
 	username = getenv("USER");
-	printf("|			        			|\n");
-	printf("|			MINISHELL			|\n");
-	printf("|			        			|\n");
-	printf("\n\n\nHi, @%s!\n\n", username);
+	printf("\e[32m*******************************************\e[39m\n");
+	printf("\e[32m|                                         |\e[39m\n");
+	printf("\e[32m|             MINISHELL  v1.0             |\e[39m\n");
+	printf("\e[32m|                                         |\e[39m\n");
+	printf("\e[32m*******************************************\e[39m\n");
+	printf("\n\n\n\e[32mHi, @%s!\e[39m\n\n", username);
 }
+
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_data data;
+	t_data *data;
 	
-	(void)argc;
-	(void)argv;
-	data.envp = envp;
-	init_data(&data);
+	if (argc > 1 && *argv)
+	{
+		ft_putendl_fd("Minishell: Too many arguments", 1);
+		return (FAILURE);
+	}
+	if(!(data = (t_data *)malloc(sizeof(t_data))))
+	{
+		perror("[data] Malloc error");
+		return FAILURE;
+	}
 	welcome();
-	while (TRUE)
-		minishell(&data);
-	exit_minishell(&data, SUCCESS);
+	init_data(data, envp);
+	while (!data->exit_flag)
+		minishell(data);		
+	return 0;
 }
-
-
-/// envp
-// mesclar com developer
-// adicionar o envp na lista ligada
-// realocar o envp quando essa for alterada
+	
