@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/22 13:42:42 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/25 02:15:54 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,15 @@
 
 #define NO_PIPE		0
 
-#define NUMBER_OF_BUILTINS 5
+#define NUMBER_OF_BUILTINS 7
 
 #define EXIT		1
 #define CD			2
 #define ECHO		3
 #define HELLO		4
 #define HELP		5
+#define PWD			6
+#define ENV			7
 #define	NONE		0
 
 #define SQUOTES 39
@@ -170,6 +172,7 @@ int		execute_pid(t_data *data, int id);
 void	ft_execve(t_data *data, int argve_index);
 int		multiple_exec(t_data *data);
 void	builtin_exec(t_data *data, int code);
+int		env(t_data *data);
 
 //pipes_fds_handling.c 
 int		open_pipes(int n_pipes, int fd[n_pipes][2]);
@@ -187,6 +190,9 @@ int		main_process_handler(int *pid, int n_pipes, int fd[n_pipes][2]);
 int		exit_minishell(t_data *data, int status);
 void	check_exit(t_data *data);
 void	mini_exit (t_data *data);
+
+//pwd.c
+void	pwd(void);
 
 //main.c
 void init_data(t_data *data);

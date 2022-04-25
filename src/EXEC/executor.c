@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 23:19:00 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/19 21:38:14 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/25 02:18:57 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void ft_execve(t_data *data, int argve_index)
 
 void builtin_exec(t_data *data, int code)
 {
+	printf("code: %i\n", code);
 	if (code == EXIT)		
 		mini_exit(data);				
 	else if (code == CD)
@@ -48,7 +49,11 @@ void builtin_exec(t_data *data, int code)
 	else if (code == HELLO)
 		hello();	
 	else if (code == HELP)
-		open_help();	
+		open_help();
+	else if (code == PWD)
+		pwd();
+	else if (code == ENV)
+	 	env(data);
 }
 
 int execute_pid(t_data *data, int id) 
@@ -57,7 +62,9 @@ int execute_pid(t_data *data, int id)
 
 	exec_signals();
 	redirect_filter(data, id);
+	printf("data->argve %s\n",data->argve[id][0]);
 	builtin_flag = is_builtins(data->argve[id][0]);	
+	printf("\nbuiltin_flag: %d\n", builtin_flag);
 	if (builtin_flag)
 	{
 		builtin_exec(data, builtin_flag);

@@ -106,7 +106,7 @@ static int	count_redirects(t_data *data, char *s, int id)
 	int		i;
 	int		aux;
 	int		redirects_nbr;
-
+	(void)id;
 	i = -1;
 	redirects_nbr = 0;
 	while (s[++i])
@@ -130,7 +130,7 @@ static int	count_redirects(t_data *data, char *s, int id)
 	}
 	return (redirects_nbr);
 }
-
+ 
 static void	malloc_file(t_data *data, int string_level, int id, int bytes)
 {
 	if (!string_level)
