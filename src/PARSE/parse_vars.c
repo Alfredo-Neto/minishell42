@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_vars.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 12:30:10 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/03/24 12:34:30 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/04/23 11:59:28 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ char	*get_var_value(char *input)
 
 void	grab_vars(t_data *data)
 {
-	char *str;
-	char *name;
-	char *value;
+	char	*str;
+	char	*name;
+	char	*value;
 
 	str = data->input;
 	if (ft_strchr(str, '='))
@@ -55,7 +55,7 @@ void	grab_vars(t_data *data)
 			str++;
 		while (*str != ' ' && str != data->input)
 			str--;
-		if (*str == ' ') 
+		if (*str == ' ')
 			str++;
 		name = get_var_name(str);
 		value = get_var_value(str);

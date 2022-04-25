@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_tools.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 17:30:51 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/03/24 13:38:31 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/04/23 11:58:26 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ t_vars	*last_in_list(t_vars *lst)
 
 void	add_to_list(t_vars **lst, char *name, char *value)
 {
-	t_vars *aux;
-	t_vars *new;
+	t_vars	*aux;
+	t_vars	*new;
 
 	new = new_node(name, value);
 	if (!*lst)
@@ -53,9 +53,10 @@ void	add_to_list(t_vars **lst, char *name, char *value)
 
 void	clear_list(t_vars *lst)
 {
-	t_vars *aux;
+	t_vars	*aux;
 
 	if (lst != 0x0)
+	{
 		while (lst)
 		{
 			aux = lst->next;
@@ -64,17 +65,21 @@ void	clear_list(t_vars *lst)
 			free(lst);
 			lst = aux;
 		}
+	}
 }
 
 char	*find_in_list(char *var_name, t_vars *lst)
 {
-	var_name++;
+	if (!(++var_name))
+		return ("$");
 	if (lst != 0x0)
+	{
 		while (lst)
 		{
 			if (ft_strcmp(var_name, lst->var_name) == 0)
 				return (lst->var_value);
 			lst = lst->next;
 		}
-	return "$";
+	}
+	return (NULL);
 }
