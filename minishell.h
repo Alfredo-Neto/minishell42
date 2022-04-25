@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/24 14:04:53 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/04/25 13:14:38 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,10 +151,10 @@ void	fill_redirects(t_data *data);
 void	parser(t_data *data);
 
 //parse_vars.c
-char	*get_var_value(char *input, int parse);
+char	*get_var_value(char *input);
 char	*get_var_name(char *input);
 void	update_envp(t_data *data, char* name, char* value, t_vdt vdt);
-void	grab_vars(t_data *data, char *str, int parse);
+void	grab_vars(t_data *data, char *str);
 
 //..................................................EXPANDER
 //expand_variables.c
@@ -206,7 +206,6 @@ void	hello(void);
 //..................................................TOOLS
 // Vamos usar funcoes proprias
 //str_tools.c
-// str_tools.c
 int		ft_strcpy_handled(char **new, char const *src);
 int		ft_strjoin_handled(char **s1, char const *s2);
 int		ft_str_count(char **str);

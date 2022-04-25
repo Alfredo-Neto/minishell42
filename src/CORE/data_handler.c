@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 16:50:20 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/24 14:02:38 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/04/25 13:14:48 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	init_command_path(t_data *data)
 	i = 0;
 	while (data->envp[i])
 	{
-		grab_vars(data, data->envp[i], FALSE);
+		grab_vars(data, data->envp[i]);
 		temp = last_in_list(data->vars);
 		temp->env = i++;
 		temp->is_malloc = 0;

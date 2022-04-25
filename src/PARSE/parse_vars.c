@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 12:30:10 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/04/24 14:04:04 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/04/25 13:15:11 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*get_var_name(char *input)
 }
 
 // gets and returns the value of the variable
-char	*get_var_value(char *input, int parse)
+char	*get_var_value(char *input)
 {
 	int		i;
 	char	*value;
@@ -43,13 +43,17 @@ char	*get_var_value(char *input, int parse)
 			i++;
 	}
 	else
+		while (input[i])
+			i++;
+		/* check for double quotes being removed in lexer
 		if (parse)
-			//while (input[i] != ' ' && input[i])  // aspas sendo removidas no lexer
-			while (input[i])
+			while (input[i] != ' ' && input[i])
+			
 				i++;
 		else
 			while (input[i])
 				i++;
+		*/
 	value = (char *)malloc(i * sizeof(char) + 1);
 	ft_strlcpy(value, input, i + 1);
 	return (value);
@@ -75,7 +79,7 @@ void	update_envp(t_data *data, char* name, char* value, t_vdt vdt)
 }
 
 // checks for variables in the input string and stores them on a linked list
-void	grab_vars(t_data *data, char *str, int parse)
+void	grab_vars(t_data *data, char *str)
 {
 	char	*name;
 	char	*value;
@@ -84,17 +88,8 @@ void	grab_vars(t_data *data, char *str, int parse)
 	if (ft_strchr(str, '='))
 	{
 		data->exec_flag = -1;
-		if (parse)
-		{
-			while (*str != '=')
-				str++;
-			while (*str != ' ' && str != data->input)
-				str--;
-			if (*str == ' ') 
-				str++;
-		}
 		name = get_var_name(str);
-		value = get_var_value(str, parse);
+		value = get_var_value(str);
 		if (!data->vars)
 			data->vars = new_node(name, value);
 		else

@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 15:34:28 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/24 13:38:15 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/04/25 13:17:30 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,10 +106,10 @@ void	expander(t_data *data)
 			data->exec_flag = -1;
 			return;
 		}
-		cmdstr = new_argve(vdt.value, data);  // check for memleak here
+		cmdstr = new_argve(vdt.value, data);
 		data->exec_flag = 1;
 		if (ft_strchr(vdt.value, ' '))
-			insert_new_args(data, cmdstr, i);  // check for memleak here
+			insert_new_args(data, cmdstr, i);
 		else
 		{
 			free(data->argve[0][i]);
