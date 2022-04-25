@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   history.c                                          :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/16 21:09:01 by ebresser          #+#    #+#             */
-/*   Updated: 2022/03/17 00:05:15 by ebresser         ###   ########.fr       */
+/*   Created: 2022/03/10 21:03:07 by joeduard          #+#    #+#             */
+/*   Updated: 2022/04/23 11:58:56 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void put_on_history(char *buf, char *old_input)
-{	
-	if (!old_input || ft_strcmp(old_input, buf)) //N repete hist
-		add_history(buf); 
+// functions for parsing command line
+void	parser(t_data *data)
+{
+	grab_vars(data);
+	//parse_quotes();
+	//parse_redirects();
 }

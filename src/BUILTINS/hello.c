@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   hello.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/24 17:07:35 by azamario          #+#    #+#             */
-/*   Updated: 2022/04/19 21:46:27 by vlima-nu         ###   ########.fr       */
+/*   Created: 2022/03/22 12:57:41 by ebresser          #+#    #+#             */
+/*   Updated: 2022/04/23 13:31:41 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../minishell.h"
 
-size_t	ft_strlen(const char *s)
+void	hello(void)
 {
-	size_t	i;
+	char	*username;
 
-	i = 0;
-	if (!s)
-		return (0);
-	while (*(s++))
-		i++;
-	return (i);
+	username = getenv("USER");
+	printf("\nHello %s.\nMind that this is not a place to play around."
+		"\nUse help to know more..\n", username);
 }

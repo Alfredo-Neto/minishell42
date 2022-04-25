@@ -3,54 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 19:08:49 by joeduard          #+#    #+#             */
-/*   Updated: 2022/03/17 00:01:20 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/04/23 14:18:30 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/** execflag returns zero if there is no command
-		// or it is a builtin command,
-		// 1 if it is a simple command
-		// 2 if it is including a pipe.
-*/
 #include "../minishell.h"
 
-void	wellcome(void)
+void	welcome(void)
 {
 	char	*username;
 
 	clear();
 	username = getenv("USER");
-	printf("\n\n\nHi, @%s!\n", username);
-	clear();
+	printf("\e[32m*******************************************\e[39m\n");
+	printf("\e[32m|                                         |\e[39m\n");
+	printf("\e[32m|             MINISHELL  v1.0             |\e[39m\n");
+	printf("\e[32m|                                         |\e[39m\n");
+	printf("\e[32m*******************************************\e[39m\n");
+	printf("\n\n\n\e[32mHi, @%s!\e[39m\n\n", username);
 }
 
-void	init_shell(t_data *data)
+int	main(int argc, char **argv, char **envp)
 {
-	data->input_string[0] = '\0';
-	data->parsed_args[0] = NULL;
-	data->parsed_args_piped[0] = NULL;
-	data->exec_flag = 0;
-}
+	t_data	*data;
 
-int	main(void)
-{
-	t_data data;
-
-	init_shell(&data);
-	while (1)
+	if (argc > 1 && *argv)
 	{
-		if (take_input(data.input_string))
-			continue ;
-		printf(".......................INPUT: %s\n", data.input_string);
-		data.exec_flag = process_string(data.input_string, data.parsed_args,
-				data.parsed_args_piped);
-		if (data.exec_flag == 1)
-			exec_args(data.parsed_args);
-		if (data.exec_flag == 2)
-			exec_args_piped(data.parsed_args, data.parsed_args_piped);
+		ft_putendl_fd("Minishell: Too many arguments", 1);
+		return (FAILURE);
 	}
+	data = (t_data *)malloc(sizeof(t_data));
+	if (!data)
+	{
+		perror("[data] Malloc error");
+		return (FAILURE);
+	}
+	welcome();
+	init_data(data);
+	data->envp = envp;//init envp - alocando!
+	while (!data->exit_flag)
+		minishell(data);
 	return (0);
 }

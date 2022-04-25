@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/24 17:07:35 by azamario          #+#    #+#             */
-/*   Updated: 2022/04/19 21:46:27 by vlima-nu         ###   ########.fr       */
+/*   Created: 2022/04/25 02:03:00 by azamario          #+#    #+#             */
+/*   Updated: 2022/04/25 02:30:02 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../minishell.h"
 
-size_t	ft_strlen(const char *s)
+int	env(t_data *data)
 {
-	size_t	i;
+	int i;
 
 	i = 0;
-	if (!s)
-		return (0);
-	while (*(s++))
-		i++;
-	return (i);
+	while (data->envp[++i])
+		printf("%s\n", data->envp[i]);
+	return (SUCCESS);
 }

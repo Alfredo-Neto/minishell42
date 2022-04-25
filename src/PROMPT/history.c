@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   history.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/24 17:07:35 by azamario          #+#    #+#             */
-/*   Updated: 2022/04/19 21:46:27 by vlima-nu         ###   ########.fr       */
+/*   Created: 2022/03/16 21:09:01 by ebresser          #+#    #+#             */
+/*   Updated: 2022/04/23 13:25:38 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../minishell.h"
 
-size_t	ft_strlen(const char *s)
+void	put_on_history(char *buf, char *old_input)
 {
-	size_t	i;
-
-	i = 0;
-	if (!s)
-		return (0);
-	while (*(s++))
-		i++;
-	return (i);
+	if (!old_input || ft_strcmp(old_input, buf)) //N repete hist
+		add_history(buf);
 }
