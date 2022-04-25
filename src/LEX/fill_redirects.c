@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_redirects.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 20:31:09 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/04/23 13:50:58 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/25 03:08:04 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ static int	count_redirects(t_data *data, char *s)
 	int		i;
 	int		aux;
 	int		redirects_nbr;
-	(void)id;
+
 	i = -1;
 	redirects_nbr = 0;
 	while (s[++i])
