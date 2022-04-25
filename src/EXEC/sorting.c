@@ -6,18 +6,18 @@
 /*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 12:16:34 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/25 02:22:09 by azamario         ###   ########.fr       */
+/*   Updated: 2022/04/25 02:59:10 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int is_builtins(char *cmd)
+int	is_builtins(char *cmd)
 {
-	int i;
-	int switcher;
-	char *builtin_cmd[NUMBER_OF_BUILTINS];
-	
+	int		i;
+	int		switcher;
+	char	*builtin_cmd[NUMBER_OF_BUILTINS];
+
 	i = 0;
 	switcher = 0;
 	builtin_cmd[0] = "exit";
@@ -32,13 +32,11 @@ int is_builtins(char *cmd)
 		if (strcmp(cmd, builtin_cmd[i]) == 0)
 		{
 			switcher = i + 1;
-			break;
+			break ;
 		}
 		i++;
 	}
-	if(switcher)
+	if (switcher)
 		return (switcher);
-	return (FALSE);	
+	return (FALSE);
 }
-
-	

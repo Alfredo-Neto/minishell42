@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_take_input.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 20:56:26 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/21 15:04:24 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/04/23 13:25:59 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void prompt(t_data *data)
+void	prompt(t_data *data)
 {
 	char	cwd[1024];
 	char	*buf;
@@ -46,7 +46,7 @@ void	print_dir(void)
 /** Function to take input - MALLOC input*/
 int	take_input(t_data *data)
 {
-	prompt(data);	
+	prompt(data);
 	if (!data->input)
 		exit_minishell(data, FAILURE);
 	if (ft_strlen(data->input) != 0)

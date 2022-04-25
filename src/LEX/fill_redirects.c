@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 20:31:09 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/04/22 14:05:27 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/23 13:50:58 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #define BL_IN_REDIR	"minishell: syntax error near unexpected token `newline'"
 
 static void	malloc_file(t_data *data, int string_level, int k, int bytes);
-static int	count_redirects(t_data *data, char *str, int i);
+static int	count_redirects(t_data *data, char *str);
 static int	save_file(char *cmd, char **file);
 static void	find_redirects(t_data *data, int id);
 
@@ -47,12 +47,19 @@ void	fill_redirects(t_data *data)
 	malloc_file(data, 0, 0, data->number_of_pipes + 1);
 	while (data->cmds_piped[id])
 	{
-		redirects_nbr = count_redirects(data, data->cmds_piped[id], id);
+		redirects_nbr = count_redirects(data, data->cmds_piped[id]);
 		if (redirects_nbr)
 		{
 			malloc_file(data, 1, id, redirects_nbr + 1);
 			find_redirects(data, id);
 		}
+		id++;
+	}
+	id = 0;
+	while (data->cmds_piped[id])
+	{
+		reverse_char(data->cmds_piped[id], 4, '>');
+		reverse_char(data->cmds_piped[id], 5, '<');
 		id++;
 	}
 	// debug_redirects(data);
@@ -101,7 +108,7 @@ static int	save_file(char *cmd, char **file)
 	return (total - 1);
 }
 
-static int	count_redirects(t_data *data, char *s, int id)
+static int	count_redirects(t_data *data, char *s)
 {
 	int		i;
 	int		aux;
