@@ -10,42 +10,51 @@ static int too_many_arguments(char **str)
     return (EXIT_SUCCESS);
 }
 
-static char *get_dir(char *directory)
+int isInvalidArgs(t_data *data)
+{
+    if (!data->argve[0] || too_many_arguments(data->argve[0]))
+        return (1);
+    return (0);
+}
+
+static char *get_dir(char **str)
 {
 
-    return (directory);
+    return ();
 }
 
 int cd(t_data *data)
 {
-    char *directory;
+    char **new_dir;
+    char *old_dir;
+    char *curr_dir;
 
-    (void)directory;
-    if (!data->argve[0] || too_many_arguments(data->argve[0]))
+    if (isInvalidArgs(data))
         return (EXIT_FAILURE);
-    directory = get_dir(data->argve[0][1]);
-    if (chdir(directory))
+    new_dir = data->argve[0][1];
+    old_dir = get_current_dir();
+    if (chdir(new_dir))
     {
         ft_putstr_fd("cd: ", 1);
-        perror(directory);
-        free_str(directory);
+        perror(new_dir);
+        ft_super_free((void *)&new_dir);
         return (EXIT_FAILURE);
     }
-    // update_env_pwd
-    // free stuff out
+    curr_dir = get_current_dir()
+    update_env_vars("PWD");
+    update_env_vars("OLDPWD");
+    ft_super_free((void *)&new_dir);
+    ft_super_free((void *)&old_dir); 
+    ft_super_free((void *)&curr_dir); 
     return (EXIT_SUCCESS);
 }
 
-void free_double_str(char ***str) // Uso: passar endereço da **str
-{
-    char **aux;
-    int i = 0;
+// alt_cd
+//     too_many_arguments
+//         get_dir
+//             get_current_dir
+//                 update_env_dir
 
-    aux = *str;
-    if (str && *str)
-    {
-        while (aux[i])
-            free(aux[i++]);
-        free(aux);
-    }
-}
+//                     HOME
+//                         envp
+//                             set_env
