@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 16:50:20 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/25 13:14:48 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/04/26 00:04:15 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	init_data(t_data *data, char **envp)
 {	
 	ft_bzero(data, sizeof(t_data));
-	data->envp = envp;//init envp - alocando!
+	data->envp = envp;
 	init_command_path(data);
 	data->number_of_pipes = GARBAGE;
 	data->exec_flag = GARBAGE;

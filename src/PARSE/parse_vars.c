@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 12:30:10 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/04/25 13:15:11 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/04/25 23:55:53 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,6 @@ char	*get_var_value(char *input)
 	else
 		while (input[i])
 			i++;
-		/* check for double quotes being removed in lexer
-		if (parse)
-			while (input[i] != ' ' && input[i])
-			
-				i++;
-		else
-			while (input[i])
-				i++;
-		*/
 	value = (char *)malloc(i * sizeof(char) + 1);
 	ft_strlcpy(value, input, i + 1);
 	return (value);
