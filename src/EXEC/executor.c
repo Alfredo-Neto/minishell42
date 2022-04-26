@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 23:19:00 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/24 14:03:01 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/04/25 23:43:59 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,10 @@ void	builtin_exec(t_data *data, int code)
 		hello();
 	else if (code == HELP)
 		open_help();
+	else if (code == PWD)
+		pwd();
+	else if (code == ENV)
+	 	env(data);
 }
 
 int	execute_pid(t_data *data, int id)

@@ -6,38 +6,40 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/25 13:14:38 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/04/25 23:43:39 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
-# define MINISHELL_H
+#define MINISHELL_H
 
-# include "libft/libft.h"
-# include <stdio.h>
-# include <string.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <sys/types.h>
-# include <sys/wait.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <signal.h>
+#include "libft/libft.h"
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <readline/readline.h>
+#include <readline/history.h>
+#include <signal.h>
 
-# define NO_PIPE		0
+#define NO_PIPE		0
 
-# define NUMBER_OF_BUILTINS 5
+#define NUMBER_OF_BUILTINS 7
 
-# define EXIT		1
-# define CD			2
-# define ECHO		3
-# define HELLO		4
-# define HELP		5
-# define NONE		0
+#define EXIT		1
+#define CD			2
+#define ECHO		3
+#define HELLO		4
+#define HELP		5
+#define PWD			6
+#define ENV			7
+#define	NONE		0
 
-# define SQUOTES 39
-# define DQUOTES 34
-# define NO_QUOTES_FOUND -1
+#define SQUOTES 39
+#define DQUOTES 34
+#define NO_QUOTES_FOUND -1
 
 // CÓDIGO DA MARCE
 # define OFF 0
@@ -176,6 +178,7 @@ int		execute_pid(t_data *data, int id);
 void	ft_execve(t_data *data, int argve_index);
 int		multiple_exec(t_data *data);
 void	builtin_exec(t_data *data, int code);
+int		env(t_data *data);
 
 //pipes_fds_handling.c 
 int		open_pipes(t_data *data);
@@ -193,6 +196,9 @@ void	main_process_handler(t_data *data);
 int		exit_minishell(t_data *data, int status);
 void	check_exit(t_data *data);
 void	mini_exit(t_data *data);
+
+//pwd.c
+void	pwd(void);
 
 //help.c
 void	open_help(void);

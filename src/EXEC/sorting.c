@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sorting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 12:16:34 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/23 12:44:19 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/25 02:59:10 by azamario         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	is_builtins(char *cmd)
 	builtin_cmd[2] = "echo";
 	builtin_cmd[3] = "hello";
 	builtin_cmd[4] = "help";
+	builtin_cmd[5] = "pwd";
+	builtin_cmd[6] = "env";
 	while (i < NUMBER_OF_BUILTINS)
 	{
 		if (strcmp(cmd, builtin_cmd[i]) == 0)
