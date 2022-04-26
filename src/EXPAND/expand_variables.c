@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 15:34:28 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/25 13:17:30 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/04/26 18:25:43 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,10 @@ void	expander(t_data *data)
 			free(data->argve[0][i]);
 			data->argve[0][i] = ft_strdup(vdt.value);
 		}
+		i = 0;
+		while(cmdstr[i])
+			free(cmdstr[i++]);
+		free(cmdstr);
 	}
 	i = 0;
 	while (data->argve[0][i])
