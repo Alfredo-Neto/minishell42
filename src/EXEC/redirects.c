@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 19:26:28 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/04/23 13:15:56 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/26 14:26:00 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 
 void	new_prompt_heredoc(int signal)
 {
-	write(1, "\n", 1);
-	exit(131);
 	(void)signal;
+	write(1, "\n", 1);
+	exit(130);
 }
 
 void	heredoc(char *eof)
@@ -38,7 +38,7 @@ void	heredoc(char *eof)
 				printf(NO_DELIMITER, eof);
 				exit(1);
 			}
-			if (!strcmp(input, eof))
+			if (!ft_strcmp(input, eof))
 			{
 				free(input);
 				exit(0);
