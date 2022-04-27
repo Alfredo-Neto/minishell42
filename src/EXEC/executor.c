@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 23:19:00 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/26 18:26:29 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/04/27 23:47:50 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void	builtin_exec(t_data *data, int code)
 		pwd();
 	else if (code == ENV)
 	 	env(data);
+	else if (code == EXPORT)
+		export(data);
 }
 
 int	execute_pid(t_data *data, int id)
@@ -102,7 +104,7 @@ int	executor(t_data *data)
 		return SUCCESS;
 	while (id < data->number_of_pipes + 1)
 	{
-		data->pid[id] = fork();
+		data->pid[id] = 0; //fork();
 		if (data->pid[id] < 0)
 		{
 			perror("Fork");

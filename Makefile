@@ -28,6 +28,7 @@ SRC_FILES	=	main.c \
 				echo.c \
 				pwd.c \
 				env.c \
+				export.c \
 				str_tools.c \
 				list_tools.c \
 				parse_vars.c \

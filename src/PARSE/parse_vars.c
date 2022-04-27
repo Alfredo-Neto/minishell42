@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 12:30:10 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/04/25 23:55:53 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/04/27 20:50:21 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,26 @@
 char	*get_var_name(char *input)
 {
 	int		i;
+	int		space;
 	char	*name;
 
 	i = 0;
+	space = 0;
 	while (input[i] != '=')
+	{
 		i++;
-	name = (char *)malloc(i * sizeof(char) + 1);
-	ft_strlcpy(name, input, i + 1);
+		if (input[i] == ' ')
+			space = i;
+	}
+	name = (char *)malloc((i - space) * sizeof(char));
+	if (space)
+	{
+		while (*input != ' ')
+			input++;
+		space++;
+		input++;
+	}
+	ft_strlcpy(name, input, (i - space) + 1);
 	return (name);
 }
 

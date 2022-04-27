@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/25 23:43:39 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/04/26 18:33:06 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 #define NO_PIPE		0
 
-#define NUMBER_OF_BUILTINS 7
+#define NUMBER_OF_BUILTINS 8
 
 #define EXIT		1
 #define CD			2
@@ -35,6 +35,7 @@
 #define HELP		5
 #define PWD			6
 #define ENV			7
+#define EXPORT		8
 #define	NONE		0
 
 #define SQUOTES 39
@@ -208,6 +209,9 @@ void	echo(t_data *data);
 
 //hello.c
 void	hello(void);
+
+//export.c
+void	export(t_data *data);
 
 //..................................................TOOLS
 // Vamos usar funcoes proprias

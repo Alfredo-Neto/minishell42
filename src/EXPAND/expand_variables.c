@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 15:34:28 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/26 18:25:43 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/04/27 23:20:28 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,6 @@ void	make_space(char **argve, int start)
 	free(argve[i]);
 }
 
-// returns how many arguments on the arg list
-int		arglist_size(char **arglist)
-{
-	int	i;
-
-	i = 0;
-	while (arglist[i])
-		i++;
-	return (i);
-}
-
 // allocates a bigger argve, copies the old to the new one and frees the old one
 char **new_argve(char *value, t_data *data)
 {
@@ -66,8 +55,8 @@ char **new_argve(char *value, t_data *data)
 	int		argve_size;
 
 	cmdstr = ft_split(value, ' ');
-	cmdstr_size = arglist_size(cmdstr);
-	argve_size = arglist_size(data->argve[0]);
+	cmdstr_size = ft_str_count(cmdstr);
+	argve_size = ft_str_count(data->argve[0]);
 	temp_argve = (char **)malloc((cmdstr_size + argve_size + 1) * sizeof(char *));
 	ft_memcpy(temp_argve, data->argve[0], argve_size * sizeof(char *));
 	free(data->argve[0]);
