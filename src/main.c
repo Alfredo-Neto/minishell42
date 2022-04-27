@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 19:08:49 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/23 14:18:30 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/24 14:01:32 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ int	main(int argc, char **argv, char **envp)
 		return (FAILURE);
 	}
 	welcome();
-	init_data(data);
-	data->envp = envp;//init envp - alocando!
+	init_data(data, envp);
 	while (!data->exit_flag)
 		minishell(data);
 	return (0);

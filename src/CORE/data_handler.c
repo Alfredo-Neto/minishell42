@@ -6,15 +6,29 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 16:50:20 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/23 14:46:22 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/26 17:16:06 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	init_data(t_data *data)
-{	
+void	init_data(t_data *data, char **envp)
+{
+	int		i;
+
+	i = 0;
 	ft_bzero(data, sizeof(t_data));
+	data->envp = (char **)ft_calloc(ft_str_count(envp) + 1, sizeof(char *));
+	if (!data->envp)
+		exit_minishell(data, FAILURE);
+	while (envp[i])
+	{
+		data->envp[i] = ft_strdup(envp[i]);
+		if (!data->envp[i])
+			exit_minishell(data, FAILURE);
+		i++;
+	}
+	// data->envp = envp;
 	init_command_path(data);
 	data->number_of_pipes = GARBAGE;
 	data->exec_flag = GARBAGE;
@@ -22,11 +36,11 @@ void	init_data(t_data *data)
 
 int	init_command_path(t_data *data)
 {
-	int		i;
-	int		ret;
+	int i;
+	int ret;
+	t_vars	*temp;
 
 	data->command_path = ft_split(getenv("PATH"), ':');
-	
 	i = 0;
 	while (data->command_path[i] != NULL)
 	{
@@ -37,6 +51,16 @@ int	init_command_path(t_data *data)
 			exit_minishell(data, FAILURE);
 		}
 		i++;
+	}
+	i = 0;
+	while (data->envp[i])
+	{
+		grab_vars(data, data->envp[i]);
+		temp = last_in_list(data->vars);
+		if (!temp)
+			break ;
+		temp->env = i++;
+		temp->is_malloc = 0;
 	}
 	return (SUCCESS);
 }

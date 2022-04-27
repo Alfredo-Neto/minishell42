@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 13:55:53 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/23 14:03:29 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/26 14:32:28 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,12 @@ void	pull_space(t_data *data)
 }	
 */
 
-void	lexer(t_data *data)
+int	lexer(t_data *data)
 {
-	treat_input(data); 	// devolver linha de comando tratada (aspas) para pull_pipe	| devolve como data->string
+	if (treat_input(data)) 	// devolver linha de comando tratada (aspas) para pull_pipe	| devolve como data->string
+		return (FAILURE);
 	pull_pipe(data); //tenho estrutura de str** - cada string com linha de cmd
 	fill_redirects(data);
 	pull_space(data); //tenho estrutura de str*** - cada str é um arg(ou cmd)
+	return (SUCCESS);
 }

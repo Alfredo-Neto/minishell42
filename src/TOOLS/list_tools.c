@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 17:30:51 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/04/23 11:58:26 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/26 17:15:07 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 // list handling functions
 
+// creates a new node with received values
 t_vars	*new_node(char *name, char *value)
 {
 	t_vars	*new;
@@ -24,9 +25,12 @@ t_vars	*new_node(char *name, char *value)
 	new->var_name = ft_strdup(name);
 	new->var_value = ft_strdup(value);
 	new->next = NULL;
+	new->env = -1;
+	new->is_malloc = 1;
 	return (new);
 }
 
+// finds the last node on the list
 t_vars	*last_in_list(t_vars *lst)
 {
 	if (!lst)
@@ -36,6 +40,7 @@ t_vars	*last_in_list(t_vars *lst)
 	return (lst);
 }
 
+// creates a new node on an existing list
 void	add_to_list(t_vars **lst, char *name, char *value)
 {
 	t_vars	*aux;
@@ -51,6 +56,7 @@ void	add_to_list(t_vars **lst, char *name, char *value)
 	aux->next = new;
 }
 
+// clears the list and frees its memory
 void	clear_list(t_vars *lst)
 {
 	t_vars	*aux;
@@ -68,18 +74,74 @@ void	clear_list(t_vars *lst)
 	}
 }
 
-char	*find_in_list(char *var_name, t_vars *lst)
+// finds a variable name on a list
+//char	*find_in_list(char *var_name, t_vars *lst)
+t_vdt	find_in_list(char *var_name, t_vars *lst)
 {
+	t_vdt	ret;
+
+	ret = (t_vdt){0};
 	if (!(++var_name))
-		return ("$");
+	{
+		ret.value = "$";
+		return (ret);
+	}
+	var_name--;
+	if (lst != 0x0)
+		while (lst)
+		{
+			if (ft_strcmp(var_name, lst->var_name) == 0)
+			{
+				ret.value = lst->var_value;
+				ret.is_envp = lst->env;
+				ret.is_malloc = lst->is_malloc;
+				return (ret);
+			}
+			lst = lst->next;
+		}
+	ret.value = "$";
+	return (ret);
+}
+
+// changes the value of an existing variable on the list
+void	change_in_list(t_vars *lst, char *var_name, char *var_value)
+{
 	if (lst != 0x0)
 	{
 		while (lst)
 		{
 			if (ft_strcmp(var_name, lst->var_name) == 0)
-				return (lst->var_value);
+			{
+				free(lst->var_value);
+				lst->is_malloc = 1;
+				lst->var_value = ft_strdup(var_value);
+				return;
+			}
 			lst = lst->next;
 		}
 	}
-	return (NULL);
 }
+
+// void	delete_in_list(char *var_name, t_vars **vars)
+// {
+// 	t_vars	*aux;
+// 	t_vars	*aux2;
+
+// 	if (!*vars)
+// 		return ;
+// 	aux2 = *vars;
+// 	while (aux2)
+// 	{
+// 		aux = aux2;
+// 		if (!ft_strcmp(var_name, aux->var_name))
+// 		{
+// 			printf("delete ft %s\n", aux->var_name);
+// 			free(aux->var_name);
+// 			free(aux->var_value);
+// 			aux2 = aux->next;
+// 			ft_bzero(aux, sizeof(t_vars));
+// 			return ;
+// 		}
+// 		aux2 = (aux2)->next;
+// 	}
+// }

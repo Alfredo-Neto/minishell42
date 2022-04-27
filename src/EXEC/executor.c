@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 23:19:00 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/25 03:00:29 by azamario         ###   ########.fr       */
+/*   Updated: 2022/04/26 15:04:36 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ void	ft_execve(t_data *data, int argve_index)
 	printf("Minishell: command not found: %s\n", data->argve[argve_index][0]);
 }
 
-void	builtin_exec(t_data *data, int code)
+void	builtin_exec(t_data *data, int code, int id)
 {
 	if (code == EXIT)
 		mini_exit(data);
 	else if (code == CD)
-		chdir(data->argve[0][1]);
+		chdir(data->argve[id][1]);
 	else if (code == ECHO)
 		echo(data);
 	else if (code == HELLO)
@@ -51,6 +51,8 @@ void	builtin_exec(t_data *data, int code)
 		pwd();
 	else if (code == ENV)
 	 	env(data);
+	else if (code == UNSET)
+		unset(data, id);
 }
 
 int	execute_pid(t_data *data, int id)
@@ -62,7 +64,7 @@ int	execute_pid(t_data *data, int id)
 	builtin_flag = is_builtins(data->argve[id][0]);
 	if (builtin_flag)
 	{
-		builtin_exec(data, builtin_flag);
+		builtin_exec(data, builtin_flag, id);
 		exit (SUCCESS);
 	}
 	else
@@ -98,6 +100,8 @@ int	executor(t_data *data)
 	create_executor_parametes(data);
 	open_pipes(data);
 	id = 0;
+	if (data->exec_flag == -1)
+		return SUCCESS;
 	while (id < data->number_of_pipes + 1)
 	{
 		data->pid[id] = fork();

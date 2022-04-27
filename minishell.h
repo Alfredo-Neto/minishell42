@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/25 03:01:06 by azamario         ###   ########.fr       */
+/*   Updated: 2022/04/26 16:26:42 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 #define NO_PIPE		0
 
-#define NUMBER_OF_BUILTINS 7
+#define NUMBER_OF_BUILTINS 8
 
 #define EXIT		1
 #define CD			2
@@ -35,6 +35,7 @@
 #define HELP		5
 #define PWD			6
 #define ENV			7
+#define UNSET		8
 #define	NONE		0
 
 #define CHAR_MAX_NUM 	1024
@@ -62,10 +63,19 @@
 // Clearing the shell using escape sequences
 # define clear() printf("\033[H\033[J")
 
-typedef struct s_vars
+typedef struct	s_vdt
+{
+	char	*value;
+	int		is_envp;
+	int		is_malloc;
+}				t_vdt;
+
+typedef struct	s_vars
 {
 	char			*var_name;
 	char			*var_value;
+	int				env;
+	int				is_malloc;
 	struct s_vars	*next;
 }				t_vars;
 
@@ -93,7 +103,7 @@ typedef struct s_data
 
 //..................................................CORE
 //data_handler.c
-void	init_data(t_data *data);
+void	init_data(t_data *data, char **envp);
 int		init_command_path(t_data *data);
 void	data_clean(t_data *data);
 void	double_free(void ***ptr);
@@ -123,14 +133,14 @@ void	put_on_history(char *buf, char *old_input);
 
 //..................................................LEX
 //lexer.c - tokens
-void	lexer(t_data *data);
+int		lexer(t_data *data);
 void	pull_pipe(t_data *data);
 void	pull_space(t_data *data);
 
 //---------LEXER------------//
-void	treat_input(t_data *data);
-void	treat_input_chars(t_data *data);
-void	treat_char(t_data *data, char c, int number);
+int		treat_input(t_data *data);
+int		treat_input_chars(t_data *data);
+int		treat_char(t_data *data, char c, int number);
 
 void	treat_token_strings(t_data *data);
 void	treat_quotes(char *token);
@@ -146,9 +156,10 @@ void	fill_redirects(t_data *data);
 void	parser(t_data *data);
 
 //parse_vars.c
-void	grab_vars(t_data *data);
 char	*get_var_value(char *input);
 char	*get_var_name(char *input);
+void	update_envp(t_data *data, char* name, char* value, t_vdt vdt);
+void	grab_vars(t_data *data, char *str);
 
 //..................................................EXPANDER
 //expand_variables.c
@@ -169,7 +180,7 @@ int		executor(t_data *data);
 int		execute_pid(t_data *data, int id);
 void	ft_execve(t_data *data, int argve_index);
 int		multiple_exec(t_data *data);
-void	builtin_exec(t_data *data, int code);
+void	builtin_exec(t_data *data, int code, int id);
 int		env(t_data *data);
 
 //pipes_fds_handling.c 
@@ -194,8 +205,6 @@ void	mini_exit(t_data *data);
 //pwd.c
 void	pwd(void);
 
-//main.c
-void	init_data(t_data *data);
 //help.c
 void	open_help(void);
 
@@ -205,10 +214,12 @@ void	echo(t_data *data);
 //hello.c
 void	hello(void);
 
+//unset.c
+void	unset(t_data *data, int id);
+
 //..................................................TOOLS
 // Vamos usar funcoes proprias
 //str_tools.c
-// str_tools.c
 int		ft_strcpy_handled(char **new, char const *src);
 int		ft_strjoin_handled(char **s1, char const *s2);
 int		ft_str_count(char **str);
@@ -219,7 +230,10 @@ t_vars	*new_node(char *name, char *value);
 t_vars	*last_in_list(t_vars *lst);
 void	add_to_list(t_vars **lst, char *name, char *value);
 void	clear_list(t_vars *lst);
-char	*find_in_list(char *var_name, t_vars *lst);
+t_vdt	find_in_list(char *var_name, t_vars *lst);
+void	change_in_list(t_vars *lst, char *var_name, char *var_value);
+int		is_envp(char *name, t_vars *lst);
+void	delete_in_list(char *var_name, t_vars **vars);
 
 //////////////////////////////////////////////////////////
 
