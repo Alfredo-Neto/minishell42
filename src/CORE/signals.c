@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 21:52:40 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/04/21 14:16:00 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/04/27 18:58:30 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,11 @@ void	exec_signals(void)
 	signal(SIGINT, handler);
 	signal(SIGTERM, handler);
 	signal(SIGQUIT, handler);
+}
+
+void	interrupt_input_writing(int signal)
+{
+	(void)signal;
+	write(1, "\n", 1);
+	exit(130);
 }

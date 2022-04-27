@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 23:19:00 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/27 01:23:37 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/27 20:00:57 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	ft_execve(t_data *data, int id)
 		}
 	}
 	ft_printf(STDERR, "Minishell: command not found: %s\n", data->argve[id][0]);
+	exit(FAILURE);
 }
 
 void	builtin_exec(t_data *data, int code, int id)
@@ -60,18 +61,21 @@ int	execute_pid(t_data *data, int id)
 	int	builtin_flag;
 
 	exec_signals();
-	redirect_filter(data, id);
 	builtin_flag = is_builtins(data->argve[id][0]);
 	if (builtin_flag)
-	{
 		builtin_exec(data, builtin_flag, id);
-		exit (SUCCESS);
-	}
 	else
 	{
-		ft_execve(data, id);
-		exit (FAILURE);
+		data->pid[id] = fork();
+		if (data->pid[id] < 0)
+		{
+			perror("Minishell: Could not fork proccess: ");
+			return (FAILURE);
+		}
+		if (!data->pid[id])
+			ft_execve(data, id);
 	}
+	return (SUCCESS);
 }
 
 void	create_executor_parametes(t_data *data)
@@ -83,7 +87,7 @@ void	create_executor_parametes(t_data *data)
 	data->fd = (int **)ft_calloc(sizeof(int *), data->number_of_pipes + 1);
 	if (!data->pid || !data->fd)
 		exit_minishell(data, FAILURE);
-	while (i < data->number_of_pipes)
+	while (i < data->number_of_pipes + 1)
 	{
 		data->fd[i] = (int *)malloc(sizeof(int) * 2);
 		if (!data->fd[i])
@@ -95,30 +99,24 @@ void	create_executor_parametes(t_data *data)
 int	executor(t_data *data)
 {
 	int		id;
+	int		save_fd[2];
 
+	id = 0;
 	check_exit(data);
 	create_executor_parametes(data);
 	open_pipes(data);
-	id = 0;
 	if (data->exec_flag == -1)
-		return SUCCESS;
+		return (SUCCESS);
 	while (id < data->number_of_pipes + 1)
 	{
-		data->pid[id] = fork();
-		if (data->pid[id] < 0)
-		{
-			perror("Fork");
-			return (FAILURE);
-		}
-		if (data->pid[id] == 0)
-		{	
-			scope_fd_select(id, data);
-			execute_pid(data, id);
-			return (SUCCESS);
-		}
-		if (data->path_aux)
-			free(data->path_aux);
-		id++;
+		save_std_fds(save_fd);
+		close_other_fds(id, data);
+		file_descriptor_handler(id, data);
+		if (redirect_filter(data, id, save_fd))
+			break ;
+		if (execute_pid(data, id++))
+			break ;
+		restore_std_fds(save_fd);
 	}
 	main_process_handler(data);
 	return (SUCCESS); //tratar erros

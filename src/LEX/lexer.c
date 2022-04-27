@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 13:55:53 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/26 14:32:28 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/27 19:47:02 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	pull_pipe(t_data *data) //, char ***cmds_piped)
 	data->cmds_piped = ft_split(data->input, '|');
 	if (data->cmds_piped == NULL)
 	{
-		perror("Malloc failure 1");
+		perror("Minishell: Malloc failed in pull_pipe: ");
 		exit_minishell(data, FAILURE);
 	}
 	data->number_of_pipes = ft_str_count(data->cmds_piped) - 1;
@@ -41,7 +41,7 @@ void	pull_space(t_data *data)
 	data->argve = (char ***)malloc((no_cmds + 1) * sizeof(char **));
 	if (data->argve == NULL)
 	{
-		perror("Malloc failure 2");
+		perror("Minishell: Malloc failed in pull_space ");
 		exit_minishell(data, FAILURE);
 	}
 	while ((data->cmds_piped)[i])
@@ -49,7 +49,7 @@ void	pull_space(t_data *data)
 		data->argve[i] = ft_split((data->cmds_piped)[i], ' ');
 		if (data->argve[i] == NULL)
 		{
-			perror("Malloc failure 3");
+			perror("Minishell: Malloc failed in pull_space ");
 			exit_minishell(data, FAILURE);
 		}
 		i++;
@@ -83,7 +83,8 @@ int	lexer(t_data *data)
 	if (treat_input(data)) 	// devolver linha de comando tratada (aspas) para pull_pipe	| devolve como data->string
 		return (FAILURE);
 	pull_pipe(data); //tenho estrutura de str** - cada string com linha de cmd
-	fill_redirects(data);
+	if (fill_redirects(data))
+		return (FAILURE);
 	pull_space(data); //tenho estrutura de str*** - cada str é um arg(ou cmd)
 	return (SUCCESS);
 }

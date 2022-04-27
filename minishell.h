@@ -6,14 +6,13 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/27 00:59:39 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/27 20:23:46 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 #define MINISHELL_H
 
-#include "libft/libft.h"
 #include "ft_printf/inc/ft_printf.h"
 #include <stdio.h>
 #include <errno.h>
@@ -103,7 +102,7 @@ typedef struct s_data
 //..................................................CORE
 //data_handler.c
 void	init_data(t_data *data, char **envp);
-int		init_command_path(t_data *data);
+void	init_command_path(t_data *data);
 void	data_clean(t_data *data);
 void	double_free(void ***ptr);
 void	triple_free(char ****ptr, int number_of_ids);
@@ -148,7 +147,7 @@ void	reverse_char(char *cmd, int nbr, char c);
 
 char	*reverse_quotes_treat(char *str);
 char	*tokens_to_string(char const *s1, char const *s2);
-void	fill_redirects(t_data *data);
+int		fill_redirects(t_data *data);
 
 //..................................................PARSE
 //parser.c  -  quotes ok: analisa!
@@ -169,10 +168,10 @@ void	expander(t_data *data);
 int		is_builtins(char *cmd);
 
 //redirects.c
-void	new_prompt_heredoc(int signal);
+void	interrupt_input_writing(int signal);
 void	redirect(char *file, int flags, int std_fd);
-void	heredoc(char *eof);
-void	redirect_filter(t_data *data, int id);
+int		heredoc(char *eof, int *fd);
+int		redirect_filter(t_data *data, int id, int *save_fd);
 
 //executor.c
 int		executor(t_data *data);
@@ -189,6 +188,10 @@ int		stdin_stdout_handler(int in, int out);
 int		file_descriptor_handler(int id, t_data *data);
 int		scope_fd_select(int id, t_data *data);
 int		redir_execute_pid(t_data *data, int id);
+
+//std_fds.c
+void	restore_std_fds(int *fd);
+void	save_std_fds(int *fd);
 
 //processes_handler.c
 void	main_process_handler(t_data *data);
