@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 19:26:28 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/04/23 13:15:56 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/27 01:23:03 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 
 void	new_prompt_heredoc(int signal)
 {
-	write(1, "\n", 1);
-	exit(131);
 	(void)signal;
+	write(1, "\n", 1);
+	exit(130);
 }
 
 void	heredoc(char *eof)
@@ -35,10 +35,10 @@ void	heredoc(char *eof)
 			input = readline("> ");
 			if (!input)
 			{
-				printf(NO_DELIMITER, eof);
+				ft_printf(STDERR, NO_DELIMITER, eof);
 				exit(1);
 			}
-			if (!strcmp(input, eof))
+			if (!ft_strcmp(input, eof))
 			{
 				free(input);
 				exit(0);
@@ -55,11 +55,11 @@ void	redirect(char *file, int flags, int std_fd)
 	int	fd;
 
 	if (!std_fd)
-		fd = open(file, flags); //perguntar Vi
+		fd = open(file, flags);
 	else
 		fd = open(file, flags, 0777);
 	if (fd == -1)
-		perror("Redirect Failed...\n"); //perror("open error");
+		perror("Minishell: Open function failed:");
 	else
 	{
 		dup2(fd, std_fd);

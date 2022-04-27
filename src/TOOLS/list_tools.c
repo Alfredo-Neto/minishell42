@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_tools.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 17:30:51 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/04/24 14:04:32 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/04/26 17:15:07 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,3 +121,27 @@ void	change_in_list(t_vars *lst, char *var_name, char *var_value)
 		}
 	}
 }
+
+// void	delete_in_list(char *var_name, t_vars **vars)
+// {
+// 	t_vars	*aux;
+// 	t_vars	*aux2;
+
+// 	if (!*vars)
+// 		return ;
+// 	aux2 = *vars;
+// 	while (aux2)
+// 	{
+// 		aux = aux2;
+// 		if (!ft_strcmp(var_name, aux->var_name))
+// 		{
+// 			printf("delete ft %s\n", aux->var_name);
+// 			free(aux->var_name);
+// 			free(aux->var_value);
+// 			aux2 = aux->next;
+// 			ft_bzero(aux, sizeof(t_vars));
+// 			return ;
+// 		}
+// 		aux2 = (aux2)->next;
+// 	}
+// }

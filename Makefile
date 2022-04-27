@@ -4,6 +4,8 @@ CFLAGS		=	-Wall -Wextra -Werror -lreadline -g -fsanitize=address
 LIBFT_DIR	=	libft
 LIBFT		=	$(LIBFT_DIR)/libft.a
 LIBFLAGS	=	-L $(LIBFT_DIR) -lft
+PRINTF_DIR	=	ft_printf
+PRINTF		=	ft_printf/libftprintf.a
 VPATH 		= 	src src/CORE src/PROMPT src/LEX \
 				src/PARSE src/EXPAND src/EXEC \
 				src/BUILTINS src/TOOLS
@@ -26,10 +28,12 @@ SRC_FILES	=	main.c \
 				exit.c \
 				help.c \
 				echo.c \
-				pwd.c \
 				env.c \
 				export.c \
+				unset.c \
 				str_tools.c \
+				cd.c \
+				pwd.c \
 				list_tools.c \
 				parse_vars.c \
 				treat_input.c \
@@ -45,28 +49,23 @@ $(OBJ_DIR)/%.o: %.c $(HEADERS)
 
 all: $(NAME)
 
-debub: $(OBJ_DIR) $(LIBFT) $(OBJ)
-	mv $(OBJ) $(OBJ_DIR)
-	$(CC) $(addprefix obj/, $(OBJ)) $(CFLAGS) $(LIBFLAGS) -o $@
-	@echo ""
-	@echo "|		minishell with debug created		|"
-	@echo ""
-
 $(NAME): $(OBJ_DIR) $(LIBFT) $(OBJ)
 	mv $(OBJ) $(OBJ_DIR)
-	$(CC) $(addprefix obj/, $(OBJ)) $(CFLAGS) $(LIBFLAGS) -o $@
+	$(CC) $(addprefix obj/, $(OBJ)) $(LIBFT) $(PRINTF) $(CFLAGS) $(LIBFLAGS) -fPIE -o $@
 	@echo ""
 	@echo "|		minishell created		|"
 	@echo ""
 
 $(LIBFT):
 		make -C $(LIBFT_DIR)
+		make -C $(PRINTF_DIR)
 
 $(OBJ_DIR):
 		mkdir -p $(OBJ_DIR)
 
 clean:
 	make -C $(LIBFT_DIR) fclean
+	make -C $(PRINTF_DIR) fclean
 	@echo ""
 	@echo "|		minishell deleted		|"
 	@echo ""

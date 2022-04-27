@@ -6,31 +6,35 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 02:55:15 by azamario          #+#    #+#             */
-/*   Updated: 2022/04/23 14:02:19 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/27 00:56:25 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	treat_input(t_data *data) // echo "'jorge' ale"
+int	treat_input(t_data *data) // echo "'jorge' ale"
 {
 	//validate input()
-	treat_input_chars(data); // se entre as aspas tiver ' ' ou > ou  < ou |, substitui por um char não imprimível echo "'jorge1ale"\0
+	if (treat_input_chars(data)) // se entre as aspas tiver ' ' ou > ou  < ou |, substitui por um char não imprimível echo "'jorge1ale"\0
+		return (FAILURE);
 	//treat_operators() // verifica se tem espaços antes de | e redirects
 	data->tokens = ft_split(data->input, ' '); // quebra os inputs em token para tratar, o que estiver entre aspas será um token único: echo\0 "'jorge1ale"\0
 	treat_token_strings(data); // trata os tokens e restabelece a string no data->string || aqui tratamos dollar?
+	return (SUCCESS);
 }
 
-void	treat_input_chars(t_data *data)
+int	treat_input_chars(t_data *data)
 {
-	treat_char(data, ' ', 1);
+	if (treat_char(data, ' ', 1))
+		return (FAILURE);
 	treat_char(data, '|', 6);
 	treat_char(data, '>', 4);
 	treat_char(data, '<', 5);
 	treat_char(data, '$', 7);
+	return (SUCCESS);
 }
 
-void	treat_char(t_data *data, char c, int number)
+int	treat_char(t_data *data, char c, int number)
 {
 	int	i;
 	int	sign;
@@ -38,19 +42,29 @@ void	treat_char(t_data *data, char c, int number)
 	i = 0;
 	while (data->input[i])
 	{
+		if (data->input[i] == '$' && !data->input[i + 1])
+			data->input[i] = 7;
 		if (data->input[i] == '\'' || data->input[i] == '\"')
 		{
 			sign = data->input[i++];
 			while (data->input[i] != sign && data->input[i])
 			{
 				if (data->input[i] == c)
-					if ((c == '$' && sign == '\'') || c != '$')
+					if ((c == '$' && \
+				(sign == '\'' || data->input[i + 1] == '\"')) || c != '$')
 						data->input[i] = number;
 				i++;
+			}
+			if (!data->input[i])
+			{
+				ft_printf(STDERR, \
+					"Minishell: Sintaxe Error: Unclosed quotes `%c'\n", sign);
+				return (FAILURE);
 			}
 		}
 		i++;
 	}
+	return (SUCCESS);
 }
 
 void	treat_token_strings(t_data *data) //echo\0 "'jorge1ale"\0

@@ -6,13 +6,13 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 23:19:00 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/27 23:47:50 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/04/27 23:54:32 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	ft_execve(t_data *data, int argve_index)
+void	ft_execve(t_data *data, int id)
 {
 	int		i;
 
@@ -21,8 +21,8 @@ void	ft_execve(t_data *data, int argve_index)
 	while (data->command_path[i])
 	{
 		data->path_aux = ft_strjoin(data->command_path[i], \
-			data->argve[argve_index][0]);
-		if (execve(data->path_aux, data->argve[argve_index], data->envp) < 0)
+			data->argve[id][0]);
+		if (execve(data->path_aux, data->argve[id], data->envp) < 0)
 		{
 			if (data->path_aux)
 			{
@@ -32,15 +32,15 @@ void	ft_execve(t_data *data, int argve_index)
 			i++;
 		}
 	}
-	printf("Minishell: command not found: %s\n", data->argve[argve_index][0]);
+	ft_printf(STDERR, "Minishell: command not found: %s\n", data->argve[id][0]);
 }
 
-void	builtin_exec(t_data *data, int code)
+void	builtin_exec(t_data *data, int code, int id)
 {
 	if (code == EXIT)
 		mini_exit(data);
 	else if (code == CD)
-		chdir(data->argve[0][1]);
+		cd(data, id);
 	else if (code == ECHO)
 		echo(data);
 	else if (code == HELLO)
@@ -52,7 +52,9 @@ void	builtin_exec(t_data *data, int code)
 	else if (code == ENV)
 	 	env(data);
 	else if (code == EXPORT)
-		export(data);
+		export(data, id);
+	else if (code == UNSET)
+		unset(data, id);
 }
 
 int	execute_pid(t_data *data, int id)
@@ -64,7 +66,7 @@ int	execute_pid(t_data *data, int id)
 	builtin_flag = is_builtins(data->argve[id][0]);
 	if (builtin_flag)
 	{
-		builtin_exec(data, builtin_flag);
+		builtin_exec(data, builtin_flag, id);
 		exit (SUCCESS);
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/26 18:33:06 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/04/27 23:54:51 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 #define MINISHELL_H
 
 #include "libft/libft.h"
+#include "ft_printf/inc/ft_printf.h"
 #include <stdio.h>
+#include <errno.h>
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -36,7 +38,10 @@
 #define PWD			6
 #define ENV			7
 #define EXPORT		8
+#define UNSET		9
 #define	NONE		0
+
+#define CHAR_MAX_NUM 	1024
 
 #define SQUOTES 39
 #define DQUOTES 34
@@ -57,9 +62,6 @@
 # define GREATGREAT			2
 # define LESS				3
 # define LESSLESS			6
-
-// Clearing the shell using escape sequences
-# define clear() printf("\033[H\033[J")
 
 typedef struct	s_vdt
 {
@@ -131,14 +133,14 @@ void	put_on_history(char *buf, char *old_input);
 
 //..................................................LEX
 //lexer.c - tokens
-void	lexer(t_data *data);
+int		lexer(t_data *data);
 void	pull_pipe(t_data *data);
 void	pull_space(t_data *data);
 
 //---------LEXER------------//
-void	treat_input(t_data *data);
-void	treat_input_chars(t_data *data);
-void	treat_char(t_data *data, char c, int number);
+int		treat_input(t_data *data);
+int		treat_input_chars(t_data *data);
+int		treat_char(t_data *data, char c, int number);
 
 void	treat_token_strings(t_data *data);
 void	treat_quotes(char *token);
@@ -178,7 +180,7 @@ int		executor(t_data *data);
 int		execute_pid(t_data *data, int id);
 void	ft_execve(t_data *data, int argve_index);
 int		multiple_exec(t_data *data);
-void	builtin_exec(t_data *data, int code);
+void	builtin_exec(t_data *data, int code, int id);
 int		env(t_data *data);
 
 //pipes_fds_handling.c 
@@ -193,6 +195,8 @@ int		redir_execute_pid(t_data *data, int id);
 void	main_process_handler(t_data *data);
 
 //..................................................BUILTINS
+int 	cd(t_data *data, int id);
+void 	pwd();
 //exit.c
 int		exit_minishell(t_data *data, int status);
 void	check_exit(t_data *data);
@@ -211,7 +215,10 @@ void	echo(t_data *data);
 void	hello(void);
 
 //export.c
-void	export(t_data *data);
+void	export(t_data *data, int id);
+
+//unset.c
+void	unset(t_data *data, int id);
 
 //..................................................TOOLS
 // Vamos usar funcoes proprias
@@ -229,6 +236,7 @@ void	clear_list(t_vars *lst);
 t_vdt	find_in_list(char *var_name, t_vars *lst);
 void	change_in_list(t_vars *lst, char *var_name, char *var_value);
 int		is_envp(char *name, t_vars *lst);
+void	delete_in_list(char *var_name, t_vars **vars);
 
 //////////////////////////////////////////////////////////
 
