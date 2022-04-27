@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:32:15 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/04/27 23:47:52 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/04/27 23:55:55 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,25 @@ void	export(t_data *data, int id)
 	char	**new_envp;
 	t_vdt	vdt;
 	int		envp_size;
+	int		i;
 
-	name = get_var_name(data->argve[0][i]);
-	value = get_var_value(data->argve[0][i]);
-	vdt = find_in_list(name, data->vars);
-	if (ft_strcmp(vdt.value, "$") == 0)
+	i = 0;
+	while (data->argve[0][i])
 	{
+		name = get_var_name(data->argve[0][i]);
+		value = get_var_value(data->argve[0][i]);
+		vdt = find_in_list(name, data->vars);
+		if (ft_strcmp(vdt.value, "$") == 0)
+		{
+			free(value);
+			free(name);
+			break;
+		}
+		envp_size = ft_str_count(data->envp) + ft_str_count(data->argve[id]);
+		new_envp = (char**)malloc(sizeof(char**) * (envp_size + 2));
+		relocate_envp(data->envp, new_envp, data->argve[0][i]);
 		free(value);
 		free(name);
-		return;
+		i++;
 	}
-	envp_size = ft_str_count(data->envp) + ft_str_count(data->argve[id]);
-	new_envp = (char**)malloc(sizeof(char**) * (envp_size + 2));
-	relocate_envp(data->envp, new_envp, data->argve[0][i]);
-	free(value);
-	free(name);
-	
 }
