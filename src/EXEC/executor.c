@@ -6,13 +6,13 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 23:19:00 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/26 15:04:36 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/27 01:23:37 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	ft_execve(t_data *data, int argve_index)
+void	ft_execve(t_data *data, int id)
 {
 	int		i;
 
@@ -21,8 +21,8 @@ void	ft_execve(t_data *data, int argve_index)
 	while (data->command_path[i])
 	{
 		data->path_aux = ft_strjoin(data->command_path[i], \
-			data->argve[argve_index][0]);
-		if (execve(data->path_aux, data->argve[argve_index], data->envp) < 0)
+			data->argve[id][0]);
+		if (execve(data->path_aux, data->argve[id], data->envp) < 0)
 		{
 			if (data->path_aux)
 			{
@@ -32,7 +32,7 @@ void	ft_execve(t_data *data, int argve_index)
 			i++;
 		}
 	}
-	printf("Minishell: command not found: %s\n", data->argve[argve_index][0]);
+	ft_printf(STDERR, "Minishell: command not found: %s\n", data->argve[id][0]);
 }
 
 void	builtin_exec(t_data *data, int code, int id)
@@ -40,7 +40,7 @@ void	builtin_exec(t_data *data, int code, int id)
 	if (code == EXIT)
 		mini_exit(data);
 	else if (code == CD)
-		chdir(data->argve[id][1]);
+		cd(data, id);
 	else if (code == ECHO)
 		echo(data);
 	else if (code == HELLO)
@@ -122,19 +122,4 @@ int	executor(t_data *data)
 	}
 	main_process_handler(data);
 	return (SUCCESS); //tratar erros
-}
-
-// Function to call builtin commands
-void builtin_exec(t_data *data, int code)
-{
-	if (code == EXIT)		
-		exit_minishell(data, code);
-	else if (code == CD)
-		cd(data);
-	else if (code == ECHO)
-		echo(data);
-	else if (code == HELLO)
-		hello();	
-	else if (code == HELP)
-		open_help();	
 }

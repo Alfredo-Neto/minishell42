@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 02:55:15 by azamario          #+#    #+#             */
-/*   Updated: 2022/04/26 14:35:26 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/27 00:56:25 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ int	treat_char(t_data *data, char c, int number)
 			}
 			if (!data->input[i])
 			{
-				printf("Minishell: Sintaxe Error: Unclosed quotes `%c'\n", sign);
+				ft_printf(STDERR, \
+					"Minishell: Sintaxe Error: Unclosed quotes `%c'\n", sign);
 				return (FAILURE);
 			}
 		}

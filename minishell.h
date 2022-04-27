@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/26 16:26:42 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/27 00:59:39 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 #define MINISHELL_H
 
 #include "libft/libft.h"
+#include "ft_printf/inc/ft_printf.h"
 #include <stdio.h>
+#include <errno.h>
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -59,9 +61,6 @@
 # define GREATGREAT			2
 # define LESS				3
 # define LESSLESS			6
-
-// Clearing the shell using escape sequences
-# define clear() printf("\033[H\033[J")
 
 typedef struct	s_vdt
 {
@@ -195,7 +194,7 @@ int		redir_execute_pid(t_data *data, int id);
 void	main_process_handler(t_data *data);
 
 //..................................................BUILTINS
-int cd(t_data *data);
+int 	cd(t_data *data, int id);
 void 	pwd();
 //exit.c
 int		exit_minishell(t_data *data, int status);

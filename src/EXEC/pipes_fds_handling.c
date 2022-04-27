@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 23:19:00 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/23 13:07:57 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/27 01:24:12 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	open_pipes(t_data *data)
 	{
 		if ((pipe(data->fd[id++])) < 0)
 		{
-			perror("pipe");
+			perror("Minishell: Could not open pipe");
 			j = 0;
 			while (j < id)
 			{

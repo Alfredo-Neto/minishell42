@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   fill_redirects.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 20:31:09 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/04/25 03:08:04 by azamario         ###   ########.fr       */
+/*   Updated: 2022/04/27 01:19:07 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-#define DIFF_REDIR		"minishell: syntax error near unexpected token `%c'"
+#define DIFF_REDIR	"minishell: syntax error near unexpected token `%c'"
 #define BL_IN_REDIR	"minishell: syntax error near unexpected token `newline'"
 
 static void	malloc_file(t_data *data, int string_level, int k, int bytes);
@@ -53,11 +53,6 @@ void	fill_redirects(t_data *data)
 			malloc_file(data, 1, id, redirects_nbr + 1);
 			find_redirects(data, id);
 		}
-		id++;
-	}
-	id = 0;
-	while (data->cmds_piped[id])
-	{
 		reverse_char(data->cmds_piped[id], 4, '>');
 		reverse_char(data->cmds_piped[id], 5, '<');
 		id++;
@@ -104,6 +99,8 @@ static int	save_file(char *cmd, char **file)
 	init = total;
 	while (!ft_strchr(" ><", cmd[total]) && cmd[total])
 		total++;
+	if (cmd[total])
+		total--;
 	*file = ft_substr(cmd, init, total);
 	return (total - 1);
 }
@@ -124,9 +121,9 @@ static int	count_redirects(t_data *data, char *s)
 		while (ft_strchr("><", s[aux]) && s[aux])
 			aux++;
 		if ((s[i] != s[i + 1] && ft_strchr("><", s[i + 1])) || aux - i > 2)
-			printf(DIFF_REDIR, s[i + 1 + (aux - i > 2)]);
+			ft_printf(STDERR, DIFF_REDIR, s[i + 1 + (aux - i > 2)]);
 		else if (!s[aux])
-			printf(BL_IN_REDIR);
+			ft_printf(STDERR, BL_IN_REDIR);
 		else
 		{
 			i += aux - i;

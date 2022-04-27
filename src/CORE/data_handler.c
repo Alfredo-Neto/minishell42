@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 16:50:20 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/26 17:16:06 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/27 00:20:10 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	init_command_path(t_data *data)
 		ret = ft_strjoin_handled(&(data->command_path[i]), "/");
 		if (ret == FAILURE)
 		{
-			printf("Init failed\n");
+			ft_putstr_fd("Init failed\n", 2);
 			exit_minishell(data, FAILURE);
 		}
 		i++;
