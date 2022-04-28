@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 20:31:09 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/04/27 01:19:07 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/27 13:51:43 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #define BL_IN_REDIR	"minishell: syntax error near unexpected token `newline'"
 
 static void	malloc_file(t_data *data, int string_level, int k, int bytes);
-static int	count_redirects(t_data *data, char *str);
+static int	count_redirects(char *str);
 static int	save_file(char *cmd, char **file);
 static void	find_redirects(t_data *data, int id);
 
@@ -29,16 +29,16 @@ static void	find_redirects(t_data *data, int id);
 // 	while (data->file[id])
 // 	{
 // 		k = -1;
-// 		printf("\nid:%d\n", id);
+// 		ft_printf(STDERR, "\nid:%d\n", id);
 // 		while (data->file[id][++k])
-// 			printf("\n%d %s\n", data->file_mode[id][k], data->file[id][k]);
-// 		printf("\n%s-", data->cmds_piped[id]);
-// 		printf("cmd_len:%ld\n", strlen(data->cmds_piped[id]));
+// 			ft_printf(STDERR, "\n%d %s\n", data->file_mode[id][k], data->file[id][k]);
+// 		ft_printf(STDERR, "\n%s-", data->cmds_piped[id]);
+// 		ft_printf(STDERR, "cmd_len:%ld\n", strlen(data->cmds_piped[id]));
 // 		id++;
 // 	}
 // }
 
-void	fill_redirects(t_data *data)
+int	fill_redirects(t_data *data)
 {
 	int		id;
 	int		redirects_nbr;
@@ -47,7 +47,9 @@ void	fill_redirects(t_data *data)
 	malloc_file(data, 0, 0, data->number_of_pipes + 1);
 	while (data->cmds_piped[id])
 	{
-		redirects_nbr = count_redirects(data, data->cmds_piped[id]);
+		redirects_nbr = count_redirects(data->cmds_piped[id]);
+		if (redirects_nbr == -1)
+			return (FAILURE);
 		if (redirects_nbr)
 		{
 			malloc_file(data, 1, id, redirects_nbr + 1);
@@ -57,7 +59,7 @@ void	fill_redirects(t_data *data)
 		reverse_char(data->cmds_piped[id], 5, '<');
 		id++;
 	}
-	// debug_redirects(data);
+	return (SUCCESS);
 }
 
 static void	find_redirects(t_data *data, int id)
@@ -105,10 +107,10 @@ static int	save_file(char *cmd, char **file)
 	return (total - 1);
 }
 
-static int	count_redirects(t_data *data, char *s)
+static int	count_redirects(char *s)
 {
 	int		i;
-	int		aux;
+	int		j;
 	int		redirects_nbr;
 
 	i = -1;
@@ -117,24 +119,23 @@ static int	count_redirects(t_data *data, char *s)
 	{
 		if (s[i] != '>' && s[i] != '<')
 			continue ;
-		aux = i;
-		while (ft_strchr("><", s[aux]) && s[aux])
-			aux++;
-		if ((s[i] != s[i + 1] && ft_strchr("><", s[i + 1])) || aux - i > 2)
-			ft_printf(STDERR, DIFF_REDIR, s[i + 1 + (aux - i > 2)]);
-		else if (!s[aux])
+		j = i;
+		while (ft_strchr("><", s[i]) && s[i])
+			i++;
+		if ((s[j] != s[j + 1] && ft_strchr("><", s[j + 1])) || i - j > 2)
+			ft_printf(STDERR, DIFF_REDIR, s[i + 1 + (j - i > 2)]);
+		else if (!s[i])
 			ft_printf(STDERR, BL_IN_REDIR);
 		else
 		{
-			i += aux - i;
 			redirects_nbr++;
 			continue ;
 		}
-		exit_minishell(data, FAILURE);
+		return (-1);
 	}
 	return (redirects_nbr);
 }
- 
+
 static void	malloc_file(t_data *data, int string_level, int id, int bytes)
 {
 	if (!string_level)

@@ -32,6 +32,8 @@ SRC_FILES	=	main.c \
 				export.c \
 				unset.c \
 				str_tools.c \
+				std_fds.c \
+				here_document.c \
 				cd.c \
 				pwd.c \
 				list_tools.c \

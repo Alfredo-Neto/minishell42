@@ -1,40 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   std_fds.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/21 19:11:16 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/27 15:36:37 by vlima-nu         ###   ########.fr       */
+/*   Created: 2022/04/27 20:05:19 by vlima-nu          #+#    #+#             */
+/*   Updated: 2022/04/27 20:05:34 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	echo(t_data *data)
+void	restore_std_fds(int *fd)
 {
-	int	break_line;
-	int	index;
+	dup2(fd[STDOUT], STDOUT_FILENO);
+	close(fd[STDOUT]);
+	dup2(fd[STDIN], STDIN_FILENO);
+	close(fd[STDIN]);
+}
 
-	break_line = TRUE;
-	if (data->argve[0][1])
-	{
-		index = 1;
-		if (!ft_strncmp(data->argve[0][index], "-n", 3))
-		{
-			break_line = FALSE;
-			index = 2;
-		}
-		while (data->argve[0][index])
-		{
-			ft_putstr_fd(data->argve[0][index], 1);
-			if (data->argve[0][++index])
-				ft_putchar_fd(' ', 1);
-		}
-		if (break_line)
-			ft_putstr_fd("\n", 1);
-	}
-	else
-		ft_putstr_fd("\n", 1);
+void	save_std_fds(int *fd)
+{
+	fd[STDIN] = dup(STDIN_FILENO);
+	fd[STDOUT] = dup(STDOUT_FILENO);
 }

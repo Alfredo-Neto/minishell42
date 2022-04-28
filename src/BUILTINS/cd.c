@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 23:04:49 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/04/27 00:55:46 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/27 19:24:30 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@
 
 static int	too_many_arguments(char **str);
 static void	chdir_to_path(t_data *data, int path);
-static void	update_paths(t_data *data, char **old_dir);
+static void	update_paths(t_data *data, char *old_dir);
 
 int	cd(t_data *data, int id)
 {
 	char	*new_dir;
 	char	*old_dir;
 
-	if (too_many_arguments(data->argve[id]))
+	if (too_many_arguments(data->argve[id]) || data->number_of_pipes)
 		return (EXIT_FAILURE);
 	new_dir = data->argve[id][1];
 	old_dir = getcwd(NULL, 100);
@@ -35,9 +35,11 @@ int	cd(t_data *data, int id)
 	else if (chdir(new_dir))
 	{
 		ft_printf(STDERR, "Minishell: cd: %s: %s\n", new_dir, strerror(errno));
+		ft_super_free((void **)&old_dir);
 		return (EXIT_FAILURE);
 	}
-	update_paths(data, &old_dir);
+	update_paths(data, old_dir);
+	ft_super_free((void **)&old_dir);
 	return (EXIT_SUCCESS);
 }
 
@@ -63,18 +65,17 @@ static void	chdir_to_path(t_data *data, int path)
 		ft_printf(STDERR, "Minishell: cd: %s: %s\n", vdt.value, strerror(errno));
 }
 
-static void	update_paths(t_data *data, char **old_dir)
+static void	update_paths(t_data *data, char *old_dir)
 {
 	char	*curr_dir;
 	t_vdt	vdt;
 
 	curr_dir = getcwd(NULL, 100);
 	vdt = find_in_list("OLDPWD", data->vars);
-	update_envp(data, "OLDPWD", *old_dir, vdt);
-	change_in_list(data->vars, "OLDPWD", *old_dir);
+	update_envp(data, "OLDPWD", old_dir, vdt);
+	change_in_list(data->vars, "OLDPWD", old_dir);
 	vdt = find_in_list("PWD", data->vars);
 	update_envp(data, "PWD", curr_dir, vdt);
 	change_in_list(data->vars, "PWD", curr_dir);
-	ft_super_free((void *)*old_dir);
 	ft_super_free((void *)&curr_dir);
 }

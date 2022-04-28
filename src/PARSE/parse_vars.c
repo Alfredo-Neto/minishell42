@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 12:30:10 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/04/27 20:50:21 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/04/28 00:00:30 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,7 @@ void	update_envp(t_data *data, char* name, char* value, t_vdt vdt)
 	ft_strlcpy(new_var, name, name_size + 1);
 	ft_strlcat(new_var, "=", name_size + 3);
 	ft_strlcat(new_var, value, value_size + name_size + 4);
-	if (vdt.is_malloc)
-		free(data->envp[vdt.is_envp]);
+	free(data->envp[vdt.is_envp]);
 	data->envp[vdt.is_envp] = new_var;
 }
 

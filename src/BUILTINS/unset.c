@@ -6,28 +6,28 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 12:39:44 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/04/26 17:15:30 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/27 15:03:43 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	debug_unset(t_data *data)
-{
-	t_vars	*aux;
-	int		i;
+// void	debug_unset(t_data *data)
+// {
+// 	t_vars	*aux;
+// 	int		i;
 
-	i = 0;
-	while (data->envp[i])
-		printf("%s\n", data->envp[i++]);
-	printf("\nStruct:\n\n");
-	aux = data->vars;
-	while (aux)
-	{
-		printf("%s\n", aux->var_name);
-		aux = aux->next;
-	}
-}
+// 	i = 0;
+// 	while (data->envp[i])
+// 		printf("%s\n", data->envp[i++]);
+// 	printf("\nStruct:\n\n");
+// 	aux = data->vars;
+// 	while (aux)
+// 	{
+// 		printf("%s\n", aux->var_name);
+// 		aux = aux->next;
+// 	}
+// }
 
 void	unset(t_data *data, int id)
 {
@@ -54,8 +54,6 @@ void	unset(t_data *data, int id)
 			else
 				i++;
 		}
-		// Não está funcionando...
-		// delete_in_list(data->argve[id][arg++], &data->vars);
+		delete_in_list(data->argve[id][arg++], &data->vars);
 	}
-	debug_unset(data);
 }

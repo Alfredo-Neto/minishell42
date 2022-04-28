@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 22:54:50 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/23 14:45:51 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/26 20:45:46 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,11 +103,11 @@ void	ft_strcut(char **str, size_t init, size_t end)
 	char	*second;
 
 	if (init)
-		first = ft_substr(*str, 0, init); // malloc
+		first = ft_substr(*str, 0, init);
 	else
 		first = ft_strdup("");
-	if (end != ft_strlen(*str))
-		second = ft_substr(*str, end, ft_strlen(*str)); // malloc
+	if (end < ft_strlen(*str))
+		second = ft_substr(*str, end, ft_strlen(*str));
 	else
 		second = ft_strdup("");
 	free(*str);
