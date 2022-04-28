@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 23:04:49 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/04/27 19:24:30 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/28 00:01:33 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	cd(t_data *data, int id)
 	if (too_many_arguments(data->argve[id]) || data->number_of_pipes)
 		return (EXIT_FAILURE);
 	new_dir = data->argve[id][1];
-	old_dir = getcwd(NULL, 100);
+	old_dir = getcwd(NULL, 0);
 	if (!new_dir || !ft_strcmp("~", new_dir))
 		chdir_to_path(data, HOME);
 	else if (!ft_strcmp("-", new_dir))
@@ -70,7 +70,7 @@ static void	update_paths(t_data *data, char *old_dir)
 	char	*curr_dir;
 	t_vdt	vdt;
 
-	curr_dir = getcwd(NULL, 100);
+	curr_dir = getcwd(NULL, 0);
 	vdt = find_in_list("OLDPWD", data->vars);
 	update_envp(data, "OLDPWD", old_dir, vdt);
 	change_in_list(data->vars, "OLDPWD", old_dir);

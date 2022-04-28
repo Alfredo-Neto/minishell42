@@ -3,3 +3,4 @@ libft/*.o
 .vscode/*.json
 libft/libft.a
 minishell
+ft_printf/libftprintf.a

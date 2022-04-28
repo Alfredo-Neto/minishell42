@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/27 23:59:20 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/04/28 00:04:20 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 
 #define NO_PIPE		0
 
-#define NUMBER_OF_BUILTINS 8
+#define NUMBER_OF_BUILTINS 9
 
 #define EXIT		1
 #define CD			2
