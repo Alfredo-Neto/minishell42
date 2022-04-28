@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/28 00:04:20 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/04/28 15:18:11 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,6 +230,8 @@ int		ft_strcpy_handled(char **new, char const *src);
 int		ft_strjoin_handled(char **s1, char const *s2);
 int		ft_str_count(char **str);
 void	ft_strcut(char **str, size_t init, size_t end);
+char	*remount_var(char *var_name, char *var_value);
+
 
 //list_tools.c
 t_vars	*new_node(char *name, char *value);
@@ -240,6 +242,7 @@ t_vdt	find_in_list(char *var_name, t_vars *lst);
 void	change_in_list(t_vars *lst, char *var_name, char *var_value);
 int		is_envp(char *name, t_vars *lst);
 void	delete_in_list(char *var_name, t_vars **vars);
+void	upd_idx_in_list(t_vars *lst, char *var_name, int pos);
 
 //////////////////////////////////////////////////////////
 

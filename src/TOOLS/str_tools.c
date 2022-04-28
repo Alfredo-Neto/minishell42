@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_tools.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 22:54:50 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/26 20:45:46 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/28 15:29:13 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,4 +116,15 @@ void	ft_strcut(char **str, size_t init, size_t end)
 	free(second);
 	first = NULL;
 	second = NULL;
+}
+
+// remount var from var_name + '=' + var_value
+char *remount_var(char *var_name, char *var_value)
+{
+	char *name;
+
+	name = ft_strdup(var_name);
+	ft_strjoin_handled(&name, "=");
+	ft_strjoin_handled(&name, var_value);
+	return (name);
 }

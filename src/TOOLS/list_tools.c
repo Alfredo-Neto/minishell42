@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_tools.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 17:30:51 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/04/27 15:31:21 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/28 14:22:00 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ void	change_in_list(t_vars *lst, char *var_name, char *var_value)
 	}
 }
 
+// deletes an item in list
 void	delete_in_list(char *var_name, t_vars **vars)
 {
 	t_vars	*temp;
@@ -147,4 +148,19 @@ void	delete_in_list(char *var_name, t_vars **vars)
 	free(temp->var_name);
 	free(temp->var_value);
 	free(temp);
+}
+
+// updates the envp index in a list item
+void	upd_idx_in_list(t_vars *lst, char *var_name, int pos)
+{
+	if (lst != 0x0)
+		while (lst)
+		{
+			if (ft_strcmp(var_name, lst->var_name) == 0)
+			{
+				lst->env = pos;
+				return ;
+			}
+			lst = lst->next;
+		}
 }
