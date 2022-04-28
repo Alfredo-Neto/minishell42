@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:32:15 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/04/28 00:12:51 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/04/28 21:15:29 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,46 +15,116 @@
 // alloc a bigger envp
 // point older variables to new envp
 
-void	relocate_envp(char **old_envp, char **new_envp, char *new_var)
+int		relocate_envp(char **old_envp, char **new_envp, char *new_var)
 {
+	int	pos;
+
+	pos = 0;
 	while (*old_envp)
 	{
 		*new_envp = *old_envp;
 		old_envp++;
 		new_envp++;
+		pos++;
 	}
 	*new_envp = ft_strdup(new_var);
 	new_envp++;
 	*new_envp = NULL;
+	return (pos);
+}
+
+// calculates and allocate the new envp size
+char	**new_bigger_envp(char **old_envp)
+{
+	int		envp_size;
+
+	envp_size = ft_str_count(old_envp);
+	envp_size += 2;  // new variable + NULL
+	return((char**)malloc(sizeof(char**) * (envp_size)));
+}
+
+// reallocates envp when there is no var definition in input
+void	upd_envp_w_def(t_data *data, int i, int id)
+{
+	char	**new_envp;
+	int		pos;
+	char	*name;
+
+	new_envp = new_bigger_envp(data->envp);
+	pos = relocate_envp(data->envp, new_envp, data->argve[id][i]);
+	free(data->envp);
+	data->envp = new_envp;
+	name = get_var_name(data->argve[id][i]);
+	upd_idx_in_list(data->vars, name, pos);
+	free(name);
+}
+
+// reallocates envp when there is a var definition in input
+void	upd_envp_no_def(t_data *data, int i, int id)
+{
+	char	**new_envp;
+	int		pos;
+	char	*name;
+	t_vdt	vdt;
+
+	vdt = find_in_list(data->argve[id][i], data->vars);
+	if (*vdt.value != '$')
+	{
+		new_envp = new_bigger_envp(data->envp);
+		name = remount_var(data->argve[id][i], vdt.value);
+		pos = relocate_envp(data->envp, new_envp, name);
+		free(data->envp);
+		data->envp = new_envp;
+		upd_idx_in_list(data->vars, data->argve[id][i], pos);
+		free(name);
+	}
+}
+
+// sorts envp content and prints on screen
+void	sort_export(char **envp)
+{
+	char	**temp_envp;
+	int		i;
+	int		last;
+
+	temp_envp = envp;
+	temp_envp = new_bigger_envp(envp);
+	i = relocate_envp(envp, temp_envp, "----temp----");
+	last = i--;
+	while (i > 0)
+	{
+		if (ft_strcmp(temp_envp[i], temp_envp[i - 1]) < 0)
+		{
+			temp_envp[last] = temp_envp[i];
+			temp_envp[i] = temp_envp[i - 1];
+			temp_envp[i - 1] = temp_envp[last];
+			i = last;
+		}
+		i--;
+	}
+	while (i < last)
+		printf("declare -x %s\n", temp_envp[i++]);
+	free(temp_envp);
 }
 
 void	export(t_data *data, int id)
 {
-	char	*name;
-	char	*value;
-	char	**new_envp;
-	t_vdt	vdt;
-	int		envp_size;
 	int		i;
 
-	i = 1;
-	envp_size = ft_str_count(data->envp) + ft_str_count(data->argve[id]);
-	new_envp = (char**)malloc(sizeof(char**) * (envp_size + 2));
-	relocate_envp(data->envp, new_envp, data->argve[id][i]);
+	i = 0;
 	while (data->argve[id][i])
 	{
-		name = get_var_name(data->argve[id][i]);
-		value = get_var_value(data->argve[id][i]);
-		vdt = find_in_list(name, data->vars);
-		if (ft_strcmp(vdt.value, "$") == 0)
+		if (is_builtins(data->argve[id][i]) == 0)
 		{
-			free(value);
-			free(name);
-			break;
+			if (ft_strchr(data->argve[id][i], '='))
+				upd_envp_w_def(data, i, id);
+			else
+				upd_envp_no_def(data, i, id);
 		}
-		
-		free(value);
-		free(name);
+		else if (!(data->argve[id][i + 1]))
+		{
+			sort_export(data->envp);
+		}
 		i++;
 	}
 }
