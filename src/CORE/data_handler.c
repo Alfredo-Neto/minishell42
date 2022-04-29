@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 16:50:20 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/28 15:01:18 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/04/29 00:57:38 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	data_clean(t_data *data)
 	data->string = NULL;
 	data->input = NULL;
 	data->pid = NULL;
-	//double_free((void ***)&data->fd);
+	//double_free((void ***)&data->fd);  // MEMLEAK
 	double_free((void ***)&data->cmds_piped);
 	double_free((void ***)&data->tokens);
 	double_free((void ***)&data->file_mode);

@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:32:15 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/04/28 21:15:29 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/04/29 00:30:36 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,16 @@ void	upd_envp_w_def(t_data *data, int i, int id)
 	char	**new_envp;
 	int		pos;
 	char	*name;
+	t_vdt	vdt;
 
+	name = get_var_name(data->argve[id][i]);
+	vdt = find_in_list(name, data->vars);
+	if (vdt.is_envp >= 0)
+		return;
 	new_envp = new_bigger_envp(data->envp);
 	pos = relocate_envp(data->envp, new_envp, data->argve[id][i]);
 	free(data->envp);
 	data->envp = new_envp;
-	name = get_var_name(data->argve[id][i]);
 	upd_idx_in_list(data->vars, name, pos);
 	free(name);
 }
@@ -68,6 +72,8 @@ void	upd_envp_no_def(t_data *data, int i, int id)
 	t_vdt	vdt;
 
 	vdt = find_in_list(data->argve[id][i], data->vars);
+	if (vdt.is_envp >= 0)
+		return;
 	if (*vdt.value != '$')
 	{
 		new_envp = new_bigger_envp(data->envp);
@@ -122,9 +128,7 @@ void	export(t_data *data, int id)
 				upd_envp_no_def(data, i, id);
 		}
 		else if (!(data->argve[id][i + 1]))
-		{
 			sort_export(data->envp);
-		}
 		i++;
 	}
 }

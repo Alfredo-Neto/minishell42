@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   treat_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 02:55:15 by azamario          #+#    #+#             */
-/*   Updated: 2022/04/27 00:56:25 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/29 00:58:43 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	treat_input(t_data *data) // echo "'jorge' ale"
 
 int	treat_input_chars(t_data *data)
 {
-	if (treat_char(data, ' ', 1))
+	if (treat_char(data, ' ', 1))  // NOT WORKING
 		return (FAILURE);
 	treat_char(data, '|', 6);
 	treat_char(data, '>', 4);
