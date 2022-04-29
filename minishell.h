@@ -3,43 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/25 03:01:06 by azamario         ###   ########.fr       */
+/*   Updated: 2022/04/29 16:26:28 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
-#define MINISHELL_H
+# define MINISHELL_H
 
-#include "libft/libft.h"
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <signal.h>
+# include "libft/libft.h"
+# include <stdio.h>
+# include <string.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <signal.h>
 
-#define NO_PIPE		0
-
-#define NUMBER_OF_BUILTINS 7
-
-#define EXIT		1
-#define CD			2
-#define ECHO		3
-#define HELLO		4
-#define HELP		5
-#define PWD			6
-#define ENV			7
-#define	NONE		0
-
-#define SQUOTES 39
-#define DQUOTES 34
-#define NO_QUOTES_FOUND -1
+# define NO_PIPE		0
+# define NUMBER_OF_BUILTINS 7
+# define EXIT		1
+# define CD			2
+# define ECHO		3
+# define HELLO		4
+# define HELP		5
+# define PWD		6
+# define ENV		7
+# define NONE 		0
+# define SQUOTES	39
+# define DQUOTES	34
+# define NO_QUOTES_FOUND	-1
 
 // CÓDIGO DA MARCE
 # define OFF 0

@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 13:55:53 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/23 14:03:29 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/29 16:34:15 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
 // Create an aux **str based on pipe
-void	pull_pipe(t_data *data) //, char ***cmds_piped)
+void	pull_pipe(t_data *data)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	data->cmds_piped = ft_split(data->input, '|');

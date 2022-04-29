@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 16:50:20 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/23 14:46:22 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/29 17:00:48 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	init_command_path(t_data *data)
 	int		ret;
 
 	data->command_path = ft_split(getenv("PATH"), ':');
-	
 	i = 0;
 	while (data->command_path[i] != NULL)
 	{

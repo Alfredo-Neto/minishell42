@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: azamario <azamario@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 23:19:00 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/25 03:00:29 by azamario         ###   ########.fr       */
+/*   Updated: 2022/04/29 16:29:36 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	builtin_exec(t_data *data, int code)
 	else if (code == PWD)
 		pwd();
 	else if (code == ENV)
-	 	env(data);
+		env(data);
 }
 
 int	execute_pid(t_data *data, int id)

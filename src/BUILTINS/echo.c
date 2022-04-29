@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 19:11:16 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/23 13:30:20 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/29 16:08:13 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	echo(t_data *data)
 	int	index;
 
 	break_line = TRUE;
-	if (data->argve[0][1]) // parsed_str[0])
+	if (data->argve[0][1])
 	{
 		index = 1;
 		if (!ft_strncmp(data->argve[0][index], "-n", 3))

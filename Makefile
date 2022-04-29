@@ -32,9 +32,11 @@ SRC_FILES	=	main.c \
 				list_tools.c \
 				parse_vars.c \
 				treat_input.c \
+				treat_input_2.c \
 				pipes_fds_handling.c \
 				processes_handler.c \
 				signals.c
+				
 
 OBJ			=	$(SRC_FILES:%.c=%.o)
 OBJ_DIR		=	obj

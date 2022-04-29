@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 17:25:35 by azamario          #+#    #+#             */
-/*   Updated: 2022/04/20 18:12:49 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/29 16:07:49 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,6 @@
 // 	split[j] = NULL;
 // 	return (split);
 // }
-
-
 // vlima-nu
 
 static size_t	ft_wordlen(char const *s, char c)

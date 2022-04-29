@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirects.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: joeduard <joeduard@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 19:26:28 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/04/23 13:15:56 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/29 16:31:41 by joeduard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,8 @@ void	redirect_filter(t_data *data, int id)
 //     //Para teste em redir - abre
 //     data->file = (char ***)malloc(sizeof(char **) * (1)); //por bloco de pipe
 //     (data->file)[id] = (char **)malloc(sizeof(char *) * (3 + 1));
-//     printf("Está sendo redirecionado a arquivo! Arquivo criado: ver pasta testes\n");
+//     printf("Está sendo redirecionado a arquivo! Arquivo criado: 
+//													ver pasta testes\n");
 //     (data->file)[id][0] = "./testes/file_a.txt";// >
 //     (data->file)[id][1] = "./testes/file_b_append.txt";//
 //     (data->file)[id][2] = "./testes/file_c.txt";//
