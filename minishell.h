@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/05/01 13:44:55 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/01 17:48:28 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ typedef struct s_data
 //data_handler.c
 void	init_data(t_data *data, char **envp);
 void	init_command_path(t_data *data);
+void	backup_envp_parameter(t_data *data, char **envp);
+void	fill_list_vars(t_data *data);
 void	data_clean(t_data *data);
 void	double_free(void ***ptr);
 void	triple_free(char ****ptr, int number_of_ids);
