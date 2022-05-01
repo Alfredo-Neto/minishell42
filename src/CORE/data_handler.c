@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 16:50:20 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/27 21:48:37 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/01 13:44:58 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	data_clean(t_data *data)
 	data->string = NULL;
 	data->input = NULL;
 	data->pid = NULL;
-	double_free((void ***)&data->fd);
+	//double_free((void ***)&data->fd);  // MEMLEAK
 	double_free((void ***)&data->cmds_piped);
 	double_free((void ***)&data->tokens);
 	double_free((void ***)&data->file_mode);

@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 23:19:00 by joeduard          #+#    #+#             */
-/*   Updated: 2022/05/01 13:38:36 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/01 13:45:45 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	builtin_exec(t_data *data, int code, int id)
 	 	env(data);
 	else if (code == UNSET && !data->number_of_pipes)
 		unset(data, id);
+	else if (code == EXPORT && !data->number_of_pipes)
+		export(data, id);
 }
 
 int	execute_pid(t_data *data, int id)

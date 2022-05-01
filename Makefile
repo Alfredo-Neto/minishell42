@@ -1,6 +1,6 @@
 NAME		=	minishell
 CC			=	gcc
-CFLAGS		=	-Wall -Wextra -Werror -lreadline -g #-fsanitize=address 
+CFLAGS		=	-Wall -Wextra -Werror -lreadline -g -fsanitize=address 
 LIBFT_DIR	=	libft
 LIBFT		=	$(LIBFT_DIR)/libft.a
 LIBFLAGS	=	-L $(LIBFT_DIR) -lft
@@ -29,6 +29,7 @@ SRC_FILES	=	main.c \
 				help.c \
 				echo.c \
 				env.c \
+				export.c \
 				unset.c \
 				str_tools.c \
 				std_fds.c \

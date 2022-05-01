@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/05/01 13:38:28 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/01 13:44:55 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 
 #define NO_PIPE		0
 
-#define NUMBER_OF_BUILTINS 8
+#define NUMBER_OF_BUILTINS 9
 
 #define EXIT		1
 #define CD			2
@@ -36,7 +36,8 @@
 #define HELP		5
 #define PWD			6
 #define ENV			7
-#define UNSET		8
+#define EXPORT		8
+#define UNSET		9
 #define	NONE		0
 
 #define CHAR_MAX_NUM 	1024
@@ -213,6 +214,9 @@ void	echo(t_data *data, int id);
 //hello.c
 void	hello(void);
 
+//export.c
+void	export(t_data *data, int id);
+
 //unset.c
 void	unset(t_data *data, int id);
 
@@ -223,6 +227,8 @@ int		ft_strcpy_handled(char **new, char const *src);
 int		ft_strjoin_handled(char **s1, char const *s2);
 int		ft_str_count(char **str);
 void	ft_strcut(char **str, size_t init, size_t end);
+char	*remount_var(char *var_name, char *var_value);
+
 
 //list_tools.c
 t_vars	*new_node(char *name, char *value);
@@ -233,6 +239,7 @@ t_vdt	find_in_list(char *var_name, t_vars *lst);
 void	change_in_list(t_vars *lst, char *var_name, char *var_value);
 int		is_envp(char *name, t_vars *lst);
 void	delete_in_list(char *var_name, t_vars **vars);
+void	upd_idx_in_list(t_vars *lst, char *var_name, int pos);
 
 //////////////////////////////////////////////////////////
 
