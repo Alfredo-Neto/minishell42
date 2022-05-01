@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 17:30:51 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/04/27 15:31:21 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/27 21:52:50 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ t_vars	*new_node(char *name, char *value)
 	new->var_value = ft_strdup(value);
 	new->next = NULL;
 	new->env = -1;
-	new->is_malloc = 1;
 	return (new);
 }
 
@@ -94,7 +93,6 @@ t_vdt	find_in_list(char *var_name, t_vars *lst)
 			{
 				ret.value = lst->var_value;
 				ret.is_envp = lst->env;
-				ret.is_malloc = lst->is_malloc;
 				return (ret);
 			}
 			lst = lst->next;
@@ -113,7 +111,6 @@ void	change_in_list(t_vars *lst, char *var_name, char *var_value)
 			if (ft_strcmp(var_name, lst->var_name) == 0)
 			{
 				free(lst->var_value);
-				lst->is_malloc = 1;
 				lst->var_value = ft_strdup(var_value);
 				return ;
 			}

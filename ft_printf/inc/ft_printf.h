@@ -18,8 +18,8 @@
 # include <stdarg.h>
 # include "../../libft/libft.h"
 
-# define STDOUT 0
-# define STDIN 1
+# define STDOUT 1
+# define STDIN 0
 # define STDERR 2
 # define LIMIT 2147483614
 # define TYPES "cspdiuxX%"

@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/27 20:23:46 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/01 13:38:28 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ typedef struct	s_vdt
 {
 	char	*value;
 	int		is_envp;
-	int		is_malloc;
 }				t_vdt;
 
 typedef struct	s_vars
@@ -73,7 +72,6 @@ typedef struct	s_vars
 	char			*var_name;
 	char			*var_value;
 	int				env;
-	int				is_malloc;
 	struct s_vars	*next;
 }				t_vars;
 
@@ -82,7 +80,6 @@ typedef struct s_data
 	char	*username;
 	char	**envp;
 	char	**command_path;
-	char	*path_aux;
 	char	*input;
 	char	*old_input;
 	char	**cmds_piped;
@@ -170,8 +167,8 @@ int		is_builtins(char *cmd);
 //redirects.c
 void	interrupt_input_writing(int signal);
 void	redirect(char *file, int flags, int std_fd);
-int		heredoc(char *eof, int *fd);
-int		redirect_filter(t_data *data, int id, int *save_fd);
+int		heredoc(char *eof);
+int		redirect_filter(t_data *data, int id);
 
 //executor.c
 int		executor(t_data *data);
@@ -211,7 +208,7 @@ void	pwd(void);
 void	open_help(void);
 
 //echo.c
-void	echo(t_data *data);
+void	echo(t_data *data, int id);
 
 //hello.c
 void	hello(void);

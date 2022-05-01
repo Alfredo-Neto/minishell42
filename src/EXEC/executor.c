@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 23:19:00 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/27 20:00:57 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/01 13:38:36 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,19 @@
 void	ft_execve(t_data *data, int id)
 {
 	int		i;
+	char	*path_aux;
 
-	data->path_aux = NULL;
+	path_aux = NULL;
 	i = 0;
 	while (data->command_path[i])
 	{
-		data->path_aux = ft_strjoin(data->command_path[i], \
-			data->argve[id][0]);
-		if (execve(data->path_aux, data->argve[id], data->envp) < 0)
+		path_aux = ft_strjoin(data->command_path[i], data->argve[id][0]);
+		if (execve(path_aux, data->argve[id], data->envp) < 0)
 		{
-			if (data->path_aux)
+			if (path_aux)
 			{
-				free(data->path_aux);
-				data->path_aux = NULL;
+				free(path_aux);
+				path_aux = NULL;
 			}
 			i++;
 		}
@@ -38,12 +38,12 @@ void	ft_execve(t_data *data, int id)
 
 void	builtin_exec(t_data *data, int code, int id)
 {
-	if (code == EXIT)
+	if (code == EXIT && !data->number_of_pipes)
 		mini_exit(data);
-	else if (code == CD)
+	else if (code == CD && !data->number_of_pipes)
 		cd(data, id);
 	else if (code == ECHO)
-		echo(data);
+		echo(data, id);
 	else if (code == HELLO)
 		hello();
 	else if (code == HELP)
@@ -52,7 +52,7 @@ void	builtin_exec(t_data *data, int code, int id)
 		pwd();
 	else if (code == ENV)
 	 	env(data);
-	else if (code == UNSET)
+	else if (code == UNSET && !data->number_of_pipes)
 		unset(data, id);
 }
 
@@ -65,17 +65,8 @@ int	execute_pid(t_data *data, int id)
 	if (builtin_flag)
 		builtin_exec(data, builtin_flag, id);
 	else
-	{
-		data->pid[id] = fork();
-		if (data->pid[id] < 0)
-		{
-			perror("Minishell: Could not fork proccess: ");
-			return (FAILURE);
-		}
-		if (!data->pid[id])
-			ft_execve(data, id);
-	}
-	return (SUCCESS);
+		ft_execve(data, id);
+	exit(SUCCESS);
 }
 
 void	create_executor_parametes(t_data *data)
@@ -87,7 +78,7 @@ void	create_executor_parametes(t_data *data)
 	data->fd = (int **)ft_calloc(sizeof(int *), data->number_of_pipes + 1);
 	if (!data->pid || !data->fd)
 		exit_minishell(data, FAILURE);
-	while (i < data->number_of_pipes + 1)
+	while (i < data->number_of_pipes)
 	{
 		data->fd[i] = (int *)malloc(sizeof(int) * 2);
 		if (!data->fd[i])
@@ -96,27 +87,45 @@ void	create_executor_parametes(t_data *data)
 	}
 }
 
+int	execute_a_command(t_data *data)
+{
+	int		save_fd[2];
+	int		builtin;
+
+	builtin = is_builtins(data->argve[0][0]);
+	save_std_fds(save_fd);
+	redirect_filter(data, 0);
+	builtin_exec(data, builtin, 0);
+	restore_std_fds(save_fd);
+	return (SUCCESS);
+}
+
 int	executor(t_data *data)
 {
 	int		id;
-	int		save_fd[2];
 
-	id = 0;
-	check_exit(data);
-	create_executor_parametes(data);
-	open_pipes(data);
 	if (data->exec_flag == -1)
 		return (SUCCESS);
-	while (id < data->number_of_pipes + 1)
+	if (!data->number_of_pipes && is_builtins(data->argve[0][0]))
+		return (execute_a_command(data));
+	id = -1;
+	create_executor_parametes(data);
+	open_pipes(data);
+	while (++id < data->number_of_pipes + 1)
 	{
-		save_std_fds(save_fd);
-		close_other_fds(id, data);
-		file_descriptor_handler(id, data);
-		if (redirect_filter(data, id, save_fd))
-			break ;
-		if (execute_pid(data, id++))
-			break ;
-		restore_std_fds(save_fd);
+		data->pid[id] = fork();
+		if (data->pid[id] < 0)
+		{
+			perror("Minishell: Could not fork proccess: ");
+			return (FAILURE);
+		}
+		if (!data->pid[id])
+		{
+			close_other_fds(id, data);
+			file_descriptor_handler(id, data);
+			redirect_filter(data, id);
+			execute_pid(data, id);
+		}
 	}
 	main_process_handler(data);
 	return (SUCCESS); //tratar erros

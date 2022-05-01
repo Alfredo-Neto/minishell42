@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 19:26:28 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/04/27 19:59:14 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/01 13:38:02 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	redirect(char *file, int flags, int std_fd)
 	}
 }
 
-int	redirect_filter(t_data *data, int id, int *save_fd)
+int	redirect_filter(t_data *data, int id)
 {
 	int	i;
 
@@ -45,7 +45,7 @@ int	redirect_filter(t_data *data, int id, int *save_fd)
 		else if (data->file_mode[id][i] == LESS)
 			redirect(data->file[id][i], O_RDONLY | O_CREAT, STDIN);
 		else if (data->file_mode[id][i] == LESSLESS)
-			if (heredoc(data->file[id][i], save_fd))
+			if (heredoc(data->file[id][i]))
 				return (FAILURE);
 		i++;
 	}

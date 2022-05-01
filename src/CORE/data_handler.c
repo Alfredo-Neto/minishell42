@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 16:50:20 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/27 18:46:22 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/04/27 21:48:37 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	init_data(t_data *data, char **envp)
 
 	i = 0;
 	ft_bzero(data, sizeof(t_data));
-	data->envp = (char **)ft_calloc(ft_str_count(envp) + 20, sizeof(char *));
+	data->envp = (char **)ft_calloc(ft_str_count(envp) + 1, sizeof(char *));
 	if (!data->envp)
 		exit_minishell(data, FAILURE);
 	while (envp[i])
@@ -55,7 +55,6 @@ void	init_command_path(t_data *data)
 		grab_vars(data, data->envp[i]);
 		temp = last_in_list(data->vars);
 		temp->env = i++;
-		temp->is_malloc = 1;
 	}
 }
 

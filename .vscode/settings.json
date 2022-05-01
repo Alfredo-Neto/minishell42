@@ -5,5 +5,8 @@
 		"errno.h": "c",
 		"libft.h": "c",
 		"ft_printf.h": "c"
-	}
+	},
+	"cSpell.words": [
+		"argve"
+	]
 }
