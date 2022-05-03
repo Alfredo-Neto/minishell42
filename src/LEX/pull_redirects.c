@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fill_redirects.c                                   :+:      :+:    :+:   */
+/*   pull_redirects.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 20:31:09 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/04/27 13:51:43 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/02 22:19:30 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,31 +20,13 @@ static int	count_redirects(char *str);
 static int	save_file(char *cmd, char **file);
 static void	find_redirects(t_data *data, int id);
 
-// void	debug_redirects(t_data *data)
-// {
-// 	int		id;
-// 	int		k;
-
-// 	id = 0;
-// 	while (data->file[id])
-// 	{
-// 		k = -1;
-// 		ft_printf(STDERR, "\nid:%d\n", id);
-// 		while (data->file[id][++k])
-// 			ft_printf(STDERR, "\n%d %s\n", data->file_mode[id][k], data->file[id][k]);
-// 		ft_printf(STDERR, "\n%s-", data->cmds_piped[id]);
-// 		ft_printf(STDERR, "cmd_len:%ld\n", strlen(data->cmds_piped[id]));
-// 		id++;
-// 	}
-// }
-
-int	fill_redirects(t_data *data)
+int	pull_redirects(t_data *data)
 {
 	int		id;
 	int		redirects_nbr;
 
 	id = 0;
-	malloc_file(data, 0, 0, data->number_of_pipes + 1);
+	malloc_file(data, 0, 0, data->number_of_pipes + 2);
 	while (data->cmds_piped[id])
 	{
 		redirects_nbr = count_redirects(data->cmds_piped[id]);
@@ -55,8 +37,8 @@ int	fill_redirects(t_data *data)
 			malloc_file(data, 1, id, redirects_nbr + 1);
 			find_redirects(data, id);
 		}
-		reverse_char(data->cmds_piped[id], 4, '>');
-		reverse_char(data->cmds_piped[id], 5, '<');
+		unmask_character(data->cmds_piped[id], 4, '>');
+		unmask_character(data->cmds_piped[id], 5, '<');
 		id++;
 	}
 	return (SUCCESS);
@@ -83,8 +65,9 @@ static void	find_redirects(t_data *data, int id)
 			data->file_mode[id][k] *= 2;
 		j += 1 + (!(data->file_mode[id][k] % 2));
 		j += save_file(data->cmds_piped[id] + j, &data->file[id][k]);
-		ft_strcut(&data->cmds_piped[id], init - 1, j + 1);
-		if (!data->file[id][k])
+		ft_strcut(&data->cmds_piped[id], init - 1, j);
+		j -= init;
+		if (!data->file[id][k] || !data->cmds_piped[id])
 			exit_minishell(data, FAILURE);
 		k++;
 	}
@@ -104,7 +87,7 @@ static int	save_file(char *cmd, char **file)
 	if (cmd[total])
 		total--;
 	*file = ft_substr(cmd, init, total);
-	return (total - 1);
+	return (total);
 }
 
 static int	count_redirects(char *s)

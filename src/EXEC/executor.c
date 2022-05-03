@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 23:19:00 by joeduard          #+#    #+#             */
-/*   Updated: 2022/05/01 13:45:45 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/02 22:54:36 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_execve(t_data *data, int id)
 		}
 	}
 	ft_printf(STDERR, "Minishell: command not found: %s\n", data->argve[id][0]);
-	exit(FAILURE);
+	exit(127);
 }
 
 void	builtin_exec(t_data *data, int code, int id)
@@ -51,7 +51,7 @@ void	builtin_exec(t_data *data, int code, int id)
 	else if (code == PWD)
 		pwd();
 	else if (code == ENV)
-	 	env(data);
+		env(data);
 	else if (code == UNSET && !data->number_of_pipes)
 		unset(data, id);
 	else if (code == EXPORT && !data->number_of_pipes)
@@ -89,27 +89,12 @@ void	create_executor_parametes(t_data *data)
 	}
 }
 
-int	execute_a_command(t_data *data)
-{
-	int		save_fd[2];
-	int		builtin;
-
-	builtin = is_builtins(data->argve[0][0]);
-	save_std_fds(save_fd);
-	redirect_filter(data, 0);
-	builtin_exec(data, builtin, 0);
-	restore_std_fds(save_fd);
-	return (SUCCESS);
-}
-
 int	executor(t_data *data)
 {
 	int		id;
 
-	if (data->exec_flag == -1)
-		return (SUCCESS);
 	if (!data->number_of_pipes && is_builtins(data->argve[0][0]))
-		return (execute_a_command(data));
+		return (execute_one_cmd(data));
 	id = -1;
 	create_executor_parametes(data);
 	open_pipes(data);
@@ -130,5 +115,5 @@ int	executor(t_data *data)
 		}
 	}
 	main_process_handler(data);
-	return (SUCCESS); //tratar erros
+	return (SUCCESS);
 }

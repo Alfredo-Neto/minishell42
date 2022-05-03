@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:32:15 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/04/29 00:30:36 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/05/02 22:58:52 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // alloc a bigger envp
 // point older variables to new envp
 
-int		relocate_envp(char **old_envp, char **new_envp, char *new_var)
+int	relocate_envp(char **old_envp, char **new_envp, char *new_var)
 {
 	int	pos;
 
@@ -39,8 +39,8 @@ char	**new_bigger_envp(char **old_envp)
 	int		envp_size;
 
 	envp_size = ft_str_count(old_envp);
-	envp_size += 2;  // new variable + NULL
-	return((char**)malloc(sizeof(char**) * (envp_size)));
+	envp_size += 2;
+	return ((char **)malloc(sizeof(char **) * (envp_size)));
 }
 
 // reallocates envp when there is no var definition in input
@@ -54,7 +54,7 @@ void	upd_envp_w_def(t_data *data, int i, int id)
 	name = get_var_name(data->argve[id][i]);
 	vdt = find_in_list(name, data->vars);
 	if (vdt.is_envp >= 0)
-		return;
+		return ;
 	new_envp = new_bigger_envp(data->envp);
 	pos = relocate_envp(data->envp, new_envp, data->argve[id][i]);
 	free(data->envp);
@@ -73,7 +73,7 @@ void	upd_envp_no_def(t_data *data, int i, int id)
 
 	vdt = find_in_list(data->argve[id][i], data->vars);
 	if (vdt.is_envp >= 0)
-		return;
+		return ;
 	if (*vdt.value != '$')
 	{
 		new_envp = new_bigger_envp(data->envp);

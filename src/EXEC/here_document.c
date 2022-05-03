@@ -6,16 +6,41 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 18:18:13 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/05/01 13:37:53 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/02 22:29:37 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-
 #define TMP_FILE	"/tmp/minishell_here_document"
 #define NO_DELIMITER "minishell: warning: here-document at \
 line %d delimited by end-of-file (wanted `%s')"
+
+static int	create_tmp_file(void);
+static void	redirect_tmp_file_input(void);
+static void	clear_tmp_file(void);
+static void	write_input(char *eof, int tmp_file);
+
+int	heredoc(char *eof)
+{
+	int		tmp_file;
+	int		status;
+
+	signal(SIGINT, SIG_IGN);
+	tmp_file = create_tmp_file();
+	if (tmp_file < 0)
+		return (FAILURE);
+	if (!fork())
+		write_input(eof, tmp_file);
+	wait(&status);
+	if (status == 130)
+	{
+		clear_tmp_file();
+		return (FAILURE);
+	}
+	redirect_tmp_file_input();
+	return (SUCCESS);
+}
 
 static int	create_tmp_file(void)
 {
@@ -45,7 +70,7 @@ static void	clear_tmp_file(void)
 	close(tmp_fd);
 }
 
-void	write_input(char *eof, int tmp_file)
+static void	write_input(char *eof, int tmp_file)
 {
 	char	*input;
 	int		line;
@@ -57,7 +82,7 @@ void	write_input(char *eof, int tmp_file)
 		input = readline("> ");
 		if (!input)
 		{
-			ft_printf(STDERR, NO_DELIMITER, line ,eof);
+			ft_printf(STDERR, NO_DELIMITER, line, eof);
 			exit(0);
 		}
 		if (!ft_strcmp(input, eof))
@@ -69,25 +94,4 @@ void	write_input(char *eof, int tmp_file)
 		free(input);
 		line++;
 	}
-}
-
-int	heredoc(char *eof)
-{
-	int		tmp_file;
-	int		status;
-
-	signal(SIGINT, SIG_IGN);
-	tmp_file = create_tmp_file();
-	if (tmp_file < 0)
-		return (FAILURE);
-	if (!fork())
-		write_input(eof, tmp_file);
-	wait(&status);
-	if (status == 130)
-	{
-		clear_tmp_file();
-		return (FAILURE);
-	}
-	redirect_tmp_file_input();
-	return (SUCCESS);
 }

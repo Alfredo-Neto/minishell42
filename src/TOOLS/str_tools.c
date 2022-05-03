@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_tools.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 22:54:50 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/28 15:29:13 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/05/02 23:15:44 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,20 +54,6 @@ int	ft_str_count(char **str)
 	return (count);
 }
 
-static void	copylen(char *scpy, const char *s)
-{
-	int	i;
-
-	if (!s)
-		return ;
-	i = 0;
-	while (s[i] != '\0')
-	{
-		scpy[i] = s[i];
-		i++;
-	}
-}
-
 // tratada: libera string antiga - adiciona s2 ao final de s1
 int	ft_strjoin_handled(char **s1, char const *s2)
 {
@@ -81,12 +67,11 @@ int	ft_strjoin_handled(char **s1, char const *s2)
 	s = (char *)malloc(len * sizeof(char));
 	if (!s)
 		return (FAILURE);
-	copylen(s, *s1);
 	k = ft_strlen(*s1);
-	copylen(&s[k], s2);
-	k = k + ft_strlen(s2);
-	s[k] = '\0';
-	free(*s1); //desprezo s1 antiga
+	ft_strlcpy(s, *s1, k + 1);
+	ft_strlcpy(s + k, s2, len - k);
+	s[len - 1] = '\0';
+	free(*s1);
 	*s1 = s;
 	return (SUCCESS);
 }
@@ -119,9 +104,9 @@ void	ft_strcut(char **str, size_t init, size_t end)
 }
 
 // remount var from var_name + '=' + var_value
-char *remount_var(char *var_name, char *var_value)
+char	*remount_var(char *var_name, char *var_value)
 {
-	char *name;
+	char	*name;
 
 	name = ft_strdup(var_name);
 	ft_strjoin_handled(&name, "=");

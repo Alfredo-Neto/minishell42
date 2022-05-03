@@ -1,6 +1,6 @@
 NAME		=	minishell
 CC			=	gcc
-CFLAGS		=	-Wall -Wextra -Werror -lreadline -g -fsanitize=address 
+CFLAGS		=	-Wall -Wextra -Werror -lreadline -g #-fsanitize=address 
 LIBFT_DIR	=	libft
 LIBFT		=	$(LIBFT_DIR)/libft.a
 LIBFLAGS	=	-L $(LIBFT_DIR) -lft
@@ -15,11 +15,12 @@ HEADERS		=	minishell.h
 SRC_FILES	=	main.c \
 				minishell.c \
 				hello.c \
-				data_handler.c \
+				clear_data.c \
+				init_data.c \
 				prompt_take_input.c \
 				history.c \
 				lexer.c \
-				fill_redirects.c \
+				pull_redirects.c \
 				parser.c \
 				redirects.c \
 				expand_variables.c \
@@ -32,13 +33,15 @@ SRC_FILES	=	main.c \
 				export.c \
 				unset.c \
 				str_tools.c \
-				std_fds.c \
 				here_document.c \
+				execute_one_cmd.c \
+				mask_n_unmask_chars.c \
 				cd.c \
 				pwd.c \
 				list_tools.c \
 				parse_vars.c \
-				treat_input.c \
+				treat_quotes.c \
+				mask_dollar.c \
 				pipes_fds_handling.c \
 				processes_handler.c \
 				signals.c

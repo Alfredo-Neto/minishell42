@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 17:30:51 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/05/01 13:45:54 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/02 23:20:23 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ t_vdt	find_in_list(char *var_name, t_vars *lst)
 	}
 	var_name--;
 	if (lst != 0x0)
+	{
 		while (lst)
 		{
 			if (ft_strcmp(var_name, lst->var_name) == 0)
@@ -97,6 +98,7 @@ t_vdt	find_in_list(char *var_name, t_vars *lst)
 			}
 			lst = lst->next;
 		}
+	}
 	ret.value = "$";
 	return (ret);
 }
@@ -151,6 +153,7 @@ void	delete_in_list(char *var_name, t_vars **vars)
 void	upd_idx_in_list(t_vars *lst, char *var_name, int pos)
 {
 	if (lst != 0x0)
+	{
 		while (lst)
 		{
 			if (ft_strcmp(var_name, lst->var_name) == 0)
@@ -160,4 +163,5 @@ void	upd_idx_in_list(t_vars *lst, char *var_name, int pos)
 			}
 			lst = lst->next;
 		}
+	}
 }

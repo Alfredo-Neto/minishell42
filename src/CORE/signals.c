@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 21:52:40 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/04/27 18:58:30 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/02 22:41:52 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	new_prompt_mini(int signal)
 {
 	(void)signal;
 	write(1, "\n", 1);
-	rl_on_new_line(); //Como funciona?
-	rl_redisplay();  //Como funciona?
+	rl_on_new_line();
+	rl_redisplay();
 }
 
 /*

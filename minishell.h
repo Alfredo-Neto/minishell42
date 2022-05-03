@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/05/01 17:48:28 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/05/02 22:22:53 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,15 +94,11 @@ typedef struct s_data
 	char	***file;
 	char	**file_mode;
 	char	**tokens;
-	char	*string;
 }				t_data;
 
 //..................................................CORE
 //data_handler.c
 void	init_data(t_data *data, char **envp);
-void	init_command_path(t_data *data);
-void	backup_envp_parameter(t_data *data, char **envp);
-void	fill_list_vars(t_data *data);
 void	data_clean(t_data *data);
 void	double_free(void ***ptr);
 void	triple_free(char ****ptr, int number_of_ids);
@@ -136,22 +132,31 @@ void	pull_pipe(t_data *data);
 void	pull_space(t_data *data);
 
 //---------LEXER------------//
-int		treat_input(t_data *data);
-int		treat_input_chars(t_data *data);
-int		treat_char(t_data *data, char c, int number);
+int		pull_quotes(t_data *data);
+int		mask_all_chars(t_data *data);
+int		mask_character(char *str, char c, int number);
 
 void	treat_token_strings(t_data *data);
 void	treat_quotes(char *token);
 void	no_quotes(char *token);
-void	reverse_char(char *cmd, int nbr, char c);
+void	unmask_character(char *cmd, int nbr, char c);
 
 char	*reverse_quotes_treat(char *str);
 char	*tokens_to_string(char const *s1, char const *s2);
-int		fill_redirects(t_data *data);
+int		pull_redirects(t_data *data);
 
 //..................................................PARSE
 //parser.c  -  quotes ok: analisa!
 void	parser(t_data *data);
+
+//mask_dollar.c
+void	mask_dollar(t_data *data);
+
+// mask_n_unmask_chars.c
+char	*reverse_quotes_treat(char *str);
+void	unmask_character(char *cmd, int nbr, char c);
+int		mask_all_chars(t_data *data);
+int		mask_character(char *str, char c, int number);
 
 //parse_vars.c
 char	*get_var_value(char *input);
@@ -169,9 +174,8 @@ int		is_builtins(char *cmd);
 
 //redirects.c
 void	interrupt_input_writing(int signal);
-void	redirect(char *file, int flags, int std_fd);
-int		heredoc(char *eof);
 int		redirect_filter(t_data *data, int id);
+int		heredoc(char *eof);
 
 //executor.c
 int		executor(t_data *data);
@@ -189,9 +193,8 @@ int		file_descriptor_handler(int id, t_data *data);
 int		scope_fd_select(int id, t_data *data);
 int		redir_execute_pid(t_data *data, int id);
 
-//std_fds.c
-void	restore_std_fds(int *fd);
-void	save_std_fds(int *fd);
+//execute_one_cmd.c
+int		execute_one_cmd(t_data *data);
 
 //processes_handler.c
 void	main_process_handler(t_data *data);

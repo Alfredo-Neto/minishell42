@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_vars.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 12:30:10 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/04/28 00:00:30 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/05/02 23:04:46 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,12 @@ char	*get_var_value(char *input)
 	return (value);
 }
 
-void	update_envp(t_data *data, char* name, char* value, t_vdt vdt)
+void	update_envp(t_data *data, char *name, char *value, t_vdt vdt)
 {
-	int	var_size;
-	int	name_size;
-	int	value_size;
-	char *new_var;
+	int		var_size;
+	int		name_size;
+	int		value_size;
+	char	*new_var;
 
 	name_size = ft_strlen(name);
 	value_size = ft_strlen(value);
