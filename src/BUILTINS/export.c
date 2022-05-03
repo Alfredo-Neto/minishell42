@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:32:15 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/05/02 22:58:52 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/03 23:53:17 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,16 @@ void	sort_export(char **envp)
 	free(temp_envp);
 }
 
+int		invalid_var(char ***argve, int id)
+{
+	if (ft_strcmp(argve[id][0], "export") == 0 && 
+		ft_strcmp(argve[id][1], "$") == 0 &&
+		argve[id][2] == 0x0)
+		return TRUE;
+	else
+		return FALSE;
+}
+
 void	export(t_data *data, int id)
 {
 	int		i;
@@ -122,9 +132,11 @@ void	export(t_data *data, int id)
 	{
 		if (is_builtins(data->argve[id][i]) == 0)
 		{
-			if (ft_strchr(data->argve[id][i], '='))
+			if (invalid_var(data->argve, id))
+				printf("bash: export: `$': not a valid identifier\n");
+			else if (ft_strchr(data->argve[id][i], '='))
 				upd_envp_w_def(data, i, id);
-			else
+			else 
 				upd_envp_no_def(data, i, id);
 		}
 		else if (!(data->argve[id][i + 1]))
