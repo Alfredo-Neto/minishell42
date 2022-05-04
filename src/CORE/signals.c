@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 21:52:40 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/05/02 22:41:52 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/04 01:15:40 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,16 @@ void	handler(int signal)
 		write(1, "\n", 1);
 		exit(130);
 	}
-	else if (signal == SIGTERM)
-	{
-		printf("Terminated\n");
-		exit(131);
-	}
 	else
 	{
-		printf("Coredumped\n");
-		exit(1);
+		printf("Quit (core dumped)\n");
+		exit(131);
 	}
 }
 
 void	exec_signals(void)
 {
 	signal(SIGINT, handler);
-	signal(SIGTERM, handler);
 	signal(SIGQUIT, handler);
 }
 
