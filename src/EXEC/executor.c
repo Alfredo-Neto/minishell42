@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 23:19:00 by joeduard          #+#    #+#             */
-/*   Updated: 2022/05/04 00:21:59 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/05/04 00:24:41 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,10 @@ int	executor(t_data *data)
 {
 	int		id;
 
-	if (data->exec_flag == -1)  // added to avoid execution if input is var definition
-		return (SUCCESS);
 	if (!data->number_of_pipes && is_builtins(data->argve[0][0]))
 		return (execute_one_cmd(data));
+	if (data->exec_flag == -1)  // added to avoid execution if input is var definition
+		return (SUCCESS);
 	id = -1;
 	create_executor_parametes(data);
 	open_pipes(data);
