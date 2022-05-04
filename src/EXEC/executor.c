@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 23:19:00 by joeduard          #+#    #+#             */
-/*   Updated: 2022/05/02 22:54:36 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/04 00:21:59 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ int	executor(t_data *data)
 {
 	int		id;
 
+	if (data->exec_flag == -1)  // added to avoid execution if input is var definition
+		return (SUCCESS);
 	if (!data->number_of_pipes && is_builtins(data->argve[0][0]))
 		return (execute_one_cmd(data));
 	id = -1;

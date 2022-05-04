@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:32:15 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/05/03 23:53:17 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/05/04 00:06:03 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ void	sort_export(char **envp)
 	free(temp_envp);
 }
 
+// checks if expression is "export $", an invalid input
 int		invalid_var(char ***argve, int id)
 {
 	if (ft_strcmp(argve[id][0], "export") == 0 && 
