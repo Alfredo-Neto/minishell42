@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:32:15 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/05/04 01:03:02 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/05/04 01:07:56 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void	sort_export(char **envp)
 	temp_envp = new_bigger_envp(envp);
 	i = relocate_envp(envp, temp_envp, "----temp----");
 	last = i--;
+	free(temp_envp[last]);
 	while (i > 0)
 	{
 		if (ft_strcmp(temp_envp[i], temp_envp[i - 1]) < 0)
@@ -110,7 +111,6 @@ void	sort_export(char **envp)
 	}
 	while (i < last)
 		printf("declare -x %s\n", temp_envp[i++]);
-	free(temp_envp[last]);
 	free(temp_envp);
 }
 
