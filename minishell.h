@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lang <lang@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/05/04 01:27:02 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/05/04 13:01:49 by lang             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@
 #define SQUOTES 39
 #define DQUOTES 34
 #define NO_QUOTES_FOUND -1
+
+#define NO_SLASH_FOUND -1
 
 // CÓDIGO DA MARCE
 # define OFF 0
@@ -145,6 +147,9 @@ void	unmask_character(char *cmd, int nbr, char c);
 char	*reverse_quotes_treat(char *str);
 char	*tokens_to_string(char const *s1, char const *s2);
 int		pull_redirects(t_data *data);
+
+//absolute_path_tester.c - to executor
+int		absolute_path_tester(char *cmd);
 
 //..................................................PARSE
 //parser.c  -  quotes ok: analisa!

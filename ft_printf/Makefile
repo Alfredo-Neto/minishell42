@@ -1,6 +1,6 @@
 NAME		=	libftprintf.a
-FLAGS		=	-Wall -Wextra -Werror -g3 -O3
-CC			= 	clang
+FLAGS		=	-Wall -Wextra #-Werror -g3 -O3
+#CC			= 	clang
 RM			=	rm -fr
 MK			=	make -C
 LIBPATH		=	../libft

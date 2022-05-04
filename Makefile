@@ -44,7 +44,8 @@ SRC_FILES	=	main.c \
 				mask_dollar.c \
 				pipes_fds_handling.c \
 				processes_handler.c \
-				signals.c
+				signals.c \
+				absolute_path_tester.c
 
 OBJ			=	$(SRC_FILES:%.c=%.o)
 OBJ_DIR		=	obj
