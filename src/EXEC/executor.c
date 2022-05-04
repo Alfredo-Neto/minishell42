@@ -6,69 +6,46 @@
 /*   By: lang <lang@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 23:19:00 by joeduard          #+#    #+#             */
-/*   Updated: 2022/05/04 13:42:04 by lang             ###   ########.fr       */
+/*   Updated: 2022/05/04 14:05:50 by lang             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
 
-//static int	find_path_and_execve(t_data *data, int id)
-//{
-//	int		i;
-//	char	*path_aux;
-//
-//	i = 0;
-//	path_aux = NULL;
-//	while (data->command_path[i])
-//	{
-//		path_aux = ft_strjoin(data->command_path[i], data->argve[id][0]);
-//		if (execve(path_aux, data->argve[id], data->envp) < 0)
-//		{
-//			if (path_aux)
-//			{
-//				free(path_aux);
-//				path_aux = NULL;
-//			}
-//			i++;
-//		}
-//	}
-//	ft_printf(STDERR, "Minishell: command not found: %s\n", data->argve[id][0]);
-//	return FAILURE;
-//}
+static int	find_path_and_execve(t_data *data, int id)
+{
+	int		i;
+	char	*path_aux;
+
+	i = 0;
+	path_aux = NULL;
+	while (data->command_path[i])
+	{
+		path_aux = ft_strjoin(data->command_path[i], data->argve[id][0]);
+		if (execve(path_aux, data->argve[id], data->envp) < 0)
+		{
+			if (path_aux)
+			{
+				free(path_aux);
+				path_aux = NULL;
+			}
+			i++;
+		}
+	}
+	ft_printf(STDERR, "Minishell: command not found: %s\n", data->argve[id][0]);
+	return FAILURE;
+}
 
 void	ft_execve(t_data *data, int id)
 {	
 	if (absolute_path_tester (data->argve[id][0]))
 	{
-		printf("Comando: %s\n", data->argve[id][0]);
 		execve(data->argve[id][0], data->argve[id], data->envp);
 		ft_printf(STDERR, "Minishell: %s: No such file or directory\n", data->argve[id][0]);
 	}
 	else
-		//find_path_and_execve(data, id);
-	{
-		int		i;
-		char	*path_aux;
-
-		printf("Comando: %s\n", data->argve[id][0]);
-		i = 0;
-		path_aux = NULL;
-		while (data->command_path[i])
-		{
-			path_aux = ft_strjoin(data->command_path[i], data->argve[id][0]);
-			if (execve(path_aux, data->argve[id], data->envp) < 0)
-			{
-				if (path_aux)
-				{
-					free(path_aux);
-					path_aux = NULL;
-				}
-				i++;
-			}
-		}
-		ft_printf(STDERR, "Minishell: command not found: %s\n", data->argve[id][0]);
-	}
+		find_path_and_execve(data, id);	
 	exit(127);
 }
 
