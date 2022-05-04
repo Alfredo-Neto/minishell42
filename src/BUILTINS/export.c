@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:32:15 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/05/04 00:06:03 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/05/04 01:03:02 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ void	sort_export(char **envp)
 	}
 	while (i < last)
 		printf("declare -x %s\n", temp_envp[i++]);
+	free(temp_envp[last]);
 	free(temp_envp);
 }
 
