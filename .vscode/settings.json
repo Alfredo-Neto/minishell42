@@ -1,5 +1,13 @@
 {
 	"files.associations": {
-		"minishell.h": "c"
-	}
+		"minishell.h": "c",
+		"type_traits": "c"
+		"type_traits": "c",
+		"errno.h": "c",
+		"libft.h": "c",
+		"ft_printf.h": "c"
+	},
+	"cSpell.words": [
+		"argve"
+	]
 }
