@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_variables.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 15:34:28 by ebresser          #+#    #+#             */
-/*   Updated: 2022/05/02 23:01:14 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/04 00:02:27 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void	expander(t_data *data)
 		if (*vdt.value == '$')
 		{
 			data->exec_flag = -1;
+			data->argve[0][i] = 0x0;
 			return ;
 		}
 		cmdstr = new_argve(vdt.value, data);
