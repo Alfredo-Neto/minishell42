@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 23:19:00 by joeduard          #+#    #+#             */
-/*   Updated: 2022/05/04 00:24:41 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/05/04 01:27:21 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ int	executor(t_data *data)
 			redirect_filter(data, id);
 			execute_pid(data, id);
 		}
+		waitpid(data->pid[id], &data->child_ret, 0);
 	}
 	main_process_handler(data);
 	return (SUCCESS);
