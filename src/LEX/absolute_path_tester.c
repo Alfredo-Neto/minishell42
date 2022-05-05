@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   absolute_path_tester.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lang <lang@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 12:48:06 by lang              #+#    #+#             */
-/*   Updated: 2022/05/04 13:16:44 by lang             ###   ########.fr       */
+/*   Updated: 2022/05/05 20:44:43 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,11 @@ int absolute_path_tester(char *cmd)
 {
 	if (!cmd)
 		return (FALSE);
-	else
+	while (*cmd)
 	{
-		while(*cmd)
-		{
-			if (*cmd == '/')
-				return (TRUE);
-			cmd++;
-		}
+		if (*cmd == '/')
+			return (TRUE);
+		cmd++;
 	}
 	return (FALSE);
 }

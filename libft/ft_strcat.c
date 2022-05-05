@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   processes_handler.c                                :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/08 23:19:00 by joeduard          #+#    #+#             */
-/*   Updated: 2022/05/04 16:04:17 by vlima-nu         ###   ########.fr       */
+/*   Created: 2021/10/07 00:41:49 by vlima-nu          #+#    #+#             */
+/*   Updated: 2021/10/07 00:41:54 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
-
-void	main_process_handler(t_data *data)
+char	*ft_strcat(char *s1, char *s2)
 {
-	int	count;
+	unsigned int	i;
+	unsigned int	j;
 
-	count = 0;
-	while (count < data->number_of_pipes)
-	{
-		close(data->fd[count][0]);
-		close(data->fd[count][1]);
-		count++;
-	}
-	count = 0;
-	while (count < data->number_of_pipes + 1)
-		waitpid(data->pid[count++], NULL, 0);
+	i = 0;
+	j = 0;
+	while (s1[i])
+		i++;
+	while (s2[j])
+		s1[i++] = s2[j++];
+	s1[i] = 0;
+	return (s1);
 }

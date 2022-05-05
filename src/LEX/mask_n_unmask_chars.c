@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 22:18:03 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/05/02 22:22:25 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/05 12:05:17 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	mask_all_chars(t_data *data)
 {
 	if (mask_character(data->input, ' ', 1))
 		return (FAILURE);
+	mask_character(data->input, '&', 8);
 	mask_character(data->input, '|', 6);
 	mask_character(data->input, '>', 4);
 	mask_character(data->input, '<', 5);

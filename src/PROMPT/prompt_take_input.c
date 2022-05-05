@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 20:56:26 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/23 13:25:59 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/05 17:18:49 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,11 @@ void	prompt(t_data *data)
 	char	*buf;
 	char	*prompt_str;
 	char	*path;
+	char	*username;
 
-	data->username = getenv("USER");
+	username = getenv("USER");
 	getcwd(cwd, sizeof(cwd));
-	buf = ft_strjoin("\e[32m", data->username);
+	buf = ft_strjoin("\e[32m", username);
 	prompt_str = ft_strjoin(buf, ":\e[39m");
 	path = ft_strjoin("\e[35m", cwd);
 	free(buf);
@@ -34,23 +35,14 @@ void	prompt(t_data *data)
 	free(path);
 }
 
-//Function to print Current Directory.
-void	print_dir(void)
-{
-	char	cwd[1024];
-
-	getcwd(cwd, sizeof(cwd));
-	printf("Dir: %s\n", cwd);
-}
-
 /** Function to take input - MALLOC input*/
 int	take_input(t_data *data)
 {
 	prompt(data);
 	if (!data->input)
-		exit_minishell(data, FAILURE);
+		exit_minishell(data, SUCCESS);
 	if (ft_strlen(data->input) != 0)
-	{		
+	{
 		put_on_history(data->input, data->old_input);
 		if (data->old_input)
 			free(data->old_input);
