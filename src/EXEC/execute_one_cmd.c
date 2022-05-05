@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 20:05:19 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/05/02 19:59:20 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/05 11:22:17 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int	execute_one_cmd(t_data *data)
 
 	builtin = is_builtins(data->argve[0][0]);
 	save_std_fds(save_fd);
-	redirect_filter(data, 0);
-	builtin_exec(data, builtin, 0);
+	if (!redirect_filter(data, 0))
+		builtin_exec(data, builtin, 0);
 	restore_std_fds(save_fd);
 	return (SUCCESS);
 }

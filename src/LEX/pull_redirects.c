@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 20:31:09 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/05/02 22:19:30 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/05 10:16:22 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ static void	find_redirects(t_data *data, int id)
 			data->file_mode[id][k] *= 2;
 		j += 1 + (!(data->file_mode[id][k] % 2));
 		j += save_file(data->cmds_piped[id] + j, &data->file[id][k]);
-		ft_strcut(&data->cmds_piped[id], init - 1, j);
-		j -= init;
+		ft_strcut(&data->cmds_piped[id], init, j);
+		j = init - 1;
 		if (!data->file[id][k] || !data->cmds_piped[id])
 			exit_minishell(data, FAILURE);
 		k++;
@@ -75,19 +75,21 @@ static void	find_redirects(t_data *data, int id)
 
 static int	save_file(char *cmd, char **file)
 {
-	int		total;
+	int		end;
 	int		init;
 
-	total = 0;
-	while (cmd[total] == ' ' && cmd[total])
-		total++;
-	init = total;
-	while (!ft_strchr(" ><", cmd[total]) && cmd[total])
-		total++;
-	if (cmd[total])
-		total--;
-	*file = ft_substr(cmd, init, total);
-	return (total);
+	end = 0;
+	while (cmd[end] == ' ' && cmd[end])
+		end++;
+	init = end;
+	while (!ft_strchr(" ><", cmd[end]) && cmd[end])
+		end++;
+	if (cmd[end])
+		end--;
+	*file = ft_substr(cmd, init, end);
+	if (cmd[end])
+		end++;
+	return (end);
 }
 
 static int	count_redirects(char *s)

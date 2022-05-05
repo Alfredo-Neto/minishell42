@@ -41,6 +41,7 @@ SRC_FILES	=	main.c \
 				list_tools.c \
 				parse_vars.c \
 				treat_quotes.c \
+				treat_spaces.c \
 				mask_dollar.c \
 				pipes_fds_handling.c \
 				processes_handler.c \

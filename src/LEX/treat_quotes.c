@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 02:55:15 by azamario          #+#    #+#             */
-/*   Updated: 2022/05/02 22:25:19 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/05 20:14:46 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	pull_quotes(t_data *data)
 {
 	if (mask_all_chars(data))
 		return (FAILURE);
-	data->tokens = ft_split(data->input, ' ');
+	remove_extra_spaces(data);
 	treat_token_strings(data);
 	return (SUCCESS);
 }
@@ -32,30 +32,32 @@ int	pull_quotes(t_data *data)
 */
 void	treat_token_strings(t_data *data)
 {
+	char	**tokens;
 	char	*buf;
 	char	*string;
 	int		i;
 
 	i = 0;
 	string = NULL;
-	while (data->tokens[i])
+	tokens = ft_split(data->input, ' ');
+	while (tokens[i])
 	{
-		treat_quotes(data->tokens[i]);
-		no_quotes(data->tokens[i]);
+		treat_quotes(tokens[i]);
+		no_quotes(tokens[i]);
 		if (!string)
-			string = tokens_to_string(string, data->tokens[i]);
+			string = tokens_to_string(string, tokens[i]);
 		else
 		{
-			buf = tokens_to_string(string, data->tokens[i]);
+			buf = tokens_to_string(string, tokens[i]);
 			free(string);
 			string = ft_strdup(buf);
 			free(buf);
 		}
 		i++;
 	}
+	double_free((void ***)&tokens);
 	free(data->input);
-	data->input = ft_strdup(string);
-	free(string);
+	data->input = string;
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 17:30:51 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/05/02 23:20:23 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/05 20:25:41 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,14 @@ t_vdt	find_in_list(char *var_name, t_vars *lst)
 	t_vdt	ret;
 
 	ret = (t_vdt){0};
-	if (!(++var_name))
+	if (!var_name)
+		return (ret);
+	if (!ft_strcmp(var_name, "$?"))
 	{
-		ret.value = "$";
+		ret.value = ft_itoa(g_status_code);
+		ret.is_question_mark = 1;
 		return (ret);
 	}
-	var_name--;
 	if (lst != 0x0)
 	{
 		while (lst)
@@ -99,7 +101,7 @@ t_vdt	find_in_list(char *var_name, t_vars *lst)
 			lst = lst->next;
 		}
 	}
-	ret.value = "$";
+	ret.value = 0;
 	return (ret);
 }
 

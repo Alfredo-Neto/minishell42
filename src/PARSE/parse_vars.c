@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 12:30:10 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/05/02 23:04:46 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/04 20:03:26 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	grab_vars(t_data *data, char *str)
 		else
 		{
 			vdt = find_in_list(name, data->vars);
-			if (ft_strcmp(vdt.value, "$") == 0)
+			if (!vdt.value)
 				add_to_list(&data->vars, name, value);
 			else
 			{

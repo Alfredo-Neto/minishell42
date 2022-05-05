@@ -6,11 +6,13 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 19:08:49 by joeduard          #+#    #+#             */
-/*   Updated: 2022/04/27 01:21:09 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/04 19:31:21 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+int	g_status_code = 0;
 
 void	welcome(void)
 {
@@ -43,7 +45,7 @@ int	main(int argc, char **argv, char **envp)
 	}
 	welcome();
 	init_data(data, envp);
-	while (!data->exit_flag)
+	while (TRUE)
 		minishell(data);
 	return (0);
 }

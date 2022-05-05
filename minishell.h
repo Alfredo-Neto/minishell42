@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/05/04 01:27:02 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/05/05 20:25:21 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,15 @@
 # define LESS				3
 # define LESSLESS			6
 
+#define	UNEXPECTED_TOKEN	"Minishell: syntax error near unexpected token `%c'"
+
+extern	int g_status_code;
+
 typedef struct	s_vdt
 {
 	char	*value;
 	int		is_envp;
+	int		is_question_mark;
 }				t_vdt;
 
 typedef struct	s_vars
@@ -78,7 +83,6 @@ typedef struct	s_vars
 
 typedef struct s_data
 {
-	char	*username;
 	char	**envp;
 	char	**command_path;
 	char	*input;
@@ -87,14 +91,14 @@ typedef struct s_data
 	char	***argve;
 	t_vars	*vars;
 	int		number_of_pipes;
+	int		number_of_ids;
 	int		**fd;
 	int		*pid;
 	int		exec_flag;
-	int		exit_flag;
 	int		child_ret;
 	char	***file;
 	char	**file_mode;
-	char	**tokens;
+	char	**operators;
 }				t_data;
 
 //..................................................CORE
@@ -136,6 +140,7 @@ void	pull_space(t_data *data);
 int		pull_quotes(t_data *data);
 int		mask_all_chars(t_data *data);
 int		mask_character(char *str, char c, int number);
+void	remove_extra_spaces(t_data *data);
 
 void	treat_token_strings(t_data *data);
 void	treat_quotes(char *token);

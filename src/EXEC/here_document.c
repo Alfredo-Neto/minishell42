@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 18:18:13 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/05/02 22:29:37 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/05 10:38:34 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	heredoc(char *eof)
 	if (status == 130)
 	{
 		clear_tmp_file();
+		g_status_code = 130;
 		return (FAILURE);
 	}
 	redirect_tmp_file_input();

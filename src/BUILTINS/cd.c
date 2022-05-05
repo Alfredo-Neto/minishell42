@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 23:04:49 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/04/28 00:01:33 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/05/05 10:23:54 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #define OLDPWD	1
 
 static int	too_many_arguments(char **str);
-static void	chdir_to_path(t_data *data, int path);
+static int	chdir_to_path(t_data *data, int path);
 static void	update_paths(t_data *data, char *old_dir);
 
 int	cd(t_data *data, int id)
@@ -24,18 +24,20 @@ int	cd(t_data *data, int id)
 	char	*new_dir;
 	char	*old_dir;
 
-	if (too_many_arguments(data->argve[id]) || data->number_of_pipes)
+	g_status_code = 0;
+	if (too_many_arguments(data->argve[id]))
 		return (EXIT_FAILURE);
 	new_dir = data->argve[id][1];
 	old_dir = getcwd(NULL, 0);
 	if (!new_dir || !ft_strcmp("~", new_dir))
-		chdir_to_path(data, HOME);
+		return (chdir_to_path(data, HOME));
 	else if (!ft_strcmp("-", new_dir))
-		chdir_to_path(data, OLDPWD);
+		return (chdir_to_path(data, OLDPWD));
 	else if (chdir(new_dir))
 	{
 		ft_printf(STDERR, "Minishell: cd: %s: %s\n", new_dir, strerror(errno));
 		ft_super_free((void **)&old_dir);
+		g_status_code = 1;
 		return (EXIT_FAILURE);
 	}
 	update_paths(data, old_dir);
@@ -48,12 +50,13 @@ static int	too_many_arguments(char **str)
 	if (ft_str_count(str) > 2)
 	{
 		ft_putendl_fd("Minishell: cd: too many arguments", 2);
+		g_status_code = 1;
 		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
 }
 
-static void	chdir_to_path(t_data *data, int path)
+static int	chdir_to_path(t_data *data, int path)
 {
 	t_vdt	vdt;
 
@@ -62,7 +65,12 @@ static void	chdir_to_path(t_data *data, int path)
 	else
 		vdt = find_in_list("OLDPWD", data->vars);
 	if (chdir(vdt.value))
+	{
+		g_status_code = 1;
 		ft_printf(STDERR, "Minishell: cd: %s: %s\n", vdt.value, strerror(errno));
+		return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
 }
 
 static void	update_paths(t_data *data, char *old_dir)

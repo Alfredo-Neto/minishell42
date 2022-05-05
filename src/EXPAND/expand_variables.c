@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   expand_variables.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 15:34:28 by ebresser          #+#    #+#             */
-/*   Updated: 2022/05/04 00:02:27 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/05/05 20:26:33 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+void	move_ptrs_back(char **argve);
 
 // finds the variables on argve
 int	find_vars(char **argve)
@@ -81,37 +83,53 @@ void	insert_new_args(t_data *data, char **cmdstr, int i)
 void	expander(t_data *data)
 {
 	int		i;
+	int		id;
 	char	**cmdstr;
 	t_vdt	vdt;
 
-	i = 0;
-	while (find_vars(data->argve[0]) != -1)
+	id = 0;
+	while (data->argve[0])
 	{
-		i = find_vars(data->argve[0]);
-		data->argve[0][i]++;
-		vdt = find_in_list(data->argve[0][i], data->vars);
-		data->argve[0][i]--;
-		if (*vdt.value == '$')
+		while (find_vars(data->argve[0]) != -1)
 		{
-			data->exec_flag = -1;
-			data->argve[0][i] = 0x0;
-			return ;
-		}
-		cmdstr = new_argve(vdt.value, data);
-		data->exec_flag = 1;
-		if (ft_strchr(vdt.value, ' '))
-			insert_new_args(data, cmdstr, i);
-		else
-		{
-			free(data->argve[0][i]);
-			data->argve[0][i] = ft_strdup(vdt.value);
+			i = find_vars(data->argve[0]);
+			vdt = find_in_list(data->argve[0][i], data->vars);
+			if (!vdt.value)
+			{
+				free(data->argve[0][i]);
+				move_ptrs_back(&data->argve[0][i]);
+				continue ;
+			}
+			cmdstr = new_argve(vdt.value, data);
+			data->exec_flag = 1;
+			if (ft_strchr(vdt.value, ' '))
+				insert_new_args(data, cmdstr, i);
+			else
+			{
+				free(data->argve[0][i]);
+				data->argve[0][i] = ft_strdup(vdt.value);
+			}
+			if (vdt.is_question_mark)
+				free(vdt.value);
+			double_free((void ***)&cmdstr);
 		}
 		i = 0;
-		while (cmdstr[i])
-			free(cmdstr[i++]);
-		free(cmdstr);
+		while (data->argve[0][i])
+			unmask_character(data->argve[0][i++], 7, '$');
+		id++;
+		data->argve++;
 	}
+	data->argve -= id;
+}
+
+void	move_ptrs_back(char **ptr)
+{
+	int	i;
+
 	i = 0;
-	while (data->argve[0][i])
-		unmask_character(data->argve[0][i++], 7, '$');
+	while (ptr[i])
+	{
+		ptr[i] = ptr[i + 1];
+		i++;
+	}
 }

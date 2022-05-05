@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clear_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 17:29:32 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/05/04 01:28:52 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/05/05 20:14:57 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	data_clean(t_data *data)
 	data->pid = NULL;
 	double_free((void ***)&data->fd);
 	double_free((void ***)&data->cmds_piped);
-	double_free((void ***)&data->tokens);
 	double_free((void ***)&data->file_mode);
 	triple_free(&data->file, data->number_of_pipes + 1);
 	triple_free(&data->argve, data->number_of_pipes + 1);

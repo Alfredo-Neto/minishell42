@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 23:19:00 by joeduard          #+#    #+#             */
-/*   Updated: 2022/05/04 01:27:21 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/05/05 20:21:26 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	ft_execve(t_data *data, int id)
 	char	*path_aux;
 
 	path_aux = NULL;
+	g_status_code = 0;
 	i = 0;
 	while (data->command_path[i])
 	{
@@ -33,6 +34,7 @@ void	ft_execve(t_data *data, int id)
 		}
 	}
 	ft_printf(STDERR, "Minishell: command not found: %s\n", data->argve[id][0]);
+	g_status_code = 127;
 	exit(127);
 }
 
@@ -62,12 +64,17 @@ int	execute_pid(t_data *data, int id)
 {
 	int	builtin_flag;
 
-	exec_signals();
-	builtin_flag = is_builtins(data->argve[id][0]);
-	if (builtin_flag)
-		builtin_exec(data, builtin_flag, id);
-	else
-		ft_execve(data, id);
+	close_other_fds(id, data);
+	file_descriptor_handler(id, data);
+	if (!redirect_filter(data, id))
+	{
+		exec_signals();
+		builtin_flag = is_builtins(data->argve[id][0]);
+		if (builtin_flag)
+			builtin_exec(data, builtin_flag, id);
+		else
+			ft_execve(data, id);
+	}
 	exit(SUCCESS);
 }
 
@@ -93,10 +100,11 @@ int	executor(t_data *data)
 {
 	int		id;
 
-	if (!data->number_of_pipes && is_builtins(data->argve[0][0]))
-		return (execute_one_cmd(data));
 	if (data->exec_flag == -1)  // added to avoid execution if input is var definition
 		return (SUCCESS);
+	signal(SIGINT, handler);
+	if (!data->number_of_pipes && is_builtins(data->argve[0][0]))
+		return (execute_one_cmd(data));
 	id = -1;
 	create_executor_parametes(data);
 	open_pipes(data);
@@ -109,13 +117,7 @@ int	executor(t_data *data)
 			return (FAILURE);
 		}
 		if (!data->pid[id])
-		{
-			close_other_fds(id, data);
-			file_descriptor_handler(id, data);
-			redirect_filter(data, id);
 			execute_pid(data, id);
-		}
-		waitpid(data->pid[id], &data->child_ret, 0);
 	}
 	main_process_handler(data);
 	return (SUCCESS);
