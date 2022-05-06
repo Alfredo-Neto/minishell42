@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 18:18:13 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/05/05 10:38:34 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/05 22:13:29 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #define TMP_FILE	"/tmp/minishell_here_document"
 #define NO_DELIMITER "minishell: warning: here-document at \
-line %d delimited by end-of-file (wanted `%s')"
+line %d delimited by end-of-file (wanted `%s')\n"
 
 static int	create_tmp_file(void);
 static void	redirect_tmp_file_input(void);

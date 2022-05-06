@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 20:31:09 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/05/05 10:16:22 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/05 21:03:26 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ int	pull_redirects(t_data *data)
 	{
 		redirects_nbr = count_redirects(data->cmds_piped[id]);
 		if (redirects_nbr == -1)
+		{
+			g_status_code = SINTAX_ERR;
 			return (FAILURE);
+		}
 		if (redirects_nbr)
 		{
 			malloc_file(data, 1, id, redirects_nbr + 1);

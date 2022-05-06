@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:32:15 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/05/04 01:07:56 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/05/05 21:40:27 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,10 @@ void	upd_envp_w_def(t_data *data, int i, int id)
 	name = get_var_name(data->argve[id][i]);
 	vdt = find_in_list(name, data->vars);
 	if (vdt.is_envp >= 0)
+	{
+		free(name);
 		return ;
+	}
 	new_envp = new_bigger_envp(data->envp);
 	pos = relocate_envp(data->envp, new_envp, data->argve[id][i]);
 	free(data->envp);

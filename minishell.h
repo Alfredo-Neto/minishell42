@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/05/05 20:39:04 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/05 21:02:24 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@
 # define LESSLESS			6
 
 #define	UNEXPECTED_TOKEN	"Minishell: syntax error near unexpected token `%c'"
+#define SINTAX_ERR			2
 
 extern	int g_status_code;
 

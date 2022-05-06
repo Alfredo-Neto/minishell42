@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 22:18:03 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/05/05 12:05:17 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/05 21:04:13 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,10 @@ void	unmask_character(char *cmd, int nbr, char c)
 int	mask_all_chars(t_data *data)
 {
 	if (mask_character(data->input, ' ', 1))
+	{
+		g_status_code = SINTAX_ERR;
 		return (FAILURE);
+	}
 	mask_character(data->input, '&', 8);
 	mask_character(data->input, '|', 6);
 	mask_character(data->input, '>', 4);
