@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 23:19:00 by joeduard          #+#    #+#             */
-/*   Updated: 2022/05/05 23:06:57 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/06 12:12:00 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,12 @@ void	builtin_exec(t_data *data, int code, int id)
 int	execute_pid(t_data *data, int id)
 {
 	int	builtin_flag;
+	int	save_fd[2];
 
+	save_std_fds(save_fd);
 	close_other_fds(id, data);
 	file_descriptor_handler(id, data);
-	if (!redirect_filter(data, id))
+	if (!redirect_filter(data, id, save_fd))
 	{
 		exec_signals();
 		builtin_flag = is_builtins(data->argve[id][0]);

@@ -1,0 +1,47 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/vlima-nu/minishell42'
+mkdir -p obj
+make -C libft
+make -C ft_printf
+gcc -Wall -Wextra -Werror -lreadline -g -fsanitize=address    -c -o main.o src/main.c
+gcc -Wall -Wextra -Werror -lreadline -g -fsanitize=address    -c -o minishell.o src/CORE/minishell.c
+gcc -Wall -Wextra -Werror -lreadline -g -fsanitize=address    -c -o hello.o src/BUILTINS/hello.c
+gcc -Wall -Wextra -Werror -lreadline -g -fsanitize=address    -c -o clear_data.o src/CORE/clear_data.c
+gcc -Wall -Wextra -Werror -lreadline -g -fsanitize=address    -c -o init_data.o src/CORE/init_data.c
+gcc -Wall -Wextra -Werror -lreadline -g -fsanitize=address    -c -o prompt_take_input.o src/PROMPT/prompt_take_input.c
+gcc -Wall -Wextra -Werror -lreadline -g -fsanitize=address    -c -o history.o src/PROMPT/history.c
+gcc -Wall -Wextra -Werror -lreadline -g -fsanitize=address    -c -o lexer.o src/LEX/lexer.c
+gcc -Wall -Wextra -Werror -lreadline -g -fsanitize=address    -c -o pull_redirects.o src/LEX/pull_redirects.c
+gcc -Wall -Wextra -Werror -lreadline -g -fsanitize=address    -c -o parser.o src/PARSE/parser.c
+gcc -Wall -Wextra -Werror -lreadline -g -fsanitize=address    -c -o redirects.o src/EXEC/redirects.c
+gcc -Wall -Wextra -Werror -lreadline -g -fsanitize=address    -c -o expand_variables.o src/EXPAND/expand_variables.c
+gcc -Wall -Wextra -Werror -lreadline -g -fsanitize=address    -c -o sorting.o src/EXEC/sorting.c
+gcc -Wall -Wextra -Werror -lreadline -g -fsanitize=address    -c -o executor.o src/EXEC/executor.c
+gcc -Wall -Wextra -Werror -lreadline -g -fsanitize=address    -c -o exit.o src/BUILTINS/exit.c
+gcc -Wall -Wextra -Werror -lreadline -g -fsanitize=address    -c -o help.o src/BUILTINS/help.c
+gcc -Wall -Wextra -Werror -lreadline -g -fsanitize=address    -c -o echo.o src/BUILTINS/echo.c
+gcc -Wall -Wextra -Werror -lreadline -g -fsanitize=address    -c -o env.o src/BUILTINS/env.c
+gcc -Wall -Wextra -Werror -lreadline -g -fsanitize=address    -c -o export.o src/BUILTINS/export.c
+gcc -Wall -Wextra -Werror -lreadline -g -fsanitize=address    -c -o unset.o src/BUILTINS/unset.c
+gcc -Wall -Wextra -Werror -lreadline -g -fsanitize=address    -c -o str_tools.o src/TOOLS/str_tools.c
+gcc -Wall -Wextra -Werror -lreadline -g -fsanitize=address    -c -o here_document.o src/EXEC/here_document.c
+gcc -Wall -Wextra -Werror -lreadline -g -fsanitize=address    -c -o execute_one_cmd.o src/EXEC/execute_one_cmd.c
+gcc -Wall -Wextra -Werror -lreadline -g -fsanitize=address    -c -o mask_n_unmask_chars.o src/LEX/mask_n_unmask_chars.c
+gcc -Wall -Wextra -Werror -lreadline -g -fsanitize=address    -c -o cd.o src/BUILTINS/cd.c
+gcc -Wall -Wextra -Werror -lreadline -g -fsanitize=address    -c -o pwd.o src/BUILTINS/pwd.c
+gcc -Wall -Wextra -Werror -lreadline -g -fsanitize=address    -c -o list_tools.o src/TOOLS/list_tools.c
+gcc -Wall -Wextra -Werror -lreadline -g -fsanitize=address    -c -o parse_vars.o src/PARSE/parse_vars.c
+gcc -Wall -Wextra -Werror -lreadline -g -fsanitize=address    -c -o treat_quotes.o src/LEX/treat_quotes.c
+gcc -Wall -Wextra -Werror -lreadline -g -fsanitize=address    -c -o treat_spaces.o src/LEX/treat_spaces.c
+gcc -Wall -Wextra -Werror -lreadline -g -fsanitize=address    -c -o mask_dollar.o src/LEX/mask_dollar.c
+gcc -Wall -Wextra -Werror -lreadline -g -fsanitize=address    -c -o pipes_fds_handling.o src/EXEC/pipes_fds_handling.c
+gcc -Wall -Wextra -Werror -lreadline -g -fsanitize=address    -c -o processes_handler.o src/EXEC/processes_handler.c
+gcc -Wall -Wextra -Werror -lreadline -g -fsanitize=address    -c -o signals.o src/CORE/signals.c
+gcc -Wall -Wextra -Werror -lreadline -g -fsanitize=address    -c -o absolute_path_tester.o src/LEX/absolute_path_tester.c
+mv main.o minishell.o hello.o clear_data.o init_data.o prompt_take_input.o history.o lexer.o pull_redirects.o parser.o redirects.o expand_variables.o sorting.o executor.o exit.o help.o echo.o env.o export.o unset.o str_tools.o here_document.o execute_one_cmd.o mask_n_unmask_chars.o cd.o pwd.o list_tools.o parse_vars.o treat_quotes.o treat_spaces.o mask_dollar.o pipes_fds_handling.o processes_handler.o signals.o absolute_path_tester.o obj
+gcc obj/main.o obj/minishell.o obj/hello.o obj/clear_data.o obj/init_data.o obj/prompt_take_input.o obj/history.o obj/lexer.o obj/pull_redirects.o obj/parser.o obj/redirects.o obj/expand_variables.o obj/sorting.o obj/executor.o obj/exit.o obj/help.o obj/echo.o obj/env.o obj/export.o obj/unset.o obj/str_tools.o obj/here_document.o obj/execute_one_cmd.o obj/mask_n_unmask_chars.o obj/cd.o obj/pwd.o obj/list_tools.o obj/parse_vars.o obj/treat_quotes.o obj/treat_spaces.o obj/mask_dollar.o obj/pipes_fds_handling.o obj/processes_handler.o obj/signals.o obj/absolute_path_tester.o libft/libft.a ft_printf/libftprintf.a -Wall -Wextra -Werror -lreadline -g -fsanitize=address  -L libft -lft -fPIE -o minishell
+echo ""
+echo "|		minishell created		|"
+echo ""
+make: Leaving directory '/home/vlima-nu/minishell42'
+ 

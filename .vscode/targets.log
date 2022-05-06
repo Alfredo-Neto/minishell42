@@ -1,0 +1,553 @@
+make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+# GNU Make 4.3
+# Built for x86_64-pc-linux-gnu
+# Copyright (C) 1988-2020 Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
+
+# Make data base, printed on Fri May  6 11:59:58 2022
+
+# Variables
+
+# makefile (from 'Makefile', line 51)
+OBJ = $(SRC_FILES:%.c=%.o)
+# environment
+LC_ALL = C
+# environment
+WSLENV = VSCODE_WSL_EXT_LOCATION/up
+# makefile (from 'Makefile', line 9)
+VPATH = src src/CORE src/PROMPT src/LEX src/PARSE src/EXPAND src/EXEC src/BUILTINS src/TOOLS
+# environment
+VSCODE_CWD = /mnt/c/Users/victo/AppData/Local/Programs/Microsoft VS Code
+# default
+MAKE_COMMAND := make
+# environment
+VSCODE_HANDLES_SIGPIPE = true
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# makefile (from 'Makefile', line 52)
+OBJ_DIR = obj
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# default
+.VARIABLES := 
+# environment
+PWD = /home/vlima-nu/minishell42
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# environment
+VSCODE_LOG_STACK = false
+# automatic
+%F = $(notdir $%)
+# makefile (from 'Makefile', line 5)
+LIBFT = $(LIBFT_DIR)/libft.a
+# environment
+LANG = C
+# default
+.LOADED := 
+# default
+.INCLUDE_DIRS = /usr/local/include /usr/include /usr/include
+# makefile
+MAKEFLAGS = pqrR
+# makefile
+CURDIR := /home/vlima-nu/minishell42
+# environment
+VSCODE_PIPE_LOGGING = true
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# environment
+MFLAGS = -pqrR
+# default
+.SHELLFLAGS := -c
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# makefile (from 'Makefile', line 1)
+MAKEFILE_LIST := Makefile
+# automatic
+@F = $(notdir $@)
+# environment
+VSCODE_VERBOSE_LOGGING = true
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# makefile (from 'Makefile', line 7)
+PRINTF_DIR = ft_printf
+# automatic
+*F = $(notdir $*)
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# environment
+VSCODE_NLS_CONFIG = {"locale":"pt-br","availableLanguages":{"*":"pt-br"},"_languagePackId":"87bc42524dcd0342864b21d9918adfb2.pt-br","_translationsConfigFile":"/home/vlima-nu/.vscode-server/data/clp/87bc42524dcd0342864b21d9918adfb2.pt-br/tcf.json","_cacheRoot":"/home/vlima-nu/.vscode-server/data/clp/87bc42524dcd0342864b21d9918adfb2.pt-br","_resolvedLanguagePackCoreLocation":"/home/vlima-nu/.vscode-server/data/clp/87bc42524dcd0342864b21d9918adfb2.pt-br/57fd6d0195bb9b9d1b49f6da5db789060795de47","_corruptedFile":"/home/vlima-nu/.vscode-server/data/clp/87bc42524dcd0342864b21d9918adfb2.pt-br/corrupted.info","_languagePackSupport":true}
+# default
+MAKE_HOST := x86_64-pc-linux-gnu
+# makefile
+SHELL = /bin/sh
+# default
+MAKECMDGOALS := all
+# makefile (from 'Makefile', line 13)
+HEADERS = minishell.h
+# environment
+SHLVL = 0
+# environment
+MAKELEVEL := 0
+# default
+MAKE = $(MAKE_COMMAND)
+# environment
+PATH = /home/vlima-nu/.vscode-server/bin/57fd6d0195bb9b9d1b49f6da5db789060795de47/bin/remote-cli:/home/vlima-nu/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/PuTTY/:/mnt/c/Program Files/Docker/Docker/resources/bin:/mnt/c/ProgramData/DockerDesktop/version-bin:/mnt/c/Users/victo/AppData/Local/Microsoft/WindowsApps:/mnt/c/Windows/System32/bash.exe:/mnt/c/Users/victo/Downloads/OpenSSH-Win64/ssh.exe:/mnt/c/Users/victo/AppData/Local/atom/bin:/mnt/c/Users/victo/AppData/Local/Programs/Microsoft VS Code/bin:/opt/mssql-tools18/bin
+# default
+MAKEFILES := 
+# automatic
+^F = $(notdir $^)
+# makefile (from 'Makefile', line 6)
+LIBFLAGS = -L $(LIBFT_DIR) -lft
+# makefile (from 'Makefile', line 4)
+LIBFT_DIR = libft
+# environment
+VSCODE_LOG_NATIVE = false
+# automatic
+?F = $(notdir $?)
+# makefile (from 'Makefile', line 1)
+NAME = minishell
+# makefile (from 'Makefile', line 8)
+PRINTF = ft_printf/libftprintf.a
+# environment
+HOSTTYPE = x86_64
+# environment
+LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
+# automatic
++F = $(notdir $+)
+# 'override' directive
+GNUMAKEFLAGS := 
+# environment
+LOGNAME = vlima-nu
+# environment
+VSCODE_WSL_EXT_LOCATION = /mnt/c/Users/victo/.vscode/extensions/ms-vscode-remote.remote-wsl-0.66.2
+# makefile
+.DEFAULT_GOAL := all
+# makefile (from 'Makefile', line 12)
+RM = rm -fr
+# environment
+DISPLAY = :0
+# environment
+USER = vlima-nu
+# default
+MAKE_VERSION := 4.3
+# makefile (from 'Makefile', line 15)
+SRC_FILES = main.c minishell.c hello.c clear_data.c init_data.c prompt_take_input.c history.c lexer.c pull_redirects.c parser.c redirects.c expand_variables.c sorting.c executor.c exit.c help.c echo.c env.c export.c unset.c str_tools.c here_document.c execute_one_cmd.c mask_n_unmask_chars.c cd.c pwd.c list_tools.c parse_vars.c treat_quotes.c treat_spaces.c mask_dollar.c pipes_fds_handling.c processes_handler.c signals.c absolute_path_tester.c
+# environment
+VSCODE_EXTHOST_WILL_SEND_SOCKET = true
+# environment
+_ = /home/vlima-nu/.vscode-server/bin/57fd6d0195bb9b9d1b49f6da5db789060795de47/node
+# makefile (from 'Makefile', line 3)
+CFLAGS = -Wall -Wextra -Werror -lreadline -g -fsanitize=address 
+# environment
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-cc4671db-c8d2-4180-a255-669550b2fafc.sock
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
+HOME = /home/vlima-nu
+# environment
+TERM = xterm-256color
+# default
+.RECIPEPREFIX := 
+# automatic
+<F = $(notdir $<)
+# default
+SUFFIXES := 
+ 
+# environment
+WSL_DISTRO_NAME = Debian
+# default
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync check-symlink load
+# makefile (from 'Makefile', line 2)
+CC = gcc
+# variable set hash-table stats:
+# Load=77/1024=8%, Rehash=0, Collisions=2/124=2%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# src/CORE (device 2, inode 10696049115066566): 6 files, no impossibilities.
+# src/EXEC (device 2, inode 1125899907022101): 9 files, no impossibilities.
+# src (device 2, inode 6755399441143494): 11 files, no impossibilities.
+# src/EXPAND (device 2, inode 1970324837415460): 3 files, no impossibilities.
+# src/BUILTINS (device 2, inode 21955048183487836): 11 files, no impossibilities.
+# src/TOOLS (device 2, inode 1688849860901713): 4 files, no impossibilities.
+# . (device 2, inode 33495522228568196): 17 files, no impossibilities.
+# src/PARSE (device 2, inode 3659174697731300): 4 files, no impossibilities.
+# src/LEX (device 2, inode 1970324837417031): 10 files, no impossibilities.
+# src/PROMPT (device 2, inode 1688849860787801): 4 files, no impossibilities.
+
+# 79 files, no impossibilities in 10 directories.
+
+# Implicit Rules
+
+obj/%.o: %.c minishell.h
+#  recipe to execute (from 'Makefile', line 55):
+	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
+
+# 1 implicit rules, 0 (0.0%) terminal.
+# Files
+
+# Not a target:
+mask_dollar.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+unset.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+hello.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+help.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+executor.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+parse_vars.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+expand_variables.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+list_tools.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+echo.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+minishell: obj libft/libft.a main.o minishell.o hello.o clear_data.o init_data.o prompt_take_input.o history.o lexer.o pull_redirects.o parser.o redirects.o expand_variables.o sorting.o executor.o exit.o help.o echo.o env.o export.o unset.o str_tools.o here_document.o execute_one_cmd.o mask_n_unmask_chars.o cd.o pwd.o list_tools.o parse_vars.o treat_quotes.o treat_spaces.o mask_dollar.o pipes_fds_handling.o processes_handler.o signals.o absolute_path_tester.o
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/4=0%
+#  recipe to execute (from 'Makefile', line 60):
+	mv $(OBJ) $(OBJ_DIR)
+	$(CC) $(addprefix obj/, $(OBJ)) $(LIBFT) $(PRINTF) $(CFLAGS) $(LIBFLAGS) -fPIE -o $@
+	@echo ""
+	@echo "|		minishell created		|"
+	@echo ""
+
+# Not a target:
+pwd.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+execute_one_cmd.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+signals.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-05 23:35:29.1674964
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+exit.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+libft/libft.a:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 67):
+		make -C $(LIBFT_DIR)
+		make -C $(PRINTF_DIR)
+
+# Not a target:
+parser.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+processes_handler.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+export.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+clear_data.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+clean:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 74):
+	make -C $(LIBFT_DIR) fclean
+	make -C $(PRINTF_DIR) fclean
+	@echo ""
+	@echo "|		minishell deleted		|"
+	@echo ""
+
+# Not a target:
+here_document.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+lexer.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+cd.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+re: fclean all
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+
+obj:
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: ''
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := obj
+# automatic
+# * := 
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+#  recipe to execute (from 'Makefile', line 71):
+		mkdir -p $(OBJ_DIR)
+
+# Not a target:
+redirects.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+minishell.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+git:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 90):
+	git add .
+	git status
+	git commit -m "$m"
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+all: minishell
+#  Phony target (prerequisite of .PHONY).
+#  Command line target.
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/4=0%
+
+fclean: clean
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 81):
+	$(RM) $(OBJ_DIR)
+	$(RM) $(NAME)
+
+# Not a target:
+str_tools.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+prompt_take_input.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+main.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+pipes_fds_handling.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+treat_spaces.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+install:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 85):
+	@sudo apt-get -y install libreadline-dev
+
+# Not a target:
+pull_redirects.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+treat_quotes.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+mask_n_unmask_chars.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+sorting.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+absolute_path_tester.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+env.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+.SUFFIXES:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+.PHONY: all clean fclean re git
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+init_data.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+history.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# files hash-table stats:
+# Load=48/1024=5%, Rehash=0, Collisions=1/129=1%
+# VPATH Search Paths
+
+# No 'vpath' search paths.
+
+# General ('VPATH' variable) search path:
+# src:src/CORE:src/PROMPT:src/LEX:src/PARSE:src/EXPAND:src/EXEC:src/BUILTINS:src/TOOLS
+
+# strcache buffers: 1 (0) / strings = 121 / storage = 1300 B / avg = 10 B
+# current buf: size = 8162 B / used = 1300 B / count = 121 / avg = 10 B
+
+# strcache performance: lookups = 177 / hit rate = 31%
+# hash-table stats:
+# Load=121/8192=1%, Rehash=0, Collisions=2/177=1%
+# Finished Make data base on Fri May  6 11:59:58 2022
+
+ 

@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/05/05 23:09:56 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/06 12:10:07 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,8 +187,8 @@ int		is_builtins(char *cmd);
 
 //redirects.c
 void	interrupt_input_writing(int signal);
-int		redirect_filter(t_data *data, int id);
-int		heredoc(char *eof);
+int		redirect_filter(t_data *data, int id, int *save_fd);
+int		heredoc(char *eof, int *save_fd);
 
 //executor.c
 int		executor(t_data *data);
@@ -211,6 +211,8 @@ int		execute_one_cmd(t_data *data);
 
 //processes_handler.c
 void	main_process_handler(t_data *data);
+void	restore_std_fds(int *fd);
+void	save_std_fds(int *fd);
 
 //..................................................BUILTINS
 int 	cd(t_data *data, int id);
