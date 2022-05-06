@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/05/05 21:02:24 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/05 23:09:56 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,6 +179,7 @@ void	grab_vars(t_data *data, char *str);
 //..................................................EXPANDER
 //expand_variables.c
 void	expander(t_data *data);
+void	move_ptrs_back(char **ptr);
 
 //..................................................EXEC
 //sorting.c

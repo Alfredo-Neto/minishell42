@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 23:19:00 by joeduard          #+#    #+#             */
-/*   Updated: 2022/05/05 20:41:47 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/05 23:06:57 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,16 @@ static int	find_path_and_execve(t_data *data, int id)
 			i++;
 		}
 	}
-	ft_printf(STDERR, "Minishell: command not found: %s\n", data->argve[id][0]);
 	return (FAILURE);
 }
 
 void	ft_execve(t_data *data, int id)
-{	
+{
 	if (absolute_path_tester(data->argve[id][0]))
-	{
 		execve(data->argve[id][0], data->argve[id], data->envp);
-		ft_printf(STDERR, "Minishell: %s: No such file or directory\n", data->argve[id][0]);
-	}
-	else
+	else if (data->command_path)
 		find_path_and_execve(data, id);
+	ft_printf(STDERR, "Minishell: %s: No such file or directory\n", data->argve[id][0]);
 	g_status_code = 127;
 	exit(127);
 }
