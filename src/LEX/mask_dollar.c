@@ -6,11 +6,11 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 21:49:28 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/05/02 22:01:17 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/10 10:43:39 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "minishell.h"
 
 static int	is_dollar_sign(char c);
 static int	is_quotes_or_space(char c);

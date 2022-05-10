@@ -6,11 +6,11 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 12:57:41 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/23 13:31:41 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/10 10:42:06 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "minishell.h"
 
 void	hello(void)
 {

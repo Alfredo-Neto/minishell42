@@ -6,11 +6,11 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 20:53:52 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/05/05 15:18:43 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/10 10:43:56 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "minishell.h"
 
 void	remove_extra_spaces(t_data *data)
 {

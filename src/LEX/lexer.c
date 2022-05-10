@@ -6,11 +6,11 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 13:55:53 by ebresser          #+#    #+#             */
-/*   Updated: 2022/05/02 23:03:06 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/10 10:43:35 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "minishell.h"
 
 // Create an aux **str based on pipe
 void	pull_pipe(t_data *data)

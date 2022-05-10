@@ -6,11 +6,11 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 20:05:19 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/05/06 12:10:19 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/10 10:42:48 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "minishell.h"
 
 int	execute_one_cmd(t_data *data)
 {

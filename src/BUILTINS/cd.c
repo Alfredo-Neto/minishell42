@@ -6,11 +6,11 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 23:04:49 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/05/05 10:23:54 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/10 10:41:42 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "minishell.h"
 
 #define HOME	0
 #define OLDPWD	1

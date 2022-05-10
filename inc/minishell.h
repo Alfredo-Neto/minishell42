@@ -6,14 +6,14 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/05/06 12:10:07 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/09 21:47:16 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 #define MINISHELL_H
 
-#include "ft_printf/inc/ft_printf.h"
+#include "../ft_printf/inc/ft_printf.h"
 #include <stdio.h>
 #include <errno.h>
 #include <string.h>

@@ -6,11 +6,11 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 22:18:03 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/05/05 21:04:13 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/10 10:43:42 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "minishell.h"
 
 #define UNCLOSED_QUOTES "Minishell: Sintaxe Error: Unclosed quotes `%c'\n"
 

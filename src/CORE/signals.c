@@ -6,11 +6,11 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 21:52:40 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/05/05 19:56:12 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/10 10:42:43 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "minishell.h"
 
 /*
 	Creates a new prompt.

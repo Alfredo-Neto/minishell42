@@ -6,11 +6,11 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 21:08:58 by azamario          #+#    #+#             */
-/*   Updated: 2022/05/02 22:59:26 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/10 10:42:15 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "minishell.h"
 
 void	pwd(void)
 {

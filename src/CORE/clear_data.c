@@ -6,11 +6,11 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 17:29:32 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/05/05 20:14:57 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/10 10:42:25 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "minishell.h"
 
 void	data_clean(t_data *data)
 {

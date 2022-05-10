@@ -6,11 +6,11 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 12:39:44 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/05/05 23:31:37 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/10 10:42:19 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "minishell.h"
 
 void	unset(t_data *data, int id)
 {

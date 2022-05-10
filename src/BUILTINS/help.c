@@ -6,11 +6,11 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 19:06:23 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/23 13:32:19 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/10 10:42:10 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "minishell.h"
 
 // Help command builtin - retirar (ou não!)
 void	open_help(void)

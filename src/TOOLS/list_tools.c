@@ -6,11 +6,11 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 17:30:51 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/05/05 20:25:41 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/10 10:44:22 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "minishell.h"
 
 // list handling functions
 
@@ -130,6 +130,7 @@ void	delete_in_list(char *var_name, t_vars **vars)
 	t_vars	*prev;
 
 	temp = *vars;
+	prev = temp;
 	if (temp && !ft_strcmp(var_name, temp->var_name))
 	{
 		*vars = temp->next;

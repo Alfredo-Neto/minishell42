@@ -25,7 +25,7 @@ OBJ			=	$(addprefix obj/, $(notdir $(SRC:.c=.o)))
 all:		$(NAME)
 
 $(NAME):	$(LIB)
-	@$(CC) $(FLAGS) -I ./inc -c -fPIE $(SRC)
+	@$(CC) $(FLAGS) -I ./inc -c $(SRC)
 	@mkdir -p obj
 	@mv $(notdir $(SRC:.c=.o)) obj
 	@$(AR) $(NAME) $(OBJ)

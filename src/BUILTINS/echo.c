@@ -6,11 +6,11 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 19:11:16 by ebresser          #+#    #+#             */
-/*   Updated: 2022/04/27 22:51:52 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/10 10:41:47 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "minishell.h"
 
 void	echo(t_data *data, int id)
 {

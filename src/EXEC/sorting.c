@@ -6,11 +6,11 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 12:16:34 by ebresser          #+#    #+#             */
-/*   Updated: 2022/05/02 22:33:41 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/10 10:43:13 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "minishell.h"
 
 int	is_builtins(char *cmd)
 {
