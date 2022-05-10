@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 15:34:28 by ebresser          #+#    #+#             */
-/*   Updated: 2022/05/10 10:43:25 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/10 20:47:51 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	make_space(char **argve, int start)
 }
 
 // allocates a bigger argve, copies the old to the new one and frees the old one
-char	**new_argve(char *value, t_data *data)
+char	**new_argve(char *value, t_data *data, int id)
 {
 	char	**cmdstr;
 	char	**temp_argve;
@@ -58,25 +58,25 @@ char	**new_argve(char *value, t_data *data)
 
 	cmdstr = ft_split(value, ' ');
 	cmdstr_size = ft_str_count(cmdstr);
-	argve_size = ft_str_count(data->argve[0]);
+	argve_size = ft_str_count(data->argve[id]);
 	temp_argve = (char **)malloc((cmdstr_size + argve_size + 1) * \
 		sizeof(char *));
-	ft_memcpy(temp_argve, data->argve[0], argve_size * sizeof(char *));
-	free(data->argve[0]);
-	data->argve[0] = temp_argve;
-	data->argve[0][argve_size] = 0x0;
+	ft_memcpy(temp_argve, data->argve[id], argve_size * sizeof(char *));
+	free(data->argve[id]);
+	data->argve[id] = temp_argve;
+	data->argve[id][argve_size] = 0x0;
 	return (cmdstr);
 }
 
 // makes room for new args and inserts it into data structure
-void	insert_new_args(t_data *data, char **cmdstr, int i)
+void	insert_new_args(t_data *data, char **cmdstr, int i, int id)
 {
-	free(data->argve[0][i]);
-	data->argve[0][i] = ft_strdup(*cmdstr);
+	free(data->argve[id][i]);
+	data->argve[id][i] = ft_strdup(*cmdstr);
 	while (*(++cmdstr))
 	{
-		make_space(data->argve[0], ++i);
-		data->argve[0][i] = ft_strdup(*cmdstr);
+		make_space(data->argve[id], ++i);
+		data->argve[id][i] = ft_strdup(*cmdstr);
 	}
 }
 
@@ -88,38 +88,36 @@ void	expander(t_data *data)
 	t_vdt	vdt;
 
 	id = 0;
-	while (data->argve[0])
+	while (data->argve[id])
 	{
-		while (find_vars(data->argve[0]) != -1)
+		while (find_vars(data->argve[id]) != -1)
 		{
-			i = find_vars(data->argve[0]);
-			vdt = find_in_list(data->argve[0][i], data->vars);
+			i = find_vars(data->argve[id]);
+			vdt = find_in_list(data->argve[id][i], data->vars);
 			if (!vdt.value)
 			{
-				free(data->argve[0][i]);
-				move_ptrs_back(&data->argve[0][i]);
+				free(data->argve[id][i]);
+				move_ptrs_back(&data->argve[id][i]);
 				continue ;
 			}
-			cmdstr = new_argve(vdt.value, data);
+			cmdstr = new_argve(vdt.value, data, id);
 			data->exec_flag = 1;
 			if (ft_strchr(vdt.value, ' '))
-				insert_new_args(data, cmdstr, i);
+				insert_new_args(data, cmdstr, i, id);
 			else
 			{
-				free(data->argve[0][i]);
-				data->argve[0][i] = ft_strdup(vdt.value);
+				free(data->argve[id][i]);
+				data->argve[id][i] = ft_strdup(vdt.value);
 			}
 			if (vdt.is_question_mark)
 				free(vdt.value);
 			double_free((void ***)&cmdstr);
 		}
 		i = 0;
-		while (data->argve[0][i])
-			unmask_character(data->argve[0][i++], 7, '$');
+		while (data->argve[id][i])
+			unmask_character(data->argve[id][i++], 7, '$');
 		id++;
-		data->argve++;
 	}
-	data->argve -= id;
 }
 
 void	move_ptrs_back(char **ptr)

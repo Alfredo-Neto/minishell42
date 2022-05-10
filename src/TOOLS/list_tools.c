@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 17:30:51 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/05/10 10:44:22 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/10 20:48:51 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ t_vdt	find_in_list(char *var_name, t_vars *lst)
 			lst = lst->next;
 		}
 	}
-	ret.value = 0;
 	return (ret);
 }
 

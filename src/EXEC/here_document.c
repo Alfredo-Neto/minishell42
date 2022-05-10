@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 18:18:13 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/05/10 10:42:56 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/10 20:45:29 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	heredoc(char *eof, int *save_fd)
 	int		tmp_file;
 	int		status;
 	int		save_std_out;
+	int		pid;
 
 	tmp_file = create_tmp_file();
 	save_std_out = dup(STDOUT);
@@ -34,10 +35,11 @@ int	heredoc(char *eof, int *save_fd)
 	if (tmp_file < 0)
 		return (FAILURE);
 	signal(SIGINT, SIG_IGN);
-	if (!fork())
+	pid = fork();
+	if (!pid)
 		write_input(eof, tmp_file);
-	wait(&status);
-	if (status == 130)
+	waitpid(pid, &status, 0);
+	if (WEXITSTATUS(status) == 130)
 	{
 		clear_tmp_file();
 		g_status_code = 130;
