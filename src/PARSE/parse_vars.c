@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_vars.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 12:30:10 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/05/10 10:44:03 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/12 00:24:18 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	update_envp(t_data *data, char *name, char *value, t_vdt vdt)
 }
 
 // checks for variables in the input string and stores them on a linked list
-void	grab_vars(t_data *data, char *str)
+int	grab_vars(t_data *data, char *str)
 {
 	char	*name;
 	char	*value;
@@ -90,24 +90,28 @@ void	grab_vars(t_data *data, char *str)
 
 	if (ft_strchr(str, '='))
 	{
-		data->exec_flag = -1;
-		name = get_var_name(str);
-		value = get_var_value(str);
-		if (!data->vars)
-			data->vars = new_node(name, value);
-		else
+		if (data->number_of_pipes < 1) //Não adiciona se houver pipe: ola=vc | wc -c
 		{
-			vdt = find_in_list(name, data->vars);
-			if (!vdt.value)
-				add_to_list(&data->vars, name, value);
+			name = get_var_name(str);
+			value = get_var_value(str);
+			if (!data->vars)
+				data->vars = new_node(name, value);
 			else
 			{
-				if (vdt.is_envp >= 0)
-					update_envp(data, name, value, vdt);
-				change_in_list(data->vars, name, value);
+				vdt = find_in_list(name, data->vars);
+				if (!vdt.value)
+					add_to_list(&data->vars, name, value);
+				else
+				{
+					if (vdt.is_envp >= 0)
+						update_envp(data, name, value, vdt);
+					change_in_list(data->vars, name, value);
+				}
 			}
+			free(name);
+			free(value);
 		}
-		free(name);
-		free(value);
+		return (TRUE);	
 	}
+	return (FALSE);
 }

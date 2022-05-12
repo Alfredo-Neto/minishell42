@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clear_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 17:29:32 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/05/10 10:42:25 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/12 00:29:33 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ void	data_clean(t_data *data)
 	triple_free(&data->file, data->number_of_pipes + 1);
 	triple_free(&data->argve, data->number_of_pipes + 1);
 	data->number_of_pipes = GARBAGE;
-	data->exec_flag = TRUE;
+	if (data->exec_flag)
+		free(data->exec_flag);
+	data->exec_flag = NULL;
 }
 
 void	double_free(void ***ptr)

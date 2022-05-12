@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 13:55:53 by ebresser          #+#    #+#             */
-/*   Updated: 2022/05/10 10:43:35 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/11 21:51:49 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,9 @@ void	pull_space(t_data *data)
 
 int	lexer(t_data *data)
 {
+	//testa |
+	//printf("minishell: syntax error near unexpected token `|'\n");
+	//	return (FAILURE);
 	if (pull_quotes(data))
 		return (FAILURE);
 	pull_pipe(data);

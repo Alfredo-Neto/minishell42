@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 23:19:00 by joeduard          #+#    #+#             */
-/*   Updated: 2022/05/10 10:42:57 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/12 00:40:01 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,13 @@ static int	find_path_and_execve(t_data *data, int id)
 
 void	ft_execve(t_data *data, int id)
 {
+	//if(data->exec_flag[id] == VAR_DEFINITION)
+	//{
+	//	g_status_code = 0;
+	//	exit(0);
+	//}	
 	if (absolute_path_tester(data->argve[id][0]))
-		execve(data->argve[id][0], data->argve[id], data->envp);
+		execve(data->argve[id][0], data->argve[id], data->envp);	
 	else if (data->command_path)
 		find_path_and_execve(data, id);
 	ft_printf(STDERR, "Minishell: %s: No such file or directory\n", data->argve[id][0]);
@@ -53,7 +58,7 @@ void	builtin_exec(t_data *data, int code, int id)
 {
 	if (code == EXIT && !data->number_of_pipes)
 		mini_exit(data);
-	else if (code == CD && !data->number_of_pipes)
+	else if (code == CD)
 		cd(data, id);
 	else if (code == ECHO)
 		echo(data, id);
@@ -65,9 +70,9 @@ void	builtin_exec(t_data *data, int code, int id)
 		pwd();
 	else if (code == ENV)
 		env(data);
-	else if (code == UNSET && !data->number_of_pipes)
+	else if (code == UNSET)
 		unset(data, id);
-	else if (code == EXPORT && !data->number_of_pipes)
+	else if (code == EXPORT)
 		export(data, id);
 }
 
@@ -113,8 +118,8 @@ int	executor(t_data *data)
 {
 	int		id;
 
-	if (data->exec_flag == -1)  // added to avoid execution if input is var definition
-		return (SUCCESS);
+	//if (data->exec_flag == -1)  // added to avoid execution if input is var definition
+	//	return (SUCCESS);
 	signal(SIGINT, handler);
 	if (!data->number_of_pipes && is_builtins(data->argve[0][0]))
 		return (execute_one_cmd(data));
@@ -123,6 +128,13 @@ int	executor(t_data *data)
 	open_pipes(data);
 	while (++id < data->number_of_pipes + 1)
 	{
+		//if (ft_str_count(data->argve[id]) == 1)
+		//	grab_vars(data, data->argve[id][0]);
+		if (data->exec_flag[id] == VAR_DEFINITION)
+		{
+			//data->exec_flag = 0;
+			continue;
+		}
 		data->pid[id] = fork();
 		if (data->pid[id] < 0)
 		{

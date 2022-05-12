@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 16:50:20 by ebresser          #+#    #+#             */
-/*   Updated: 2022/05/10 10:42:30 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/12 00:29:45 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	init_data(t_data *data, char **envp)
 	backup_envp_parameter(data, envp);
 	fill_list_vars(data);
 	data->number_of_pipes = GARBAGE;
-	data->exec_flag = GARBAGE;
+	data->exec_flag = NULL;
 }
 
 static void	init_command_path(t_data *data)

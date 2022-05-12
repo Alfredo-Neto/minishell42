@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/05/09 21:47:16 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/12 00:21:58 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@
 # define TRUE				1
 # define GARBAGE			-1
 # define NOT_EXIST			-2
+# define VAR_DEFINITION		-3
 
 # define GREAT				1
 # define GREATGREAT			2
@@ -97,7 +98,7 @@ typedef struct s_data
 	int		number_of_ids;
 	int		**fd;
 	int		*pid;
-	int		exec_flag;
+	char*	exec_flag;
 	int		child_ret;
 	char	***file;
 	char	**file_mode;
@@ -159,7 +160,7 @@ int		absolute_path_tester(char *cmd);
 
 //..................................................PARSE
 //parser.c  -  quotes ok: analisa!
-void	parser(t_data *data);
+int	parser(t_data *data);
 
 //mask_dollar.c
 void	mask_dollar(t_data *data);
@@ -174,7 +175,7 @@ int		mask_character(char *str, char c, int number);
 char	*get_var_value(char *input);
 char	*get_var_name(char *input);
 void	update_envp(t_data *data, char* name, char* value, t_vdt vdt);
-void	grab_vars(t_data *data, char *str);
+int	grab_vars(t_data *data, char *str);
 
 //..................................................EXPANDER
 //expand_variables.c

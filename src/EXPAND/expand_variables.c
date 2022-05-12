@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_variables.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 15:34:28 by ebresser          #+#    #+#             */
-/*   Updated: 2022/05/10 20:47:51 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/12 00:49:26 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	expander(t_data *data)
 				continue ;
 			}
 			cmdstr = new_argve(vdt.value, data, id);
-			data->exec_flag = 1;
+			data->exec_flag[id] = 1;
 			if (ft_strchr(vdt.value, ' '))
 				insert_new_args(data, cmdstr, i, id);
 			else
