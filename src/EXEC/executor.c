@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 23:19:00 by joeduard          #+#    #+#             */
-/*   Updated: 2022/05/12 00:40:01 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/05/12 22:59:58 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,6 @@ static int	find_path_and_execve(t_data *data, int id)
 
 void	ft_execve(t_data *data, int id)
 {
-	//if(data->exec_flag[id] == VAR_DEFINITION)
-	//{
-	//	g_status_code = 0;
-	//	exit(0);
-	//}	
 	if (absolute_path_tester(data->argve[id][0]))
 		execve(data->argve[id][0], data->argve[id], data->envp);	
 	else if (data->command_path)
@@ -118,8 +113,6 @@ int	executor(t_data *data)
 {
 	int		id;
 
-	//if (data->exec_flag == -1)  // added to avoid execution if input is var definition
-	//	return (SUCCESS);
 	signal(SIGINT, handler);
 	if (!data->number_of_pipes && is_builtins(data->argve[0][0]))
 		return (execute_one_cmd(data));
@@ -128,13 +121,8 @@ int	executor(t_data *data)
 	open_pipes(data);
 	while (++id < data->number_of_pipes + 1)
 	{
-		//if (ft_str_count(data->argve[id]) == 1)
-		//	grab_vars(data, data->argve[id][0]);
 		if (data->exec_flag[id] == VAR_DEFINITION)
-		{
-			//data->exec_flag = 0;
 			continue;
-		}
 		data->pid[id] = fork();
 		if (data->pid[id] < 0)
 		{

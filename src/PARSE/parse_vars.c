@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_vars.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 12:30:10 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/05/12 00:24:18 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/05/12 23:31:15 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,30 +88,27 @@ int	grab_vars(t_data *data, char *str)
 	char	*value;
 	t_vdt	vdt;
 
-	if (ft_strchr(str, '='))
+	if (!ft_strchr(str, '='))
+		return (FALSE);
+	if (data->number_of_pipes >= 1) //Não adiciona se houver pipe: ola=vc | wc -c
+		return (TRUE);
+	name = get_var_name(str);
+	value = get_var_value(str);
+	if (!data->vars)
+		data->vars = new_node(name, value);
+	else
 	{
-		if (data->number_of_pipes < 1) //Não adiciona se houver pipe: ola=vc | wc -c
+		vdt = find_in_list(name, data->vars);
+		if (!vdt.value)
+			add_to_list(&data->vars, name, value);
+		else
 		{
-			name = get_var_name(str);
-			value = get_var_value(str);
-			if (!data->vars)
-				data->vars = new_node(name, value);
-			else
-			{
-				vdt = find_in_list(name, data->vars);
-				if (!vdt.value)
-					add_to_list(&data->vars, name, value);
-				else
-				{
-					if (vdt.is_envp >= 0)
-						update_envp(data, name, value, vdt);
-					change_in_list(data->vars, name, value);
-				}
-			}
-			free(name);
-			free(value);
+			if (vdt.is_envp >= 0)
+				update_envp(data, name, value, vdt);
+			change_in_list(data->vars, name, value);
 		}
-		return (TRUE);	
 	}
-	return (FALSE);
+	free(name);
+	free(value);
+	return (TRUE);
 }
