@@ -6,11 +6,13 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 20:05:19 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/05/10 10:42:48 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/12 22:33:14 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	restore_std_fds(int *fd);
 
 int	execute_one_cmd(t_data *data)
 {
@@ -25,7 +27,7 @@ int	execute_one_cmd(t_data *data)
 	return (SUCCESS);
 }
 
-void	restore_std_fds(int *fd)
+static void	restore_std_fds(int *fd)
 {
 	dup2(fd[STDOUT], STDOUT_FILENO);
 	close(fd[STDOUT]);

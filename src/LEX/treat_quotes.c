@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 02:55:15 by azamario          #+#    #+#             */
-/*   Updated: 2022/05/10 10:43:53 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/12 21:58:16 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ void	treat_token_strings(t_data *data)
 	char	*string;
 	int		i;
 
-	i = 0;
+	i = -1;
 	string = NULL;
 	tokens = ft_split(data->input, ' ');
-	while (tokens[i])
+	while (tokens[++i])
 	{
 		treat_quotes(tokens[i]);
 		no_quotes(tokens[i]);
@@ -53,7 +53,6 @@ void	treat_token_strings(t_data *data)
 			string = ft_strdup(buf);
 			free(buf);
 		}
-		i++;
 	}
 	double_free((void ***)&tokens);
 	free(data->input);

@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 19:26:28 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/05/10 10:43:10 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/12 22:16:08 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@ int	redirect_filter(t_data *data, int id, int *save_fd)
 	while (data->file_mode[id][i] && !status)
 	{
 		if (data->file_mode[id][i] == GREAT)
-			status = redirect(data->file[id][i], O_WRONLY | O_CREAT | O_TRUNC, STDOUT);
+			status = redirect(data->file[id][i], \
+				O_WRONLY | O_CREAT | O_TRUNC, STDOUT);
 		else if (data->file_mode[id][i] == GREATGREAT)
-			status = redirect(data->file[id][i], O_WRONLY | O_CREAT | O_APPEND, STDOUT);
+			status = redirect(data->file[id][i], \
+				O_WRONLY | O_CREAT | O_APPEND, STDOUT);
 		else if (data->file_mode[id][i] == LESS)
 			status = redirect(data->file[id][i], O_RDONLY, STDIN);
 		else if (data->file_mode[id][i] == LESSLESS)

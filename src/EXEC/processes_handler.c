@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 23:19:00 by joeduard          #+#    #+#             */
-/*   Updated: 2022/05/10 10:43:06 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/12 22:22:39 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,22 @@ void	main_process_handler(t_data *data)
 	count = 0;
 	while (count < data->number_of_pipes + 1)
 		waitpid(data->pid[count++], NULL, 0);
+}
+
+void	create_executor_parametes(t_data *data)
+{
+	int		i;
+
+	i = 0;
+	data->pid = (int *)ft_calloc(sizeof(int), data->number_of_pipes + 1);
+	data->fd = (int **)ft_calloc(sizeof(int *), data->number_of_pipes + 1);
+	if (!data->pid || !data->fd)
+		exit_minishell(data, FAILURE);
+	while (i < data->number_of_pipes)
+	{
+		data->fd[i] = (int *)malloc(sizeof(int) * 2);
+		if (!data->fd[i])
+			exit_minishell(data, FAILURE);
+		i++;
+	}
 }

@@ -3,91 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:32:15 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/05/10 21:31:59 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/05/12 23:39:05 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// alloc a bigger envp
-// point older variables to new envp
-
-int	relocate_envp(char **old_envp, char **new_envp, char *new_var)
-{
-	int	pos;
-
-	pos = 0;
-	while (*old_envp)
-	{
-		*new_envp = *old_envp;
-		old_envp++;
-		new_envp++;
-		pos++;
-	}
-	*new_envp = ft_strdup(new_var);
-	new_envp++;
-	*new_envp = NULL;
-	return (pos);
-}
-
-// calculates and allocate the new envp size
-char	**new_bigger_envp(char **old_envp)
-{
-	int		envp_size;
-
-	envp_size = ft_str_count(old_envp);
-	envp_size += 2;
-	return ((char **)malloc(sizeof(char **) * (envp_size)));
-}
-
-// reallocates envp when there is no var definition in input
-void	upd_envp_w_def(t_data *data, int i, int id)
-{
-	char	**new_envp;
-	int		pos;
-	char	*name;
-	t_vdt	vdt;
-
-	name = get_var_name(data->argve[id][i]);
-	vdt = find_in_list(name, data->vars);
-	if (vdt.is_envp >= 0)
-	{
-		free(name);
-		return ;
-	}
-	new_envp = new_bigger_envp(data->envp);
-	pos = relocate_envp(data->envp, new_envp, data->argve[id][i]);
-	free(data->envp);
-	data->envp = new_envp;
-	upd_idx_in_list(data->vars, name, pos);
-	free(name);
-}
-
-// reallocates envp when there is a var definition in input
-void	upd_envp_no_def(t_data *data, int i, int id)
-{
-	char	**new_envp;
-	int		pos;
-	char	*name;
-	t_vdt	vdt;
-
-	vdt = find_in_list(data->argve[id][i], data->vars);
-	if (vdt.is_envp >= 0)
-		return ;
-	if (*vdt.value != '$')
-	{
-		new_envp = new_bigger_envp(data->envp);
-		name = remount_var(data->argve[id][i], vdt.value);
-		pos = relocate_envp(data->envp, new_envp, name);
-		free(data->envp);
-		data->envp = new_envp;
-		upd_idx_in_list(data->vars, data->argve[id][i], pos);
-		free(name);
-	}
-}
 
 // sorts envp content and prints on screen
 void	sort_export(char **envp)
@@ -118,14 +41,14 @@ void	sort_export(char **envp)
 }
 
 // checks if expression is "export $", an invalid input
-int		invalid_var(char ***argve, int id)
+int	invalid_var(char ***argve, int id)
 {
-	if (ft_strcmp(argve[id][0], "export") == 0 && 
+	if (ft_strcmp(argve[id][0], "export") == 0 &&
 		ft_strcmp(argve[id][1], "$") == 0 &&
 		argve[id][2] == 0x0)
-		return TRUE;
+		return (TRUE);
 	else
-		return FALSE;
+		return (FALSE);
 }
 
 void	export(t_data *data, int id)
@@ -141,7 +64,7 @@ void	export(t_data *data, int id)
 				printf("bash: export: `$': not a valid identifier\n");
 			else if (ft_strchr(data->argve[id][i], '='))
 				upd_envp_w_def(data, i, id);
-			else 
+			else
 				upd_envp_no_def(data, i, id);
 		}
 		else if (!(data->argve[id][i + 1]))

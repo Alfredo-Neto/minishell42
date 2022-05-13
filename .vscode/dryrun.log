@@ -1,5 +1,400 @@
-make --dry-run --keep-going --print-directory
+make --dry-run --always-make --keep-going --print-directory
 make: Entering directory '/home/vlima-nu/minishell42'
-make: Nothing to be done for 'all'.
+mkdir -p obj
+mkdir -p obj/BUILTINS
+mkdir -p obj/CORE
+mkdir -p obj/EXEC
+mkdir -p obj/EXPAND
+mkdir -p obj/LEX
+mkdir -p obj/PARSE
+mkdir -p obj/PROMPT
+mkdir -p obj/TOOLS
+gcc -Wall -Wextra -Werror -lreadline -g3 -O3 -fsanitize=address  -I inc -c src/BUILTINS/cd.c -o obj/BUILTINS/cd.o
+mkdir -p obj
+mkdir -p obj/BUILTINS
+mkdir -p obj/CORE
+mkdir -p obj/EXEC
+mkdir -p obj/EXPAND
+mkdir -p obj/LEX
+mkdir -p obj/PARSE
+mkdir -p obj/PROMPT
+mkdir -p obj/TOOLS
+gcc -Wall -Wextra -Werror -lreadline -g3 -O3 -fsanitize=address  -I inc -c src/BUILTINS/echo.c -o obj/BUILTINS/echo.o
+mkdir -p obj
+mkdir -p obj/BUILTINS
+mkdir -p obj/CORE
+mkdir -p obj/EXEC
+mkdir -p obj/EXPAND
+mkdir -p obj/LEX
+mkdir -p obj/PARSE
+mkdir -p obj/PROMPT
+mkdir -p obj/TOOLS
+gcc -Wall -Wextra -Werror -lreadline -g3 -O3 -fsanitize=address  -I inc -c src/BUILTINS/env.c -o obj/BUILTINS/env.o
+mkdir -p obj
+mkdir -p obj/BUILTINS
+mkdir -p obj/CORE
+mkdir -p obj/EXEC
+mkdir -p obj/EXPAND
+mkdir -p obj/LEX
+mkdir -p obj/PARSE
+mkdir -p obj/PROMPT
+mkdir -p obj/TOOLS
+gcc -Wall -Wextra -Werror -lreadline -g3 -O3 -fsanitize=address  -I inc -c src/BUILTINS/exit.c -o obj/BUILTINS/exit.o
+mkdir -p obj
+mkdir -p obj/BUILTINS
+mkdir -p obj/CORE
+mkdir -p obj/EXEC
+mkdir -p obj/EXPAND
+mkdir -p obj/LEX
+mkdir -p obj/PARSE
+mkdir -p obj/PROMPT
+mkdir -p obj/TOOLS
+gcc -Wall -Wextra -Werror -lreadline -g3 -O3 -fsanitize=address  -I inc -c src/BUILTINS/export.c -o obj/BUILTINS/export.o
+mkdir -p obj
+mkdir -p obj/BUILTINS
+mkdir -p obj/CORE
+mkdir -p obj/EXEC
+mkdir -p obj/EXPAND
+mkdir -p obj/LEX
+mkdir -p obj/PARSE
+mkdir -p obj/PROMPT
+mkdir -p obj/TOOLS
+gcc -Wall -Wextra -Werror -lreadline -g3 -O3 -fsanitize=address  -I inc -c src/BUILTINS/export_utils.c -o obj/BUILTINS/export_utils.o
+mkdir -p obj
+mkdir -p obj/BUILTINS
+mkdir -p obj/CORE
+mkdir -p obj/EXEC
+mkdir -p obj/EXPAND
+mkdir -p obj/LEX
+mkdir -p obj/PARSE
+mkdir -p obj/PROMPT
+mkdir -p obj/TOOLS
+gcc -Wall -Wextra -Werror -lreadline -g3 -O3 -fsanitize=address  -I inc -c src/BUILTINS/hello.c -o obj/BUILTINS/hello.o
+mkdir -p obj
+mkdir -p obj/BUILTINS
+mkdir -p obj/CORE
+mkdir -p obj/EXEC
+mkdir -p obj/EXPAND
+mkdir -p obj/LEX
+mkdir -p obj/PARSE
+mkdir -p obj/PROMPT
+mkdir -p obj/TOOLS
+gcc -Wall -Wextra -Werror -lreadline -g3 -O3 -fsanitize=address  -I inc -c src/BUILTINS/help.c -o obj/BUILTINS/help.o
+mkdir -p obj
+mkdir -p obj/BUILTINS
+mkdir -p obj/CORE
+mkdir -p obj/EXEC
+mkdir -p obj/EXPAND
+mkdir -p obj/LEX
+mkdir -p obj/PARSE
+mkdir -p obj/PROMPT
+mkdir -p obj/TOOLS
+gcc -Wall -Wextra -Werror -lreadline -g3 -O3 -fsanitize=address  -I inc -c src/BUILTINS/pwd.c -o obj/BUILTINS/pwd.o
+mkdir -p obj
+mkdir -p obj/BUILTINS
+mkdir -p obj/CORE
+mkdir -p obj/EXEC
+mkdir -p obj/EXPAND
+mkdir -p obj/LEX
+mkdir -p obj/PARSE
+mkdir -p obj/PROMPT
+mkdir -p obj/TOOLS
+gcc -Wall -Wextra -Werror -lreadline -g3 -O3 -fsanitize=address  -I inc -c src/BUILTINS/unset.c -o obj/BUILTINS/unset.o
+mkdir -p obj
+mkdir -p obj/BUILTINS
+mkdir -p obj/CORE
+mkdir -p obj/EXEC
+mkdir -p obj/EXPAND
+mkdir -p obj/LEX
+mkdir -p obj/PARSE
+mkdir -p obj/PROMPT
+mkdir -p obj/TOOLS
+gcc -Wall -Wextra -Werror -lreadline -g3 -O3 -fsanitize=address  -I inc -c src/EXPAND/expand_variables.c -o obj/EXPAND/expand_variables.o
+mkdir -p obj
+mkdir -p obj/BUILTINS
+mkdir -p obj/CORE
+mkdir -p obj/EXEC
+mkdir -p obj/EXPAND
+mkdir -p obj/LEX
+mkdir -p obj/PARSE
+mkdir -p obj/PROMPT
+mkdir -p obj/TOOLS
+gcc -Wall -Wextra -Werror -lreadline -g3 -O3 -fsanitize=address  -I inc -c src/EXPAND/expand_utils.c -o obj/EXPAND/expand_utils.o
+mkdir -p obj
+mkdir -p obj/BUILTINS
+mkdir -p obj/CORE
+mkdir -p obj/EXEC
+mkdir -p obj/EXPAND
+mkdir -p obj/LEX
+mkdir -p obj/PARSE
+mkdir -p obj/PROMPT
+mkdir -p obj/TOOLS
+gcc -Wall -Wextra -Werror -lreadline -g3 -O3 -fsanitize=address  -I inc -c src/PROMPT/history.c -o obj/PROMPT/history.o
+mkdir -p obj
+mkdir -p obj/BUILTINS
+mkdir -p obj/CORE
+mkdir -p obj/EXEC
+mkdir -p obj/EXPAND
+mkdir -p obj/LEX
+mkdir -p obj/PARSE
+mkdir -p obj/PROMPT
+mkdir -p obj/TOOLS
+gcc -Wall -Wextra -Werror -lreadline -g3 -O3 -fsanitize=address  -I inc -c src/PROMPT/prompt_take_input.c -o obj/PROMPT/prompt_take_input.o
+mkdir -p obj
+mkdir -p obj/BUILTINS
+mkdir -p obj/CORE
+mkdir -p obj/EXEC
+mkdir -p obj/EXPAND
+mkdir -p obj/LEX
+mkdir -p obj/PARSE
+mkdir -p obj/PROMPT
+mkdir -p obj/TOOLS
+gcc -Wall -Wextra -Werror -lreadline -g3 -O3 -fsanitize=address  -I inc -c src/PARSE/parse_vars.c -o obj/PARSE/parse_vars.o
+mkdir -p obj
+mkdir -p obj/BUILTINS
+mkdir -p obj/CORE
+mkdir -p obj/EXEC
+mkdir -p obj/EXPAND
+mkdir -p obj/LEX
+mkdir -p obj/PARSE
+mkdir -p obj/PROMPT
+mkdir -p obj/TOOLS
+gcc -Wall -Wextra -Werror -lreadline -g3 -O3 -fsanitize=address  -I inc -c src/PARSE/parser.c -o obj/PARSE/parser.o
+mkdir -p obj
+mkdir -p obj/BUILTINS
+mkdir -p obj/CORE
+mkdir -p obj/EXEC
+mkdir -p obj/EXPAND
+mkdir -p obj/LEX
+mkdir -p obj/PARSE
+mkdir -p obj/PROMPT
+mkdir -p obj/TOOLS
+gcc -Wall -Wextra -Werror -lreadline -g3 -O3 -fsanitize=address  -I inc -c src/TOOLS/list_tools_one.c -o obj/TOOLS/list_tools_one.o
+mkdir -p obj
+mkdir -p obj/BUILTINS
+mkdir -p obj/CORE
+mkdir -p obj/EXEC
+mkdir -p obj/EXPAND
+mkdir -p obj/LEX
+mkdir -p obj/PARSE
+mkdir -p obj/PROMPT
+mkdir -p obj/TOOLS
+gcc -Wall -Wextra -Werror -lreadline -g3 -O3 -fsanitize=address  -I inc -c src/TOOLS/list_tools_two.c -o obj/TOOLS/list_tools_two.o
+mkdir -p obj
+mkdir -p obj/BUILTINS
+mkdir -p obj/CORE
+mkdir -p obj/EXEC
+mkdir -p obj/EXPAND
+mkdir -p obj/LEX
+mkdir -p obj/PARSE
+mkdir -p obj/PROMPT
+mkdir -p obj/TOOLS
+gcc -Wall -Wextra -Werror -lreadline -g3 -O3 -fsanitize=address  -I inc -c src/TOOLS/str_tools.c -o obj/TOOLS/str_tools.o
+mkdir -p obj
+mkdir -p obj/BUILTINS
+mkdir -p obj/CORE
+mkdir -p obj/EXEC
+mkdir -p obj/EXPAND
+mkdir -p obj/LEX
+mkdir -p obj/PARSE
+mkdir -p obj/PROMPT
+mkdir -p obj/TOOLS
+gcc -Wall -Wextra -Werror -lreadline -g3 -O3 -fsanitize=address  -I inc -c src/CORE/clear_data.c -o obj/CORE/clear_data.o
+mkdir -p obj
+mkdir -p obj/BUILTINS
+mkdir -p obj/CORE
+mkdir -p obj/EXEC
+mkdir -p obj/EXPAND
+mkdir -p obj/LEX
+mkdir -p obj/PARSE
+mkdir -p obj/PROMPT
+mkdir -p obj/TOOLS
+gcc -Wall -Wextra -Werror -lreadline -g3 -O3 -fsanitize=address  -I inc -c src/CORE/init_data.c -o obj/CORE/init_data.o
+mkdir -p obj
+mkdir -p obj/BUILTINS
+mkdir -p obj/CORE
+mkdir -p obj/EXEC
+mkdir -p obj/EXPAND
+mkdir -p obj/LEX
+mkdir -p obj/PARSE
+mkdir -p obj/PROMPT
+mkdir -p obj/TOOLS
+gcc -Wall -Wextra -Werror -lreadline -g3 -O3 -fsanitize=address  -I inc -c src/CORE/minishell.c -o obj/CORE/minishell.o
+mkdir -p obj
+mkdir -p obj/BUILTINS
+mkdir -p obj/CORE
+mkdir -p obj/EXEC
+mkdir -p obj/EXPAND
+mkdir -p obj/LEX
+mkdir -p obj/PARSE
+mkdir -p obj/PROMPT
+mkdir -p obj/TOOLS
+gcc -Wall -Wextra -Werror -lreadline -g3 -O3 -fsanitize=address  -I inc -c src/CORE/signals.c -o obj/CORE/signals.o
+mkdir -p obj
+mkdir -p obj/BUILTINS
+mkdir -p obj/CORE
+mkdir -p obj/EXEC
+mkdir -p obj/EXPAND
+mkdir -p obj/LEX
+mkdir -p obj/PARSE
+mkdir -p obj/PROMPT
+mkdir -p obj/TOOLS
+gcc -Wall -Wextra -Werror -lreadline -g3 -O3 -fsanitize=address  -I inc -c src/CORE/main.c -o obj/CORE/main.o
+mkdir -p obj
+mkdir -p obj/BUILTINS
+mkdir -p obj/CORE
+mkdir -p obj/EXEC
+mkdir -p obj/EXPAND
+mkdir -p obj/LEX
+mkdir -p obj/PARSE
+mkdir -p obj/PROMPT
+mkdir -p obj/TOOLS
+gcc -Wall -Wextra -Werror -lreadline -g3 -O3 -fsanitize=address  -I inc -c src/EXEC/execute_one_cmd.c -o obj/EXEC/execute_one_cmd.o
+mkdir -p obj
+mkdir -p obj/BUILTINS
+mkdir -p obj/CORE
+mkdir -p obj/EXEC
+mkdir -p obj/EXPAND
+mkdir -p obj/LEX
+mkdir -p obj/PARSE
+mkdir -p obj/PROMPT
+mkdir -p obj/TOOLS
+gcc -Wall -Wextra -Werror -lreadline -g3 -O3 -fsanitize=address  -I inc -c src/EXEC/executor.c -o obj/EXEC/executor.o
+mkdir -p obj
+mkdir -p obj/BUILTINS
+mkdir -p obj/CORE
+mkdir -p obj/EXEC
+mkdir -p obj/EXPAND
+mkdir -p obj/LEX
+mkdir -p obj/PARSE
+mkdir -p obj/PROMPT
+mkdir -p obj/TOOLS
+gcc -Wall -Wextra -Werror -lreadline -g3 -O3 -fsanitize=address  -I inc -c src/EXEC/here_document.c -o obj/EXEC/here_document.o
+mkdir -p obj
+mkdir -p obj/BUILTINS
+mkdir -p obj/CORE
+mkdir -p obj/EXEC
+mkdir -p obj/EXPAND
+mkdir -p obj/LEX
+mkdir -p obj/PARSE
+mkdir -p obj/PROMPT
+mkdir -p obj/TOOLS
+gcc -Wall -Wextra -Werror -lreadline -g3 -O3 -fsanitize=address  -I inc -c src/EXEC/pipes_fds_handling.c -o obj/EXEC/pipes_fds_handling.o
+mkdir -p obj
+mkdir -p obj/BUILTINS
+mkdir -p obj/CORE
+mkdir -p obj/EXEC
+mkdir -p obj/EXPAND
+mkdir -p obj/LEX
+mkdir -p obj/PARSE
+mkdir -p obj/PROMPT
+mkdir -p obj/TOOLS
+gcc -Wall -Wextra -Werror -lreadline -g3 -O3 -fsanitize=address  -I inc -c src/EXEC/processes_handler.c -o obj/EXEC/processes_handler.o
+mkdir -p obj
+mkdir -p obj/BUILTINS
+mkdir -p obj/CORE
+mkdir -p obj/EXEC
+mkdir -p obj/EXPAND
+mkdir -p obj/LEX
+mkdir -p obj/PARSE
+mkdir -p obj/PROMPT
+mkdir -p obj/TOOLS
+gcc -Wall -Wextra -Werror -lreadline -g3 -O3 -fsanitize=address  -I inc -c src/EXEC/redirects.c -o obj/EXEC/redirects.o
+mkdir -p obj
+mkdir -p obj/BUILTINS
+mkdir -p obj/CORE
+mkdir -p obj/EXEC
+mkdir -p obj/EXPAND
+mkdir -p obj/LEX
+mkdir -p obj/PARSE
+mkdir -p obj/PROMPT
+mkdir -p obj/TOOLS
+gcc -Wall -Wextra -Werror -lreadline -g3 -O3 -fsanitize=address  -I inc -c src/EXEC/sorting.c -o obj/EXEC/sorting.o
+mkdir -p obj
+mkdir -p obj/BUILTINS
+mkdir -p obj/CORE
+mkdir -p obj/EXEC
+mkdir -p obj/EXPAND
+mkdir -p obj/LEX
+mkdir -p obj/PARSE
+mkdir -p obj/PROMPT
+mkdir -p obj/TOOLS
+gcc -Wall -Wextra -Werror -lreadline -g3 -O3 -fsanitize=address  -I inc -c src/LEX/absolute_path_tester.c -o obj/LEX/absolute_path_tester.o
+mkdir -p obj
+mkdir -p obj/BUILTINS
+mkdir -p obj/CORE
+mkdir -p obj/EXEC
+mkdir -p obj/EXPAND
+mkdir -p obj/LEX
+mkdir -p obj/PARSE
+mkdir -p obj/PROMPT
+mkdir -p obj/TOOLS
+gcc -Wall -Wextra -Werror -lreadline -g3 -O3 -fsanitize=address  -I inc -c src/LEX/lexer.c -o obj/LEX/lexer.o
+mkdir -p obj
+mkdir -p obj/BUILTINS
+mkdir -p obj/CORE
+mkdir -p obj/EXEC
+mkdir -p obj/EXPAND
+mkdir -p obj/LEX
+mkdir -p obj/PARSE
+mkdir -p obj/PROMPT
+mkdir -p obj/TOOLS
+gcc -Wall -Wextra -Werror -lreadline -g3 -O3 -fsanitize=address  -I inc -c src/LEX/mask_dollar.c -o obj/LEX/mask_dollar.o
+mkdir -p obj
+mkdir -p obj/BUILTINS
+mkdir -p obj/CORE
+mkdir -p obj/EXEC
+mkdir -p obj/EXPAND
+mkdir -p obj/LEX
+mkdir -p obj/PARSE
+mkdir -p obj/PROMPT
+mkdir -p obj/TOOLS
+gcc -Wall -Wextra -Werror -lreadline -g3 -O3 -fsanitize=address  -I inc -c src/LEX/mask_n_unmask_chars.c -o obj/LEX/mask_n_unmask_chars.o
+mkdir -p obj
+mkdir -p obj/BUILTINS
+mkdir -p obj/CORE
+mkdir -p obj/EXEC
+mkdir -p obj/EXPAND
+mkdir -p obj/LEX
+mkdir -p obj/PARSE
+mkdir -p obj/PROMPT
+mkdir -p obj/TOOLS
+gcc -Wall -Wextra -Werror -lreadline -g3 -O3 -fsanitize=address  -I inc -c src/LEX/pull_redirects.c -o obj/LEX/pull_redirects.o
+mkdir -p obj
+mkdir -p obj/BUILTINS
+mkdir -p obj/CORE
+mkdir -p obj/EXEC
+mkdir -p obj/EXPAND
+mkdir -p obj/LEX
+mkdir -p obj/PARSE
+mkdir -p obj/PROMPT
+mkdir -p obj/TOOLS
+gcc -Wall -Wextra -Werror -lreadline -g3 -O3 -fsanitize=address  -I inc -c src/LEX/treat_operators.c -o obj/LEX/treat_operators.o
+mkdir -p obj
+mkdir -p obj/BUILTINS
+mkdir -p obj/CORE
+mkdir -p obj/EXEC
+mkdir -p obj/EXPAND
+mkdir -p obj/LEX
+mkdir -p obj/PARSE
+mkdir -p obj/PROMPT
+mkdir -p obj/TOOLS
+gcc -Wall -Wextra -Werror -lreadline -g3 -O3 -fsanitize=address  -I inc -c src/LEX/treat_quotes.c -o obj/LEX/treat_quotes.o
+mkdir -p obj
+mkdir -p obj/BUILTINS
+mkdir -p obj/CORE
+mkdir -p obj/EXEC
+mkdir -p obj/EXPAND
+mkdir -p obj/LEX
+mkdir -p obj/PARSE
+mkdir -p obj/PROMPT
+mkdir -p obj/TOOLS
+gcc -Wall -Wextra -Werror -lreadline -g3 -O3 -fsanitize=address  -I inc -c src/LEX/treat_spaces.c -o obj/LEX/treat_spaces.o
+make -C libft
+make -C ft_printf
+gcc -Wall -Wextra -Werror -lreadline -g3 -O3 -fsanitize=address  obj/BUILTINS/cd.o obj/BUILTINS/echo.o obj/BUILTINS/env.o obj/BUILTINS/exit.o obj/BUILTINS/export.o obj/BUILTINS/export_utils.o obj/BUILTINS/hello.o obj/BUILTINS/help.o obj/BUILTINS/pwd.o obj/BUILTINS/unset.o obj/EXPAND/expand_variables.o obj/EXPAND/expand_utils.o obj/PROMPT/history.o obj/PROMPT/prompt_take_input.o obj/PARSE/parse_vars.o obj/PARSE/parser.o obj/TOOLS/list_tools_one.o obj/TOOLS/list_tools_two.o obj/TOOLS/str_tools.o obj/CORE/clear_data.o obj/CORE/init_data.o obj/CORE/minishell.o obj/CORE/signals.o obj/CORE/main.o obj/EXEC/execute_one_cmd.o obj/EXEC/executor.o obj/EXEC/here_document.o obj/EXEC/pipes_fds_handling.o obj/EXEC/processes_handler.o obj/EXEC/redirects.o obj/EXEC/sorting.o obj/LEX/absolute_path_tester.o obj/LEX/lexer.o obj/LEX/mask_dollar.o obj/LEX/mask_n_unmask_chars.o obj/LEX/pull_redirects.o obj/LEX/treat_operators.o obj/LEX/treat_quotes.o obj/LEX/treat_spaces.o libft/libft.a ft_printf/libftprintf.a -L libft -lft -lreadline -o minishell
+echo ""
+echo "|		minishell created		|"
+echo ""
 make: Leaving directory '/home/vlima-nu/minishell42'
  
