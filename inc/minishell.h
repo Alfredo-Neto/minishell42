@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/05/09 21:47:16 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/12 22:32:12 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,12 @@ void	grab_vars(t_data *data, char *str);
 //..................................................EXPANDER
 //expand_variables.c
 void	expander(t_data *data);
-void	move_ptrs_back(char **ptr);
+
+//expand_utils.c
+int		find_vars(char **argve);
+void	make_space(char **argve, int start);
+char	**new_argve(char *value, t_data *data, int id);
+void	insert_new_args(t_data *data, char **cmdstr, int i, int id);
 
 //..................................................EXEC
 //sorting.c
@@ -192,11 +197,7 @@ int		heredoc(char *eof, int *save_fd);
 
 //executor.c
 int		executor(t_data *data);
-int		execute_pid(t_data *data, int id);
-void	ft_execve(t_data *data, int argve_index);
-int		multiple_exec(t_data *data);
 void	builtin_exec(t_data *data, int code, int id);
-int		env(t_data *data);
 
 //pipes_fds_handling.c 
 int		open_pipes(t_data *data);
@@ -208,11 +209,11 @@ int		redir_execute_pid(t_data *data, int id);
 
 //execute_one_cmd.c
 int		execute_one_cmd(t_data *data);
+void	save_std_fds(int *fd);
 
 //processes_handler.c
 void	main_process_handler(t_data *data);
-void	restore_std_fds(int *fd);
-void	save_std_fds(int *fd);
+void	create_executor_parametes(t_data *data);
 
 //..................................................BUILTINS
 int 	cd(t_data *data, int id);
@@ -228,6 +229,9 @@ void	pwd(void);
 //help.c
 void	open_help(void);
 
+//env.c
+int		env(t_data *data);
+
 //echo.c
 void	echo(t_data *data, int id);
 
@@ -237,18 +241,23 @@ void	hello(void);
 //export.c
 void	export(t_data *data, int id);
 
+//export_utils.c
+int		relocate_envp(char **old_envp, char **new_envp, char *new_var);
+char	**new_bigger_envp(char **old_envp);
+void	upd_envp_w_def(t_data *data, int i, int id);
+void	upd_envp_no_def(t_data *data, int i, int id);
+
 //unset.c
 void	unset(t_data *data, int id);
 
 //..................................................TOOLS
 // Vamos usar funcoes proprias
 //str_tools.c
-int		ft_strcpy_handled(char **new, char const *src);
 int		ft_strjoin_handled(char **s1, char const *s2);
 int		ft_str_count(char **str);
 void	ft_strcut(char **str, size_t init, size_t end);
 char	*remount_var(char *var_name, char *var_value);
-
+void	move_ptrs_back(char **ptr);
 
 //list_tools.c
 t_vars	*new_node(char *name, char *value);

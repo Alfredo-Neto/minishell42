@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 18:18:13 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/05/10 20:45:29 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/12 22:36:47 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,17 @@ int	heredoc(char *eof, int *save_fd)
 	int		tmp_file;
 	int		status;
 	int		save_std_out;
-	int		pid;
 
 	tmp_file = create_tmp_file();
+	if (tmp_file < 0)
+		return (FAILURE);
 	save_std_out = dup(STDOUT);
 	dup2(save_fd[STDOUT], STDOUT_FILENO);
 	dup2(save_fd[STDIN], STDIN_FILENO);
-	if (tmp_file < 0)
-		return (FAILURE);
 	signal(SIGINT, SIG_IGN);
-	pid = fork();
-	if (!pid)
+	if (!fork())
 		write_input(eof, tmp_file);
-	waitpid(pid, &status, 0);
+	wait(&status);
 	if (WEXITSTATUS(status) == 130)
 	{
 		clear_tmp_file();

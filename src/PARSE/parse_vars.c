@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 12:30:10 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/05/10 10:44:03 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/12 22:20:06 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,26 +88,25 @@ void	grab_vars(t_data *data, char *str)
 	char	*value;
 	t_vdt	vdt;
 
-	if (ft_strchr(str, '='))
+	if (!ft_strchr(str, '='))
+		return ;
+	data->exec_flag = -1;
+	name = get_var_name(str);
+	value = get_var_value(str);
+	if (!data->vars)
+		data->vars = new_node(name, value);
+	else
 	{
-		data->exec_flag = -1;
-		name = get_var_name(str);
-		value = get_var_value(str);
-		if (!data->vars)
-			data->vars = new_node(name, value);
+		vdt = find_in_list(name, data->vars);
+		if (!vdt.value)
+			add_to_list(&data->vars, name, value);
 		else
 		{
-			vdt = find_in_list(name, data->vars);
-			if (!vdt.value)
-				add_to_list(&data->vars, name, value);
-			else
-			{
-				if (vdt.is_envp >= 0)
-					update_envp(data, name, value, vdt);
-				change_in_list(data->vars, name, value);
-			}
+			if (vdt.is_envp >= 0)
+				update_envp(data, name, value, vdt);
+			change_in_list(data->vars, name, value);
 		}
-		free(name);
-		free(value);
 	}
+	free(name);
+	free(value);
 }
