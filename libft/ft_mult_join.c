@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_mult_join.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/13 20:28:30 by ebresser          #+#    #+#             */
-/*   Updated: 2022/05/14 11:45:37 by vlima-nu         ###   ########.fr       */
+/*   Created: 2022/05/14 13:32:06 by vlima-nu          #+#    #+#             */
+/*   Updated: 2022/05/14 13:33:15 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	minishell(t_data *data)
+char	*ft_mult_join(unsigned int nbr_of_strs, char *s1, ...)
 {
-	signal(SIGINT, new_prompt_mini);
-	signal(SIGQUIT, SIG_IGN);
-	data_clean(data);
-	if (take_input(data) || lexer(data))
-		return ;
-	expander(data);
-	if (parser(data))
-		return ;
-	executor(data);
+	va_list	args;
+	char	*final_str;
+	char	*str_n;
+	char	*buf;
+
+	final_str = ft_strdup(s1);
+	va_start(args, s1);
+	while (nbr_of_strs)
+	{
+		str_n = va_arg(args, char *);
+		buf = ft_strjoin(final_str, str_n);
+		free(final_str);
+		final_str = ft_strdup(buf);
+		free(buf);
+		nbr_of_strs--;
+	}
+	va_end(args);
+	return (final_str);
 }

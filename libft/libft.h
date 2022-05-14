@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 18:05:41 by azamario          #+#    #+#             */
-/*   Updated: 2022/05/04 21:11:14 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/14 13:34:23 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <stdarg.h>
 //# include <bsd/string.h>
 
 void		*ft_memset(void *b, int c, size_t len);
@@ -65,6 +66,7 @@ void		ft_putchar_fd(char c, int fd);
 void		ft_putstr_fd(char *s, int fd);
 void		ft_putendl_fd(char *s, int fd);
 void		ft_putnbr_fd(int n, int fd);
+char		*ft_mult_join(unsigned int nbr_of_strs, char *s1, ...);
 
 typedef struct s_list
 {

@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Thu May 12 22:16:20 2022
+# Make data base, printed on Sat May 14 13:45:15 2022
 
 # Variables
 
@@ -155,9 +155,9 @@ OBJS_DIR = obj
 # environment
 _ = /home/vlima-nu/.vscode-server/bin/da15b6fd3ef856477bf6f4fb29ba1b7af717770d/node
 # makefile (from 'Makefile', line 4)
-CFLAGS = -Wall -Wextra -Werror -lreadline -g3 -O3 -fsanitize=address 
+CFLAGS = -Wall -Wextra -Werror -lreadline -g -fsanitize=address 
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-d8730f20-d802-414c-ac5c-bf3369fd88c8.sock
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-35c47f47-3935-42ae-a32f-90fbf721ecbe.sock
 # makefile (from 'Makefile', line 23)
 PARSE = parse_vars.c parser.c
 # environment
@@ -191,17 +191,12 @@ CC = gcc
 
 # Directories
 
-# src/CORE (device 2, inode 10696049115066566): 7 files, no impossibilities so far.
-# src/EXEC (device 2, inode 1125899907022101): 8 files, no impossibilities so far.
 # src (device 2, inode 6755399441143494): No files, no impossibilities so far.
 # src/EXPAND (device 2, inode 1970324837415460): 4 files, no impossibilities so far.
 # src/BUILTINS (device 2, inode 21955048183487836): 12 files, no impossibilities so far.
-# src/TOOLS (device 2, inode 1688849860901713): 5 files, no impossibilities so far.
 # . (device 2, inode 33495522228568196): 16 files, no impossibilities.
-# src/PARSE (device 2, inode 3659174697731300): 4 files, no impossibilities so far.
-# src/PROMPT (device 2, inode 9007199254816843): 4 files, no impossibilities so far.
 
-# 60 files, no impossibilities in 9 directories.
+# 32 files, no impossibilities in 4 directories.
 
 # Implicit Rules
 
@@ -221,143 +216,28 @@ obj/%.o: src/%.c
 # 1 implicit rules, 0 (0.0%) terminal.
 # Files
 
-obj/CORE/clear_data.o: src/CORE/clear_data.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: 'CORE/clear_data'
-#  Last modified 2022-05-10 20:18:36.7905245
-#  File has been updated.
-#  Successfully updated.
-#  recipe to execute (from 'Makefile', line 54):
-		@mkdir -p obj
-		@mkdir -p obj/BUILTINS
-		@mkdir -p obj/CORE
-		@mkdir -p obj/EXEC
-		@mkdir -p obj/EXPAND
-		@mkdir -p obj/LEX
-		@mkdir -p obj/PARSE
-		@mkdir -p obj/PROMPT
-		@mkdir -p obj/TOOLS
-		$(CC) $(CFLAGS) $(INC) -c $< -o $@
-
-obj/TOOLS/list_tools_two.o: src/TOOLS/list_tools_two.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: 'TOOLS/list_tools_two'
-#  Last modified 2022-05-12 22:08:08.3861272
-#  File has been updated.
-#  Successfully updated.
-#  recipe to execute (from 'Makefile', line 54):
-		@mkdir -p obj
-		@mkdir -p obj/BUILTINS
-		@mkdir -p obj/CORE
-		@mkdir -p obj/EXEC
-		@mkdir -p obj/EXPAND
-		@mkdir -p obj/LEX
-		@mkdir -p obj/PARSE
-		@mkdir -p obj/PROMPT
-		@mkdir -p obj/TOOLS
-		$(CC) $(CFLAGS) $(INC) -c $< -o $@
+# Not a target:
+obj/CORE/clear_data.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
-src/CORE/clear_data.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-05-10 10:42:26.0236975
-#  File has been updated.
-#  Successfully updated.
+obj/TOOLS/list_tools_two.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
-obj/TOOLS/str_tools.o: src/TOOLS/str_tools.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: 'TOOLS/str_tools'
-#  Last modified 2022-05-12 22:08:08.9453565
-#  File has been updated.
-#  Successfully updated.
-#  recipe to execute (from 'Makefile', line 54):
-		@mkdir -p obj
-		@mkdir -p obj/BUILTINS
-		@mkdir -p obj/CORE
-		@mkdir -p obj/EXEC
-		@mkdir -p obj/EXPAND
-		@mkdir -p obj/LEX
-		@mkdir -p obj/PARSE
-		@mkdir -p obj/PROMPT
-		@mkdir -p obj/TOOLS
-		$(CC) $(CFLAGS) $(INC) -c $< -o $@
+# Not a target:
+obj/TOOLS/str_tools.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 obj/BUILTINS/env.o: src/BUILTINS/env.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'BUILTINS/env'
-#  Last modified 2022-05-10 20:18:31.9916424
-#  File has been updated.
-#  Successfully updated.
-#  recipe to execute (from 'Makefile', line 54):
-		@mkdir -p obj
-		@mkdir -p obj/BUILTINS
-		@mkdir -p obj/CORE
-		@mkdir -p obj/EXEC
-		@mkdir -p obj/EXPAND
-		@mkdir -p obj/LEX
-		@mkdir -p obj/PARSE
-		@mkdir -p obj/PROMPT
-		@mkdir -p obj/TOOLS
-		$(CC) $(CFLAGS) $(INC) -c $< -o $@
-
-obj/EXEC/redirects.o: src/EXEC/redirects.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: 'EXEC/redirects'
-#  Last modified 2022-05-10 20:18:39.8584243
-#  File has been updated.
-#  Needs to be updated (-q is set).
-# automatic
-# @ := obj/EXEC/redirects.o
-# automatic
-# * := EXEC/redirects
-# automatic
-# < := src/EXEC/redirects.c
-# automatic
-# + := src/EXEC/redirects.c
-# automatic
-# % := 
-# automatic
-# ^ := src/EXEC/redirects.c
-# automatic
-# ? := src/EXEC/redirects.c
-# automatic
-# | := 
-# variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=3/16=19%
-#  recipe to execute (from 'Makefile', line 54):
-		@mkdir -p obj
-		@mkdir -p obj/BUILTINS
-		@mkdir -p obj/CORE
-		@mkdir -p obj/EXEC
-		@mkdir -p obj/EXPAND
-		@mkdir -p obj/LEX
-		@mkdir -p obj/PARSE
-		@mkdir -p obj/PROMPT
-		@mkdir -p obj/TOOLS
-		$(CC) $(CFLAGS) $(INC) -c $< -o $@
-
-obj/CORE/init_data.o: src/CORE/init_data.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: 'CORE/init_data'
-#  Last modified 2022-05-10 20:18:37.1105502
-#  File has been updated.
-#  Successfully updated.
-#  recipe to execute (from 'Makefile', line 54):
-		@mkdir -p obj
-		@mkdir -p obj/BUILTINS
-		@mkdir -p obj/CORE
-		@mkdir -p obj/EXEC
-		@mkdir -p obj/EXPAND
-		@mkdir -p obj/LEX
-		@mkdir -p obj/PARSE
-		@mkdir -p obj/PROMPT
-		@mkdir -p obj/TOOLS
-		$(CC) $(CFLAGS) $(INC) -c $< -o $@
-
-obj/EXEC/pipes_fds_handling.o: src/EXEC/pipes_fds_handling.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: 'EXEC/pipes_fds_handling'
-#  Last modified 2022-05-10 20:18:39.3171669
+#  Last modified 2022-05-14 11:51:44.7807337
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 54):
@@ -373,43 +253,28 @@ obj/EXEC/pipes_fds_handling.o: src/EXEC/pipes_fds_handling.c
 		$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 # Not a target:
-src/TOOLS/list_tools_two.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-05-12 22:08:08.1063332
-#  File has been updated.
-#  Successfully updated.
-
-obj/PROMPT/prompt_take_input.o: src/PROMPT/prompt_take_input.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: 'PROMPT/prompt_take_input'
-#  Last modified 2022-05-10 20:18:35.1171168
-#  File has been updated.
-#  Successfully updated.
-#  recipe to execute (from 'Makefile', line 54):
-		@mkdir -p obj
-		@mkdir -p obj/BUILTINS
-		@mkdir -p obj/CORE
-		@mkdir -p obj/EXEC
-		@mkdir -p obj/EXPAND
-		@mkdir -p obj/LEX
-		@mkdir -p obj/PARSE
-		@mkdir -p obj/PROMPT
-		@mkdir -p obj/TOOLS
-		$(CC) $(CFLAGS) $(INC) -c $< -o $@
+obj/EXEC/redirects.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
-src/EXEC/executor.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-05-12 22:01:18.2268802
-#  File has been updated.
-#  Successfully updated.
+obj/CORE/init_data.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
-src/TOOLS/str_tools.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-05-12 21:22:18.2968958
-#  File has been updated.
-#  Successfully updated.
+obj/EXEC/pipes_fds_handling.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+obj/PROMPT/prompt_take_input.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 src/BUILTINS/cd.c:
@@ -418,16 +283,9 @@ src/BUILTINS/cd.c:
 #  File has been updated.
 #  Successfully updated.
 
-# Not a target:
-src/EXEC/pipes_fds_handling.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-05-10 10:43:02.2298753
-#  File has been updated.
-#  Successfully updated.
-
 minishell: obj/BUILTINS/cd.o obj/BUILTINS/echo.o obj/BUILTINS/env.o obj/BUILTINS/exit.o obj/BUILTINS/export.o obj/BUILTINS/export_utils.o obj/BUILTINS/hello.o obj/BUILTINS/help.o obj/BUILTINS/pwd.o obj/BUILTINS/unset.o obj/EXPAND/expand_variables.o obj/EXPAND/expand_utils.o obj/PROMPT/history.o obj/PROMPT/prompt_take_input.o obj/PARSE/parse_vars.o obj/PARSE/parser.o obj/TOOLS/list_tools_one.o obj/TOOLS/list_tools_two.o obj/TOOLS/str_tools.o obj/CORE/clear_data.o obj/CORE/init_data.o obj/CORE/minishell.o obj/CORE/signals.o obj/CORE/main.o obj/EXEC/execute_one_cmd.o obj/EXEC/executor.o obj/EXEC/here_document.o obj/EXEC/pipes_fds_handling.o obj/EXEC/processes_handler.o obj/EXEC/redirects.o obj/EXEC/sorting.o obj/LEX/absolute_path_tester.o obj/LEX/lexer.o obj/LEX/mask_dollar.o obj/LEX/mask_n_unmask_chars.o obj/LEX/pull_redirects.o obj/LEX/treat_operators.o obj/LEX/treat_quotes.o obj/LEX/treat_spaces.o
 #  Implicit rule search has not been done.
-#  Last modified 2022-05-12 22:08:11.3750228
+#  Last modified 2022-05-14 13:38:43.2142696
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
@@ -443,7 +301,7 @@ minishell: obj/BUILTINS/cd.o obj/BUILTINS/echo.o obj/BUILTINS/env.o obj/BUILTINS
 obj/BUILTINS/cd.o: src/BUILTINS/cd.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'BUILTINS/cd'
-#  Last modified 2022-05-12 20:30:21.4165911
+#  Last modified 2022-05-14 11:51:44.4346603
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 54):
@@ -459,16 +317,9 @@ obj/BUILTINS/cd.o: src/BUILTINS/cd.c
 		$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 # Not a target:
-src/PARSE/parse_vars.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-05-12 20:21:13.3849457
-#  File has been updated.
-#  Successfully updated.
-
-# Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-12 22:05:02.6794979
+#  Last modified 2022-05-12 23:43:09.6771984
 #  File has been updated.
 #  Successfully updated.
 
@@ -478,59 +329,24 @@ obj/LEX/lexer.o:
 #  Modification time never checked.
 #  File has not been updated.
 
-obj/TOOLS/list_tools_one.o: src/TOOLS/list_tools_one.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: 'TOOLS/list_tools_one'
-#  Last modified 2022-05-12 22:07:54.5543775
-#  File has been updated.
-#  Successfully updated.
-#  recipe to execute (from 'Makefile', line 54):
-		@mkdir -p obj
-		@mkdir -p obj/BUILTINS
-		@mkdir -p obj/CORE
-		@mkdir -p obj/EXEC
-		@mkdir -p obj/EXPAND
-		@mkdir -p obj/LEX
-		@mkdir -p obj/PARSE
-		@mkdir -p obj/PROMPT
-		@mkdir -p obj/TOOLS
-		$(CC) $(CFLAGS) $(INC) -c $< -o $@
+# Not a target:
+obj/TOOLS/list_tools_one.o:
+#  Implicit rule search has not been done.
+ 
+#  Modification time never checked.
+#  File has not been updated.
 
-obj/PARSE/parse_vars.o: src/PARSE/parse_vars.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: 'PARSE/parse_vars'
-#  Last modified 2022-05-12 20:22:00.5037176
-#  File has been updated.
-#  Successfully updated.
-#  recipe to execute (from 'Makefile', line 54):
-		@mkdir -p obj
-		@mkdir -p obj/BUILTINS
-		@mkdir -p obj/CORE
-		@mkdir -p obj/EXEC
-		@mkdir -p obj/EXPAND
-		@mkdir -p obj/LEX
-		@mkdir -p obj/PARSE
-		@mkdir -p obj/PROMPT
-		@mkdir -p obj/TOOLS
-		$(CC) $(CFLAGS) $(INC) -c $< -o $@
+# Not a target:
+obj/PARSE/parse_vars.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
-obj/PARSE/parser.o: src/PARSE/parser.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: 'PARSE/parser'
-#  Last modified 2022-05-12 20:30:21.6101755
-#  File has been updated.
-#  Successfully updated.
-#  recipe to execute (from 'Makefile', line 54):
-		@mkdir -p obj
-		@mkdir -p obj/BUILTINS
-		@mkdir -p obj/CORE
-		@mkdir -p obj/EXEC
-		@mkdir -p obj/EXPAND
-		@mkdir -p obj/LEX
-		@mkdir -p obj/PARSE
-		@mkdir -p obj/PROMPT
-		@mkdir -p obj/TOOLS
-		$(CC) $(CFLAGS) $(INC) -c $< -o $@
+# Not a target:
+obj/PARSE/parser.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 src/BUILTINS/pwd.c:
@@ -542,34 +358,15 @@ src/BUILTINS/pwd.c:
 # Not a target:
 src/BUILTINS/export_utils.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-12 22:06:05.0944535
+#  Last modified 2022-05-12 23:35:15.9172915
 #  File has been updated.
 #  Successfully updated.
-
-obj/CORE/signals.o: src/CORE/signals.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: 'CORE/signals'
-#  Last modified 2022-05-10 20:39:55.3515477
-#  File has been updated.
-#  Successfully updated.
-#  recipe to execute (from 'Makefile', line 54):
-		@mkdir -p obj
-		@mkdir -p obj/BUILTINS
-		@mkdir -p obj/CORE
-		@mkdir -p obj/EXEC
-		@mkdir -p obj/EXPAND
-		@mkdir -p obj/LEX
-		@mkdir -p obj/PARSE
-		@mkdir -p obj/PROMPT
-		@mkdir -p obj/TOOLS
-		$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 # Not a target:
-src/EXPAND/expand_utils.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-05-12 21:42:00.3677463
-#  File has been updated.
-#  Successfully updated.
+obj/CORE/signals.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 clean:
 #  Phony target (prerequisite of .PHONY).
@@ -586,7 +383,7 @@ clean:
 obj/BUILTINS/export.o: src/BUILTINS/export.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'BUILTINS/export'
-#  Last modified 2022-05-12 22:06:24.0462664
+#  Last modified 2022-05-14 11:51:45.145823
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 54):
@@ -601,36 +398,17 @@ obj/BUILTINS/export.o: src/BUILTINS/export.c
 		@mkdir -p obj/TOOLS
 		$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
-obj/EXPAND/expand_utils.o: src/EXPAND/expand_utils.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: 'EXPAND/expand_utils'
-#  Last modified 2022-05-12 22:07:54.1437641
-#  File has been updated.
-#  Successfully updated.
-#  recipe to execute (from 'Makefile', line 54):
-		@mkdir -p obj
-		@mkdir -p obj/BUILTINS
-		@mkdir -p obj/CORE
-		@mkdir -p obj/EXEC
-		@mkdir -p obj/EXPAND
-		@mkdir -p obj/LEX
-		@mkdir -p obj/PARSE
-		@mkdir -p obj/PROMPT
-		@mkdir -p obj/TOOLS
-		$(CC) $(CFLAGS) $(INC) -c $< -o $@
+# Not a target:
+obj/EXPAND/expand_utils.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 obj/EXEC/sorting.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-
-# Not a target:
-src/PROMPT/history.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-05-10 10:44:10.5040954
-#  File has been updated.
-#  Successfully updated.
 
 re: fclean all
 #  Phony target (prerequisite of .PHONY).
@@ -648,25 +426,7 @@ src/BUILTINS/help.c:
 obj/BUILTINS/pwd.o: src/BUILTINS/pwd.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'BUILTINS/pwd'
-#  Last modified 2022-05-10 20:18:33.4584039
-#  File has been updated.
-#  Successfully updated.
-#  recipe to execute (from 'Makefile', line 54):
-		@mkdir -p obj
-		@mkdir -p obj/BUILTINS
-		@mkdir -p obj/CORE
-		@mkdir -p obj/EXEC
-		@mkdir -p obj/EXPAND
-		@mkdir -p obj/LEX
-		@mkdir -p obj/PARSE
-		@mkdir -p obj/PROMPT
-		@mkdir -p obj/TOOLS
-		$(CC) $(CFLAGS) $(INC) -c $< -o $@
-
-obj/EXEC/executor.o: src/EXEC/executor.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: 'EXEC/executor'
-#  Last modified 2022-05-12 22:08:09.4150951
+#  Last modified 2022-05-14 11:51:45.857423
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 54):
@@ -682,16 +442,15 @@ obj/EXEC/executor.o: src/EXEC/executor.c
 		$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 # Not a target:
-src/CORE/init_data.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-05-10 10:42:31.0462068
-#  File has been updated.
-#  Successfully updated.
+obj/EXEC/executor.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 obj/BUILTINS/exit.o: src/BUILTINS/exit.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'BUILTINS/exit'
-#  Last modified 2022-05-10 20:18:32.2316598
+#  Last modified 2022-05-14 11:51:44.9542639
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 54):
@@ -715,9 +474,27 @@ obj/LEX/absolute_path_tester.o:
 obj/EXPAND/expand_variables.o: src/EXPAND/expand_variables.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'EXPAND/expand_variables'
-#  Last modified 2022-05-12 22:07:53.7389543
+#  Last modified 2022-05-14 13:35:39.2644908
 #  File has been updated.
-#  Successfully updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := obj/EXPAND/expand_variables.o
+# automatic
+# * := EXPAND/expand_variables
+# automatic
+# < := src/EXPAND/expand_variables.c
+# automatic
+# + := src/EXPAND/expand_variables.c
+# automatic
+# % := 
+# automatic
+# ^ := src/EXPAND/expand_variables.c
+# automatic
+# ? := src/EXPAND/expand_variables.c
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=3/16=19%
 #  recipe to execute (from 'Makefile', line 54):
 		@mkdir -p obj
 		@mkdir -p obj/BUILTINS
@@ -730,23 +507,11 @@ obj/EXPAND/expand_variables.o: src/EXPAND/expand_variables.c
 		@mkdir -p obj/TOOLS
 		$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
-obj/EXEC/here_document.o: src/EXEC/here_document.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: 'EXEC/here_document'
-#  Last modified 2022-05-12 22:08:09.6934379
-#  File has been updated.
-#  Successfully updated.
-#  recipe to execute (from 'Makefile', line 54):
-		@mkdir -p obj
-		@mkdir -p obj/BUILTINS
-		@mkdir -p obj/CORE
-		@mkdir -p obj/EXEC
-		@mkdir -p obj/EXPAND
-		@mkdir -p obj/LEX
-		@mkdir -p obj/PARSE
-		@mkdir -p obj/PROMPT
-		@mkdir -p obj/TOOLS
-		$(CC) $(CFLAGS) $(INC) -c $< -o $@
+# Not a target:
+obj/EXEC/here_document.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 git:
 #  Phony target (prerequisite of .PHONY).
@@ -778,13 +543,6 @@ src/BUILTINS/env.c:
 #  File has been updated.
 #  Successfully updated.
 
-# Not a target:
-src/TOOLS/list_tools_one.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-05-12 21:24:32.2353614
-#  File has been updated.
-#  Successfully updated.
-
 all: minishell
 #  Phony target (prerequisite of .PHONY).
 #  Command line target.
@@ -807,50 +565,20 @@ fclean: clean
 # Not a target:
 src/EXPAND/expand_variables.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-12 21:42:16.1645466
+#  Last modified 2022-05-14 13:41:53.794308
 #  File has been updated.
 #  Successfully updated.
 
-obj/EXEC/processes_handler.o: src/EXEC/processes_handler.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: 'EXEC/processes_handler'
-#  Last modified 2022-05-10 20:18:39.5583472
-#  File has been updated.
-#  Successfully updated.
-#  recipe to execute (from 'Makefile', line 54):
-		@mkdir -p obj
-		@mkdir -p obj/BUILTINS
-		@mkdir -p obj/CORE
-		@mkdir -p obj/EXEC
-		@mkdir -p obj/EXPAND
-		@mkdir -p obj/LEX
-		@mkdir -p obj/PARSE
-		@mkdir -p obj/PROMPT
-		@mkdir -p obj/TOOLS
-		$(CC) $(CFLAGS) $(INC) -c $< -o $@
+# Not a target:
+obj/EXEC/processes_handler.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 obj/BUILTINS/unset.o: src/BUILTINS/unset.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'BUILTINS/unset'
-#  Last modified 2022-05-10 20:18:33.8830653
-#  File has been updated.
-#  Successfully updated.
-#  recipe to execute (from 'Makefile', line 54):
-		@mkdir -p obj
-		@mkdir -p obj/BUILTINS
-		@mkdir -p obj/CORE
-		@mkdir -p obj/EXEC
-		@mkdir -p obj/EXPAND
-		@mkdir -p obj/LEX
-		@mkdir -p obj/PARSE
-		@mkdir -p obj/PROMPT
-		@mkdir -p obj/TOOLS
-		$(CC) $(CFLAGS) $(INC) -c $< -o $@
-
-obj/EXEC/execute_one_cmd.o: src/EXEC/execute_one_cmd.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: 'EXEC/execute_one_cmd'
-#  Last modified 2022-05-10 20:18:38.4365272
+#  Last modified 2022-05-14 11:51:46.0215099
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 54):
@@ -866,29 +594,16 @@ obj/EXEC/execute_one_cmd.o: src/EXEC/execute_one_cmd.c
 		$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 # Not a target:
-src/EXEC/execute_one_cmd.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-05-10 10:42:48.5288159
-#  File has been updated.
-#  Successfully updated.
+obj/EXEC/execute_one_cmd.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
-obj/CORE/main.o: src/CORE/main.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: 'CORE/main'
-#  Last modified 2022-05-10 20:18:38.116459
-#  File has been updated.
-#  Successfully updated.
-#  recipe to execute (from 'Makefile', line 54):
-		@mkdir -p obj
-		@mkdir -p obj/BUILTINS
-		@mkdir -p obj/CORE
-		@mkdir -p obj/EXEC
-		@mkdir -p obj/EXPAND
-		@mkdir -p obj/LEX
-		@mkdir -p obj/PARSE
-		@mkdir -p obj/PROMPT
-		@mkdir -p obj/TOOLS
-		$(CC) $(CFLAGS) $(INC) -c $< -o $@
+# Not a target:
+obj/CORE/main.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 src/BUILTINS/hello.c:
@@ -898,42 +613,17 @@ src/BUILTINS/hello.c:
 #  Successfully updated.
 
 # Not a target:
-src/CORE/main.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-05-10 10:42:39.0351281
-#  File has been updated.
-#  Successfully updated.
-
-obj/CORE/minishell.o: src/CORE/minishell.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: 'CORE/minishell'
-#  Last modified 2022-05-10 20:18:37.4906091
-#  File has been updated.
-#  Successfully updated.
-#  recipe to execute (from 'Makefile', line 54):
-		@mkdir -p obj
-		@mkdir -p obj/BUILTINS
-		@mkdir -p obj/CORE
-		@mkdir -p obj/EXEC
-		@mkdir -p obj/EXPAND
-		@mkdir -p obj/LEX
-		@mkdir -p obj/PARSE
-		@mkdir -p obj/PROMPT
-		@mkdir -p obj/TOOLS
-		$(CC) $(CFLAGS) $(INC) -c $< -o $@
+obj/CORE/minishell.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 src/BUILTINS/export.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-12 22:00:39.6146905
+#  Last modified 2022-05-13 08:08:19.1018595
 #  File has been updated.
-#  Successfully updated.
-
-# Not a target:
-src/CORE/signals.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-05-10 20:39:32.9648821
-#  File has been updated.
+ 
 #  Successfully updated.
 
 # Not a target:
@@ -945,7 +635,7 @@ obj/LEX/pull_redirects.o:
 obj/BUILTINS/echo.o: src/BUILTINS/echo.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'BUILTINS/echo'
-#  Last modified 2022-05-10 20:18:31.7105595
+#  Last modified 2022-05-14 11:51:44.6173202
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 54):
@@ -960,38 +650,10 @@ obj/BUILTINS/echo.o: src/BUILTINS/echo.c
 		@mkdir -p obj/TOOLS
 		$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
-# Not a target:
-src/EXEC/here_document.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-05-12 22:04:36.9644349
-#  File has been updated.
-#  Successfully updated.
-
-# Not a target:
-src/EXEC/processes_handler.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-05-10 10:43:07.6553399
-#  File has been updated.
-#  Successfully updated.
-
-# Not a target:
-src/PROMPT/prompt_take_input.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-05-10 10:44:15.5707361
-#  File has been updated.
-#  Successfully updated.
-
-# Not a target:
-src/PARSE/parser.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-05-12 20:30:15.583361
-#  File has been updated.
-#  Successfully updated.
-
 obj/BUILTINS/export_utils.o: src/BUILTINS/export_utils.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'BUILTINS/export_utils'
-#  Last modified 2022-05-12 22:06:24.2988373
+#  Last modified 2022-05-14 11:51:45.3438595
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 54):
@@ -1016,7 +678,7 @@ install:
 obj/BUILTINS/help.o: src/BUILTINS/help.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'BUILTINS/help'
-#  Last modified 2022-05-10 20:18:33.1778892
+#  Last modified 2022-05-14 11:51:45.6960589
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 54):
@@ -1038,13 +700,6 @@ obj/LEX/mask_n_unmask_chars.o:
 #  File has not been updated.
 
 # Not a target:
-src/CORE/minishell.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-05-10 10:42:40.7482246
-#  File has been updated.
-#  Successfully updated.
-
-# Not a target:
 obj/LEX/mask_dollar.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -1057,23 +712,11 @@ src/BUILTINS/exit.c:
 #  File has been updated.
 #  Successfully updated.
 
-obj/PROMPT/history.o: src/PROMPT/history.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: 'PROMPT/history'
-#  Last modified 2022-05-10 20:18:34.7647931
-#  File has been updated.
-#  Successfully updated.
-#  recipe to execute (from 'Makefile', line 54):
-		@mkdir -p obj
-		@mkdir -p obj/BUILTINS
-		@mkdir -p obj/CORE
-		@mkdir -p obj/EXEC
-		@mkdir -p obj/EXPAND
-		@mkdir -p obj/LEX
-		@mkdir -p obj/PARSE
-		@mkdir -p obj/PROMPT
-		@mkdir -p obj/TOOLS
-		$(CC) $(CFLAGS) $(INC) -c $< -o $@
+# Not a target:
+obj/PROMPT/history.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 obj/LEX/treat_operators.o:
@@ -1081,17 +724,10 @@ obj/LEX/treat_operators.o:
 #  Modification time never checked.
 #  File has not been updated.
 
-# Not a target:
-src/EXEC/redirects.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-05-12 22:16:09.4577116
-#  File has been updated.
-#  Successfully updated.
-
 obj/BUILTINS/hello.o: src/BUILTINS/hello.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'BUILTINS/hello'
-#  Last modified 2022-05-10 20:18:32.8973854
+#  Last modified 2022-05-14 11:51:45.5083806
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 54):
@@ -1131,19 +767,19 @@ obj/LEX/treat_spaces.o:
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=80/1024=8%, Rehash=0, Collisions=17/230=7%
+# Load=61/1024=6%, Rehash=0, Collisions=5/154=3%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 165 / storage = 2736 B / avg = 16 B
-# current buf: size = 8162 B / used = 2736 B / count = 165 / avg = 16 B
+# strcache buffers: 1 (0) / strings = 104 / storage = 1657 B / avg = 15 B
+# current buf: size = 8162 B / used = 1657 B / count = 104 / avg = 15 B
 
-# strcache performance: lookups = 233 / hit rate = 29%
+# strcache performance: lookups = 143 / hit rate = 27%
 # hash-table stats:
-# Load=165/8192=2%, Rehash=0, Collisions=2/233=1%
-# Finished Make data base on Thu May 12 22:16:20 2022
+# Load=104/8192=1%, Rehash=0, Collisions=0/143=0%
+# Finished Make data base on Sat May 14 13:45:15 2022
 
  

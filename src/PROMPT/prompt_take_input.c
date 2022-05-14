@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_take_input.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 20:56:26 by joeduard          #+#    #+#             */
-/*   Updated: 2022/05/10 21:15:31 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/05/14 13:29:27 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,14 @@
 void	prompt(t_data *data)
 {
 	char	cwd[1024];
-	char	*buf;
 	char	*prompt_str;
-	char	*path;
 	char	*username;
 
 	username = getenv("USER");
 	getcwd(cwd, sizeof(cwd));
-	buf = ft_strjoin("\e[32m", username);
-	prompt_str = ft_strjoin(buf, ":\e[39m");
-	path = ft_strjoin("\e[35m", cwd);
-	free(buf);
-	buf = ft_strjoin(prompt_str, path);
-	free(prompt_str);
-	prompt_str = ft_strjoin(buf, "\e[39m$ ");
+	prompt_str = ft_mult_join(7, "\e[32m", username, ":", "\e[35m", cwd, "\e[0m", "$ ");
 	data->input = readline(prompt_str);
-	free(buf);
 	free(prompt_str);
-	free(path);
 }
 
 /** Function to take input - MALLOC input*/

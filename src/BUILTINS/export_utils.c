@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 22:00:43 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/05/12 22:06:04 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/14 14:42:01 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ void	upd_envp_no_def(t_data *data, int i, int id)
 	t_vdt	vdt;
 
 	vdt = find_in_list(data->argve[id][i], data->vars);
-	if (vdt.is_envp >= 0)
-		return ;
+	// if (vdt.is_envp >= 0)
+	// 	return ;
 	if (*vdt.value != '$')
 	{
 		new_envp = new_bigger_envp(data->envp);

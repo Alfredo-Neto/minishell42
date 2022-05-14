@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 17:30:51 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/05/12 22:21:29 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/14 12:26:12 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ t_vdt	find_in_list(char *var_name, t_vars *lst)
 	if (!ft_strcmp(var_name, "?"))
 	{
 		ret.value = ft_itoa(g_status_code);
-		ret.is_question_mark = 1;
+		ret.is_allocated = 1;
 		return (ret);
 	}
 	if (!lst)

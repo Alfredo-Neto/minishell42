@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:03:07 by joeduard          #+#    #+#             */
-/*   Updated: 2022/05/12 23:28:13 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/14 14:37:56 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,11 @@ static void	pull_variables(t_data *data);
 // functions for parsing command line
 int	parser(t_data *data)
 {
-	pull_variables(data);
+	data->exec_flag = (char *)ft_calloc(data->number_of_pipes + 1, sizeof(char));
 	if (is_builtins(data->argve[0][0]) == EXPORT)
 		data->exec_flag[0] = 1;
+	else
+		pull_variables(data);
 	return (SUCCESS);
 }
 
@@ -34,7 +36,6 @@ static void	pull_variables(t_data *data)
 	i = 0;
 	till_i = -1;
 	till_j = -1;
-	data->exec_flag = (char *)ft_calloc(data->number_of_pipes + 1, sizeof(char));
 	while (data->argve[i])
 	{
 		j = 0;

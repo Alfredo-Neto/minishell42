@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/05/12 23:39:15 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/14 13:15:52 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ typedef struct	s_vdt
 {
 	char	*value;
 	int		is_envp;
-	int		is_question_mark;
+	int		is_allocated;
 }				t_vdt;
 
 typedef struct	s_vars
@@ -272,5 +272,7 @@ void	delete_in_list(char *var_name, t_vars **vars);
 void	upd_idx_in_list(t_vars *lst, char *var_name, int pos);
 
 //////////////////////////////////////////////////////////
+
+char	*ft_mult_join(unsigned int nbr_of_strs, char *s1, ...);
 
 #endif
