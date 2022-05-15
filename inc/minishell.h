@@ -6,47 +6,47 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/05/14 13:15:52 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/15 13:39:40 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
-#define MINISHELL_H
+# define MINISHELL_H
 
-#include "../ft_printf/inc/ft_printf.h"
-#include <stdio.h>
-#include <errno.h>
-#include <string.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <signal.h>
+# include "../ft_printf/inc/ft_printf.h"
+# include <stdio.h>
+# include <errno.h>
+# include <string.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <signal.h>
 
-#define NO_PIPE		0
+# define NO_PIPE		0
 
-#define NUMBER_OF_BUILTINS 9
+# define NUMBER_OF_BUILTINS 9
 
-#define EXIT		1
-#define CD			2
-#define ECHO		3
-#define HELLO		4
-#define HELP		5
-#define PWD			6
-#define ENV			7
-#define EXPORT		8
-#define UNSET		9
-#define	NONE		0
+# define EXIT		1
+# define CD			2
+# define ECHO		3
+# define HELLO		4
+# define HELP		5
+# define PWD		6
+# define ENV		7
+# define EXPORT		8
+# define UNSET		9
+# define NONE		0
 
-#define CHAR_MAX_NUM 	1024
+# define CHAR_MAX_NUM 	1024
 
-#define SQUOTES 39
-#define DQUOTES 34
-#define NO_QUOTES_FOUND -1
+# define SQUOTES 39
+# define DQUOTES 34
+# define NO_QUOTES_FOUND -1
 
-#define NO_SLASH_FOUND -1
+# define NO_SLASH_FOUND -1
 
 // CÓDIGO DA MARCE
 # define OFF 0
@@ -65,19 +65,19 @@
 # define LESS				3
 # define LESSLESS			6
 
-#define	UNEXPECTED_TOKEN	"Minishell: syntax error near unexpected token `%c'"
-#define SINTAX_ERR			2
+# define UNEXPECTED_TOKEN	"Minishell: syntax error near unexpected token `%c'"
+# define SINTAX_ERR			2
 
-extern	int g_status_code;
+extern int	g_status_code;
 
-typedef struct	s_vdt
+typedef struct s_vdt
 {
 	char	*value;
 	int		is_envp;
 	int		is_allocated;
 }				t_vdt;
 
-typedef struct	s_vars
+typedef struct s_vars
 {
 	char			*var_name;
 	char			*var_value;
@@ -137,7 +137,7 @@ void	put_on_history(char *buf, char *old_input);
 //..................................................LEX
 //lexer.c - tokens
 int		lexer(t_data *data);
-void	pull_pipe(t_data *data);
+int		pull_pipe(t_data *data);
 void	pull_space(t_data *data);
 
 //---------LEXER------------//
@@ -160,7 +160,7 @@ int		absolute_path_tester(char *cmd);
 
 //..................................................PARSE
 //parser.c  -  quotes ok: analisa!
-int	parser(t_data *data);
+int		parser(t_data *data);
 
 //mask_dollar.c
 void	mask_dollar(t_data *data);
@@ -175,7 +175,7 @@ int		mask_character(char *str, char c, int number);
 char	*get_var_value(char *input);
 char	*get_var_name(char *input);
 void	update_envp(t_data *data, char* name, char* value, t_vdt vdt);
-int	grab_vars(t_data *data, char *str);
+int		grab_vars(t_data *data, char *str);
 
 //..................................................EXPANDER
 //expand_variables.c
@@ -272,7 +272,5 @@ void	delete_in_list(char *var_name, t_vars **vars);
 void	upd_idx_in_list(t_vars *lst, char *var_name, int pos);
 
 //////////////////////////////////////////////////////////
-
-char	*ft_mult_join(unsigned int nbr_of_strs, char *s1, ...);
 
 #endif

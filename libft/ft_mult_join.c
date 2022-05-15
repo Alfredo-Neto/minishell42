@@ -6,29 +6,36 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/14 13:32:06 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/05/14 13:33:15 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/15 12:13:22 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_mult_join(unsigned int nbr_of_strs, char *s1, ...)
+char	*ft_mult_join(unsigned int nbr_of_strs, ...)
 {
-	va_list	args;
-	char	*final_str;
-	char	*str_n;
-	char	*buf;
+	va_list			args;
+	char			*final_str;
+	char			*str_n;
+	char			*buf;
+	unsigned int	i;
 
-	final_str = ft_strdup(s1);
-	va_start(args, s1);
-	while (nbr_of_strs)
+	va_start(args, nbr_of_strs);
+	final_str = NULL;
+	i = 0;
+	while (i < nbr_of_strs)
 	{
 		str_n = va_arg(args, char *);
-		buf = ft_strjoin(final_str, str_n);
-		free(final_str);
-		final_str = ft_strdup(buf);
-		free(buf);
-		nbr_of_strs--;
+		if (!final_str)
+			final_str = ft_strdup(str_n);
+		else
+		{
+			buf = ft_strjoin(final_str, str_n);
+			free(final_str);
+			final_str = ft_strdup(buf);
+			free(buf);
+		}
+		i++;
 	}
 	va_end(args);
 	return (final_str);

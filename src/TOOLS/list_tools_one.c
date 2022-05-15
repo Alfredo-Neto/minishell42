@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/23 17:30:51 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/05/14 12:26:12 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/15 12:58:16 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,17 +80,16 @@ t_vdt	find_in_list(char *var_name, t_vars *lst)
 	t_vdt	ret;
 
 	ret = (t_vdt){0};
-	if (!var_name)
+	if (!var_name || !lst)
 		return (ret);
-	var_name++;
+	if (*var_name == '$')
+		var_name++;
 	if (!ft_strcmp(var_name, "?"))
 	{
 		ret.value = ft_itoa(g_status_code);
 		ret.is_allocated = 1;
 		return (ret);
 	}
-	if (!lst)
-		return (ret);
 	while (lst)
 	{
 		if (ft_strcmp(var_name, lst->var_name) == 0)

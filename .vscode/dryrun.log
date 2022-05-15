@@ -1,20 +1,5 @@
 make --dry-run --keep-going --print-directory
 make: Entering directory '/home/vlima-nu/minishell42'
-mkdir -p obj
-mkdir -p obj/BUILTINS
-mkdir -p obj/CORE
-mkdir -p obj/EXEC
-mkdir -p obj/EXPAND
-mkdir -p obj/LEX
-mkdir -p obj/PARSE
-mkdir -p obj/PROMPT
-mkdir -p obj/TOOLS
-gcc -Wall -Wextra -Werror -lreadline -g -fsanitize=address  -I inc -c src/EXPAND/expand_variables.c -o obj/EXPAND/expand_variables.o
-make -C libft
-make -C ft_printf
-gcc -Wall -Wextra -Werror -lreadline -g -fsanitize=address  obj/BUILTINS/cd.o obj/BUILTINS/echo.o obj/BUILTINS/env.o obj/BUILTINS/exit.o obj/BUILTINS/export.o obj/BUILTINS/export_utils.o obj/BUILTINS/hello.o obj/BUILTINS/help.o obj/BUILTINS/pwd.o obj/BUILTINS/unset.o obj/EXPAND/expand_variables.o obj/EXPAND/expand_utils.o obj/PROMPT/history.o obj/PROMPT/prompt_take_input.o obj/PARSE/parse_vars.o obj/PARSE/parser.o obj/TOOLS/list_tools_one.o obj/TOOLS/list_tools_two.o obj/TOOLS/str_tools.o obj/CORE/clear_data.o obj/CORE/init_data.o obj/CORE/minishell.o obj/CORE/signals.o obj/CORE/main.o obj/EXEC/execute_one_cmd.o obj/EXEC/executor.o obj/EXEC/here_document.o obj/EXEC/pipes_fds_handling.o obj/EXEC/processes_handler.o obj/EXEC/redirects.o obj/EXEC/sorting.o obj/LEX/absolute_path_tester.o obj/LEX/lexer.o obj/LEX/mask_dollar.o obj/LEX/mask_n_unmask_chars.o obj/LEX/pull_redirects.o obj/LEX/treat_operators.o obj/LEX/treat_quotes.o obj/LEX/treat_spaces.o libft/libft.a ft_printf/libftprintf.a -L libft -lft -lreadline -o minishell
-echo ""
-echo "|		minishell created		|"
-echo ""
+make: Nothing to be done for 'all'.
 make: Leaving directory '/home/vlima-nu/minishell42'
  

@@ -3,21 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 13:55:53 by ebresser          #+#    #+#             */
-/*   Updated: 2022/05/11 21:51:49 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/05/15 13:18:17 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 // Create an aux **str based on pipe
-void	pull_pipe(t_data *data)
+int	pull_pipe(t_data *data)
 {
 	int		i;
 
 	i = 0;
+	while (data->input[i] == ' ')
+		i++;
+	if (data->input[i] == '|')
+	{
+		ft_printf(STDERR, "Minishell: syntax error near unexpected token `|'\n");
+		return (FAILURE);
+	}
 	data->cmds_piped = ft_split(data->input, '|');
 	if (data->cmds_piped == NULL)
 	{
@@ -27,6 +34,7 @@ void	pull_pipe(t_data *data)
 	data->number_of_pipes = ft_str_count(data->cmds_piped) - 1;
 	while (data->cmds_piped[i])
 		unmask_character(data->cmds_piped[i++], 6, '|');
+	return (SUCCESS);
 }
 
 // Aqui ganha o formato da estrutura argve - Por isso n retorna,
@@ -62,12 +70,10 @@ void	pull_space(t_data *data)
 
 int	lexer(t_data *data)
 {
-	//testa |
-	//printf("minishell: syntax error near unexpected token `|'\n");
-	//	return (FAILURE);
 	if (pull_quotes(data))
 		return (FAILURE);
-	pull_pipe(data);
+	if (pull_pipe(data))
+		return (FAILURE);
 	if (pull_redirects(data))
 		return (FAILURE);
 	pull_space(data);
