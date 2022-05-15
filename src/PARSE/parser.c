@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:03:07 by joeduard          #+#    #+#             */
-/*   Updated: 2022/05/15 13:22:00 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/15 18:58:28 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ int	parser(t_data *data)
 {
 	data->exec_flag = (char *)ft_calloc(data->number_of_pipes + 1, \
 		sizeof(char));
-	if (is_builtins(data->argve[0][0]) == EXPORT)
-		data->exec_flag[0] = 1;
-	else
-		pull_variables(data);
+	pull_variables(data);
 	return (SUCCESS);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_vars.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 12:30:10 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/05/15 13:29:06 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/15 18:51:24 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ static void	update_var(t_data *data, char *name, char *value)
 			update_envp(data, name, value, vdt);
 		change_in_list(data->vars, name, value);
 	}
+	if (ft_strcmp(name, "PATH") == 0)
+		update_command_path(data);
 }
 
 // checks for variables in the input string and stores them on a linked list
