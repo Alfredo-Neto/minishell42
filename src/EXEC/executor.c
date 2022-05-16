@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 23:19:00 by joeduard          #+#    #+#             */
-/*   Updated: 2022/05/12 23:38:51 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/16 03:13:15 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,19 @@ static int	execute_pid(t_data *data, int id)
 
 static void	ft_execve(t_data *data, int id)
 {
-	if (absolute_path_tester(data->argve[id][0]))
+	g_status_code = 0;
+	if (ft_strchr(data->argve[id][0], '/'))
+	{
 		execve(data->argve[id][0], data->argve[id], data->envp);
-	else if (data->command_path)
+		ft_printf(STDERR, "Minishell: %s: No such file or directory\n", \
+			data->argve[id][0]);
+	}
+	else
+	{
 		find_path_and_execve(data, id);
-	ft_printf(STDERR, "Minishell: %s: command not found\n", data->argve[id][0]);
+		ft_printf(STDERR, "Minishell: %s: Command not found\n", \
+			data->argve[id][0]);
+	}
 	g_status_code = 127;
 	exit(127);
 }
@@ -79,10 +87,10 @@ static int	find_path_and_execve(t_data *data, int id)
 	int		i;
 	char	*path_aux;
 
-	path_aux = NULL;
-	g_status_code = 0;
 	i = 0;
 	path_aux = NULL;
+	if (!data->command_path)
+		return (FAILURE);
 	while (data->command_path[i])
 	{
 		path_aux = ft_strjoin(data->command_path[i], data->argve[id][0]);
@@ -102,7 +110,7 @@ static int	find_path_and_execve(t_data *data, int id)
 void	builtin_exec(t_data *data, int code, int id)
 {
 	if (code == EXIT)
-		mini_exit(data);
+		mini_exit(data, id);
 	else if (code == CD)
 		cd(data, id);
 	else if (code == ECHO)

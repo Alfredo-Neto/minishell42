@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/05/15 18:52:33 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/05/16 02:35:05 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,7 +223,7 @@ void	pwd(void);
 //exit.c
 int		exit_minishell(t_data *data, int status);
 void	check_exit(t_data *data);
-void	mini_exit(t_data *data);
+void	mini_exit(t_data *data, int id);
 
 //pwd.c
 void	pwd(void);

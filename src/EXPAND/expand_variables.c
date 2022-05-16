@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_variables.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 15:34:28 by ebresser          #+#    #+#             */
-/*   Updated: 2022/05/15 23:35:12 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/05/16 00:02:52 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	save_vars(t_data *data, int id, int i, char *var_value);
 static char	*pull_var_value(char *s[0], t_vars *vars);
-static char	*ret_full_value(char *s, int offset, char *value, int i);
+static char	*ret_full_value(char **s, int offset, t_vdt *vdt, int i);
 
 void	expander(t_data *data)
 {
@@ -64,7 +64,6 @@ static void	save_vars(t_data *data, int id, int i, char *var_value)
 static char	*pull_var_value(char **s, t_vars *vars)
 {
 	char	*var_name;
-	char	*full_value;
 	int		offset;
 	int		i;
 	t_vdt	vdt;
@@ -73,31 +72,33 @@ static char	*pull_var_value(char **s, t_vars *vars)
 	while (s[0][offset] != '$')
 		offset++;
 	i = offset + 1;
-	while (ft_isalpha(s[0][i]) || ft_isdigit(s[0][i]) || s[0][i] == '_')
+	while (ft_isalnum(s[0][i]) || s[0][i] == '_')
 			i++;
 	if (s[0][i] == '?')
 		i++;
 	var_name = ft_substr(s[0], offset, i - offset);
 	vdt = find_in_list(var_name, vars);
 	free(var_name);
-	if (!vdt.value)
-	{
-		ft_strcut(s, offset, i);
-		return (ft_strdup(*s));
-	}
-	full_value = ret_full_value(*s, offset, vdt.value, i);
-	if (vdt.is_allocated)
-		free(vdt.value);
-	return (full_value);
+	return (ret_full_value(s, offset, &vdt, i));
 }
 
-static char	*ret_full_value(char *s, int offset, char *value, int i)
+static char	*ret_full_value(char **s, int offset, t_vdt *vdt, int i)
 {
 	char	*ret;
 	char	*prefix;
 
-	prefix = ft_substr(s, 0, offset);
-	ret = ft_mult_join(3, prefix, value, s + i);
-	free(prefix);
+	if (!vdt->value)
+	{
+		ft_strcut(s, offset, i);
+		return (ft_strdup(*s));
+	}
+	else
+	{
+		prefix = ft_substr(*s, 0, offset);
+		ret = ft_mult_join(3, prefix, vdt->value, *s + i);
+		if (vdt->is_allocated)
+			free(vdt->value);
+		free(prefix);
+	}
 	return (ret);
 }

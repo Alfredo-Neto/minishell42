@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_vars.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 12:30:10 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/05/15 18:51:24 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/05/16 02:20:25 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*get_var_name(char *input)
 		if (input[i] == ' ')
 			space = i;
 	}
-	name = (char *)malloc((i - space) * sizeof(char));
+	name = (char *)malloc((i - space) * sizeof(char) + 1);
 	if (space)
 	{
 		while (*input != ' ')
