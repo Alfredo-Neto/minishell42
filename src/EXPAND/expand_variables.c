@@ -6,7 +6,7 @@
 /*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 15:34:28 by ebresser          #+#    #+#             */
-/*   Updated: 2022/05/15 23:17:39 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/05/15 23:35:12 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,10 @@ static char	*pull_var_value(char **s, t_vars *vars)
 	while (s[0][offset] != '$')
 		offset++;
 	i = offset + 1;
+	while (ft_isalpha(s[0][i]) || ft_isdigit(s[0][i]) || s[0][i] == '_')
+			i++;
 	if (s[0][i] == '?')
 		i++;
-	else
-	{
-		while (ft_isalpha(s[0][i]) || ft_isdigit(s[0][i]) || s[0][i] == '_')
-			i++;
-	}		
 	var_name = ft_substr(s[0], offset, i - offset);
 	vdt = find_in_list(var_name, vars);
 	free(var_name);
