@@ -18,7 +18,7 @@ CORE		=	clear_data.c init_data.c minishell.c signals.c main.c
 EXEC		=	execute_one_cmd.c executor.c here_document.c pipes_fds_handling.c \
 				processes_handler.c redirects.c sorting.c
 EXPAND		=	expand_variables.c expand_utils.c
-LEX			=	absolute_path_tester.c lexer.c mask_dollar.c mask_n_unmask_chars.c \
+LEX			=	lexer.c mask_dollar.c mask_n_unmask_chars.c \
 				pull_redirects.c treat_quotes.c treat_spaces.c
 PARSE		=	parse_vars.c parser.c
 TOOLS		=	list_tools_one.c list_tools_two.c str_tools.c
