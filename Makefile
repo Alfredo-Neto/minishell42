@@ -21,7 +21,7 @@ EXPAND		=	expand_variables.c expand_utils.c
 LEX			=	lexer.c mask_dollar.c mask_n_unmask_chars.c \
 				pull_redirects.c treat_quotes.c treat_spaces.c
 PARSE		=	parse_vars.c parser.c
-TOOLS		=	list_tools_one.c list_tools_two.c str_tools.c
+TOOLS		=	list_tools_one.c list_tools_two.c str_tools_one.c str_tools_two.c
 PROMPT		=	history.c prompt_take_input.c
 
 SRCS_DIR	=	src

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 21:08:58 by azamario          #+#    #+#             */
-/*   Updated: 2022/05/10 10:42:15 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/17 23:25:37 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,5 @@ void	pwd(void)
 	if (dir)
 		printf("%s\n", dir);
 	free(dir);
+	g_status_code = 0; //
 }

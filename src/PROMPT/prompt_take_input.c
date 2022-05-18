@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_take_input.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 20:56:26 by joeduard          #+#    #+#             */
-/*   Updated: 2022/05/15 13:22:48 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/17 23:26:02 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	take_input(t_data *data)
 		exit_minishell(data, SUCCESS);
 	if (ft_strlen(data->input) != 0)
 	{
+		if (is_space_str(data->input))
+			return (FAILURE);
 		put_on_history(data->input, data->old_input);
 		if (data->old_input)
 			free(data->old_input);

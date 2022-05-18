@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   help.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 19:06:23 by ebresser          #+#    #+#             */
-/*   Updated: 2022/05/10 10:42:10 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/17 23:25:33 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ void	open_help(void)
 		">all other general commands available in UNIX shell\n"
 		">pipe handling\n"
 		">improper space handling\n");
+	g_status_code = 0; //
 	return ;
 }

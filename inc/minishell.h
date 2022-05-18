@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/05/16 03:20:42 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/17 23:23:27 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,12 +251,15 @@ void	unset(t_data *data, int id);
 
 //..................................................TOOLS
 // Vamos usar funcoes proprias
-//str_tools.c
+//str_tools_one.c
 int		ft_strjoin_handled(char **s1, char const *s2);
 int		ft_str_count(char **str);
 void	ft_strcut(char **str, size_t init, size_t end);
 char	*remount_var(char *var_name, char *var_value);
 void	move_ptrs_back(char **ptr);
+
+//str_tools_two.c
+int		is_space_str(char *s);
 
 //list_tools.c
 t_vars	*new_node(char *name, char *value);
