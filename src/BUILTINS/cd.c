@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 23:04:49 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/05/16 00:57:05 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/19 21:06:31 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	cd(t_data *data, int id)
 	char	*old_dir;
 	int		status;
 
-	g_status_code = 0;
 	status = 0;
 	if (too_many_arguments(data->argve[id]))
 		return (EXIT_FAILURE);

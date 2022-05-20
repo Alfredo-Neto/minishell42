@@ -6,7 +6,7 @@
 /*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 23:19:00 by joeduard          #+#    #+#             */
-/*   Updated: 2022/05/17 23:24:04 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/05/19 21:06:49 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	executor(t_data *data)
 {
 	int		id;
 
+	g_status_code = 0;
 	signal(SIGINT, handler);
 	if (!data->number_of_pipes && is_builtins(data->argve[0][0]))
 		return (execute_one_cmd(data));
@@ -65,8 +66,6 @@ static int	execute_pid(t_data *data, int id)
 
 static void	ft_execve(t_data *data, int id)
 {
-	g_status_code = 0;
-	printf("Olha isso, Vi!\n");//
 	if (ft_strchr(data->argve[id][0], '/'))
 	{
 		execve(data->argve[id][0], data->argve[id], data->envp);

@@ -6,7 +6,7 @@
 /*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:32:15 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/05/17 23:25:19 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/05/19 21:05:57 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,4 @@ void	export(t_data *data, int id)
 			sort_export(data->envp);
 		i++;
 	}
-	g_status_code = 0; //
 }
