@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/10 19:10:08 by joeduard          #+#    #+#             */
-/*   Updated: 2022/05/17 23:23:27 by ebresser         ###   ########.fr       */
+/*   Created: 2022/03/10 19:10:08 by ebresser          #+#    #+#             */
+/*   Updated: 2022/05/21 09:58:12 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@
 
 # define NO_SLASH_FOUND -1
 
-// CÓDIGO DA MARCE
 # define OFF 0
 # define ON  1
 # define SUCCESS			0
@@ -101,8 +100,7 @@ typedef struct s_data
 	char	*exec_flag;
 	int		child_ret;
 	char	***file;
-	char	**file_mode;
-	char	**operators;
+	char	**file_mode;	
 }				t_data;
 
 //..................................................CORE
@@ -250,7 +248,6 @@ void	upd_envp_no_def(t_data *data, int i, int id);
 void	unset(t_data *data, int id);
 
 //..................................................TOOLS
-// Vamos usar funcoes proprias
 //str_tools_one.c
 int		ft_strjoin_handled(char **s1, char const *s2);
 int		ft_str_count(char **str);
@@ -271,7 +268,5 @@ void	change_in_list(t_vars *lst, char *var_name, char *var_value);
 int		is_envp(char *name, t_vars *lst);
 void	delete_in_list(char *var_name, t_vars **vars);
 void	upd_idx_in_list(t_vars *lst, char *var_name, int pos);
-
-//////////////////////////////////////////////////////////
 
 #endif
