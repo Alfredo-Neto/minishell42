@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_vars.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/24 12:30:10 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/05/16 02:20:25 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/22 17:33:19 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,8 @@ char	*get_var_value(char *input)
 	while (*input != '=')
 		input++;
 	input++;
-	if (*input == '\"')
-	{
-		input++;
-		while (input[i] != '\"' && input[i])
-			i++;
-	}
-	else
-		while (input[i])
-			i++;
+	while (input[i])
+		i++;
 	value = (char *)malloc(i * sizeof(char) + 1);
 	ft_strlcpy(value, input, i + 1);
 	return (value);

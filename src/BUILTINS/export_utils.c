@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 22:00:43 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/05/15 13:36:01 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/22 16:01:03 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	upd_envp_w_def(t_data *data, int i, int id)
 }
 
 // reallocates envp when there is a var definition in input
-void	upd_envp_no_def(t_data *data, int i, int id)
+int		upd_envp_no_def(t_data *data, int i, int id)
 {
 	char	**new_envp;
 	int		pos;
@@ -74,9 +74,11 @@ void	upd_envp_no_def(t_data *data, int i, int id)
 	t_vdt	vdt;
 
 	vdt = find_in_list(data->argve[id][i], data->vars);
+	if (vdt.value == NULL || *vdt.value == '$')
+		return 1;
 	if (vdt.is_envp >= 0)
-		return ;
-	if (*vdt.value != '$')
+		return 0;
+	else if (*vdt.value != '$')
 	{
 		new_envp = new_bigger_envp(data->envp);
 		name = remount_var(data->argve[id][i], vdt.value);
@@ -85,5 +87,8 @@ void	upd_envp_no_def(t_data *data, int i, int id)
 		data->envp = new_envp;
 		upd_idx_in_list(data->vars, data->argve[id][i], pos);
 		free(name);
+		return 0;
 	}
+	else
+		return 1;
 }

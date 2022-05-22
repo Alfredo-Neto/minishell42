@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:32:15 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/05/19 21:05:57 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/05/22 17:19:32 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ void	sort_export(char **envp)
 int	invalid_var(char ***argve, int id)
 {
 	if (ft_strcmp(argve[id][0], "export") == 0 &&
-		ft_strcmp(argve[id][1], "$") == 0 &&
+		(ft_strcmp(argve[id][1], "$") == 0 || 
+		ft_strcmp(argve[id][1], "=") == 0) &&
 		argve[id][2] == 0x0)
 		return (TRUE);
 	else
@@ -54,18 +55,23 @@ int	invalid_var(char ***argve, int id)
 void	export(t_data *data, int id)
 {
 	int		i;
+	int		strsize;
 
 	i = 0;
 	while (data->argve[id][i])
 	{
+		strsize = ft_strlen(data->argve[id][i]);
+		strsize--;
 		if (is_builtins(data->argve[id][i]) == 0)
 		{
 			if (invalid_var(data->argve, id))
-				printf("bash: export: `$': not a valid identifier\n");
+				printf("Minishell: export: `%s': not a valid identifier\n", data->argve[id][i]);
+			else if (data->argve[id][i][strsize] == '=')
+				printf("Minishell: export: `%s': not a valid identifier\n", data->argve[id][i]);
 			else if (ft_strchr(data->argve[id][i], '='))
 				upd_envp_w_def(data, i, id);
-			else
-				upd_envp_no_def(data, i, id);
+			else if (upd_envp_no_def(data, i, id))
+					printf("Minishell: export: `%s': not a valid identifier\n", data->argve[id][i]);
 		}
 		else if (!(data->argve[id][i + 1]))
 			sort_export(data->envp);
