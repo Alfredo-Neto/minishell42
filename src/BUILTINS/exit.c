@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 19:27:43 by ebresser          #+#    #+#             */
-/*   Updated: 2022/05/16 02:34:19 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/22 12:45:45 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int isdigitstr(char *str);
 
 int	exit_minishell(t_data *data, int status)
 {	
@@ -31,7 +33,12 @@ void	mini_exit(t_data *data, int id)
 
 	args = ft_str_count(data->argve[id]);
 	if (args > 2)
-		ft_printf(STDERR, "Minishell: exit: too many arguments\n");
+	{
+		if (isdigitstr(data->argve[id][1]))
+			ft_printf(STDERR, "Minishell: exit: too many arguments\n");
+		else
+			exit_minishell(data, 2);
+	}		
 	else
 	{
 		printf("Goodbye!\n");
@@ -41,4 +48,15 @@ void	mini_exit(t_data *data, int id)
 			exit_minishell(data, ft_atoi(data->argve[id][1]));
 	}
 	g_status_code = 1;
+}
+
+static int isdigitstr(char *str)
+{
+	while(*str)
+	{
+		if (!ft_isdigit(*str))
+			return (FALSE);
+		str++;
+	}
+	return (TRUE);
 }
