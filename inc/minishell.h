@@ -6,7 +6,7 @@
 /*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by ebresser          #+#    #+#             */
-/*   Updated: 2022/05/21 09:58:12 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/05/22 13:28:24 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,7 @@ char	*tokens_to_string(char const *s1, char const *s2);
 int		pull_redirects(t_data *data);
 
 //..................................................PARSE
-//parser.c  -  quotes ok: analisa!
+//parser.c
 int		parser(t_data *data);
 
 //mask_dollar.c

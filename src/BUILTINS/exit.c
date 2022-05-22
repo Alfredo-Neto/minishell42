@@ -6,7 +6,7 @@
 /*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 19:27:43 by ebresser          #+#    #+#             */
-/*   Updated: 2022/05/22 12:45:45 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/05/22 19:58:58 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void	mini_exit(t_data *data, int id)
 	}		
 	else
 	{
-		printf("Goodbye!\n");
+		if (data->number_of_pipes < 1)
+			printf("Goodbye!\n");
 		if (args == 1)
 			exit_minishell(data, 0);
 		else if (args == 2)

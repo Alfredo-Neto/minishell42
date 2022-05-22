@@ -6,7 +6,7 @@
 /*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 23:19:00 by joeduard          #+#    #+#             */
-/*   Updated: 2022/05/22 11:35:09 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/05/22 20:21:24 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,13 @@ static void	ft_execve(t_data *data, int id)
 	if (ft_strchr(data->argve[id][0], '/'))
 	{
 		execve(data->argve[id][0], data->argve[id], data->envp);
-		ft_printf(STDERR, "Minishell: %s: No such file or directory\n", \
+		printf("Minishell: %s: No such file or directory\n", \
 			data->argve[id][0]);
 	}
 	else
 	{
 		find_path_and_execve(data, id);
-		ft_printf(STDERR, "Minishell: %s: Command not found\n", \
-			data->argve[id][0]);
+		printf("Minishell: %s: Command not found\n", data->argve[id][0]);
 	}
 	g_status_code = 127;
 	exit(127);
