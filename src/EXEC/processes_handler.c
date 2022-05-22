@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   processes_handler.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 23:19:00 by joeduard          #+#    #+#             */
-/*   Updated: 2022/05/12 22:22:39 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/22 11:35:32 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	main_process_handler(t_data *data)
 {
 	int	count;
+	int status;
 
 	count = 0;
 	while (count < data->number_of_pipes)
@@ -25,7 +26,11 @@ void	main_process_handler(t_data *data)
 	}
 	count = 0;
 	while (count < data->number_of_pipes + 1)
-		waitpid(data->pid[count++], NULL, 0);
+	{
+		waitpid(data->pid[count++], &status, 0);
+		if (!g_status_code)
+			g_status_code = WEXITSTATUS(status);
+	}		
 }
 
 void	create_executor_parametes(t_data *data)
