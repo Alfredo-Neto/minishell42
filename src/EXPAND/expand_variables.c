@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 15:34:28 by ebresser          #+#    #+#             */
-/*   Updated: 2022/05/16 00:02:52 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/24 00:03:39 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,10 @@ void	expander(t_data *data)
 		}
 		i = 0;
 		while (data->argve[id][i])
-			unmask_character(data->argve[id][i++], 7, '$');
+		{
+			unmask_character(data->argve[id][i], 7, '$');
+			unmask_character(data->argve[id][i++], 1, ' ');
+		}
 	}
 }
 
@@ -72,7 +75,7 @@ static char	*pull_var_value(char **s, t_vars *vars)
 	while (s[0][offset] != '$')
 		offset++;
 	i = offset + 1;
-	while (ft_isalnum(s[0][i]) || s[0][i] == '_')
+	while ((ft_isalnum(s[0][i]) || s[0][i] == '_') && s[0][i])
 			i++;
 	if (s[0][i] == '?')
 		i++;

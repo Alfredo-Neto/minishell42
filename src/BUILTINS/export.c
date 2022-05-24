@@ -3,19 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:32:15 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/05/22 17:44:48 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/05/23 23:38:14 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
 static void	sort_export(char **envp);
 static int	invalid_var(char ***argve, int id);
-static int isdigitvar(char *vardefinition);
+static int	isdigitvar(char *vardefinition);
 
 void	export(t_data *data, int id)
 {
@@ -28,9 +27,10 @@ void	export(t_data *data, int id)
 		{
 			if (invalid_var(data->argve, id))
 			{
-				printf("minishell: export: `%s': not a valid identifier\n", data->argve[id][i]);
+				printf("minishell: export: `%s': not a valid identifier\n", \
+					data->argve[id][i]);
 				g_status_code = 1;
-			}				
+			}
 			else if (ft_strchr(data->argve[id][i], '='))
 				upd_envp_w_def(data, i, id);
 			else

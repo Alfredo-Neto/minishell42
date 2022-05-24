@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 23:19:00 by joeduard          #+#    #+#             */
-/*   Updated: 2022/05/22 20:21:24 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/05/24 00:07:13 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,10 +114,6 @@ void	builtin_exec(t_data *data, int code, int id)
 		cd(data, id);
 	else if (code == ECHO)
 		echo(data, id);
-	else if (code == HELLO)
-		hello();
-	else if (code == HELP)
-		open_help();
 	else if (code == PWD)
 		pwd();
 	else if (code == ENV)
