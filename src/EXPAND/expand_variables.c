@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_variables.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 15:34:28 by ebresser          #+#    #+#             */
-/*   Updated: 2022/05/24 20:35:03 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/05/24 23:36:37 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,14 @@ void	expander(t_data *data)
 			}
 			save_vars(data, id, i, var_value);
 		}
-		unmask_dollar_and_space(data, id);	
+		unmask_dollar_and_space(data, id);
 	}
 }
 
 static void	unmask_dollar_and_space(t_data *data, int id)
 {
-	int i;
+	int	i;
+
 	i = 0;
 	while (data->argve[id][i])
 	{
