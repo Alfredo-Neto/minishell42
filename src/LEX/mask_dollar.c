@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mask_dollar.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 21:49:28 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/05/23 20:42:45 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/24 20:21:56 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ static void	cut_dollar(t_data *data, int i)
 {
 	int		j;
 
-	if (!data->input[i + 1] || data->input[i + 1] == 1 || ft_strchr("+=", data->input[i + 1]))
+	if (!data->input[i + 1] || data->input[i + 1] == 1 || \
+	ft_strchr("+=", data->input[i + 1]))
 		data->input[i] = 7;
 	else if (ft_strchr("\'\"@!*123456789", data->input[i + 1]))
 	{

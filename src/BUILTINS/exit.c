@@ -6,13 +6,13 @@
 /*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 19:27:43 by ebresser          #+#    #+#             */
-/*   Updated: 2022/05/22 19:58:58 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/05/24 20:14:47 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int isdigitstr(char *str);
+static int	isdigitstr(char *str);
 
 int	exit_minishell(t_data *data, int status)
 {	
@@ -51,9 +51,9 @@ void	mini_exit(t_data *data, int id)
 	g_status_code = 1;
 }
 
-static int isdigitstr(char *str)
+static int	isdigitstr(char *str)
 {
-	while(*str)
+	while (*str)
 	{
 		if (!ft_isdigit(*str))
 			return (FALSE);

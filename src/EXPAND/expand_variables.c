@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   expand_variables.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 15:34:28 by ebresser          #+#    #+#             */
-/*   Updated: 2022/05/24 00:03:39 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/24 20:29:09 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static void	unmask_dollar_and_space(t_data *data, int id);
 static void	save_vars(t_data *data, int id, int i, char *var_value);
 static char	*pull_var_value(char *s[0], t_vars *vars);
 static char	*ret_full_value(char **s, int offset, t_vdt *vdt, int i);
@@ -38,13 +39,18 @@ void	expander(t_data *data)
 				continue ;
 			}
 			save_vars(data, id, i, var_value);
-		}
-		i = 0;
-		while (data->argve[id][i])
-		{
-			unmask_character(data->argve[id][i], 7, '$');
-			unmask_character(data->argve[id][i++], 1, ' ');
-		}
+		}		
+	}
+}
+
+static void	unmask_dollar_and_space(t_data *data, int id)
+{
+	int i;
+	i = 0;
+	while (data->argve[id][i])
+	{
+		unmask_character(data->argve[id][i], 7, '$');
+		unmask_character(data->argve[id][i++], 1, ' ');
 	}
 }
 
@@ -76,7 +82,7 @@ static char	*pull_var_value(char **s, t_vars *vars)
 		offset++;
 	i = offset + 1;
 	while ((ft_isalnum(s[0][i]) || s[0][i] == '_') && s[0][i])
-			i++;
+		i++;
 	if (s[0][i] == '?')
 		i++;
 	var_name = ft_substr(s[0], offset, i - offset);

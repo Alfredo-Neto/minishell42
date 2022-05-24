@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 13:55:53 by ebresser          #+#    #+#             */
-/*   Updated: 2022/05/23 23:36:24 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/24 20:13:11 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,11 @@ int	pull_pipe(t_data *data)
 	return (SUCCESS);
 }
 
-// Aqui ganha o formato da estrutura argve - Por isso n retorna,
-// mexe direto na struct
+// Here it gets the format of the argve structure - That's why n returns,
+// move directly in the struct
 void	pull_space(t_data *data)
 {
 	int		i;
-	// int		j;
 	int		no_cmds;
 
 	i = 0;
