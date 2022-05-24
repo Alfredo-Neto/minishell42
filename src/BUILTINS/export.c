@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:32:15 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/05/24 21:49:16 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/05/24 21:55:47 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,25 +22,6 @@ void	export(t_data *data, int id)
 	int		strsize;
 
 	i = 0;
-	// while (data->argve[id][i])
-	// {
-	// 	if (is_builtins(data->argve[id][i]) == 0)
-	// 	{
-	// 		if (invalid_var(data->argve, id, i))
-	// 		{
-	// 			printf("minishell: export: `%s': not a valid identifier\n", \
-	// 				data->argve[id][i]);
-	// 			g_status_code = 1;
-	// 		}
-	// 		else if (ft_strchr(data->argve[id][i], '='))
-	// 			upd_envp_w_def(data, i, id);
-	// 		else
-	// 			upd_envp_no_def(data, i, id);
-	// 	}
-	// 	else if (!(data->argve[id][i + 1]))
-	// 		sort_export(data->envp);
-	// 	i++;
-	// }
 	while (data->argve[id][i])
 	{
 		strsize = ft_strlen(data->argve[id][i]);
