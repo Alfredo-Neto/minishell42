@@ -6,7 +6,7 @@
 /*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:32:15 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/05/24 20:18:22 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/05/24 20:32:42 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static void	sort_export(char **envp);
 static int	invalid_var(char ***argve, int id, int n);
 static int	isdigitvar(char *vardefinition);
+static void	printmsg(char *str);
 
 void	export(t_data *data, int id)
 {
@@ -29,16 +30,13 @@ void	export(t_data *data, int id)
 		if (is_builtins(data->argve[id][i]) == 0)
 		{
 			if (invalid_var(data->argve, id, i))
-				printf("Minishell: export: `%s': not a valid identifier\n", \
-				data->argve[id][i]);
+				printmsg(data->argve[id][i]);
 			else if (data->argve[id][i][strsize] == '=')
-				printf("Minishell: export: `%s': not a valid identifier\n", \
-				data->argve[id][i]);
+				printmsg(data->argve[id][i]);
 			else if (ft_strchr(data->argve[id][i], '='))
 				upd_envp_w_def(data, i, id);
 			else if (upd_envp_no_def(data, i, id))
-				printf("Minishell: export: `%s': not a valid identifier\n", \
-				data->argve[id][i]);
+				printmsg(data->argve[id][i]);
 		}
 		else if (!(data->argve[id][i + 1]))
 			sort_export(data->envp);
@@ -98,4 +96,10 @@ static int	isdigitvar(char *vardefinition)
 		vardefinition++;
 	}
 	return (TRUE);
+}
+
+void	printmsg(char *str)
+{
+	printf("Minishell: export: ");
+	printf("`%s': not a valid identifier\n", str);
 }

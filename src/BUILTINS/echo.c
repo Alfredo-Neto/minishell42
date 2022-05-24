@@ -6,7 +6,7 @@
 /*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 19:11:16 by ebresser          #+#    #+#             */
-/*   Updated: 2022/05/24 20:15:35 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/05/24 20:33:01 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ static int	is_n_flag(t_data *data, int id, int *index)
 	{
 		if (!ft_strncmp(data->argve[id][*index], "-n", 2))
 		{
-			if (data->argve[id][*index][2] == '\0' || \
-			is_n_str(data->argve[id][*index] + 2))
+			if (data->argve[id][*index][2] == '\0' ||
+				is_n_str(data->argve[id][*index] + 2))
 			{
 				break_line = 0;
 				(*index)++;

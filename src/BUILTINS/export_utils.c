@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 22:00:43 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/05/24 21:32:31 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/05/24 23:22:02 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	upd_envp_w_def(t_data *data, int i, int id)
 }
 
 // reallocates envp when there is a var definition in input
-int		upd_envp_no_def(t_data *data, int i, int id)
+int	upd_envp_no_def(t_data *data, int i, int id)
 {
 	char	**new_envp;
 	int		pos;
@@ -75,9 +75,9 @@ int		upd_envp_no_def(t_data *data, int i, int id)
 
 	vdt = find_in_list(data->argve[id][i], data->vars);
 	if (vdt.value == NULL || *vdt.value == '$')
-		return 1;
+		return (1);
 	if (vdt.is_envp >= 0)
-		return 0;
+		return (0);
 	else if (*vdt.value != '$')
 	{
 		new_envp = new_bigger_envp(data->envp);
@@ -87,8 +87,8 @@ int		upd_envp_no_def(t_data *data, int i, int id)
 		data->envp = new_envp;
 		upd_idx_in_list(data->vars, data->argve[id][i], pos);
 		free(name);
-		return 0;
+		return (0);
 	}
 	else
-		return 1;
+		return (1);
 }
