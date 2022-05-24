@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 19:11:16 by ebresser          #+#    #+#             */
-/*   Updated: 2022/05/23 23:37:13 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/24 23:12:18 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ static int	is_n_flag(t_data *data, int id, int *index)
 	{
 		if (!ft_strncmp(data->argve[id][*index], "-n", 2))
 		{
-			if (data->argve[id][*index][2] == '\0' || is_n_str(data->argve[id][*index] + 2))
+			if (data->argve[id][*index][2] == '\0' ||
+				is_n_str(data->argve[id][*index] + 2))
 			{
 				break_line = 0;
 				(*index)++;
@@ -70,4 +71,3 @@ static int	is_n_str(char *s)
 	}
 	return (TRUE);
 }
-
