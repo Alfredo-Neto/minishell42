@@ -6,7 +6,7 @@
 /*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 15:34:28 by ebresser          #+#    #+#             */
-/*   Updated: 2022/05/24 20:29:09 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/05/24 20:35:03 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void	expander(t_data *data)
 				continue ;
 			}
 			save_vars(data, id, i, var_value);
-		}		
+		}
+		unmask_dollar_and_space(data, id);	
 	}
 }
 
