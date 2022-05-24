@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 13:55:53 by ebresser          #+#    #+#             */
-/*   Updated: 2022/05/15 18:58:37 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/05/23 23:36:24 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	pull_pipe(t_data *data)
 void	pull_space(t_data *data)
 {
 	int		i;
-	int		j;
+	// int		j;
 	int		no_cmds;
 
 	i = 0;
@@ -61,9 +61,6 @@ void	pull_space(t_data *data)
 			perror("Minishell: Malloc failed in pull_space ");
 			exit_minishell(data, FAILURE);
 		}
-		j = 0;
-		while (data->argve[i][j])
-			unmask_character(data->argve[i][j++], 1, ' ');
 		i++;
 	}
 }

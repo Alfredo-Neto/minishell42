@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 19:26:28 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/05/12 22:16:08 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/23 23:11:29 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int	redirect_filter(t_data *data, int id, int *save_fd)
 				return (-1);
 		i++;
 	}
+	if (!data->argve[id][0])
+		exit(FAILURE);
 	return (status);
 }
 

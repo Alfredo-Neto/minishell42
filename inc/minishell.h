@@ -6,7 +6,7 @@
 /*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by ebresser          #+#    #+#             */
-/*   Updated: 2022/05/22 15:12:10 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/05/24 21:32:22 by ocarlos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,15 @@
 
 # define NO_PIPE		0
 
-# define NUMBER_OF_BUILTINS 9
+# define NUMBER_OF_BUILTINS 7
 
 # define EXIT		1
 # define CD			2
 # define ECHO		3
-# define HELLO		4
-# define HELP		5
-# define PWD		6
-# define ENV		7
-# define EXPORT		8
-# define UNSET		9
+# define PWD		4
+# define ENV		5
+# define EXPORT		6
+# define UNSET		7
 # define NONE		0
 
 # define CHAR_MAX_NUM 	1024
@@ -155,7 +153,7 @@ char	*tokens_to_string(char const *s1, char const *s2);
 int		pull_redirects(t_data *data);
 
 //..................................................PARSE
-//parser.c  -  quotes ok: analisa!
+//parser.c
 int		parser(t_data *data);
 
 //mask_dollar.c

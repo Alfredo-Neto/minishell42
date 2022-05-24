@@ -1,7 +1,7 @@
 NAME		=	minishell
 
 CC			=	gcc
-CFLAGS		=	-Wall -Wextra -Werror -lreadline -g #-fsanitize=address
+CFLAGS		=	-Wall -Wextra -Werror -lreadline -g -fsanitize=address
 
 LIBFT_DIR	=	libft
 LIBFT		=	$(LIBFT_DIR)/libft.a
@@ -13,7 +13,7 @@ PRINTF		=	ft_printf/libftprintf.a
 INC			=	-I inc
 RM			=	rm -fr
 
-BUILTINS	=	cd.c echo.c env.c exit.c export.c export_utils.c hello.c help.c pwd.c unset.c
+BUILTINS	=	cd.c echo.c env.c exit.c export.c export_utils.c pwd.c unset.c
 CORE		=	clear_data.c init_data.c minishell.c signals.c main.c
 EXEC		=	execute_one_cmd.c executor.c here_document.c pipes_fds_handling.c \
 				processes_handler.c redirects.c sorting.c

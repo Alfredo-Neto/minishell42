@@ -6,7 +6,7 @@
 /*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 21:41:27 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/05/12 21:42:00 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/24 00:03:02 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	find_vars(char **argve)
 	int	i;
 
 	i = 0;
+	if (!argve)
+		return (-1);
 	while (argve[i])
 	{
 		if (ft_strchr(argve[i], '$'))

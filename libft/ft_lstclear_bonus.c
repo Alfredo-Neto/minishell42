@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hello.c                                            :+:      :+:    :+:   */
+/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/22 12:57:41 by ebresser          #+#    #+#             */
-/*   Updated: 2022/05/19 21:05:51 by ebresser         ###   ########.fr       */
+/*   Created: 2021/08/08 04:19:37 by vlima-nu          #+#    #+#             */
+/*   Updated: 2021/08/08 04:19:38 by vlima-nu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	hello(void)
+void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
-	char	*username;
+	t_list	*aux;
 
-	username = getenv("USER");
-	printf("\nHello %s.\nMind that this is not a place to play around."
-		"\nUse help to know more..\n", username);
+	if (!*lst)
+		return ;
+	while (*lst)
+	{
+		aux = *lst;
+		*lst = (*lst)->next;
+		ft_lstdelone(aux, del);
+	}
+	*lst = 0;
 }
