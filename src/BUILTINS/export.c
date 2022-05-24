@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 18:32:15 by ocarlos-          #+#    #+#             */
-/*   Updated: 2022/05/23 23:38:14 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/24 15:11:08 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static void	sort_export(char **envp);
-static int	invalid_var(char ***argve, int id);
+static int	invalid_var(char ***argve, int id, int n);
 static int	isdigitvar(char *vardefinition);
 
 void	export(t_data *data, int id)
@@ -25,7 +25,7 @@ void	export(t_data *data, int id)
 	{
 		if (is_builtins(data->argve[id][i]) == 0)
 		{
-			if (invalid_var(data->argve, id))
+			if (invalid_var(data->argve, id, i))
 			{
 				printf("minishell: export: `%s': not a valid identifier\n", \
 					data->argve[id][i]);
@@ -72,14 +72,15 @@ static void	sort_export(char **envp)
 
 
 // checks if expression is "export $" or var is number -> invalid input
-static int	invalid_var(char ***argve, int id)
+static int	invalid_var(char ***argve, int id, int n)
 {
 	if (ft_strcmp(argve[id][0], "export") == 0 &&
 		ft_strcmp(argve[id][1], "$") == 0 &&
 		argve[id][2] == 0x0)
 		return (TRUE);
-	else if (ft_strcmp(argve[id][0], "export") == 0 && isdigitvar(argve[id][1]))
-		return (TRUE);
+	else if (ft_strcmp(argve[id][0], "export") == 0 && \
+	(isdigitvar(argve[id][n]) || !ft_isalpha(argve[id][n][0])))
+		return (TRUE);		
 	else
 		return (FALSE);
 }
