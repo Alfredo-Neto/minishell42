@@ -6,13 +6,13 @@
 /*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 22:54:50 by ebresser          #+#    #+#             */
-/*   Updated: 2022/05/17 23:22:33 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/05/24 22:31:58 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//conta strings em char**
+//count strings in char**
 int	ft_str_count(char **str)
 {
 	int		count;
@@ -26,7 +26,7 @@ int	ft_str_count(char **str)
 	return (count);
 }
 
-// tratada: libera string antiga - adiciona s2 ao final de s1
+// handled: free old string - add s2 to end of s1
 int	ft_strjoin_handled(char **s1, char const *s2)
 {
 	size_t	len;
@@ -49,8 +49,8 @@ int	ft_strjoin_handled(char **s1, char const *s2)
 }
 
 /*
-	Retira da str o que está entre init e end, deixando apenas as extremidades.
-	Eg. str = "Paralelepipedo"
+	Removes from the str what is between init and end, leaving only the ends.
+	eg. str = "Paralelepipedo"
 	ft_strcut(&str, 4, 8);
 	str ==> "Parapipedo"
 */
@@ -96,4 +96,5 @@ void	move_ptrs_back(char **ptr)
 		ptr[i] = ptr[i + 1];
 		i++;
 	}
+	ptr[i] = NULL;
 }

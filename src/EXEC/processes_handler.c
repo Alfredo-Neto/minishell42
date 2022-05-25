@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   processes_handler.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/08 23:19:00 by joeduard          #+#    #+#             */
-/*   Updated: 2022/05/23 23:37:35 by vlima-nu         ###   ########.fr       */
+/*   Created: 2022/03/08 23:19:00 by ebresser          #+#    #+#             */
+/*   Updated: 2022/05/24 21:20:26 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

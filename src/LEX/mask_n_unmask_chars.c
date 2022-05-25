@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mask_n_unmask_chars.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 22:18:03 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/05/23 22:35:44 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/24 21:12:44 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,7 @@ void	unmask_character(char *cmd, int nbr, char c)
 }
 
 /*
-	Substitui os caracteres ' ', '>', '<', '|' e '$' por um não imprimível.
-	E.g
-	echo "'jorge ale"\0
-	echo "'jorge1ale"\0
+	Replace characters ' ', '>', '<', '|' and '$' for a non-printable one.
 */
 int	mask_all_chars(t_data *data)
 {

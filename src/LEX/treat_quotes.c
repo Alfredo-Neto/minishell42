@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   treat_quotes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vlima-nu <vlima-nu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 02:55:15 by azamario          #+#    #+#             */
-/*   Updated: 2022/05/23 21:05:06 by vlima-nu         ###   ########.fr       */
+/*   Updated: 2022/05/24 21:22:29 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*
-	Mascara todos os caracteres de sintaxe e espaços entre aspas,
-	divide o input em tokens
-	(o que estiver entre aspas é um token) e remove as aspas deles.
-	Por fim converte os tokens em uma nova string de input.
+	Masks all syntax characters and spaces in quotes,
+	splits input into tokens
+	(whatever is in quotes is a token) and removes the quotes from them.
+	Finally converts the tokens into a new input string.
 */
 int	pull_quotes(t_data *data)
 {
@@ -28,7 +28,7 @@ int	pull_quotes(t_data *data)
 }
 
 /*
-	Trata os tokens e os juntam devolta na string de input.
+	Handles the tokens and merges them back into the input string.
 */
 void	treat_token_strings(t_data *data)
 {
@@ -60,10 +60,7 @@ void	treat_token_strings(t_data *data)
 }
 
 /*
-	Substitui as aspas internas por 2 ou 3.
-	E.g
-	echo\0 "'jorge'1ale"\0.
-	echo\0 "3jorge31ale"\0.
+	Replaces the inner quotes with 2 or 3.
 */
 void	treat_quotes(char *token)
 {
@@ -93,7 +90,8 @@ void	treat_quotes(char *token)
 }
 
 /*
-	Retira as aspas "3jorge31ale"\0 e depois reverte aspas escondidas: 'jorge'1ale\0
+	Remove the quotes "3 guarana 31bolo"\0 and then reverse the hidden quotes: 
+	'guarana'1bolo\0
 */
 void	no_quotes(char *token)
 {

@@ -6,7 +6,7 @@
 /*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 12:39:44 by vlima-nu          #+#    #+#             */
-/*   Updated: 2022/05/19 21:05:28 by ebresser         ###   ########.fr       */
+/*   Updated: 2022/05/24 22:22:37 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	unset(t_data *data, int id)
 {
 	int		i;
+	int		arglen;
 	int		arg;
 
 	arg = 1;
@@ -25,8 +26,9 @@ void	unset(t_data *data, int id)
 		{
 			if (!ft_strcmp(data->argve[id][arg], "PATH"))
 				double_free((void ***)&data->command_path);
-			if (!ft_strncmp(data->envp[i], data->argve[id][arg], \
-				ft_strlen(data->argve[id][arg])))
+			arglen = ft_strlen(data->argve[id][arg]);
+			if (!ft_strncmp(data->envp[i], data->argve[id][arg], arglen) && \
+				data->envp[i][arglen] == '=')
 			{
 				free(data->envp[i]);
 				move_ptrs_back(data->envp + i);

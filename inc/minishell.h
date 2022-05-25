@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ocarlos- <ocarlos-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ebresser <ebresser@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 19:10:08 by ebresser          #+#    #+#             */
-/*   Updated: 2022/05/24 21:32:22 by ocarlos-         ###   ########.fr       */
+/*   Updated: 2022/05/24 21:53:02 by ebresser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@
 # define LESS				3
 # define LESSLESS			6
 
-# define UNEXPECTED_TOKEN	"Minishell: syntax error near unexpected token `%c'"
+# define UNEXPECTED_TOKEN	"Minishell: syntax error near unexpected\
+ token `%c'\n"
 # define SINTAX_ERR			2
 
 extern int	g_status_code;
